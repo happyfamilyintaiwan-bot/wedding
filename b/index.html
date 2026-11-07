@@ -561,17 +561,42 @@ $("rsvp-btn").href = WEDDING.rsvpUrl;
 document.querySelectorAll(".sh").forEach((h, i) => {
   h.insertAdjacentHTML("beforeend", `<svg class="brush" viewBox="-95 -23 190 46" aria-hidden="true"><g class="pop" style="--d:.2s"><ellipse class="wc" filter="url(#wcBig)" rx="70" ry="10" style="fill:var(${WASH[i % 4]});opacity:.9"/></g></svg>`);
 });
-// 場地：遠山＋建築線稿
+// 場地：遠山＋洋館線稿（屋瓦、圓窗、拱門與花圈、花台、門燈、三角旗、石階小路、樹叢和小鳥）
 (() => {
   const svg = $("venue-art");
+  const box = (x) => `<path d="M${x - 2} 147h26v5h-26z" style="fill:var(--w2)"/>`;
+  const pots = (x) => [0, 5, 10, 15, 20].map((k, i) => `<circle cx="${x + 1 + k}" cy="${145 - (i % 2) * 2}" r="2.3" style="fill:var(${i % 2 ? "--w1" : "--accent"});opacity:.85"/>`).join("");
+  const flags = Array.from({ length: 9 }, (_, i) => { const t = (i + .5) / 9, x = 92 + 136 * t, y = 100 + Math.sin(Math.PI * t) * 12; return `<path d="M${f1(x - 4)} ${f1(y)}L${f1(x + 4)} ${f1(y)}L${f1(x)} ${f1(y + 8)}Z" style="fill:var(${["--w1", "--w3", "--w4"][i % 3]});stroke:var(--ink);stroke-width:.4;stroke-opacity:.5"/>`; }).join("");
   svg.innerHTML = wash(90, 150, 120, 40, "--w3", .55, .1) + wash(250, 140, 110, 46, "--w4", .5, .2) + wash(170, 190, 180, 18, "--lf", .45, .3) +
-    `<g class="pen" style="stroke:var(--ink);opacity:.75;stroke-width:1">
-      <path class="ln" style="--d:.4s" d="M86 176V96h148v80M76 98l84-46 84 46M150 176v-34a10 10 0 0 1 20 0v34M104 120h22v24h-22zM194 120h22v24h-22zM160 66v-14M40 178h240"/>
-     </g><g id="v-fl"></g>`;
+    wash(30, 150, 30, 26, "--lf", .55, .5) + wash(292, 146, 30, 30, "--lf2", .45, .55) +
+    `<g class="pop" style="--d:.35s">
+      <path d="M86 176V96h148v80Z" style="fill:var(--paper);opacity:.9"/>
+      <path d="M48 176V130h38v46ZM234 176V130h38v46Z" style="fill:var(--paper);opacity:.9"/>
+      <path d="M76 98l84-46 84 46Z" style="fill:var(--w1);opacity:.55"/>
+      <path d="M150 176v-34a10 10 0 0 1 20 0v34Z" style="fill:var(--w4);opacity:.7"/>
+      <path d="M104 120h22v24h-22zM194 120h22v24h-22zM56 142h18v20h-18zM246 142h18v20h-18z" style="fill:var(--w4);opacity:.6"/>
+      <circle cx="160" cy="78" r="9" style="fill:var(--w2)"/>
+      <circle cx="160" cy="41.5" r="2.6" style="fill:var(--accent)"/>
+      ${box(104)}${box(194)}${pots(104)}${pots(194)}
+    </g>
+    <g class="pen" style="stroke:var(--ink);opacity:.75;stroke-width:1">
+      <path class="ln" style="--d:.4s" d="M86 176V96h148v80M76 98l84-46 84 46M150 176v-34a10 10 0 0 1 20 0v34M160 132v44M104 120h22v24h-22zM115 120v24M104 132h22M194 120h22v24h-22zM205 120v24M194 132h22M151 78a9 9 0 1 0 18 0a9 9 0 1 0 -18 0M151 78h18M160 69v18M160 52v-8M40 178h240"/>
+      <path class="ln" style="--d:.7s" d="M48 176V130h38M272 176V130h-38M44 132l22-12 20 10M276 132l-22-12-20 10M56 142h18v20h-18zM65 142v20M246 142h18v20h-18zM255 142v20M48 150h-4M276 150h4M44 148h42v4M234 148h42v4M50 148v-4M58 148v-4M66 148v-4M74 148v-4M82 148v-4M238 148v-4M246 148v-4M254 148v-4M262 148v-4M270 148v-4"/>
+      <path class="ln" style="--d:1s" d="M114 80h22M184 80h22M102 88h116M126 72h18M176 72h18M144 176h32M140 180h40M152 180l-8 18M168 180l8 18M138 176v-22M182 176v-22M134 150h8v6h-8zM178 150h8v6h-8z"/>
+      <path class="ln" style="--d:1.2s" d="M60 34q4 -4 8 0q4 -4 8 0M246 26q3 -3 6 0q3 -3 6 0M272 42q3 -3 6 0q3 -3 6 0"/>
+    </g>
+    <path d="M92 100Q160 124 228 100" style="fill:none;stroke:var(--ink);stroke-width:.5;opacity:.6"/>
+    <g class="pop" style="--d:1.1s">${flags}</g>
+    <g class="pop" style="--d:1.2s"><path d="M150 142a10 10 0 0 1 20 0" style="fill:none;stroke:var(--lf2);stroke-width:3;stroke-linecap:round"/><circle cx="152" cy="140" r="1.8" style="fill:var(--accent)"/><circle cx="160" cy="131.5" r="1.8" style="fill:var(--w1)"/><circle cx="168" cy="140" r="1.8" style="fill:var(--accent)"/></g>
+    <g class="pop" style="--d:1.25s"><circle cx="138" cy="152" r="7" style="fill:var(--w2);opacity:.8"/><circle cx="182" cy="152" r="7" style="fill:var(--w2);opacity:.8"/></g>
+    <g id="v-fl"></g>`;
   const g = svg.querySelector("#v-fl");
   const s = stem(g, "M34 180 C30 160 36 140 30 118", .7), t = stem(g, "M282 180 C290 160 284 144 292 124", .8);
   grow(g, s, { step: 9, leaf: 13, bloomP: .3, size: 9, d0: .8, span: .5 });
   grow(g, t, { step: 9, leaf: 13, bloomP: .3, size: 9, d0: .9, span: .5 });
+  const u = stem(g, "M110 178 C104 170 112 162 106 156", 1), v = stem(g, "M212 178 C218 170 210 162 216 156", 1.05);
+  grow(g, u, { step: 6, leaf: 8, bloomP: .5, size: 5, d0: 1.1, span: .4 });
+  grow(g, v, { step: 6, leaf: 8, bloomP: .5, size: 5, d0: 1.15, span: .4 });
 })();
 // 結尾：小小的新人＋水彩
 (() => {

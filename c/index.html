@@ -53,6 +53,11 @@ p { text-wrap: pretty; }
 .in .pop { opacity: 1; transform: none; }
 .ln { transition: stroke-dashoffset 1.8s cubic-bezier(.5,0,.3,1) var(--d, 0s); }
 .in .ln { stroke-dashoffset: 0 !important; }
+.bulb { animation: tw 2.4s ease-in-out infinite; animation-delay: var(--t, 0s); }
+.glow { opacity: .35; animation: tw 2.4s ease-in-out infinite; animation-delay: var(--t, 0s); }
+@keyframes tw { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+.sway { animation: sway 5s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 0; }
+@keyframes sway { 0%, 100% { rotate: -3deg; } 50% { rotate: 3deg; } }
 .fade { opacity: 0; transform: translateY(14px); filter: blur(4px); transition: opacity 1.4s ease, transform 1.4s cubic-bezier(.2,.7,.2,1), filter 1.4s ease; transition-delay: calc(var(--i, 0) * 120ms); }
 .in .fade { opacity: 1; transform: none; filter: none; }
 .sw { animation: sway 7s ease-in-out infinite alternate; animation-delay: var(--sd, 0s); }
@@ -553,16 +558,60 @@ function flakePath(r) {
 const flake = (x, y, r, d, op = .9) => `<g transform="translate(${f1(x)} ${f1(y)})"><g class="pop" style="--d:${d}s"><path class="flake" style="opacity:${op}" d="${flakePath(r)}"/></g></g>`;
 document.querySelectorAll(".flk").forEach((g) => { g.innerHTML = `<path class="flake" d="${flakePath(10)}"/>`; });
 $("seal-flake").innerHTML = `<circle r="27" style="fill:var(--paper);stroke:var(--line)"/><path class="flake" style="stroke-width:1.6" d="${flakePath(18)}"/>`;
-// 松樹（樹梢有雪）
-function pine(x, y, h, d) {
-  let t = "";
-  for (let k = 0; k < 4; k++) {
-    const ty = y - h + k * h * .22, w = h * (.16 + k * .09), by = ty + h * .32;
-    t += `<path d="M${f1(x)} ${f1(ty)}L${f1(x + w)} ${f1(by)}L${f1(x - w)} ${f1(by)}Z" style="fill:var(--lf2);stroke:var(--ink);stroke-width:.7;stroke-opacity:.35"/>`;
-    t += `<path d="M${f1(x - w * .9)} ${f1(by - 1)}Q${f1(x - w * .45)} ${f1(by - 5)} ${f1(x)} ${f1(by - 2)}Q${f1(x + w * .45)} ${f1(by - 6)} ${f1(x + w * .9)} ${f1(by - 1)}" style="fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round"/>`;
+// 松樹：每層邊緣不規則、微微傾斜，樹梢有雪；deco=1 時掛燈串、小球和星星
+const LIGHTS = ["#f3d27a", "var(--berry)", "#9fd0c4", "#f6b8a0", "#fff4cf"];
+function qpt(a, b, c, t) { const u = 1 - t; return [u * u * a[0] + 2 * u * t * b[0] + t * t * c[0], u * u * a[1] + 2 * u * t * b[1] + t * t * c[1]]; }
+function bulbs(a, b, c, n, r, d, k0 = 0) {
+  let o = `<path d="M${f1(a[0])} ${f1(a[1])}Q${f1(b[0])} ${f1(b[1])} ${f1(c[0])} ${f1(c[1])}" style="fill:none;stroke:var(--ink);stroke-width:.6;stroke-opacity:.45"/>`;
+  for (let i = 1; i < n; i++) {
+    const [x, y] = qpt(a, b, c, i / n), col = LIGHTS[(i + k0) % LIGHTS.length], t = f1(((i * 7 + k0) % 9) * .27);
+    o += `<circle class="glow" cx="${f1(x)}" cy="${f1(y + r * .9)}" r="${f1(r * 2.4)}" style="fill:${col};--t:${t}s"/><circle class="bulb" cx="${f1(x)}" cy="${f1(y + r * .9)}" r="${f1(r)}" style="fill:${col};--t:${t}s"/>`;
   }
-  t += `<path d="M${f1(x - h * .1)} ${f1(y - h + 6)}L${f1(x)} ${f1(y - h)}L${f1(x + h * .1)} ${f1(y - h + 6)}" style="fill:#fff"/>`;
-  return `<g class="pop" style="--d:${d}s;transform-origin:${f1(x)}px ${f1(y)}px"><rect x="${f1(x - 2)}" y="${f1(y - h * .1)}" width="4" height="${f1(h * .12)}" style="fill:var(--muted)"/>${t}</g>`;
+  return `<g class="pop" style="--d:${d}s">${o}</g>`;
+}
+function pine(x, y, h, d, deco = 0) {
+  let t = "", top = [x, y - h];
+  for (let k = 0; k < 4; k++) {
+    const lean = Math.sin(x * .13 + k * 1.7) * h * .025;
+    const ty = y - h + k * h * .22, w = h * (.17 + k * .095) * (1 + (R() - .5) * .14), by = ty + h * .32 + (R() - .5) * h * .03;
+    const cx = x + lean, wl = w * (1 + (R() - .5) * .16), wr = w * (1 + (R() - .5) * .16);
+    // 外緣略往外鼓、底部三段下垂的樹枝
+    let p = `M${f1(cx)} ${f1(ty)}Q${f1(cx + wr * .42)} ${f1(ty + (by - ty) * .42)} ${f1(cx + wr)} ${f1(by + h * .015)}`;
+    const segs = 4;
+    for (let j = 1; j <= segs; j++) {
+      const x2 = cx + wr - (wr + wl) * j / segs, sag = h * (.022 + R() * .018);
+      p += `Q${f1(cx + wr - (wr + wl) * (j - .5) / segs)} ${f1(by - sag)} ${f1(x2)} ${f1(by + (j === segs ? h * .015 : (R() - .3) * h * .02))}`;
+    }
+    p += `Q${f1(cx - wl * .42)} ${f1(ty + (by - ty) * .42)} ${f1(cx)} ${f1(ty)}Z`;
+    t += `<path d="${p}" style="fill:${k % 2 ? "var(--lf2)" : "var(--lf)"};stroke:var(--ink);stroke-width:.7;stroke-opacity:.35"/>`;
+    t += `<path d="M${f1(cx - wl * .86)} ${f1(by - 1)}Q${f1(cx - wl * .4)} ${f1(by - 5 - R() * 3)} ${f1(cx)} ${f1(by - 2)}Q${f1(cx + wr * .45)} ${f1(by - 6 - R() * 3)} ${f1(cx + wr * .84)} ${f1(by - 1)}" style="fill:none;stroke:#fff;stroke-width:${f1(Math.max(2, h * .028))};stroke-linecap:round"/>`;
+    if (deco && k) {
+      t += bulbs([cx - wl * .8, by - h * .05], [cx, by + h * .02], [cx + wr * .75, by - h * .1], 6, Math.max(1.1, h * .012), d + .3, k);
+      const bx = cx + (R() - .5) * w, byy = by - h * .02;
+      t += `<g class="pop" style="--d:${f1(d + .5)}s"><circle cx="${f1(bx)}" cy="${f1(byy)}" r="${f1(h * .022)}" style="fill:${k % 2 ? "var(--berry)" : "#f3d27a"};stroke:var(--ink);stroke-width:.5;stroke-opacity:.4"/></g>`;
+    }
+    if (!k) top = [cx, ty];
+  }
+  t += `<path d="M${f1(top[0] - h * .1)} ${f1(top[1] + 6)}L${f1(top[0])} ${f1(top[1])}L${f1(top[0] + h * .1)} ${f1(top[1] + 6)}" style="fill:#fff"/>`;
+  if (deco) t += `<g class="pop" style="--d:${f1(d + .6)}s"><path class="bulb" d="${star(top[0], top[1] - h * .03, h * .07)}" style="fill:#f3d27a;stroke:var(--ink);stroke-width:.6;stroke-opacity:.4"/></g>`;
+  return `<g class="pop" style="--d:${d}s;transform-origin:${f1(x)}px ${f1(y)}px"><path d="M${f1(x - 2.5)} ${f1(y - h * .1)}L${f1(x - 3)} ${f1(y + 1)}H${f1(x + 3)}L${f1(x + 2.5)} ${f1(y - h * .1)}Z" style="fill:var(--muted)"/>${t}</g>`;
+}
+function star(x, y, r) {
+  let d = "";
+  for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .45 : r; d += `${i ? "L" : "M"}${f1(x + Math.cos(a) * rr)} ${f1(y + Math.sin(a) * rr)}`; }
+  return d + "Z";
+}
+// 吊飾：一條線吊著小球或星星，會輕輕擺動
+function ornament(x, y0, len, kind, col, d) {
+  const y = y0 + len;
+  const body = kind === "star"
+    ? `<path d="${star(x, y + 7, 7)}" style="fill:${col};stroke:var(--ink);stroke-width:.6;stroke-opacity:.45"/>`
+    : `<rect x="${f1(x - 2.2)}" y="${f1(y - 1)}" width="4.4" height="3.4" rx=".8" style="fill:var(--muted)"/><circle cx="${f1(x)}" cy="${f1(y + 8)}" r="7" style="fill:${col};stroke:var(--ink);stroke-width:.6;stroke-opacity:.45"/><path d="M${f1(x - 5)} ${f1(y + 7)}Q${f1(x)} ${f1(y + 10)} ${f1(x + 5)} ${f1(y + 7)}" style="fill:none;stroke:#fff;stroke-width:1.2;opacity:.8"/><circle cx="${f1(x - 2.5)}" cy="${f1(y + 5.5)}" r="1.4" style="fill:#fff;opacity:.85"/>`;
+  return `<g class="pop" style="--d:${d}s"><g class="sway" style="animation-delay:-${f1(d * 2)}s"><path d="M${f1(x)} ${f1(y0)}V${f1(y)}" style="stroke:var(--ink);stroke-width:.6;stroke-opacity:.5"/>${body}</g></g>`;
+}
+// 禮物盒
+function gift(x, y, w, h, col, d) {
+  return `<g class="pop" style="--d:${d}s"><rect x="${f1(x)}" y="${f1(y - h)}" width="${w}" height="${h}" rx="1.5" style="fill:${col};stroke:var(--ink);stroke-width:.6;stroke-opacity:.45"/><path d="M${f1(x + w / 2)} ${f1(y - h)}V${f1(y)}M${f1(x)} ${f1(y - h * .55)}H${f1(x + w)}" style="stroke:#fff;stroke-width:2"/><path d="M${f1(x + w / 2)} ${f1(y - h)}c-5 -6 -9 -1 0 0c5 -6 9 -1 0 0" style="fill:none;stroke:#fff;stroke-width:1.6"/></g>`;
 }
 // 封面：雪山、松樹、雪地上的新人
 (() => {
@@ -574,27 +623,49 @@ function pine(x, y, h, d) {
     <g class="pop" style="--d:.3s"><path d="M-10 410 L52 346 L96 372 L170 296 L232 356 L282 318 L410 392 V560 H-10Z" style="fill:var(--w1);stroke:var(--ink);stroke-width:.7;stroke-opacity:.3"/>
       <path d="M150 316 L170 296 L190 316 L180 312 L172 320 L163 311Z M266 330 L282 318 L298 328 L288 327 L282 333 L275 327Z M38 360 L52 346 L66 360 L58 357 L52 363 L45 357Z" style="fill:#fff"/></g>
     <g class="pop" style="--d:.45s"><path d="M-10 452 Q80 404 156 434 T300 420 T410 444 V560 H-10Z" style="fill:var(--w2);stroke:var(--ink);stroke-width:.7;stroke-opacity:.25"/></g>
-    ${pine(36, 512, 104, .6)}${pine(84, 518, 66, .7)}${pine(364, 510, 116, .65)}${pine(318, 520, 60, .75)}
+    ${pine(36, 512, 104, .6, 1)}${pine(84, 518, 66, .7)}${pine(364, 510, 116, .65, 1)}${pine(318, 520, 60, .75)}
+    ${gift(96, 506, 18, 14, "var(--berry)", .9)}${gift(114, 508, 12, 10, "var(--accent)", 1)}${gift(290, 507, 16, 13, "#e9c46a", .95)}
     <g class="pop" style="--d:.55s"><path d="M-10 504 Q110 486 200 494 T410 500 V552 H-10Z" style="fill:url(#snowG)"/><path d="M-10 504 Q110 486 200 494 T410 500" style="fill:none;stroke:var(--line);stroke-width:1.2"/></g>
     <ellipse cx="200" cy="504" rx="88" ry="6" style="fill:var(--accent);opacity:.16"/>
     <g id="h-couple"><image class="couple" id="couple-img" href="${WEDDING.couple}" x="110" y="150" width="180" height="352" preserveAspectRatio="xMidYMax meet"/></g>
-    ${flake(70, 226, 9, 1.2, .7)}${flake(342, 262, 7, 1.3, .6)}${flake(118, 160, 5, 1.4, .5)}${flake(250, 140, 6, 1.5, .5)}`;
+    ${flake(70, 226, 9, 1.2, .7)}${flake(342, 262, 7, 1.3, .6)}${flake(118, 160, 5, 1.4, .5)}${flake(250, 140, 6, 1.5, .5)}
+    ${bulbs([-10, 112], [70, 150], [140, 116], 9, 2.2, .8)}${bulbs([260, 116], [330, 152], [410, 112], 9, 2.2, .85, 3)}
+    ${ornament(22, 110, 34, "ball", "var(--berry)", 1)}${ornament(58, 110, 62, "star", "#f3d27a", 1.1)}${ornament(96, 110, 26, "ball", "var(--accent)", 1.2)}
+    ${ornament(304, 110, 30, "ball", "#9fd0c4", 1.05)}${ornament(342, 110, 58, "star", "#f3d27a", 1.15)}${ornament(378, 110, 36, "ball", "var(--berry)", 1.25)}`;
 })();
 // 標題後面的筆刷
 document.querySelectorAll(".sh").forEach((h, i) => {
   h.insertAdjacentHTML("beforeend", `<svg class="brush" viewBox="-95 -23 190 46" aria-hidden="true"><g class="pop" style="--d:.2s"><ellipse class="wc" filter="url(#wcBig)" rx="70" ry="10" style="fill:var(${WASH[i % 4]});opacity:.9"/></g></svg><svg class="sh-flake" viewBox="-12 -12 24 24" aria-hidden="true"><path class="flake" d="${flakePath(9)}"/></svg>`);
 });
-// 場地：雪中的小屋
+// 場地：雪中的木屋會館（屋簷燈串、花圈、暖光窗戶、煙囪、聖誕樹、禮物、小路與柵欄）
 (() => {
   const svg = $("venue-art");
+  const win = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="1" style="fill:#f6d58e;opacity:.85"/><rect class="glow" x="${x - 4}" y="${y - 4}" width="${w + 8}" height="${h + 8}" rx="6" style="fill:#f6d58e;--t:.6s"/>`;
   svg.innerHTML = `<path d="M0 150 Q80 120 160 138 T320 132 V200 H0Z" style="fill:var(--w1)"/>
+    ${wash(250, 60, 60, 26, "--w3", .5, .1)}
     <path d="M0 174 Q90 160 170 168 T320 166 V200 H0Z" style="fill:#fff;stroke:var(--line)"/>
-    <g class="pen" style="stroke:var(--ink);opacity:.75;stroke-width:1">
-      <path class="ln" style="--d:.4s" d="M96 170V102h128v68M84 104l76-42 76 42M150 170v-30a10 10 0 0 1 20 0v30M110 120h22v22h-22zM188 120h22v22h-22zM196 74v-20h12v26"/>
+    <g class="pop" style="--d:.3s">
+      <path d="M100 172V104h120v68Z" style="fill:var(--w2)"/>
+      <path d="M58 172V128h42v44ZM220 172V128h42v44Z" style="fill:var(--w2)"/>
+      ${win(110, 116, 20, 22)}${win(190, 116, 20, 22)}${win(66, 140, 14, 16)}${win(240, 140, 14, 16)}
+      <path d="M148 172V146a12 12 0 0 1 24 0v26Z" style="fill:var(--berry);opacity:.55"/>
+      <circle cx="160" cy="84" r="8" style="fill:#f6d58e;opacity:.85"/>
     </g>
-    <path d="M84 104l76-42 76 42" style="fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;opacity:.95"/>
-    <rect x="111" y="121" width="20" height="20" style="fill:var(--accent);opacity:.35"/><rect x="189" y="121" width="20" height="20" style="fill:var(--accent);opacity:.35"/>
-    ${pine(40, 176, 70, .6)}${pine(272, 176, 80, .7)}${pine(300, 180, 48, .8)}${flake(36, 52, 6, 1)}${flake(286, 40, 8, 1.1)}`;
+    <g class="pen" style="stroke:var(--ink);opacity:.75;stroke-width:1">
+      <path class="ln" style="--d:.4s" d="M100 172V104h120v68M88 106l72-44 72 44M58 172V128h42M262 172V128h-42M52 130l26-16 22 12M268 130l-26-16-22 12M148 172V146a12 12 0 0 1 24 0v26M160 134v38M110 116h20v22h-20zM120 116v22M110 127h20M190 116h20v22h-20zM200 116v22M190 127h20M66 140h14v16h-14zM73 140v16M240 140h14v16h-14zM247 140v16M106 140h28M186 140h28M160 76a8 8 0 1 1 0 16a8 8 0 1 1 0 -16M152 84h16M160 76v16M196 70V50h12v28M100 112h120M100 158h48M172 158h48M30 178h260"/>
+      <path class="ln" style="--d:.9s" d="M142 172h36M138 176h44M154 178L140 198M166 178L180 198M22 168v12M34 168v12M46 168v12M18 172h32M274 168v12M286 168v12M298 168v12M270 172h32"/>
+    </g>
+    <path d="M88 106l72-44 72 44" style="fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;opacity:.95"/>
+    <path d="M52 130l26-16 22 12M268 130l-26-16-22 12" style="fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.95"/>
+    <path d="M196 50h12" style="stroke:#fff;stroke-width:4;stroke-linecap:round"/>
+    <path d="M108 112v5M118 112v3M130 112v6M146 112v4M174 112v5M188 112v3M202 112v6M214 112v4" style="stroke:#dbe8f3;stroke-width:1.4;stroke-linecap:round"/>
+    <g class="pop" style="--d:1.4s"><path d="M200 46q-6 -8 2 -14q8 -6 2 -14" style="fill:none;stroke:var(--muted);stroke-width:1.2;opacity:.5;stroke-linecap:round"/></g>
+    ${bulbs([90, 107], [125, 92], [160, 66], 7, 1.5, 1)}${bulbs([160, 66], [195, 92], [230, 107], 7, 1.5, 1.05, 2)}${bulbs([100, 113], [160, 124], [220, 113], 10, 1.4, 1.1, 1)}
+    <g class="pop" style="--d:1.2s"><circle cx="160" cy="140" r="7" style="fill:none;stroke:var(--lf2);stroke-width:3.6"/><circle cx="160" cy="140" r="7" style="fill:none;stroke:var(--lf);stroke-width:1.6;stroke-dasharray:2 2"/><circle cx="156" cy="135" r="1.2" style="fill:var(--berry)"/><circle cx="165" cy="137" r="1.2" style="fill:var(--berry)"/><circle cx="158" cy="146" r="1.2" style="fill:var(--berry)"/><path d="M157 147l3 -3 3 3" style="fill:none;stroke:var(--berry);stroke-width:1.4"/></g>
+    <g class="pop" style="--d:1.3s"><path d="M136 172V152M184 172V152" style="stroke:var(--ink);stroke-width:1.2;opacity:.6"/><rect x="132" y="146" width="8" height="8" rx="1.5" style="fill:#f6d58e;stroke:var(--ink);stroke-width:.6"/><rect x="180" y="146" width="8" height="8" rx="1.5" style="fill:#f6d58e;stroke:var(--ink);stroke-width:.6"/><circle class="glow" cx="136" cy="150" r="8" style="fill:#f6d58e"/><circle class="glow" cx="184" cy="150" r="8" style="fill:#f6d58e;--t:.8s"/></g>
+    ${pine(36, 178, 64, .6)}${pine(280, 178, 82, .7, 1)}${pine(306, 182, 46, .8)}
+    ${gift(252, 180, 13, 10, "var(--berry)", 1.3)}${gift(266, 182, 10, 8, "var(--accent)", 1.35)}
+    ${flake(36, 52, 6, 1)}${flake(286, 30, 8, 1.1)}${flake(120, 30, 5, 1.2, .6)}`;
 })();
 // 結尾：雪地上的小小新人
 (() => {
