@@ -321,6 +321,7 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
       <p class="deadline" id="rsvp-deadline"></p>
       <p class="muted-sm" data-i18n="rsvp_seat">讓我們為你留一個好位子</p>
       <div class="btns"><a class="btn primary" id="rsvp-btn" target="_blank" rel="noopener" data-i18n-ui="rsvp">填寫出席回覆</a></div>
+      <div class="hy-contact" id="contact"></div>
     </div>
   </section>
 
@@ -329,7 +330,7 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
     <p class="big fade" style="--i:1" data-i18n="thanks_b">謝謝你　成為我們故事的一部分</p>
     <svg class="end-art" id="end-art" viewBox="0 0 400 260" aria-hidden="true"></svg>
   </section>
-  <footer class="cg">ILLUSTRATION BY ALISON</footer>
+  <footer class="cg">Illustration by Zoe @KnittingHiyori</footer>
 </main>
 
 <canvas id="petals" aria-hidden="true"></canvas>
@@ -390,6 +391,10 @@ const WEDDING = {
   ],
   rsvpUrl: "https://forms.gle/",
   rsvpDeadline: "2027-02-20",
+  contacts: [              // 聯絡新人：type 可以是 email／line／instagram；value 留空會顯示「待填寫」
+    { who: "groom", type: "email", value: "" },
+    { who: "bride", type: "email", value: "" },
+  ],
   theme: "ice",
   showThemePicker: true,   // 示範用；正式交付給新人時改成 false
 };
@@ -549,6 +554,7 @@ $("ics-btn").addEventListener("click", () => {
 });
 $("rsvp-deadline").textContent = WEDDING.rsvpDeadline.replaceAll("-", " . ");
 $("rsvp-btn").href = WEDDING.rsvpUrl;
+HYI.renderContacts(WEDDING, LANG, $("contact"));
 
 /* ---------- 插畫 ---------- */
 // 雪花
@@ -681,9 +687,19 @@ document.querySelectorAll(".sh").forEach((h, i) => {
     <image class="couple" href="${WEDDING.couple}" x="158" y="44" width="84" height="164"/>
     ${flake(120, 70, 7, .8, .7)}${flake(282, 92, 6, .9, .6)}${flake(220, 30, 5, 1, .5)}`;
 })();
-// 桌機兩側：松林
+// 桌機兩側：從上方垂下的雪花、星星、小球吊飾＋兩條燈串（會輕輕擺動）
 function sideArt(svg, d0) {
-  svg.innerHTML = `${wash(150, 640, 160, 220, "--w1", .7, d0)}${pine(90, 800, 300, d0 + .2)}${pine(200, 810, 200, d0 + .4)}${flake(120, 200, 14, d0 + .6, .7)}${flake(220, 340, 9, d0 + .7, .6)}`;
+  const big = (x, inner) => `<g transform="translate(${x} 0) scale(2.1) translate(${-x} 0)">${inner}</g>`;
+  const hangFlake = (x, len, r, d) => `<g class="pop" style="--d:${f1(d)}s"><g class="sway" style="animation-delay:-${f1(d * 2)}s"><path d="M${x} 0V${len}" style="stroke:var(--ink);stroke-width:.8;stroke-opacity:.4"/><g transform="translate(${x} ${len + r})"><path class="flake" style="stroke-width:1.6" d="${flakePath(r)}"/></g></g></g>`;
+  const H = [[40, 190, "flake"], [88, 170, "ball", "var(--berry)"], [132, 120, "star", "#f3d27a"], [178, 520, "flake"], [222, 150, "ball", "#9fd0c4"], [262, 230, "star", "#f3d27a"]];
+  let o = wash(150, 640, 160, 220, "--w1", .5, d0) +
+    bulbs([-10, 18], [150, 96], [310, 18], 13, 3.4, d0 + .2) + bulbs([-10, 70], [150, 150], [310, 66], 11, 3, d0 + .35, 2);
+  H.forEach(([x, len, kind, col], i) => {
+    const d = d0 + .5 + i * .12;
+    o += kind === "flake" ? hangFlake(x, len, 16, d) : big(x, ornament(x, 0, len / 2.1, kind, col, d));
+  });
+  o += flake(70, 640, 10, d0 + .9, .55) + flake(230, 720, 7, d0 + 1, .5) + flake(150, 420, 6, d0 + 1.1, .45);
+  svg.innerHTML = o;
 }
 sideArt($("side-l"), .2); sideArt($("side-r"), .5);
 prepLines(document);
@@ -780,5 +796,6 @@ if (still || embed) {
   if (still) document.querySelectorAll("[data-r]").forEach((s) => s.classList.add("in"));
 }
 </script>
+<script src="../assets/invite-reveal.js"></script>
 </body>
 </html>

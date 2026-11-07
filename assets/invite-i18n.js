@@ -11,20 +11,22 @@ window.HYI = (() => {
       calHead: (y, m) => `${y} 年 ${m + 1} 月`, wk: "日一二三四五六", cd: ["天", "時", "分", "秒"], cdB: ["日", "時", "分", "秒"],
       cdDone: "謝謝你來參加我們的婚禮", to: "To. ", toB: "致　", sign: (g, b) => `${g} ＆ ${b}　敬邀`,
       map: "開啟 Google 地圖", gcal: "Google 日曆", ics: "iPhone 行事曆", rsvp: "填寫出席回覆", theme: "配色",
+      contactH: "有問題嗎？直接聯絡新人", pending: "（待填寫）", roles: { groom: "新郎", bride: "新娘" },
     },
     en: {
-      html: "en", title: (g, b) => `${g} & ${b}’s Wedding`, namesAria: (g, b) => `${g} and ${b}`,
+      html: "en", title: (g, b) => `${g} & ${b}'s Wedding`, namesAria: (g, b) => `${g} and ${b}`,
       calHead: (y, m) => `${MON_EN[m]} ${y}`, wk: ["S", "M", "T", "W", "T", "F", "S"], cd: ["Days", "Hours", "Min", "Sec"], cdB: ["Days", "Hours", "Min", "Sec"],
       cdDone: "Thank you for celebrating with us", to: "To. ", toB: "To ", sign: (g, b) => `With love, ${g} & ${b}`,
       map: "Open in Google Maps", gcal: "Google Calendar", ics: "Apple Calendar", rsvp: "RSVP now", theme: "Colors",
+      contactH: "Questions? Contact the couple", pending: "(to be added)", roles: { groom: "Groom", bride: "Bride" },
       t: {
         intro_label: "Wedding invitation", intro_sub: "You have a wedding invitation", open_label: "Open the invitation",
         to_default: "To. Dear friend", to_default_b: "To our dear friend",
         hint_a: "Tap the envelope to open", hint_b: "Tap to open", hint_c: "Tap to clear the frost",
         vcopy_b: "Join us as we celebrate", vcopy_c: "Invited in the snowy season",
         h_date: "The Date", h_story: "Our Story", h_sched: "Schedule", h_dress: "Dress Code", h_tips: "Good to Know", h_venue: "Venue", h_rsvp: "RSVP",
-        cd_cap: "Counting down to the big day", cal_tip_a: "Add it to your calendar so you don’t miss the day", cal_tip: "Add to calendar",
-        rsvp_p: "We can’t wait to see you!", rsvp_p_b: "We can’t wait to celebrate with you", rsvp_before: "Please reply by", rsvp_seat: "so we can save you a good seat",
+        cd_cap: "Counting down to the big day", cal_tip_a: "Add it to your calendar so you don't miss the day", cal_tip: "Add to calendar",
+        rsvp_p: "We can't wait to see you!", rsvp_p_b: "We can't wait to celebrate with you", rsvp_before: "Please reply by", rsvp_seat: "so we can save you a good seat",
         thanks_a: "Thank you<br>for being part of our story", thanks_b: "Thank you for being part of our story",
       },
     },
@@ -33,6 +35,7 @@ window.HYI = (() => {
       calHead: (y, m) => `${y}年${m + 1}月`, wk: "日月火水木金土", cd: ["日", "時間", "分", "秒"], cdB: ["日", "時間", "分", "秒"],
       cdDone: "ご参列いただきありがとうございました", to: "To. ", toB: "", sign: (g, b) => `${g}・${b}`,
       map: "Google マップで開く", gcal: "Google カレンダー", ics: "iPhone カレンダー", rsvp: "出欠を回答する", theme: "カラー",
+      contactH: "ご質問はおふたりへ", pending: "（記入予定）", roles: { groom: "新郎", bride: "新婦" },
       t: {
         intro_label: "結婚式の招待状", intro_sub: "結婚式の招待状が届いています", open_label: "招待状をひらく",
         to_default: "To. 大切なあなたへ", to_default_b: "大切なあなたへ",
@@ -49,6 +52,7 @@ window.HYI = (() => {
       calHead: (y, m) => `${MON_ES[m]} ${y}`, wk: ["D", "L", "M", "M", "J", "V", "S"], cd: ["Días", "Horas", "Min", "Seg"], cdB: ["Días", "Horas", "Min", "Seg"],
       cdDone: "Gracias por celebrar con nosotros", to: "Para ", toB: "Para ", sign: (g, b) => `Con cariño, ${g} y ${b}`,
       map: "Abrir en Google Maps", gcal: "Google Calendar", ics: "Calendario de Apple", rsvp: "Confirmar asistencia", theme: "Colores",
+      contactH: "¿Dudas? Escríbanle a la pareja", pending: "(por completar)", roles: { groom: "Novio", bride: "Novia" },
       t: {
         intro_label: "Invitación de boda", intro_sub: "Tienes una invitación de boda", open_label: "Abrir la invitación",
         to_default: "Para ti, con cariño", to_default_b: "Para ti, con cariño",
@@ -66,17 +70,17 @@ window.HYI = (() => {
   const SAMPLE = {
     en: {
       groom: "Adam", bride: "Quinn", initials: ["A", "Q"], sealB: ["A", "Q"],
-      invite: "We met in a college club\nand have shared ten years together.\nOn this day, we’d love you\nto be there with us.",
-      parents: [{ role: "Groom’s parents", names: "David & Linda Brown" }, { role: "Bride’s parents", names: "Mark & Susan Lee" }],
+      invite: "We met in a college club\nand have shared ten years together.\nOn this day, we'd love you\nto be there with us.",
+      parents: [{ role: "Groom's parents", names: "David & Linda Brown" }, { role: "Bride's parents", names: "Mark & Susan Lee" }],
       story: ["First hello at a club welcome party", "Our first trip together, to Kyoto", "Moved into our little home", "A beach proposal, and she said yes", "Now we want you there for our day"],
-      schedule: [["Welcome & guestbook", "Leave a note and take photos with us"], ["Ceremony", "Witness our vows with us"], ["Lunch is served", "Enjoy the wedding feast"], ["Grand entrance", "Get ready to cheer"], ["Toasts", "We’ll visit every table to say thank you"], ["Farewell treats", "Take something sweet home"]],
-      tips: [["Vegetarian", "Just tick it on the RSVP form"], ["Kids’ chairs", "Let us know if you bring little ones"], ["Parking", "Free for 3 hours on B2"], ["Photo corner", "At the entrance"]],
+      schedule: [["Welcome & guestbook", "Leave a note and take photos with us"], ["Ceremony", "Witness our vows with us"], ["Lunch is served", "Enjoy the wedding feast"], ["Grand entrance", "Get ready to cheer"], ["Toasts", "We'll visit every table to say thank you"], ["Farewell treats", "Take something sweet home"]],
+      tips: [["Vegetarian", "Just tick it on the RSVP form"], ["Kids' chairs", "Let us know if you bring little ones"], ["Parking", "Free for 3 hours on B2"], ["Photo corner", "At the entrance"]],
       venue: "(Sample) Garden Hall, 3F", address: "100 Sample Street, Your City",
       transport: ["Metro: Sample Station, Exit 2, 5-minute walk", "By car: search “Sample Wedding Hall”"],
       dress: {
-        a: { name: "Garden Pastel", text: "Soft pastels, like walking into a spring garden with us.", colors: ["Cherry blossom", "Butter", "Mint", "Sky blue"], avoid: "Please avoid all white (the bride’s color) and all black" },
-        b: { name: "Muted Garden", text: "Soft, muted tones, like a light watercolor painting.", colors: ["Dusty rose", "Oat milk", "Sage", "Mist blue"], avoid: "Please avoid all white (the bride’s color) and all black" },
-        c: { name: "Snowy Pastel", text: "A touch of color in the snow: ice blue, oatmeal, dusty pink or pine green.", colors: ["Ice blue", "Oatmeal", "Dusty pink", "Pine green"], avoid: "Please avoid all white (the bride’s color) and all black" },
+        a: { name: "Garden Pastel", text: "Soft pastels, like walking into a spring garden with us.", colors: ["Cherry blossom", "Butter", "Mint", "Sky blue"], avoid: "Please avoid all white (the bride's color) and all black" },
+        b: { name: "Muted Garden", text: "Soft, muted tones, like a light watercolor painting.", colors: ["Dusty rose", "Oat milk", "Sage", "Mist blue"], avoid: "Please avoid all white (the bride's color) and all black" },
+        c: { name: "Snowy Pastel", text: "A touch of color in the snow: ice blue, oatmeal, dusty pink or pine green.", colors: ["Ice blue", "Oatmeal", "Dusty pink", "Pine green"], avoid: "Please avoid all white (the bride's color) and all black" },
       },
       themes: { honey: "Honey", candy: "Candy pink", mint: "Mint", lavender: "Lavender", rose: "Dusty rose", sage: "Sage", mist: "Mist blue", milktea: "Milk tea", ice: "Ice blue", silver: "Silver", rosy: "Pink snow", night: "Winter night" },
     },
@@ -147,11 +151,44 @@ window.HYI = (() => {
       st.textContent = ".vert, .v-copy, .intro-to { writing-mode: horizontal-tb !important; height: auto !important; letter-spacing: .04em !important; line-height: 1.9 !important; }" +
         ".v-copy { position: static !important; margin: 10px auto 0; text-align: center; max-width: 18em; }" +
         ".vert { text-align: center !important; max-width: 22em; }" +
-        ".names b { letter-spacing: .06em !important; font-size: 26px !important; } .names { gap: 10px; }";
+        ".names b { letter-spacing: .06em !important; font-size: 26px !important; } .names { gap: 10px; }" +
+        ".sh h2 { letter-spacing: .08em !important; } .sr h3, .tip h3, .st p { letter-spacing: .03em !important; }";
+      document.head.appendChild(st);
+    }
+  }
+
+  // 聯絡新人：type 可以是 email／line／instagram；value 留空時顯示「待填寫」
+  const LINK = {
+    email: (v) => "mailto:" + v,
+    line: (v) => "https://line.me/ti/p/~" + encodeURIComponent(v.replace(/^@/, "")),
+    instagram: (v) => "https://instagram.com/" + encodeURIComponent(v.replace(/^@/, "")),
+  };
+  const LABEL = { email: "Email", line: "LINE", instagram: "Instagram" };
+  function renderContacts(W, lang, el) {
+    if (!el || !W.contacts || !W.contacts.length) return;
+    const u = UI[lang], esc = (t) => String(t).replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
+    const rows = W.contacts.map((c) => {
+      const name = c.who === "bride" ? W.bride : c.who === "groom" ? W.groom : (c.name || "");
+      const role = c.role || u.roles[c.who] || "";
+      const type = LINK[c.type] ? c.type : "email";
+      const v = (c.value || "").trim();
+      const val = v ? `<a href="${esc(LINK[type](v))}" target="_blank" rel="noopener">${esc(v)}</a>` : `<span class="hy-pending">${u.pending}</span>`;
+      const sep = lang === "zh" || lang === "ja" ? "・" : " · ";
+      return `<li><span class="hy-who">${esc(role)}${sep}${esc(name)}</span><span class="hy-how">${LABEL[type]}</span>${val}</li>`;
+    }).join("");
+    el.innerHTML = `<p class="hy-ch">${u.contactH}</p><ul>${rows}</ul>`;
+    if (!document.getElementById("hy-contact-css")) {
+      const st = document.createElement("style"); st.id = "hy-contact-css";
+      st.textContent = ".hy-contact { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--line, rgba(0,0,0,.15)); text-align: center; }" +
+        ".hy-contact .hy-ch { font-size: 13.5px; color: var(--muted, #888); letter-spacing: .08em; margin-bottom: 8px; }" +
+        ".hy-contact ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }" +
+        ".hy-contact li { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 4px 10px; font-size: 14px; }" +
+        ".hy-contact .hy-who { font-weight: 600; } .hy-contact .hy-how { font-size: 12px; color: var(--muted, #888); border: 1px solid var(--line, rgba(0,0,0,.15)); border-radius: 99px; padding: 0 8px; }" +
+        ".hy-contact a { color: inherit; text-underline-offset: 3px; word-break: break-all; } .hy-contact .hy-pending { color: var(--muted, #888); }";
       document.head.appendChild(st);
     }
   }
 
   const themeName = (lang, k, zh) => ((SAMPLE[lang] || {}).themes || {})[k] || zh;
-  return { UI, SAMPLE, pick, applySample, applyStatic, themeName };
+  return { UI, SAMPLE, pick, applySample, applyStatic, themeName, renderContacts };
 })();
