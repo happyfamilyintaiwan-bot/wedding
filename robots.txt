@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /a/
-Disallow: /b/
-Disallow: /c/
 
 Sitemap: https://wedding.knittinghiyori.com/sitemap.xml

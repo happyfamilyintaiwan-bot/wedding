@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,12 +14,25 @@
 <meta property="og:image" content="https://wedding.knittinghiyori.com/assets/og.jpg">
 <meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/icons/logo-knitting-120.webp">
-<meta name="spec-version" content="core-v1.8/wedding-draft">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://wedding.knittinghiyori.com/assets/og.jpg">
+<link rel="icon" href="/icons/favicon.ico?v=2" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-<!-- wedding 子網域：不放 Travelpayouts、不放 Google 廣告；GA4 由 Zoe 上架時依 core.md §2 加入 -->
+<!-- wedding 子網域：不放 Travelpayouts、不放 Google 廣告（core §1） -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQZHTYTRMQ"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag("js",new Date());
+gtag("set",{content_group:"wedding",page_lang:"zh-Hant",page_title:"喜帖|似顏繪喜帖|結婚書約與電子喜帖報價"});
+gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domain:".knittinghiyori.com",debug_mode:true}:{cookie_domain:".knittinghiyori.com"});
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -88,7 +101,7 @@ h3 { font-family: "Noto Serif TC", serif; letter-spacing: .04em; }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 24px; border-radius: 999px; font-weight: 700; font-size: 16px; text-decoration: none; border: 2px solid var(--ink); background: var(--card); color: var(--ink); cursor: pointer; box-shadow: 4px 4px 0 var(--ink); transition: transform .15s, box-shadow .15s; font-family: inherit; }
 .btn:hover { transform: translate(-1px, -2px); box-shadow: 5px 6px 0 var(--ink); }
 .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
-.btn.primary { background: var(--ink); color: #fff; }
+.btn.primary { background: var(--honey); color: var(--ink); }
 .price { font-family: "Noto Serif TC", serif; font-weight: 700; }
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 90ms); }
 .reveal.in { opacity: 1; transform: none; }
@@ -206,7 +219,7 @@ form.q { background: var(--card); border: 2px solid var(--ink); border-radius: 2
 .pills label { position: relative; }
 .pills input { position: absolute; opacity: 0; pointer-events: none; }
 .pills span { display: inline-block; padding: 7px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; cursor: pointer; font-size: 14px; font-weight: 400; }
-.pills input:checked + span { background: var(--ink); color: #fff; border-color: var(--ink); }
+.pills input:checked + span { background: var(--honey); color: var(--ink); border-color: var(--ink); }
 .pills input:focus-visible + span { outline: 2px solid var(--honey); outline-offset: 2px; }
 .stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; }
 .stepper button { width: 36px; height: 36px; border: 0; background: none; font-size: 18px; cursor: pointer; color: var(--ink); }
@@ -246,12 +259,13 @@ footer { border-top: 1px solid var(--line); padding: 26px 20px 40px; text-align:
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 .still .reveal { opacity: 1; transform: none; transition: none; } .still { scroll-behavior: auto; }
 </style>
+<meta name="spec-version" content="core-v1.9">
 </head>
 <body>
 
 <div class="topbar">
   <div class="kh-brand-row">
-    <a class="kh-brand" href="https://wedding.knittinghiyori.com/" data-cta="brand_hub" data-cta-type="other"><img src="/icons/logo-knitting-120.webp" width="40" height="40" alt="">編織日和・似顏繪喜帖</a>
+    <a class="kh-brand" href="https://wedding.knittinghiyori.com/" data-google-vignette="false" data-cta="brand_hub" data-cta-type="wedding"><img src="/icons/logo-knitting-120.webp" width="40" height="40" alt="">編織日和・似顏繪喜帖</a>
     <nav class="nav" aria-label="頁面導覽"><a href="#price">價格</a><a href="#shoyaku">結婚書約</a><a href="#web">電子喜帖</a><a href="#quote">估價</a><a href="#faq">常見問題</a></nav>
   </div>
 </div>
@@ -263,7 +277,7 @@ footer { border-top: 1px solid var(--line); padding: 26px 20px 40px; text-align:
         <span class="eyebrow it reveal">Illustrated Wedding</span>
         <h1 class="reveal" style="--i:1"><span class="nw">把你們畫成<em>似顏繪</em>，</span><span class="nw">做成結婚書約</span><span class="nw">和電子喜帖</span></h1>
         <p class="lead reveal" style="--i:2">先畫一張兩人的全身彩色似顏繪，再依需要加購結婚書約或網頁電子喜帖。同婚、非同婚都可以製作。</p>
-        <div class="cta reveal" style="--i:3"><a class="btn primary" href="#quote" data-cta="hero_quote">馬上估價</a><a class="btn" href="#price" data-cta="hero_price">看價格</a></div>
+        <div class="cta reveal" style="--i:3"><a class="btn primary" href="#quote" data-cta="hero_quote" data-cta-type="wedding">馬上估價</a><a class="btn" href="#price" data-cta="hero_price" data-cta-type="wedding">看價格</a></div>
       </div>
       <div class="hero-art reveal" style="--i:2" aria-label="結婚書約與電子喜帖範例">
         <img class="paper" src="assets/shoyaku/t6.webp" alt="印刷好的似顏繪結婚書約" width="900" height="1273">
@@ -338,19 +352,19 @@ footer { border-top: 1px solid var(--line); padding: 26px 20px 40px; text-align:
           <div class="phone"><div class="screen"><iframe src="a/?embed" title="A 書約手繪風範例" loading="lazy" tabindex="-1"></iframe></div></div>
           <h3>A・書約手繪風</h3><p>黑色線條小花和拱門，跟書約是同一套畫風</p>
           <div class="dots" aria-label="配色：蜂蜜黃、糖果粉、薄荷綠、薰衣草"><i style="background:#f6c873"></i><i style="background:#f7b8c8"></i><i style="background:#9fd3bb"></i><i style="background:#cdbdf0"></i></div>
-          <a class="btn" href="a/" target="_blank" rel="noopener" data-cta="style_a">看完整範例 ↗</a>
+          <a class="btn" href="a/" target="_blank" rel="noopener" data-cta="style_a" data-cta-type="wedding">看完整範例 ↗</a>
         </article>
         <article class="style b reveal" style="--i:1">
           <div class="phone"><div class="screen"><iframe src="b/?embed" title="B 日系清新範例" loading="lazy" tabindex="-1"></iframe></div></div>
           <h3>B・日系清新</h3><p>拉門開場、直書邀請文、印章，大量留白</p>
           <div class="dots" aria-label="配色：霧玫瑰、鼠尾草、霧藍、奶茶"><i style="background:#f2d4cd"></i><i style="background:#dbe6cf"></i><i style="background:#d3e0eb"></i><i style="background:#eedcc6"></i></div>
-          <a class="btn" href="b/" target="_blank" rel="noopener" data-cta="style_b">看完整範例 ↗</a>
+          <a class="btn" href="b/" target="_blank" rel="noopener" data-cta="style_b" data-cta-type="wedding">看完整範例 ↗</a>
         </article>
         <article class="style c reveal" style="--i:2">
           <div class="phone"><div class="screen"><iframe src="c/?embed" title="C 雪景範例" loading="lazy" tabindex="-1"></iframe></div></div>
           <h3>C・雪景</h3><p>雪山、松樹和慢慢飄落的雪，適合冬天的婚禮</p>
           <div class="dots" aria-label="配色：雪白藍、銀灰、粉雪、冬夜"><i style="background:#cfdff0"></i><i style="background:#d3d6dc"></i><i style="background:#efd6df"></i><i style="background:#2a3647"></i></div>
-          <a class="btn" href="c/" target="_blank" rel="noopener" data-cta="style_c">看完整範例 ↗</a>
+          <a class="btn" href="c/" target="_blank" rel="noopener" data-cta="style_c" data-cta-type="wedding">看完整範例 ↗</a>
         </article>
       </div>
       <ul class="rules web-rules reveal">
@@ -425,8 +439,8 @@ footer { border-top: 1px solid var(--line); padding: 26px 20px 40px; text-align:
             <label for="msg" style="font-weight:700;font-size:15px">詢價信（自動產生，可以再修改）</label>
             <textarea id="msg" spellcheck="false"></textarea>
             <div class="acts">
-              <button class="btn" type="button" id="copy" data-cta="quote_copy">複製訊息</button>
-              <a class="btn primary" id="mailto" data-cta="quote_email">用 Email 寄出</a>
+              <button class="btn" type="button" id="copy" data-cta="quote_copy" data-cta-type="other">複製訊息</button>
+              <a class="btn primary" id="mailto" data-cta="quote_email" data-cta-type="other">用 Email 寄出</a>
             </div>
             <p class="note" style="margin-top:10px">寄到 <b>theperfectmatchfilters@gmail.com</b>｜📎 記得附上婚紗照（或每人 2～3 張正面照＋1 張合照）<span class="copied" id="copied" hidden>　已複製！</span></p>
           </div>
@@ -466,7 +480,8 @@ footer { border-top: 1px solid var(--line); padding: 26px 20px 40px; text-align:
 <dialog class="zoom" id="zoom"><img alt=""><button type="button" aria-label="關閉">✕</button></dialog>
 
 <footer>
-  <p>聯絡：theperfectmatchfilters@gmail.com｜插畫：Alison｜<a href="https://knittinghiyori.com/">編織日和</a>｜<a href="https://knittinghiyori.com/privacy-policy/">隱私權政策</a></p>
+  <p>聯絡：theperfectmatchfilters@gmail.com｜插畫：Alison｜<a href="https://knittinghiyori.com/">編織日和</a></p>
+  <p class="kh-legal">本站使用 Cookie 進行流量分析（Google Analytics）。<a href="https://knittinghiyori.com/privacy-policy/">隱私權政策</a></p>
 </footer>
 
 <script>
@@ -551,6 +566,21 @@ $("copy").addEventListener("click", async () => {
 });
 colorPills("A");
 update();
+</script>
+<script>
+/* 點擊追蹤：有 data-cta 的連結與按鈕送 cta_click；追蹤壞掉不影響頁面 */
+(function(){
+  var dbg=/[?]hy_debug=1/.test(location.search);
+  document.addEventListener("click",function(e){
+    try{
+      var a=e.target.closest?e.target.closest("[data-cta]"):null;
+      if(!a)return;
+      var p={cta_id:a.getAttribute("data-cta"),cta_type:a.getAttribute("data-cta-type")||"other",link_url:a.href||""};
+      if(dbg)console.log("[hy-wedding] cta_click",p);
+      if(typeof gtag==="function")gtag("event","cta_click",p);
+    }catch(err){}
+  });
+})();
 </script>
 </body>
 </html>
