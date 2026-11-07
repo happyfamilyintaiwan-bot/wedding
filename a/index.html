@@ -391,6 +391,7 @@ footer .en { font-size: 20px; color: var(--ink); }
       <p class="deadline" id="rsvp-deadline"></p>
       <p class="muted-sm" data-i18n="rsvp_seat">讓我們為你留一個好位子</p>
       <div class="btns"><a class="btn primary" id="rsvp-btn" target="_blank" rel="noopener"></a></div>
+      <div class="hy-contact" id="contact"></div>
     </div>
   </section>
 
@@ -461,6 +462,10 @@ const WEDDING = {
   ],
   rsvpUrl: "https://forms.gle/",
   rsvpDeadline: "2027-02-20",
+  contacts: [              // 聯絡新人：type 可以是 email／line／instagram；value 留空會顯示「待填寫」
+    { who: "groom", type: "email", value: "" },
+    { who: "bride", type: "email", value: "" },
+  ],
   theme: "honey",
   showThemePicker: true,   // 示範用；正式交付給新人時改成 false
 };
@@ -701,6 +706,7 @@ $("ics-btn").addEventListener("click", () => {
 $("rsvp-deadline").textContent = WEDDING.rsvpDeadline.replaceAll("-", ".");
 $("rsvp-btn").innerHTML = BTN_ICON("mail") + T.rsvp;
 $("rsvp-btn").href = WEDDING.rsvpUrl;
+HYI.renderContacts(WEDDING, LANG, $("contact"));
 
 /* ---------- 插畫 ---------- */
 // 封面：簡約大氣的拱門＋全身似顏繪（花只放在頂端和兩個下角）

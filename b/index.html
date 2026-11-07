@@ -312,6 +312,7 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
       <p class="deadline" id="rsvp-deadline"></p>
       <p class="muted-sm" data-i18n="rsvp_seat">讓我們為你留一個好位子</p>
       <div class="btns"><a class="btn primary" id="rsvp-btn" target="_blank" rel="noopener" data-i18n-ui="rsvp">填寫出席回覆</a></div>
+      <div class="hy-contact" id="contact"></div>
     </div>
   </section>
 
@@ -320,7 +321,7 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
     <p class="big fade" style="--i:1" data-i18n="thanks_b">謝謝你　成為我們故事的一部分</p>
     <svg class="end-art" id="end-art" viewBox="0 0 400 260" aria-hidden="true"></svg>
   </section>
-  <footer class="cg">ILLUSTRATION BY ALISON</footer>
+  <footer class="cg">Illustration by Zoe @KnittingHiyori</footer>
 </main>
 
 <canvas id="petals" aria-hidden="true"></canvas>
@@ -381,6 +382,10 @@ const WEDDING = {
   ],
   rsvpUrl: "https://forms.gle/",
   rsvpDeadline: "2027-02-20",
+  contacts: [              // 聯絡新人：type 可以是 email／line／instagram；value 留空會顯示「待填寫」
+    { who: "groom", type: "email", value: "" },
+    { who: "bride", type: "email", value: "" },
+  ],
   theme: "rose",
   showThemePicker: true,   // 示範用；正式交付給新人時改成 false
 };
@@ -540,6 +545,7 @@ $("ics-btn").addEventListener("click", () => {
 });
 $("rsvp-deadline").textContent = WEDDING.rsvpDeadline.replaceAll("-", " . ");
 $("rsvp-btn").href = WEDDING.rsvpUrl;
+HYI.renderContacts(WEDDING, LANG, $("contact"));
 
 /* ---------- 插畫 ---------- */
 // 封面：大片水彩暈染＋不對稱花枝（日式留白）＋全身似顏繪
@@ -714,5 +720,6 @@ if (still || embed) {
   if (still) document.querySelectorAll("[data-r]").forEach((s) => s.classList.add("in"));
 }
 </script>
+<script src="../assets/invite-reveal.js"></script>
 </body>
 </html>
