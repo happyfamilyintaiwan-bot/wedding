@@ -144,7 +144,7 @@ def build(lang):
     langs = "".join(f'<a href="{p}" hreflang="{"zh-Hant" if c == "zh" else c}"{CUR if c == lang else ""} data-cta="lang_switch" data-cta-type="wedding">{n}</a>' for c, n, p in LANG_NAMES)
     rows = "\n".join(f'        <div class="row rv"><span class="n">{n}</span><h3>{h}<small>{sm}</small></h3><span class="p">{p}</span><p>{d}</p></div>' for n, h, sm, p, d in t["rows"])
     ticks = "".join(f"<li>{a}<b>{b}</b></li>" for a, b in t["ticks"])
-    phones = "\n".join(f'        <article class="ph rv" style="--i:{i}"><div class="device"><div class="screen"><iframe data-src="/{k.lower()}/?embed" title="{k} {h}" loading="lazy" tabindex="-1"></iframe></div></div><h3><span>{k}</span>{h}</h3><p>{d}</p><a href="/{k.lower()}/" target="_blank" rel="noopener" data-cta="style_{k.lower()}" data-cta-type="wedding">{t["see"]}</a></article>' for i, (k, h, d) in enumerate(t["styles"]))
+    phones = "\n".join(f'        <article class="ph rv" style="--i:{i}"><div class="device"><div class="screen"><iframe data-src="/{k.lower()}/?embed&lang={lang}" title="{k} {h}" loading="lazy" tabindex="-1"></iframe></div></div><h3><span>{k}</span>{h}</h3><p>{d}</p><a href="/{k.lower()}/?lang={lang}" target="_blank" rel="noopener" data-cta="style_{k.lower()}" data-cta-type="wedding">{t["see"]}</a></article>' for i, (k, h, d) in enumerate(t["styles"]))
     steps = "\n".join(f'        <li class="rv" style="--i:{i}"><b>{a}</b><span>{b}</span></li>' for i, (a, b) in enumerate(t["steps"]))
     pays = "".join(f'<article class="pay-card rv" style="--i:{i}"><h3>{a}</h3><p>{b}</p></article>' for i, (a, b) in enumerate(t["pay"]))
     faq = "\n".join(f"        <details><summary>{q}</summary><p>{a}</p></details>" for q, a in t["faq"])
@@ -251,7 +251,6 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{{cookie_doma
       <div class="phones">
 {phones}
       </div>
-      <p class="sample-note">{t['sample_note']}</p>
       <div class="web-foot rv" style="margin-top:40px">
         <div><span class="kicker">{t['web_price_k']}</span><p class="p">US${PRICES['bundle_launch']}</p></div>
         <ul>{''.join(f'<li>{r}</li>' for r in t['web_rules'])}</ul>

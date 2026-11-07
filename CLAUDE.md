@@ -6,3 +6,4 @@
 - `/a/ /b/ /c/` 是範例喜帖：`noindex, nofollow`、不放 GA4、robots.txt 不擋。
 - **新人的成品喜帖絕對不要放進這個 repo**（公開 repo 會露出姓名和地址）。成品喜帖放 Cloudflare Pages 專案 `hiyori-invite`，直接上傳，見 core §7-1。
 - 估價價格改了要同時改三處：方案卡、估價工具的 `SY` 物件、JSON-LD。
+- **範例喜帖多語**（2026-11-07）：A／B／C 共用 `assets/invite-i18n.js`。介面文字在 `UI`，範例內容在 `SAMPLE`。網址加 `?lang=en|ja|es` 切換；做正式喜帖時把 `WEDDING.lang` 設成新人的語言、刪掉 `sample: true`，內容直接寫在 `WEDDING`。英日西介紹頁的範例框與連結帶對應的 `lang`。

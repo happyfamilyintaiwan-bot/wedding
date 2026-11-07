@@ -283,11 +283,11 @@ footer .en { font-size: 20px; color: var(--ink); }
   </defs>
 </svg>
 
-<div id="intro" role="dialog" aria-label="婚禮邀請函">
+<div id="intro" role="dialog" aria-label="婚禮邀請函" data-i18n-label="intro_label">
   <div class="intro-inner">
-    <p class="intro-to en" id="to-line">To. 親愛的你</p>
-    <p class="intro-sub">你有一封婚禮邀請函</p>
-    <button id="env" type="button" aria-label="打開邀請函">
+    <p class="intro-to en" id="to-line" data-i18n="to_default">To. 親愛的你</p>
+    <p class="intro-sub" data-i18n="intro_sub">你有一封婚禮邀請函</p>
+    <button id="env" type="button" aria-label="打開邀請函" data-i18n-label="open_label">
       <svg viewBox="0 0 320 240" aria-hidden="true">
         <g class="env-float">
           <rect class="fs s" x="10" y="40" width="300" height="190" rx="12"/>
@@ -309,7 +309,7 @@ footer .en { font-size: 20px; color: var(--ink); }
         </g>
       </svg>
     </button>
-    <p class="intro-hint">輕觸信封　打開邀請</p>
+    <p class="intro-hint" data-i18n="hint_a">輕觸信封　打開邀請</p>
   </div>
 </div>
 
@@ -335,24 +335,24 @@ footer .en { font-size: 20px; color: var(--ink); }
   </section>
 
   <section id="date" class="band" data-r>
-    <header class="sh"><span class="en fade">Save the Date</span><h2 class="fade" style="--i:1">婚禮日期</h2></header>
+    <header class="sh"><span class="en fade">Save the Date</span><h2 class="fade" style="--i:1" data-i18n="h_date">婚禮日期</h2></header>
     <div class="cal fade" style="--i:2" id="cal"></div>
-    <p class="cd-cap fade" style="--i:3">距離婚禮還有</p>
+    <p class="cd-cap fade" style="--i:3" data-i18n="cd_cap">距離婚禮還有</p>
     <div class="countdown fade" style="--i:3" id="countdown"></div>
   </section>
 
   <section id="story" data-r>
-    <header class="sh"><span class="en fade">Our Story</span><h2 class="fade" style="--i:1">我們的故事</h2></header>
+    <header class="sh"><span class="en fade">Our Story</span><h2 class="fade" style="--i:1" data-i18n="h_story">我們的故事</h2></header>
     <div class="story" id="story-list"></div>
   </section>
 
   <section id="schedule" class="band" data-r>
-    <header class="sh"><span class="en fade">Order of the Day</span><h2 class="fade" style="--i:1">婚宴流程</h2></header>
+    <header class="sh"><span class="en fade">Order of the Day</span><h2 class="fade" style="--i:1" data-i18n="h_sched">婚宴流程</h2></header>
     <div class="sched" id="sched"></div>
   </section>
 
   <section id="dress-sec" data-r>
-    <header class="sh"><span class="en fade">Dress Code</span><h2 class="fade" style="--i:1">服裝建議</h2></header>
+    <header class="sh"><span class="en fade">Dress Code</span><h2 class="fade" style="--i:1" data-i18n="h_dress">服裝建議</h2></header>
     <p class="dress-theme fade" style="--i:2"><b id="dress-name"></b></p>
     <p class="lead fade" style="--i:2" id="dress-text"></p>
     <div class="dress fade" style="--i:3" id="dress"></div>
@@ -360,12 +360,12 @@ footer .en { font-size: 20px; color: var(--ink); }
   </section>
 
   <section id="tips-sec" class="band" data-r>
-    <header class="sh"><span class="en fade">For Our Guests</span><h2 class="fade" style="--i:1">宴席小提醒</h2></header>
+    <header class="sh"><span class="en fade">For Our Guests</span><h2 class="fade" style="--i:1" data-i18n="h_tips">宴席小提醒</h2></header>
     <div class="tips" id="tips"></div>
   </section>
 
   <section id="venue" data-r>
-    <header class="sh"><span class="en fade">Where</span><h2 class="fade" style="--i:1">婚宴地點</h2></header>
+    <header class="sh"><span class="en fade">Where</span><h2 class="fade" style="--i:1" data-i18n="h_venue">婚宴地點</h2></header>
     <svg class="venue-art" id="venue-art" viewBox="0 0 320 210" role="img" aria-label="婚宴會館插畫"></svg>
     <div class="venue-card">
       <h3 class="fade" id="venue-name"></h3>
@@ -373,7 +373,7 @@ footer .en { font-size: 20px; color: var(--ink); }
       <div class="trans" id="trans"></div>
       <div class="btns fade" style="--i:3">
         <a class="btn primary" id="map-btn" target="_blank" rel="noopener"></a>
-        <p class="cal-tip">加到行事曆，婚禮當天不會忘記</p>
+        <p class="cal-tip" data-i18n="cal_tip_a">加到行事曆，婚禮當天不會忘記</p>
         <div class="btn-row">
           <a class="btn" id="gcal-btn" target="_blank" rel="noopener"></a>
           <button class="btn" id="ics-btn" type="button"></button>
@@ -383,20 +383,20 @@ footer .en { font-size: 20px; color: var(--ink); }
   </section>
 
   <section id="rsvp" class="band" data-r>
-    <header class="sh"><span class="en fade">R.S.V.P.</span><h2 class="fade" style="--i:1">出席回覆</h2></header>
+    <header class="sh"><span class="en fade">R.S.V.P.</span><h2 class="fade" style="--i:1" data-i18n="h_rsvp">出席回覆</h2></header>
     <div class="postcard fade" style="--i:2">
       <svg class="stamp" id="stamp" viewBox="0 0 70 84" aria-hidden="true"></svg>
-      <p>期待在婚禮上見到你！</p>
-      <p class="muted-sm">請在這一天之前回覆</p>
+      <p data-i18n="rsvp_p">期待在婚禮上見到你！</p>
+      <p class="muted-sm" data-i18n="rsvp_before">請在這一天之前回覆</p>
       <p class="deadline" id="rsvp-deadline"></p>
-      <p class="muted-sm">讓我們為你留一個好位子</p>
+      <p class="muted-sm" data-i18n="rsvp_seat">讓我們為你留一個好位子</p>
       <div class="btns"><a class="btn primary" id="rsvp-btn" target="_blank" rel="noopener"></a></div>
     </div>
   </section>
 
   <section class="thanks" id="thanks" data-r>
     <span class="en fade" style="font-size:30px;color:var(--accent)">Thank you</span>
-    <p class="big fade" style="--i:1">謝謝你<br>成為我們故事的一部分</p>
+    <p class="big fade" style="--i:1" data-i18n="thanks_a">謝謝你<br>成為我們故事的一部分</p>
     <p class="lead fade" style="--i:2" id="thanks-sign"></p>
     <svg class="garland" id="garland" viewBox="0 0 400 230" aria-hidden="true"></svg>
   </section>
@@ -404,12 +404,15 @@ footer .en { font-size: 20px; color: var(--ink); }
 </main>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="themer" id="themer" role="group" aria-label="示範配色" hidden><span class="lab">配色</span></div>
+<div class="themer" id="themer" role="group" aria-label="示範配色" hidden><span class="lab" data-i18n-ui="theme">配色</span></div>
 <div class="toast" id="toast"></div>
 
+<script src="../assets/invite-i18n.js"></script>
 <script>
 /* ===== 每接一案只要改這一段 ===== */
 const WEDDING = {
+  lang: "zh",               // 喜帖語言：zh／en／ja／es（網址加 ?lang=en 可以臨時切換）
+  sample: true,             // 範例專用：切換語言時套用範例文字；正式交付給新人時刪掉這行
   groom: "阿哲", bride: "小晴",
   initials: ["A", "Q"],
   couple: "../assets/couple-kimono.webp",   // 新人全身似顏繪（去背）
@@ -461,6 +464,9 @@ const WEDDING = {
   theme: "honey",
   showThemePicker: true,   // 示範用；正式交付給新人時改成 false
 };
+const LANG = HYI.pick(WEDDING.lang), T = HYI.UI[LANG];
+if (WEDDING.sample && LANG !== "zh") HYI.applySample(WEDDING, LANG, "a");
+HYI.applyStatic(LANG);
 /* ============================== */
 
 const $ = (id) => document.getElementById(id);
@@ -608,32 +614,32 @@ const DRESS = {
 /* ---------- 填入內容 ---------- */
 let start = new Date(WEDDING.start), end = new Date(WEDDING.end);
 const pad = (n) => String(n).padStart(2, "0");
-const WK = "日一二三四五六", WK_EN = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+const WK = T.wk, WK_EN = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const ymd = () => `${start.getFullYear()}.${pad(start.getMonth() + 1)}.${pad(start.getDate())}`;
-const title = () => `${WEDDING.groom} & ${WEDDING.bride} 婚禮`;
+const title = () => T.title(WEDDING.groom, WEDDING.bride);
 const esc = (t) => String(t).replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
 
 document.documentElement.dataset.theme = params.get("theme") || WEDDING.theme;
 const toName = params.get("to");
-if (toName) $("to-line").textContent = `To. ${toName.slice(0, 20)}`;
+if (toName) $("to-line").textContent = `${T.to}${toName.slice(0, 20)}`;
 
 function renderNames() {
   const chars = (s, i0) => [...s].map((c, i) => `<span class="ch" style="--i:${i0 + i}">${esc(c)}</span>`).join("");
   const gl = [...WEDDING.groom].length;
   $("names").innerHTML = chars(WEDDING.groom, 0) + `<span class="ch amp" style="--i:${gl}">&amp;</span>` + chars(WEDDING.bride, gl + 1);
-  $("names").setAttribute("aria-label", `${WEDDING.groom} 與 ${WEDDING.bride}`);
+  $("names").setAttribute("aria-label", T.namesAria(WEDDING.groom, WEDDING.bride));
   $("hero-date").textContent = `${ymd()}　${WK_EN[start.getDay()]}`;
   const set = (id, v) => { const el = $(id); if (el) el.textContent = v; };   // 信封在開場後會被移除
   set("env-names", `${WEDDING.groom} & ${WEDDING.bride}`);
   set("env-date", ymd());
   set("seal-text", WEDDING.initials.join("&"));
-  $("thanks-sign").textContent = `${WEDDING.groom} ＆ ${WEDDING.bride}　敬邀`;
+  $("thanks-sign").textContent = T.sign(WEDDING.groom, WEDDING.bride);
 }
 function renderCal() {
   const y = start.getFullYear(), m = start.getMonth();
   const first = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate();
   const MON = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  let h = `<div class="cal-head"><span class="en">${MON[m]}</span><b>${y} 年 ${m + 1} 月</b></div><div class="cal-grid">`;
+  let h = `<div class="cal-head"><span class="en">${MON[m]}</span><b>${LANG === "en" ? y : T.calHead(y, m)}</b></div><div class="cal-grid">`;
   h += [...WK].map((w) => `<span class="wk">${w}</span>`).join("");
   for (let i = 0; i < first; i++) h += "<span></span>";
   for (let d = 1; d <= days; d++) {
@@ -649,9 +655,9 @@ $("parents").innerHTML = WEDDING.parents.map((p) => `<div><small>${esc(p.role)}<
 
 function tick() {
   const ms = start - new Date();
-  if (ms <= 0) { $("countdown").innerHTML = `<p class="cd-done">謝謝你來參加我們的婚禮 ♡</p>`; return; }
+  if (ms <= 0) { $("countdown").innerHTML = `<p class="cd-done">${T.cdDone} ♡</p>`; return; }
   const v = [Math.floor(ms / 864e5), Math.floor(ms / 36e5) % 24, Math.floor(ms / 6e4) % 60, Math.floor(ms / 1e3) % 60];
-  if (!$("countdown").querySelector(".cd")) $("countdown").innerHTML = ["天", "時", "分", "秒"].map((l) => `<div class="cd"><b>0</b><small>${l}</small></div>`).join("");
+  if (!$("countdown").querySelector(".cd")) $("countdown").innerHTML = T.cd.map((l) => `<div class="cd"><b>0</b><small>${l}</small></div>`).join("");
   $("countdown").querySelectorAll("b").forEach((b, i) => { b.textContent = i ? pad(v[i]) : v[i]; });
 }
 tick(); setInterval(tick, 1000);
@@ -676,13 +682,13 @@ $("trans").innerHTML = WEDDING.transport.map((t, i) =>
   `<div class="tr fade" style="--i:${i + 2}">${icon(t.icon, .3 + i * .2, false)}<span>${esc(t.text)}</span></div>`).join("");
 const place = `${WEDDING.venue} ${WEDDING.address}`;
 const utc = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-$("map-btn").innerHTML = BTN_ICON("pin") + "開啟 Google 地圖";
+$("map-btn").innerHTML = BTN_ICON("pin") + T.map;
 $("map-btn").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(WEDDING.mapQuery);
-$("gcal-btn").innerHTML = BTN_ICON("cal") + "Google 日曆";
+$("gcal-btn").innerHTML = BTN_ICON("cal") + T.gcal;
 const gcal = () => "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(title()) +
   "&dates=" + utc(start) + "/" + utc(end) + "&location=" + encodeURIComponent(place);
 $("gcal-btn").href = gcal();
-$("ics-btn").innerHTML = BTN_ICON("cal") + "iPhone 行事曆";
+$("ics-btn").innerHTML = BTN_ICON("cal") + T.ics;
 $("ics-btn").addEventListener("click", () => {
   const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//wedding-invite//TW", "BEGIN:VEVENT",
     "UID:" + utc(start) + "@wedding-invite", "DTSTAMP:" + utc(new Date()),
@@ -693,7 +699,7 @@ $("ics-btn").addEventListener("click", () => {
   a.download = "wedding.ics"; a.click();
 });
 $("rsvp-deadline").textContent = WEDDING.rsvpDeadline.replaceAll("-", ".");
-$("rsvp-btn").innerHTML = BTN_ICON("mail") + "填寫出席回覆";
+$("rsvp-btn").innerHTML = BTN_ICON("mail") + T.rsvp;
 $("rsvp-btn").href = WEDDING.rsvpUrl;
 
 /* ---------- 插畫 ---------- */
@@ -908,9 +914,10 @@ function setTheme(k) {
 }
 if (WEDDING.showThemePicker && !embed) {
   const box = $("themer"); box.hidden = false;
-  Object.entries(THEMES).forEach(([k, [label, col]]) => {
+  Object.entries(THEMES).forEach(([k, [label0, col]]) => {
+    const label = HYI.themeName(LANG, k, label0);
     const b = document.createElement("button");
-    b.type = "button"; b.dataset.k = k; b.style.background = col; b.title = label; b.setAttribute("aria-label", "配色：" + label);
+    b.type = "button"; b.dataset.k = k; b.style.background = col; b.title = label; b.setAttribute("aria-label", T.theme + "：" + label);
     b.setAttribute("aria-pressed", k === document.documentElement.dataset.theme);
     b.addEventListener("click", () => {
       setTheme(k);
