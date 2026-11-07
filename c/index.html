@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="ice">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>婚禮邀請</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ===== 配色：莫蘭迪四色 ===== */
+:root, [data-theme="ice"] {
+  --snow: #ffffff;
+  --paper: #f7fafc; --paper2: #e6eef5; --ink: #334150; --muted: #7d8a96; --line: #d8e2ea;
+  --accent: #6f93b5; --seal: #b96f75; --berry: #c77c84;
+  --w1: #d6e3ef; --w2: #edf2f7; --w3: #ecdfe6; --w4: #dbe9e5; --lf: #a3bcb2; --lf2: #6f8f86;
+}
+[data-theme="silver"] {
+  --snow: #ffffff;
+  --paper: #f8f8f9; --paper2: #e9eaed; --ink: #3a3d44; --muted: #858890; --line: #dcdee2;
+  --accent: #8e95a3; --seal: #b47377; --berry: #c3858b;
+  --w1: #dfe1e6; --w2: #f0f1f3; --w3: #ebe3e4; --w4: #e1e6e3; --lf: #b0bab4; --lf2: #7d8b84;
+}
+[data-theme="night"] {
+  --snow: #dde5ee;
+  --paper: #1f2937; --paper2: #2a3647; --ink: #eef2f6; --muted: #a9b4c1; --line: #3b495c;
+  --accent: #e8c48a; --seal: #c97b70; --berry: #e09a8f;
+  --w1: #34445a; --w2: #2c3a4d; --w3: #46405a; --w4: #33494a; --lf: #4f6b66; --lf2: #3d5752;
+}
+[data-theme="rosy"] {
+  --snow: #ffffff;
+  --paper: #fbf8f9; --paper2: #f3e9ed; --ink: #46393e; --muted: #8d7f84; --line: #ebdde2;
+  --accent: #c08b99; --seal: #bf6f78; --berry: #cf7f8b;
+  --w1: #efdbe3; --w2: #f7eef2; --w3: #e1e8f0; --w4: #e4ece2; --lf: #b5c4b4; --lf2: #889d8a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--paper); }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: "Noto Serif TC", serif; font-size: 15.5px; line-height: 1.95; letter-spacing: .04em;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+body.locked { overflow: hidden; height: 100svh; }
+.it { font-family: "Cormorant Garamond", serif; font-style: italic; letter-spacing: .02em; }
+.cg { font-family: "Cormorant Garamond", serif; letter-spacing: .06em; font-variant-numeric: lining-nums; }
+p { text-wrap: pretty; }
+
+/* 水彩元素 */
+.wc { }
+.pen { fill: none; stroke: var(--muted); stroke-width: .9; stroke-linecap: round; opacity: .8; }
+.pop { opacity: 0; transform: scale(.6); transition: opacity 1.6s ease var(--d, 0s), transform 1.8s cubic-bezier(.2,.8,.2,1) var(--d, 0s); }
+.in .pop { opacity: 1; transform: none; }
+.ln { transition: stroke-dashoffset 1.8s cubic-bezier(.5,0,.3,1) var(--d, 0s); }
+.in .ln { stroke-dashoffset: 0 !important; }
+.fade { opacity: 0; transform: translateY(14px); filter: blur(4px); transition: opacity 1.4s ease, transform 1.4s cubic-bezier(.2,.7,.2,1), filter 1.4s ease; transition-delay: calc(var(--i, 0) * 120ms); }
+.in .fade { opacity: 1; transform: none; filter: none; }
+.sw { animation: sway 7s ease-in-out infinite alternate; animation-delay: var(--sd, 0s); }
+@keyframes sway { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+
+/* 線條小圖示 */
+.ico { width: 40px; height: 40px; overflow: visible; }
+.ico .s { fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.ico [class*="f"] { fill: none; }
+
+/* ===== 開場：起霧的玻璃窗 ===== */
+#intro { position: fixed; inset: 0; z-index: 50; background: color-mix(in srgb, var(--paper) 62%, transparent); -webkit-backdrop-filter: blur(16px) saturate(1.1); backdrop-filter: blur(16px) saturate(1.1);
+  transition: opacity 1.6s ease, backdrop-filter 1.6s ease, -webkit-backdrop-filter 1.6s ease; }
+#intro.open { opacity: 0; -webkit-backdrop-filter: blur(0); backdrop-filter: blur(0); pointer-events: none; }
+.intro-c { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
+#open-btn { background: none; border: 0; color: var(--ink); font: inherit; cursor: pointer; display: grid; justify-items: center; gap: 12px; padding: 20px; }
+.intro-en { font-size: 26px; color: var(--accent); }
+.flake-seal { width: 92px; height: 92px; overflow: visible; animation: spin 40s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.intro-to2 { font-size: 18px; letter-spacing: .3em; }
+.intro-hint { font-size: 12px; color: var(--muted); letter-spacing: .4em; animation: blink 2.4s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .35; } }
+#open-btn:focus-visible { outline: 1px dashed var(--accent); outline-offset: 8px; }
+.hanko-row .hanko { display: none; }
+
+/* ===== 版面 ===== */
+.page { position: relative; max-width: 480px; margin: 0 auto; overflow: hidden; background: var(--paper); }
+@media (min-width: 900px) { .page { margin: 48px auto; box-shadow: 0 30px 80px -40px rgba(60,50,40,.35); } }
+section { position: relative; padding: 72px 30px; }
+.sh { text-align: center; margin-bottom: 36px; position: relative; isolation: isolate; }
+.sh .no { display: block; font-size: 13px; color: var(--muted); letter-spacing: .5em; }
+.sh h2 { font-size: 22px; font-weight: 600; letter-spacing: .5em; margin: 8px 0 2px; padding-left: .5em; position: relative; }
+.sh .it { font-size: 19px; color: var(--accent); }
+.sh .brush { position: absolute; left: 50%; top: 22px; width: 190px; height: 46px; translate: -50% 0; z-index: -1; overflow: visible; }
+.sh-flake { display: block; width: 20px; height: 20px; margin: 10px auto 0; overflow: visible; }
+.rule { width: 1px; height: 54px; background: var(--line); margin: 0 auto; }
+
+/* 封面 */
+.hero { padding: 46px 0 26px; text-align: center; background: linear-gradient(var(--paper2) 0%, var(--paper) 60%); }
+.hero .top { font-size: 22px; color: var(--accent); }
+.hero .date { font-size: 15px; letter-spacing: .5em; padding-left: .5em; margin-top: 2px; }
+.hero-art { display: block; width: 100%; height: auto; overflow: visible; margin-top: 4px; }
+.couple { opacity: 0; transform: translateY(16px); transition: opacity 2s ease .5s, transform 2s cubic-bezier(.2,.8,.2,1) .5s; }
+.in .couple { opacity: 1; transform: none; }
+.v-copy { position: absolute; right: 22px; top: 120px; writing-mode: vertical-rl; font-size: 13px; letter-spacing: .55em; color: var(--muted); line-height: 1.9; }
+.names { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 8px; }
+.names b { font-size: 30px; font-weight: 600; letter-spacing: .24em; padding-left: .24em; }
+.names i { width: 30px; height: 1px; background: var(--ink); opacity: .45; }
+.names .hanko { width: 42px; height: 42px; font-size: 14px; }
+.mini-flake { width: 28px; height: 28px; overflow: visible; }
+.flake { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; }
+
+/* 邀請（直書） */
+.vert { writing-mode: vertical-rl; margin: 0 auto; height: 250px; font-size: 16px; line-height: 2.5; letter-spacing: .3em; text-align: start; }
+.parents { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 40px; text-align: center; font-size: 14.5px; }
+.parents small { display: block; color: var(--muted); font-size: 12px; letter-spacing: .4em; }
+
+/* 日曆 */
+.cal-head { text-align: center; margin-bottom: 14px; }
+.cal-head .cg { font-size: 34px; line-height: 1; }
+.cal-head small { display: block; font-size: 12px; color: var(--muted); letter-spacing: .4em; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; row-gap: 2px; font-family: "Cormorant Garamond", serif; font-size: 18px; }
+.cal-grid .wk { font-family: "Noto Serif TC", serif; font-size: 12px; color: var(--muted); }
+.cal-grid span { position: relative; line-height: 40px; }
+.cal-grid .day { color: #fff; font-weight: 500; }
+.cal-grid .day svg { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; translate: -50% -50%; z-index: -1; overflow: visible; }
+.countdown { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 34px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.cd { text-align: center; padding: 12px 0 8px; }
+.cd + .cd { border-left: 1px solid var(--line); }
+.cd b { display: block; font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: 34px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.cd small { font-size: 11px; color: var(--muted); letter-spacing: .3em; }
+.cd-done { grid-column: 1 / -1; text-align: center; padding: 16px; }
+
+/* 故事 */
+.story { position: relative; }
+.st { display: grid; grid-template-columns: 76px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: center; }
+.st:last-child { border-bottom: 0; }
+.st .cg { font-size: 19px; color: var(--accent); }
+.st .dab { position: relative; width: 52px; height: 52px; display: grid; place-items: center; }
+.st .dab > svg:first-child { position: absolute; inset: -6px; width: 64px; height: 64px; overflow: visible; }
+
+/* 流程 */
+.sr { display: grid; grid-template-columns: 70px 52px 1fr; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.sr:last-child { border-bottom: 0; }
+.sr .cg { font-size: 24px; text-align: right; }
+.sr h3 { font-size: 16.5px; font-weight: 600; letter-spacing: .2em; }
+.sr p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.dab { position: relative; width: 52px; height: 52px; display: grid; place-items: center; }
+.dab > svg.wash { position: absolute; inset: -6px; width: 64px; height: 64px; overflow: visible; }
+
+/* 服裝建議 */
+.dress-name { text-align: center; font-size: 20px; color: var(--accent); margin-bottom: 4px; }
+.dress-text { text-align: center; color: var(--muted); font-size: 14.5px; margin-bottom: 26px; text-wrap: balance; }
+.dress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.dz { text-align: center; font-size: 13px; }
+.dz svg { width: 100%; max-width: 76px; height: auto; display: block; margin: 0 auto; overflow: visible; }
+.dz small { display: block; font-family: "Cormorant Garamond", serif; color: var(--muted); font-size: 13px; letter-spacing: .1em; }
+.avoid { text-align: center; font-size: 13px; color: var(--muted); margin-top: 22px; letter-spacing: .1em; }
+
+/* 宴席小提醒 */
+.tips { border-top: 1px solid var(--line); }
+.tip { display: grid; grid-template-columns: 52px 1fr; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.tip h3 { font-size: 15.5px; font-weight: 600; letter-spacing: .2em; }
+.tip p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+/* 場地 */
+.venue-art { display: block; width: 100%; height: auto; overflow: visible; }
+.venue-card { text-align: center; margin-top: 10px; }
+.venue-card h3 { font-size: 18px; font-weight: 600; letter-spacing: .14em; }
+.venue-card .addr { color: var(--muted); font-size: 14px; }
+.trans { margin: 22px 0 8px; text-align: left; border-top: 1px solid var(--line); }
+.tr { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; line-height: 1.6; }
+
+/* 按鈕 */
+.btns { display: grid; gap: 10px; margin-top: 24px; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 16px; border: 1px solid var(--ink); background: transparent; color: var(--ink);
+  font: inherit; font-size: 14.5px; letter-spacing: .24em; text-decoration: none; cursor: pointer; transition: background .3s, color .3s; }
+.btn:hover { background: var(--ink); color: var(--paper); }
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn-row .btn { letter-spacing: .1em; font-size: 13.5px; padding: 12px 6px; }
+.cal-tip { font-size: 12px; color: var(--muted); text-align: center; letter-spacing: .2em; margin-top: 6px; }
+
+/* 回覆 */
+.card { position: relative; background: color-mix(in srgb, var(--paper) 70%, #fff); padding: 44px 26px 30px; text-align: center; box-shadow: 0 14px 40px -26px rgba(60,50,40,.5);
+  -webkit-mask: radial-gradient(circle at 6px 6px, transparent 0 0) , linear-gradient(#000, #000); }
+.card::before { content: ""; position: absolute; inset: 10px; border: 1px solid var(--line); pointer-events: none; }
+.card .hanko { position: absolute; right: 22px; top: -18px; }
+.deadline { font-family: "Cormorant Garamond", serif; font-size: 34px; color: var(--accent); letter-spacing: .1em; line-height: 1.3; margin: 6px 0; }
+.muted-sm { font-size: 13.5px; color: var(--muted); }
+
+/* 結尾 */
+.thanks { text-align: center; padding-bottom: 30px; }
+.thanks .it { font-size: 30px; color: var(--accent); }
+.thanks .big { font-size: 17px; letter-spacing: .3em; margin-top: 6px; }
+.end-art { display: block; width: 100%; height: auto; margin-top: 18px; overflow: visible; }
+footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: var(--muted); letter-spacing: .3em; }
+
+#petals { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
+.side { position: fixed; top: 0; width: 300px; height: 100vh; z-index: 0; display: none; overflow: visible; pointer-events: none; }
+.side.l { left: calc(50% - 560px); } .side.r { right: calc(50% - 560px); transform: scaleX(-1); }
+@media (min-width: 1040px) { .side { display: block; } }
+
+.themer { position: fixed; z-index: 40; bottom: calc(14px + env(safe-area-inset-bottom)); right: 14px; display: flex; align-items: center; gap: 6px; background: #fffdfb; border: 1px solid var(--line); border-radius: 999px; padding: 5px; box-shadow: 0 6px 20px -10px rgba(0,0,0,.3); }
+.themer[hidden] { display: none; }
+.themer button { width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(0,0,0,.15); cursor: pointer; padding: 0; }
+.themer button[aria-pressed="true"] { outline: 1.5px solid var(--ink); outline-offset: 2px; }
+.themer .lab { font-size: 11px; padding: 0 4px 0 8px; color: var(--muted); letter-spacing: .2em; }
+.toast { position: fixed; z-index: 41; bottom: calc(58px + env(safe-area-inset-bottom)); right: 14px; background: var(--ink); color: var(--paper); font-size: 12px; padding: 4px 12px; border-radius: 999px; opacity: 0; transition: opacity .3s; pointer-events: none; letter-spacing: .2em; }
+.toast.show { opacity: 1; }
+
+.still *, .still *::before, .still *::after { transition: none !important; animation: none !important; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; } }
+</style>
+</head>
+<body class="locked">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- 水彩：邊緣暈開、不規則 -->
+    <filter id="wc" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="3" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation=".7"/>
+    </filter>
+    <filter id="wcBig" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <filter id="wcMid" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="3" seed="2" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="1.6"/>
+    </filter>
+    <clipPath id="photoClip"><path d="M110 520 V230 a90 90 0 0 1 180 0 V520 Z"/></clipPath>
+  </defs>
+</svg>
+
+<div id="intro">
+  <div class="intro-c">
+    <button id="open-btn" type="button" aria-label="打開邀請函">
+      <span class="intro-en it">a winter wedding</span>
+      <svg class="flake-seal" viewBox="-30 -30 60 60" aria-hidden="true"><g id="seal-flake"></g></svg>
+      <span class="intro-to2" id="to-line">To. 親愛的你</span>
+      <span class="intro-hint">輕觸　擦開霧氣</span>
+    </button>
+  </div>
+</div>
+
+<svg class="side l" id="side-l" viewBox="0 0 300 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+<svg class="side r" id="side-r" viewBox="0 0 300 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+
+<main class="page">
+  <section class="hero" id="hero">
+    <p class="top it fade">A Winter Wedding</p>
+    <p class="date cg fade" style="--i:1" id="hero-date"></p>
+    <p class="v-copy fade" style="--i:4">在雪落的季節　邀請你</p>
+    <svg class="hero-art" id="hero-art" viewBox="0 110 400 440" role="img" aria-label="新人全身似顏繪與水彩花"></svg>
+    <div class="names fade" style="--i:5"><b id="n-groom"></b><i></i><svg class="mini-flake" viewBox="-12 -12 24 24" aria-hidden="true"><g class="flk"></g></svg><span id="hanko-hero" hidden></span><i></i><b id="n-bride"></b></div>
+  </section>
+
+  <section id="invite" data-r>
+    <div class="rule"></div>
+    <p class="vert fade" id="invite-text" style="margin-top:34px"></p>
+    <div class="parents fade" style="--i:2" id="parents"></div>
+  </section>
+
+  <section id="date" data-r>
+    <header class="sh"><span class="no cg fade">— 01 —</span><h2 class="fade" style="--i:1">婚禮日期</h2><span class="it fade" style="--i:1">Save the Date</span></header>
+    <div class="fade" style="--i:2" id="cal"></div>
+    <div class="countdown fade" style="--i:3" id="countdown"></div>
+  </section>
+
+  <section id="story" data-r>
+    <header class="sh"><span class="no cg fade">— 02 —</span><h2 class="fade" style="--i:1">我們的故事</h2><span class="it fade" style="--i:1">Our Story</span></header>
+    <div class="story" id="story-list"></div>
+  </section>
+
+  <section id="schedule" data-r>
+    <header class="sh"><span class="no cg fade">— 03 —</span><h2 class="fade" style="--i:1">婚宴流程</h2><span class="it fade" style="--i:1">Order of the Day</span></header>
+    <div id="sched"></div>
+  </section>
+
+  <section id="dress-sec" data-r>
+    <header class="sh"><span class="no cg fade">— 04 —</span><h2 class="fade" style="--i:1">服裝建議</h2><span class="it fade" style="--i:1">Dress Code</span></header>
+    <p class="dress-name it fade" style="--i:2" id="dress-name"></p>
+    <p class="dress-text fade" style="--i:2" id="dress-text"></p>
+    <div class="dress fade" style="--i:3" id="dress"></div>
+    <p class="avoid fade" style="--i:4" id="dress-avoid"></p>
+  </section>
+
+  <section id="tips-sec" data-r>
+    <header class="sh"><span class="no cg fade">— 05 —</span><h2 class="fade" style="--i:1">宴席小提醒</h2><span class="it fade" style="--i:1">For Our Guests</span></header>
+    <div class="tips" id="tips"></div>
+  </section>
+
+  <section id="venue" data-r>
+    <header class="sh"><span class="no cg fade">— 06 —</span><h2 class="fade" style="--i:1">婚宴地點</h2><span class="it fade" style="--i:1">Venue</span></header>
+    <svg class="venue-art" id="venue-art" viewBox="0 0 320 200" role="img" aria-label="婚宴會館水彩插畫"></svg>
+    <div class="venue-card">
+      <h3 class="fade" id="venue-name"></h3>
+      <p class="addr fade" style="--i:1" id="venue-addr"></p>
+      <div class="trans" id="trans"></div>
+      <div class="btns fade" style="--i:3">
+        <a class="btn primary" id="map-btn" target="_blank" rel="noopener">開啟 Google 地圖</a>
+        <p class="cal-tip">加入行事曆</p>
+        <div class="btn-row">
+          <a class="btn" id="gcal-btn" target="_blank" rel="noopener">Google 日曆</a>
+          <button class="btn" id="ics-btn" type="button">iPhone 行事曆</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rsvp" data-r>
+    <header class="sh"><span class="no cg fade">— 07 —</span><h2 class="fade" style="--i:1">出席回覆</h2><span class="it fade" style="--i:1">R.S.V.P.</span></header>
+    <div class="card fade" style="--i:2">
+      <span class="hanko" id="hanko-rsvp"></span>
+      <p>期待在婚禮上與你相見</p>
+      <p class="muted-sm">請於下列日期前回覆</p>
+      <p class="deadline" id="rsvp-deadline"></p>
+      <p class="muted-sm">讓我們為你留一個好位子</p>
+      <div class="btns"><a class="btn primary" id="rsvp-btn" target="_blank" rel="noopener">填寫出席回覆</a></div>
+    </div>
+  </section>
+
+  <section class="thanks" id="thanks" data-r>
+    <p class="it fade">Thank you</p>
+    <p class="big fade" style="--i:1">謝謝你　成為我們故事的一部分</p>
+    <svg class="end-art" id="end-art" viewBox="0 0 400 260" aria-hidden="true"></svg>
+  </section>
+  <footer class="cg">ILLUSTRATION BY ALISON</footer>
+</main>
+
+<canvas id="petals" aria-hidden="true"></canvas>
+<div class="themer" id="themer" role="group" aria-label="示範配色" hidden><span class="lab">配色</span></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== 每接一案只要改這一段 ===== */
+const WEDDING = {
+  groom: "阿哲", bride: "小晴",
+  initials: ["哲", "晴"],                  // 印章上的字
+  couple: "../assets/couple-kimono.webp",
+  start: "2027-03-20T11:30:00+08:00",
+  end:   "2027-03-20T14:30:00+08:00",
+  invite: "我們從大學社團認識\n一起走過十年的日子\n這一天　想請重要的你\n來見證我們的幸福",
+  parents: [{ role: "男方家長", names: "王大明・林美華" }, { role: "女方家長", names: "陳志強・張淑芬" }],
+  story: [
+    { date: "2016.09", icon: "coffee", text: "社團迎新，第一次說話" },
+    { date: "2018.07", icon: "plane",  text: "第一次一起旅行，去了京都" },
+    { date: "2022.03", icon: "home",   text: "搬進我們的小窩" },
+    { date: "2026.05", icon: "rings",  text: "海邊求婚，她說了好" },
+    { date: "2027.03", icon: "heart",  text: "想請你來見證這一天" },
+  ],
+  schedule: [
+    { time: "11:00", icon: "pen",    title: "迎賓簽到", note: "留下祝福、和新人合照" },
+    { time: "11:30", icon: "rings",  title: "證婚儀式", note: "請大家一起見證" },
+    { time: "12:00", icon: "bowl",   title: "開席",     note: "美味的喜宴開始" },
+    { time: "12:40", icon: "heart",  title: "新人進場", note: "準備好掌聲" },
+    { time: "13:30", icon: "cheers", title: "敬酒時間", note: "到每一桌說聲謝謝" },
+    { time: "14:30", icon: "candy",  title: "送客喜糖", note: "帶一份甜回家" },
+  ],
+  dressCode: {
+    name: "Snowy Pastel",
+    text: "像雪地裡的一抹顏色：冰藍、燕麥、霧粉、松綠都很適合。",
+    colors: [
+      { name: "冰藍", hex: "#c6d8ea", type: "dress" },
+      { name: "燕麥", hex: "#e4d8c6", type: "shirt" },
+      { name: "霧粉", hex: "#e8cdd5", type: "dress" },
+      { name: "松綠", hex: "#a9bfb3", type: "shirt" },
+    ],
+    avoid: "請避開　全白（新娘的顏色）與全黑",
+  },
+  tips: [
+    { icon: "leaf",   title: "素食",     text: "回覆表單勾選即可" },
+    { icon: "baby",   title: "兒童座椅", text: "帶小朋友請先告知" },
+    { icon: "car",    title: "停車",     text: "B2 免費停 3 小時" },
+    { icon: "camera", title: "拍照區",   text: "入口設有拍照區" },
+  ],
+  venue: "（範例）婚宴會館 3F 花園廳",
+  address: "台北市○○區○○路 100 號",
+  mapQuery: "台北市政府",
+  transport: [
+    { icon: "train", text: "捷運○○站 2 號出口，步行 5 分鐘" },
+    { icon: "car",   text: "開車導航「○○婚宴會館」" },
+  ],
+  rsvpUrl: "https://forms.gle/",
+  rsvpDeadline: "2027-02-20",
+  theme: "ice",
+  showThemePicker: true,   // 示範用；正式交付給新人時改成 false
+};
+/* ============================== */
+
+const $ = (id) => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+const still = params.has("still"), embed = params.has("embed");
+const reduced = still || matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (still) document.documentElement.classList.add("still");
+let seed = 5;
+const R = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+const pick = (a) => a[Math.floor(R() * a.length)];
+const f1 = (n) => Math.round(n * 10) / 10;
+const esc = (t) => String(t).replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
+const WASH = ["--w1", "--w2", "--w3", "--w4"];
+
+/* ---------- 水彩花 ---------- */
+function wcFlower(x, y, r, col, d, petals = 6) {
+  let h = "";
+  const rot = R() * 60;
+  for (let k = 0; k < petals; k++) {
+    const a = rot + k * (360 / petals) + (R() - .5) * 14;
+    const rx = r * (.5 + R() * .12), ry = r * (.36 + R() * .1);
+    h += `<ellipse cx="${f1(r * .48)}" cy="0" rx="${f1(rx)}" ry="${f1(ry)}" transform="rotate(${f1(a)})" style="fill:var(${col});fill-opacity:1;stroke:var(--ink);stroke-width:.8;stroke-opacity:.55"/>`;
+  }
+  for (let k = 0; k < 4; k++) {
+    const a = rot + 25 + k * 90;
+    h += `<path d="M${f1(r * .12)} 0L${f1(r * .5)} 0" transform="rotate(${f1(a)})" style="fill:none;stroke:var(--ink);stroke-width:.6;stroke-opacity:.35"/>`;
+  }
+  let c = "";
+  for (let k = 0; k < 9; k++) {
+    const a = k * 40 * Math.PI / 180, l = r * (.18 + R() * .1);
+    c += `<circle cx="${f1(Math.cos(a) * l)}" cy="${f1(Math.sin(a) * l)}" r="${f1(.7 + R() * .8)}" style="fill:var(--accent);opacity:.9"/>`;
+  }
+  return `<g transform="translate(${f1(x)} ${f1(y)})"><g class="sw" style="--sd:${f1(-R() * 6)}s"><g class="pop" style="--d:${f1(d)}s"><g class="wc">${h}</g>${c}</g></g></g>`;
+}
+function wcBud(x, y, r, col, d) {
+  return `<g transform="translate(${f1(x)} ${f1(y)})"><g class="pop" style="--d:${f1(d)}s"><ellipse class="wc" rx="${f1(r * .7)}" ry="${f1(r)}" style="fill:var(${col});stroke:var(--ink);stroke-width:.7;stroke-opacity:.5"/></g></g>`;
+}
+function wcLeaf(x, y, l, ang, d, col = R() > .5 ? "--lf" : "--lf2") {
+  l = f1(l);
+  return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(ang)})"><g class="pop" style="--d:${f1(d)}s"><path class="wc" d="M0 0C${f1(l * .25)} ${f1(-l * .3)} ${f1(l * .7)} ${f1(-l * .24)} ${l} 0C${f1(l * .7)} ${f1(l * .24)} ${f1(l * .25)} ${f1(l * .3)} 0 0Z" style="fill:var(${col});stroke:var(--ink);stroke-width:.7;stroke-opacity:.45"/><path class="pen" style="stroke-width:.6" d="M${f1(l * .06)} 0Q${f1(l * .5)} ${f1(-l * .04)} ${f1(l * .9)} 0"/></g></g>`;
+}
+function wash(x, y, rx, ry, col, op, d = 0, rot = 0) {
+  return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${rot})"><g class="pop" style="--d:${d}s"><ellipse class="wc" filter="url(#wcBig)" rx="${rx}" ry="${ry}" style="fill:var(${col});opacity:${op}"/></g></g>`;
+}
+function grow(g, path, o) {
+  const L = path.getTotalLength(), n = Math.max(2, Math.round(L / o.step));
+  let back = "", front = "";
+  for (let i = 1; i <= n; i++) {
+    const s = (i / n) * L, p = path.getPointAtLength(s), q = path.getPointAtLength(Math.max(0, s - 2));
+    const ang = Math.atan2(p.y - q.y, p.x - q.x) * 180 / Math.PI, side = i % 2 ? 1 : -1;
+    const d = (o.d0 || 0) + (s / L) * (o.span ?? 1.4);
+    back += wcLeaf(p.x, p.y, o.leaf * (.7 + R() * .6), ang + side * (30 + R() * 35), d);
+    if (R() < (o.bloomP || 0)) front += wcFlower(p.x + (R() - .5) * 8, p.y + (R() - .5) * 8, o.size * (.7 + R() * .7), pick(o.cols || WASH), d + .2, R() > .5 ? 6 : 5);
+    else if (o.buds && R() < o.buds) front += wcBud(p.x + side * 6, p.y - 4, 3 + R() * 2.5, pick(o.cols || WASH), d + .3);
+  }
+  g.insertAdjacentHTML("beforeend", `<g>${back}</g><g>${front}</g>`);
+}
+function stem(g, d, delay) {
+  g.insertAdjacentHTML("beforeend", `<path class="pen ln" style="--d:${delay}s" d="${d}"/>`);
+  return g.lastElementChild;
+}
+function prepLines(root) {
+  root.querySelectorAll(".ln").forEach((el) => {
+    const L = Math.ceil(el.getTotalLength()) + 2;
+    el.style.strokeDasharray = L; el.style.strokeDashoffset = reduced ? 0 : L;
+  });
+}
+
+/* ---------- 線條圖示（細線） ---------- */
+const ICONS = {
+  pen: `<rect class="s" x="7" y="12" width="24" height="29" rx="3"/><path class="s" d="M12 20h14M12 26h10M12 32h12M31 41l2-9 10-20 4 2-10 20z"/>`,
+  rings: `<circle class="s" cx="18" cy="30" r="10"/><circle class="s" cx="30" cy="30" r="10"/><path class="s" d="M13.5 15.5l4.5-6 4.5 6-4.5 5z"/>`,
+  bowl: `<path class="s" d="M7 25h34c0 9-7 15-17 15S7 34 7 25zM18 40h12M27 21l14-14M23 21l14-15M13 19c-2-3 2-5 0-8M19 19c-2-3 2-5 0-8"/>`,
+  heart: `<path class="s" d="M24 40C10 31 6 23 9 17c3-6 11-6 15 0 4-6 12-6 15 0 3 6-1 14-15 23z"/>`,
+  cheers: `<path class="s" d="M6 12l11-3 1 12a4.5 4.5 0 0 1-8.6 2.3zM14 27l3 11M12 39l8-2M42 12l-11-3-1 12a4.5 4.5 0 0 0 8.6 2.3zM34 27l-3 11M36 39l-8-2M24 3v4"/>`,
+  candy: `<ellipse class="s" cx="24" cy="24" rx="11" ry="8.5"/><path class="s" d="M13 24l-8-7v14zM35 24l8-7v14zM20 17c2 4 2 10 0 14M27 16c2 4 2 12 0 16"/>`,
+  camera: `<rect class="s" x="6" y="15" width="36" height="25" rx="5"/><path class="s" d="M16 15l3-5h10l3 5"/><circle class="s" cx="24" cy="27.5" r="7"/>`,
+  leaf: `<path class="s" d="M10 39C8 21 20 8 41 8c0 21-12 33-31 31zM10 39L31 18"/>`,
+  baby: `<rect class="s" x="15" y="17" width="18" height="24" rx="6"/><path class="s" d="M17 17h14v-4H17zM20.5 13c0-6 7-6 7 0M15 25h6M15 31h6"/>`,
+  car: `<path class="s" d="M5 33v-7l5-9h23l8 9h2v7zM13 20h8v6H10zM25 20h6l5 6H25z"/><circle class="s" cx="14" cy="34" r="4.5"/><circle class="s" cx="34" cy="34" r="4.5"/>`,
+  train: `<rect class="s" x="10" y="7" width="28" height="29" rx="7"/><path class="s" d="M15 13h18v10H15zM16 36l-4 6M32 36l4 6"/>`,
+  coffee: `<path class="s" d="M9 18h24v10a10 10 0 0 1-10 10h-4A10 10 0 0 1 9 28zM33 21h3a4 4 0 0 1 0 8h-3M16 13c-2-3 2-4 0-7M24 13c-2-3 2-4 0-7"/>`,
+  plane: `<path class="s" d="M5 25l38-15-10 30-8-11zM25 29l18-19M25 29v10l5-6"/>`,
+  home: `<path class="s" d="M12 21v19h24V21M7 23L24 9l17 14M20 40v-9h8v9"/>`,
+};
+const icon = (n) => `<svg class="ico" viewBox="0 0 48 48" aria-hidden="true">${ICONS[n] || ICONS.heart}</svg>`;
+const dab = (n, i) => `<div class="dab"><svg class="wash" viewBox="-32 -32 64 64" aria-hidden="true"><circle class="wc" r="23" style="fill:var(${WASH[i % 4]})"/></svg>${icon(n)}</div>`;
+const DRESS = {
+  dress: (c) => `<g class="wc"><path d="M29 8h14l2 14-4 7 15 45H16l15-45-4-7z" style="fill:${c}"/></g><path class="pen" style="stroke:var(--ink);opacity:.55" d="M30 6l1 4M42 6l-1 4M29 10h14l2 12-4 7 14 43H17l14-43-4-7zM27 29h18"/>`,
+  shirt: (c) => `<g class="wc"><path d="M23 13l13-5 13 5 10 12-7 5v42H20V30l-7-5z" style="fill:${c}"/></g><path class="pen" style="stroke:var(--ink);opacity:.55" d="M24 12l12-5 12 5 10 12-7 5v41H21V29l-7-5zM30 9l6 9 6-9M36 18v30"/>`,
+};
+
+/* ---------- 內容 ---------- */
+let start = new Date(WEDDING.start), end = new Date(WEDDING.end);
+const pad = (n) => String(n).padStart(2, "0");
+const title = () => `${WEDDING.groom} & ${WEDDING.bride} 婚禮`;
+document.documentElement.dataset.theme = params.get("theme") || WEDDING.theme;
+const toName = params.get("to");
+if (toName) $("to-line").textContent = `To. ${toName.slice(0, 12)}`;
+
+const hanko = () => [...WEDDING.initials.join("")].slice(0, 2).map(esc).join("<br>");
+function renderNames() {
+  $("n-groom").textContent = WEDDING.groom; $("n-bride").textContent = WEDDING.bride;
+  ["hanko-hero", "hanko-rsvp"].forEach((id) => { const el = $(id); if (el) el.innerHTML = hanko(); });
+  $("hero-date").textContent = `${start.getFullYear()} . ${pad(start.getMonth() + 1)} . ${pad(start.getDate())}`;
+}
+function renderCal() {
+  const y = start.getFullYear(), m = start.getMonth();
+  const first = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate();
+  const MON = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let h = `<div class="cal-head"><span class="cg">${MON[m]}</span><small>${y} 年 ${m + 1} 月</small></div><div class="cal-grid">`;
+  h += [..."日一二三四五六"].map((w) => `<span class="wk">${w}</span>`).join("");
+  for (let i = 0; i < first; i++) h += "<span></span>";
+  for (let d = 1; d <= days; d++) h += d === start.getDate()
+    ? `<span class="day">${d}<svg viewBox="-25 -25 50 50" aria-hidden="true"><circle class="wc" r="17" style="fill:var(--accent)"/></svg></span>`
+    : `<span>${d}</span>`;
+  $("cal").innerHTML = h + "</div>";
+}
+renderNames(); renderCal();
+$("invite-text").innerHTML = WEDDING.invite.split("\n").map(esc).join("<br>");
+$("parents").innerHTML = WEDDING.parents.map((p) => `<div><small>${esc(p.role)}</small>${esc(p.names)}</div>`).join("");
+function tick() {
+  const ms = start - new Date();
+  if (ms <= 0) { $("countdown").innerHTML = `<p class="cd-done">謝謝你來參加我們的婚禮</p>`; return; }
+  const v = [Math.floor(ms / 864e5), Math.floor(ms / 36e5) % 24, Math.floor(ms / 6e4) % 60, Math.floor(ms / 1e3) % 60];
+  if (!$("countdown").querySelector(".cd")) $("countdown").innerHTML = ["日", "時", "分", "秒"].map((l) => `<div class="cd"><b>0</b><small>${l}</small></div>`).join("");
+  $("countdown").querySelectorAll("b").forEach((b, i) => { b.textContent = i ? pad(v[i]) : v[i]; });
+}
+tick(); setInterval(tick, 1000);
+$("story-list").innerHTML = WEDDING.story.map((s, i) =>
+  `<div class="st fade" style="--i:${i + 2}">${dab(s.icon, i)}<div><span class="cg">${esc(s.date)}</span><p>${esc(s.text)}</p></div></div>`).join("");
+$("sched").innerHTML = WEDDING.schedule.map((s, i) =>
+  `<div class="sr fade" style="--i:${i + 2}"><span class="cg">${esc(s.time)}</span>${dab(s.icon, i + 1)}<div><h3>${esc(s.title)}</h3><p>${esc(s.note || "")}</p></div></div>`).join("");
+$("tips").innerHTML = WEDDING.tips.map((t, i) =>
+  `<div class="tip fade" style="--i:${i + 2}">${dab(t.icon, i + 2)}<div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p></div></div>`).join("");
+const dc = WEDDING.dressCode;
+$("dress-name").textContent = dc.name; $("dress-text").textContent = dc.text; $("dress-avoid").textContent = dc.avoid;
+$("dress").innerHTML = dc.colors.map((c) =>
+  `<div class="dz"><svg viewBox="0 0 72 80" aria-hidden="true">${DRESS[c.type === "shirt" ? "shirt" : "dress"](c.hex)}</svg>${esc(c.name)}<small>${esc(c.hex.toUpperCase())}</small></div>`).join("");
+$("venue-name").textContent = WEDDING.venue; $("venue-addr").textContent = WEDDING.address;
+$("trans").innerHTML = WEDDING.transport.map((t, i) => `<div class="tr fade" style="--i:${i + 2}">${icon(t.icon)}<span>${esc(t.text)}</span></div>`).join("");
+const place = `${WEDDING.venue} ${WEDDING.address}`;
+const utc = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+const gcal = () => "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(title()) + "&dates=" + utc(start) + "/" + utc(end) + "&location=" + encodeURIComponent(place);
+$("map-btn").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(WEDDING.mapQuery);
+$("gcal-btn").href = gcal();
+$("ics-btn").addEventListener("click", () => {
+  const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//wedding-invite//TW", "BEGIN:VEVENT", "UID:" + utc(start) + "@wedding-invite", "DTSTAMP:" + utc(new Date()),
+    "DTSTART:" + utc(start), "DTEND:" + utc(end), "SUMMARY:" + title(), "LOCATION:" + place, "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" })); a.download = "wedding.ics"; a.click();
+});
+$("rsvp-deadline").textContent = WEDDING.rsvpDeadline.replaceAll("-", " . ");
+$("rsvp-btn").href = WEDDING.rsvpUrl;
+
+/* ---------- 插畫 ---------- */
+// 雪花
+function flakePath(r) {
+  let d = "";
+  for (let k = 0; k < 6; k++) {
+    const a = k * Math.PI / 3, c = Math.cos(a), sn = Math.sin(a);
+    const P = (t, o) => `${f1(c * r * t - sn * o)} ${f1(sn * r * t + c * o)}`;
+    d += `M0 0L${P(1, 0)}M${P(.55, 0)}L${P(.78, r * .18)}M${P(.55, 0)}L${P(.78, -r * .18)}`;
+  }
+  return d;
+}
+const flake = (x, y, r, d, op = .9) => `<g transform="translate(${f1(x)} ${f1(y)})"><g class="pop" style="--d:${d}s"><path class="flake" style="opacity:${op}" d="${flakePath(r)}"/></g></g>`;
+document.querySelectorAll(".flk").forEach((g) => { g.innerHTML = `<path class="flake" d="${flakePath(10)}"/>`; });
+$("seal-flake").innerHTML = `<circle r="27" style="fill:var(--paper);stroke:var(--line)"/><path class="flake" style="stroke-width:1.6" d="${flakePath(18)}"/>`;
+// 松樹（樹梢有雪）
+function pine(x, y, h, d) {
+  let t = "";
+  for (let k = 0; k < 4; k++) {
+    const ty = y - h + k * h * .22, w = h * (.16 + k * .09), by = ty + h * .32;
+    t += `<path d="M${f1(x)} ${f1(ty)}L${f1(x + w)} ${f1(by)}L${f1(x - w)} ${f1(by)}Z" style="fill:var(--lf2);stroke:var(--ink);stroke-width:.7;stroke-opacity:.35"/>`;
+    t += `<path d="M${f1(x - w * .9)} ${f1(by - 1)}Q${f1(x - w * .45)} ${f1(by - 5)} ${f1(x)} ${f1(by - 2)}Q${f1(x + w * .45)} ${f1(by - 6)} ${f1(x + w * .9)} ${f1(by - 1)}" style="fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round"/>`;
+  }
+  t += `<path d="M${f1(x - h * .1)} ${f1(y - h + 6)}L${f1(x)} ${f1(y - h)}L${f1(x + h * .1)} ${f1(y - h + 6)}" style="fill:#fff"/>`;
+  return `<g class="pop" style="--d:${d}s;transform-origin:${f1(x)}px ${f1(y)}px"><rect x="${f1(x - 2)}" y="${f1(y - h * .1)}" width="4" height="${f1(h * .12)}" style="fill:var(--muted)"/>${t}</g>`;
+}
+// 封面：雪山、松樹、雪地上的新人
+(() => {
+  const svg = $("hero-art");
+  svg.innerHTML = `
+    <defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--paper2)"/><stop offset="1" style="stop-color:var(--paper)"/></linearGradient><linearGradient id="snowG" x1="0" y1="0" x2="0" y2="1"><stop offset=".3" style="stop-color:var(--snow)"/><stop offset="1" style="stop-color:var(--paper)"/></linearGradient></defs>
+    ${wash(298, 190, 60, 60, "--w3", .8, .1)}
+    <g class="pop" style="--d:.2s"><circle cx="298" cy="186" r="24" style="fill:#fff;opacity:.92"/></g>
+    <g class="pop" style="--d:.3s"><path d="M-10 410 L52 346 L96 372 L170 296 L232 356 L282 318 L410 392 V560 H-10Z" style="fill:var(--w1);stroke:var(--ink);stroke-width:.7;stroke-opacity:.3"/>
+      <path d="M150 316 L170 296 L190 316 L180 312 L172 320 L163 311Z M266 330 L282 318 L298 328 L288 327 L282 333 L275 327Z M38 360 L52 346 L66 360 L58 357 L52 363 L45 357Z" style="fill:#fff"/></g>
+    <g class="pop" style="--d:.45s"><path d="M-10 452 Q80 404 156 434 T300 420 T410 444 V560 H-10Z" style="fill:var(--w2);stroke:var(--ink);stroke-width:.7;stroke-opacity:.25"/></g>
+    ${pine(36, 512, 104, .6)}${pine(84, 518, 66, .7)}${pine(364, 510, 116, .65)}${pine(318, 520, 60, .75)}
+    <g class="pop" style="--d:.55s"><path d="M-10 504 Q110 486 200 494 T410 500 V552 H-10Z" style="fill:url(#snowG)"/><path d="M-10 504 Q110 486 200 494 T410 500" style="fill:none;stroke:var(--line);stroke-width:1.2"/></g>
+    <ellipse cx="200" cy="504" rx="88" ry="6" style="fill:var(--accent);opacity:.16"/>
+    <g id="h-couple"><image class="couple" id="couple-img" href="${WEDDING.couple}" x="110" y="150" width="180" height="352" preserveAspectRatio="xMidYMax meet"/></g>
+    ${flake(70, 226, 9, 1.2, .7)}${flake(342, 262, 7, 1.3, .6)}${flake(118, 160, 5, 1.4, .5)}${flake(250, 140, 6, 1.5, .5)}`;
+})();
+// 標題後面的筆刷
+document.querySelectorAll(".sh").forEach((h, i) => {
+  h.insertAdjacentHTML("beforeend", `<svg class="brush" viewBox="-95 -23 190 46" aria-hidden="true"><g class="pop" style="--d:.2s"><ellipse class="wc" filter="url(#wcBig)" rx="70" ry="10" style="fill:var(${WASH[i % 4]});opacity:.9"/></g></svg><svg class="sh-flake" viewBox="-12 -12 24 24" aria-hidden="true"><path class="flake" d="${flakePath(9)}"/></svg>`);
+});
+// 場地：雪中的小屋
+(() => {
+  const svg = $("venue-art");
+  svg.innerHTML = `<path d="M0 150 Q80 120 160 138 T320 132 V200 H0Z" style="fill:var(--w1)"/>
+    <path d="M0 174 Q90 160 170 168 T320 166 V200 H0Z" style="fill:#fff;stroke:var(--line)"/>
+    <g class="pen" style="stroke:var(--ink);opacity:.75;stroke-width:1">
+      <path class="ln" style="--d:.4s" d="M96 170V102h128v68M84 104l76-42 76 42M150 170v-30a10 10 0 0 1 20 0v30M110 120h22v22h-22zM188 120h22v22h-22zM196 74v-20h12v26"/>
+    </g>
+    <path d="M84 104l76-42 76 42" style="fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;opacity:.95"/>
+    <rect x="111" y="121" width="20" height="20" style="fill:var(--accent);opacity:.35"/><rect x="189" y="121" width="20" height="20" style="fill:var(--accent);opacity:.35"/>
+    ${pine(40, 176, 70, .6)}${pine(272, 176, 80, .7)}${pine(300, 180, 48, .8)}${flake(36, 52, 6, 1)}${flake(286, 40, 8, 1.1)}`;
+})();
+// 結尾：雪地上的小小新人
+(() => {
+  const svg = $("end-art");
+  svg.innerHTML = `<path d="M0 214 Q100 196 200 204 T400 210 V260 H0Z" style="fill:#fff;stroke:var(--line)"/>
+    ${pine(70, 220, 90, .3)}${pine(118, 224, 54, .4)}${pine(330, 218, 96, .35)}${pine(286, 226, 50, .45)}
+    <image class="couple" href="${WEDDING.couple}" x="158" y="44" width="84" height="164"/>
+    ${flake(120, 70, 7, .8, .7)}${flake(282, 92, 6, .9, .6)}${flake(220, 30, 5, 1, .5)}`;
+})();
+// 桌機兩側：松林
+function sideArt(svg, d0) {
+  svg.innerHTML = `${wash(150, 640, 160, 220, "--w1", .7, d0)}${pine(90, 800, 300, d0 + .2)}${pine(200, 810, 200, d0 + .4)}${flake(120, 200, 14, d0 + .6, .7)}${flake(220, 340, 9, d0 + .7, .6)}`;
+}
+sideArt($("side-l"), .2); sideArt($("side-r"), .5);
+prepLines(document);
+
+/* ---------- 開場 ---------- */
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15, rootMargin: "0px 0px -8% 0px" });
+let begun = false;
+function begin() {
+  if (begun) return; begun = true;
+  document.body.classList.remove("locked");
+  $("hero").classList.add("in");
+  document.querySelectorAll(".side").forEach((s) => s.classList.add("in"));
+  document.querySelectorAll("[data-r]").forEach((s) => io.observe(s));
+  petals.start();
+}
+$("open-btn").addEventListener("click", () => {
+  if ($("intro").classList.contains("open")) return;
+  $("intro").classList.add("open");
+  setTimeout(begin, reduced ? 0 : 300);
+  setTimeout(() => $("intro").remove(), reduced ? 50 : 1800);
+});
+
+/* ---------- 下雪：慢慢、優雅地飄落 ---------- */
+const petals = (() => {
+  const c = $("petals"), x = c.getContext("2d");
+  let W, H, list = [], on = false, edge = "#9fb4c8";
+  const size = () => { const r = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; c.width = W * r; c.height = H * r; x.setTransform(r, 0, 0, r, 0, 0); };
+  const colors = () => { edge = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim(); };
+  const make = (top) => { const z = Math.random(); return { x: Math.random() * W, y: top ? -10 - Math.random() * H * .3 : Math.random() * H, z, r: 1.2 + z * 3.2,
+    v: .15 + z * .45, sw: 10 + Math.random() * 30, ph: Math.random() * 6.28 }; };
+  function frame(t) {
+    if (!on) return;
+    x.clearRect(0, 0, W, H);
+    for (const p of list) {
+      p.y += p.v;
+      if (p.y > H + 10) Object.assign(p, make(true));
+      const px = p.x + Math.sin(t / 3200 + p.ph) * p.sw;
+      x.beginPath(); x.arc(px, p.y, p.r, 0, Math.PI * 2);
+      x.globalAlpha = .35 + p.z * .55; x.fillStyle = "#fff"; x.fill();
+      x.globalAlpha = .12 + p.z * .18; x.lineWidth = .8; x.strokeStyle = edge; x.stroke();
+    }
+    requestAnimationFrame(frame);
+  }
+  addEventListener("resize", size);
+  document.addEventListener("visibilitychange", () => { if (document.hidden) on = false; else if (list.length && !on) { on = true; requestAnimationFrame(frame); } });
+  return { start() { if (reduced) return; size(); colors(); list = Array.from({ length: innerWidth > 900 ? 90 : 46 }, () => make(false)); on = true; requestAnimationFrame(frame); }, recolor: colors };
+})();
+
+/* ---------- 配色（示範用） ---------- */
+const THEMES = { ice: ["雪白藍", "#cfdff0"], silver: ["銀灰", "#d3d6dc"], rosy: ["粉雪", "#efd6df"], night: ["冬夜", "#2a3647"] };
+function setTheme(k) {
+  if (!THEMES[k]) return;
+  document.documentElement.dataset.theme = k;
+  document.querySelectorAll("#themer button").forEach((o) => o.setAttribute("aria-pressed", o.dataset.k === k));
+  petals.recolor();
+}
+if (WEDDING.showThemePicker && !embed) {
+  const box = $("themer"); box.hidden = false;
+  Object.entries(THEMES).forEach(([k, [label, col]]) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.dataset.k = k; b.style.background = col; b.title = label; b.setAttribute("aria-label", "配色：" + label);
+    b.setAttribute("aria-pressed", k === document.documentElement.dataset.theme);
+    b.addEventListener("click", () => { setTheme(k); const t = $("toast"); t.textContent = label; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1200); });
+    box.appendChild(b);
+  });
+}
+
+/* ---------- 介紹頁的試用預覽 ---------- */
+window.setPreview = ({ img, photo, groom, bride, date, theme } = {}) => {
+  if (groom) WEDDING.groom = groom.slice(0, 6);
+  if (bride) WEDDING.bride = bride.slice(0, 6);
+  if (groom || bride) WEDDING.initials = [[...WEDDING.groom].pop() || "囍", [...WEDDING.bride].pop() || ""];
+  if (date) { const s = new Date(date + "T11:30:00+08:00"); if (!isNaN(s)) { start = s; end = new Date(s.getTime() + 3 * 36e5); } }
+  if (theme) setTheme(theme);
+  renderNames(); renderCal(); tick(); $("gcal-btn").href = gcal();
+  if (img) {
+    const im = $("couple-img"), box = $("h-couple");
+    im.setAttribute("href", img);
+    box.querySelector(".photo-frame")?.remove();
+    if (photo) {
+      im.setAttribute("x", 110); im.setAttribute("y", 140); im.setAttribute("width", 180); im.setAttribute("height", 380);
+      im.setAttribute("preserveAspectRatio", "xMidYMid slice"); im.setAttribute("clip-path", "url(#photoClip)");
+      box.insertAdjacentHTML("beforeend", `<path class="photo-frame" d="M110 520 V230 a90 90 0 0 1 180 0 V520 Z" style="fill:none;stroke:var(--ink);stroke-width:1;opacity:.6"/>`);
+    } else {
+      im.setAttribute("x", 110); im.setAttribute("y", 150); im.setAttribute("width", 180); im.setAttribute("height", 352);
+      im.setAttribute("preserveAspectRatio", "xMidYMax meet"); im.removeAttribute("clip-path");
+    }
+  }
+};
+
+if (still || embed) {
+  $("intro").remove(); begin();
+  if (still) document.querySelectorAll("[data-r]").forEach((s) => s.classList.add("in"));
+}
+</script>
+</body>
+</html>

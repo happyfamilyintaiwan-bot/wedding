@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="honey">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>婚禮邀請</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 配色：糖果 pastel 四色（交付時設定 WEDDING.theme） ===== */
+[data-theme="honey"], :root {
+  --paper: #fffdf8; --sky: #fbf3e0; --ink: #2f2b28; --muted: #857b72; --accent: #d99a35; --soft: #fbeed2; --hill: #eef0dc; --card: #fffefb;
+  --p: #f6c1b0; --p-hi: #fde7df; --p-ln: #c98a77;
+  --y: #f6c873; --y-hi: #fff1d2; --y-ln: #c99a45;
+  --w: #fffaf0; --w-hi: #ffffff; --w-ln: #c9b597;
+  --l: #cfe2f1; --l-hi: #eef6fc; --l-ln: #86a9c4;
+  --g: #b9cf9c; --g-hi: #e4eed6; --g-ln: #7b9663; --e: #c9d6bb;
+}
+[data-theme="candy"] {
+  --paper: #fffaf7; --sky: #e6f3fb; --ink: #3a3333; --muted: #877c7c; --accent: #e3839c; --soft: #fde4ea; --hill: #d7eed6; --card: #fffefc;
+  --p: #f7b8c8; --p-hi: #fde6ec; --p-ln: #c97d91;
+  --y: #fdd5b2; --y-hi: #fff1e2; --y-ln: #d49b6c;
+  --w: #fff4e3; --w-hi: #ffffff; --w-ln: #c9b597;
+  --l: #d8cbf3; --l-hi: #f3eeff; --l-ln: #9b8bc7;
+  --g: #a6d2ae; --g-hi: #dcf0dc; --g-ln: #6c9c77; --e: #bcd4c2;
+}
+[data-theme="mint"] {
+  --paper: #f8fcfa; --sky: #def4ee; --ink: #2f3a36; --muted: #75857f; --accent: #4fae93; --soft: #d9f1e8; --hill: #cfeadb; --card: #fdfffe;
+  --p: #ffc8c0; --p-hi: #ffe9e5; --p-ln: #d18a80;
+  --y: #fff0b0; --y-hi: #fffbe4; --y-ln: #cdb565;
+  --w: #f9f6ee; --w-hi: #ffffff; --w-ln: #bfb59e;
+  --l: #c5e6f4; --l-hi: #eaf7fc; --l-ln: #7fb0c6;
+  --g: #9fd3bb; --g-hi: #d8f1e5; --g-ln: #5f9c83; --e: #b5d6c8;
+}
+[data-theme="lavender"] {
+  --paper: #fcfaff; --sky: #ece6fa; --ink: #37334a; --muted: #827d92; --accent: #9681cc; --soft: #ece5fa; --hill: #dfe9d6; --card: #fffeff;
+  --p: #f3c3da; --p-hi: #fde9f2; --p-ln: #c487a4;
+  --y: #fbe3b4; --y-hi: #fff5e2; --y-ln: #cfab6c;
+  --w: #f8f4fb; --w-hi: #ffffff; --w-ln: #bdb1c6;
+  --l: #cdbdf0; --l-hi: #f0eaff; --l-ln: #8f7cc4;
+  --g: #b3d1b2; --g-hi: #e1efdf; --g-ln: #74997a; --e: #c3d3c8;
+}
+[data-theme="peach"] {
+  --paper: #fffaf5; --sky: #fff0e4; --ink: #3d3430; --muted: #8a7b72; --accent: #ec8f77; --soft: #ffe5da; --hill: #e2edcc; --card: #fffefb;
+  --p: #ffc4b4; --p-hi: #ffe8e0; --p-ln: #d38a76;
+  --y: #ffe1a6; --y-hi: #fff4dc; --y-ln: #d1a85c;
+  --w: #fff5ea; --w-hi: #ffffff; --w-ln: #c9b49b;
+  --l: #f7cfdc; --l-hi: #fdebf1; --l-ln: #c98ea2;
+  --g: #b6d4a4; --g-hi: #e3f0d6; --g-ln: #789b65; --e: #c6d6bb;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--paper); }
+body {
+  background: var(--paper);
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  color: var(--ink); font-family: "LXGW WenKai TC", "Noto Serif TC", serif; font-size: 16px; line-height: 1.8;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+body.locked { overflow: hidden; height: 100svh; }
+.en { font-family: "Caveat", cursive; }
+p { text-wrap: pretty; }
+
+/* 花：細的彩色線＋漸層，比較擬真 */
+.st-l { fill: none; stroke: var(--g-ln); stroke-width: 1.5; stroke-linecap: round; }
+.rp { fill: url(#gP); stroke: var(--p-ln); } .ry { fill: url(#gY); stroke: var(--y-ln); }
+.rw { fill: url(#gW); stroke: var(--w-ln); } .rl { fill: url(#gL); stroke: var(--l-ln); }
+.rg { fill: url(#gG); stroke: var(--g-ln); } .re { fill: var(--e); stroke: var(--g-ln); }
+.rp, .ry, .rw, .rl, .rg, .re { stroke-width: 1.1; stroke-linejoin: round; }
+.cp { stroke: var(--p-ln); } .cy { stroke: var(--y-ln); } .cw { stroke: var(--w-ln); } .cl { stroke: var(--l-ln); }
+.cp, .cy, .cw, .cl { fill: none; stroke-width: 1; stroke-linecap: round; }
+.dot { fill: var(--y-ln); }
+
+/* 小圖示：可愛線條 */
+.s { stroke: var(--ink); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.fp { fill: var(--p); } .fy { fill: var(--y); } .fw { fill: #fff; } .fl { fill: var(--g); } .fl2 { fill: var(--g-ln); }
+.fs { fill: var(--soft); } .fa { fill: var(--accent); } .fh { fill: var(--hill); } .fv { fill: var(--l); }
+svg text { fill: var(--ink); }
+
+/* 動畫 */
+.ln { transition: stroke-dashoffset 1.4s cubic-bezier(.6,.05,.3,1) var(--d, 0s); }
+.in .ln { stroke-dashoffset: 0 !important; }
+.pop { transform: scale(0); transition: transform 1s cubic-bezier(.3,1.45,.5,1) var(--d, 0s); }
+.in .pop { transform: scale(1); }
+.ic .fp, .ic .fy, .ic .fw, .ic .fl, .ic .fl2, .ic .fs, .ic .fa, .ic .fv { fill-opacity: 0; transition: fill-opacity .7s ease calc(var(--d, 0s) + .7s); }
+.in .ic .fp, .in .ic .fy, .in .ic .fw, .in .ic .fl, .in .ic .fl2, .in .ic .fs, .in .ic .fa, .in .ic .fv { fill-opacity: 1; }
+.sw { animation: sway 5s ease-in-out infinite alternate; animation-delay: var(--sd, 0s); }
+@keyframes sway { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+.fade { opacity: 0; transform: translateY(18px); transition: opacity 1s ease, transform 1s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 90ms); }
+.in .fade { opacity: 1; transform: none; }
+
+/* ===== 開場信封 ===== */
+#intro { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--paper);
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1.2px); background-size: 22px 22px;
+  transition: opacity .9s ease, transform 1.1s cubic-bezier(.6,0,.2,1); }
+#intro.gone { opacity: 0; transform: scale(1.12); pointer-events: none; }
+.intro-inner { text-align: center; padding: 24px; }
+.intro-to { font-size: 30px; color: var(--accent); margin-bottom: 6px; }
+.intro-sub { color: var(--muted); font-size: 15px; letter-spacing: .12em; margin-bottom: 26px; }
+#env { background: none; border: 0; cursor: pointer; display: block; margin: 0 auto; width: min(320px, 84vw); -webkit-tap-highlight-color: transparent; }
+#env svg { width: 100%; height: auto; overflow: visible; display: block; }
+#env:focus-visible { outline: 2px dashed var(--accent); outline-offset: 10px; border-radius: 12px; }
+.env-float { animation: float 3.2s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-8px) rotate(1deg); } }
+.flap-front, .flap-back { transform-box: fill-box; transform-origin: 50% 0; }
+.flap-back { transform: scaleY(0); }
+.env-card { transition: transform 1s cubic-bezier(.3,1.3,.5,1) .75s; }
+.seal { transform-box: fill-box; transform-origin: center; transition: transform .45s cubic-bezier(.5,-0.4,.6,1), opacity .4s; }
+.open .env-float { animation: none; }
+.open .seal { transform: scale(0) rotate(40deg); opacity: 0; }
+.open .flap-front { animation: flapA .38s ease-in forwards .25s; }
+.open .flap-back { animation: flapB .38s ease-out forwards .63s; }
+.open .env-card { transform: translateY(-96px); }
+@keyframes flapA { to { transform: scaleY(0); } }
+@keyframes flapB { from { transform: scaleY(0); } to { transform: scaleY(-1); } }
+.intro-hint { margin-top: 26px; font-size: 14px; color: var(--muted); letter-spacing: .2em; animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .35; } }
+
+/* ===== 版面 ===== */
+.page { position: relative; max-width: 480px; margin: 0 auto; background: var(--paper); overflow: hidden; }
+@media (min-width: 900px) { .page { box-shadow: 0 0 0 2px var(--ink), 14px 14px 0 var(--soft); margin: 40px auto; border-radius: 28px; } }
+section { position: relative; padding: 60px 24px; }
+section.band { background: color-mix(in srgb, var(--soft) 50%, var(--paper)); margin: 30px 0; }
+.wave { position: absolute; left: 0; width: 100%; height: 22px; overflow: visible; pointer-events: none; }
+.wave.top { top: -21px; } .wave.bot { bottom: -21px; transform: scaleY(-1); }
+.wave path.fill { fill: color-mix(in srgb, var(--soft) 50%, var(--paper)); }
+.wave path.edge { stroke: var(--ink); stroke-width: 1.6; fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; opacity: .7; }
+.corner { position: absolute; width: 70px; height: 120px; overflow: visible; pointer-events: none; }
+.corner.l { left: -14px; top: 22px; } .corner.r { right: -14px; bottom: 16px; transform: scaleX(-1); }
+.sh { text-align: center; margin-bottom: 32px; }
+.sh .en { display: block; font-size: 26px; color: var(--accent); line-height: 1; transform: rotate(-4deg); }
+.sh h2 { font-size: 26px; font-weight: 700; letter-spacing: .18em; margin-top: 6px; }
+.sh svg { display: block; width: 130px; height: 34px; margin: 6px auto 0; overflow: visible; }
+.lead { text-align: center; color: var(--muted); font-size: 16px; text-wrap: balance; }
+
+/* 封面 */
+.hero { padding: 0; background: radial-gradient(120% 60% at 50% 30%, var(--w-hi) 0%, var(--sky) 55%, var(--paper) 100%); overflow: hidden; }
+.hero-text { position: relative; z-index: 2; text-align: center; padding: 50px 20px 0; }
+.hero-text .en { font-size: 28px; color: var(--accent); display: inline-block; transform: rotate(-5deg); }
+.names { font-size: clamp(38px, 12vw, 52px); font-weight: 700; letter-spacing: .06em; line-height: 1.25; margin-top: 4px; white-space: nowrap; }
+.names .amp { font-family: "Caveat", cursive; color: var(--accent); margin: 0 .12em; font-size: .9em; }
+.names .ch { display: inline-block; opacity: 0; transform: translateY(24px) rotate(6deg); transition: .8s cubic-bezier(.2,1.4,.4,1); transition-delay: calc(var(--i) * 80ms + .3s); }
+.in .names .ch { opacity: 1; transform: none; }
+.hero-date { font-size: 16px; letter-spacing: .34em; margin-top: 2px; }
+.hero-art { position: relative; display: block; width: 100%; height: auto; margin-top: -4px; overflow: visible; }
+.couple { opacity: 0; transform: translateY(26px); transition: opacity 1.2s ease .4s, transform 1.4s cubic-bezier(.2,.8,.2,1) .4s; }
+.in .couple { opacity: 1; transform: none; }
+.cloud { position: absolute; z-index: 1; width: 86px; opacity: .9; animation: drift 26s linear infinite alternate; }
+.cloud.c2 { width: 60px; animation-duration: 34s; animation-direction: alternate-reverse; }
+@keyframes drift { from { translate: -14px 0; } to { translate: 26px 0; } }
+
+/* 邀請 */
+.monogram { display: block; width: 190px; height: 190px; margin: 0 auto 20px; overflow: visible; }
+.invite-text { text-align: center; font-size: 17px; line-height: 2.1; }
+.parents { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: center; }
+.parents div { border-top: 2px dashed color-mix(in srgb, var(--ink) 20%, transparent); padding-top: 10px; }
+.parents small { display: block; font-size: 13px; color: var(--accent); letter-spacing: .2em; }
+.parents span { font-size: 15px; }
+
+/* 日曆＋倒數 */
+.cal { background: var(--card); border: 2px solid var(--ink); border-radius: 22px; padding: 20px 16px 14px; box-shadow: 6px 6px 0 var(--soft); }
+.cal-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 6px 10px; border-bottom: 2px dashed color-mix(in srgb, var(--ink) 22%, transparent); margin-bottom: 8px; }
+.cal-head .en { font-size: 28px; color: var(--accent); line-height: 1; }
+.cal-head b { font-size: 18px; letter-spacing: .1em; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; row-gap: 4px; }
+.cal-grid .wk { font-size: 13px; color: var(--muted); }
+.cal-grid span { position: relative; line-height: 38px; font-size: 16px; }
+.cal-grid .day { font-weight: 700; color: var(--accent); }
+.cal-grid .day svg { position: absolute; left: 50%; top: 50%; width: 50px; height: 50px; translate: -50% -52%; overflow: visible; }
+.cd-cap { text-align: center; color: var(--muted); font-size: 14px; margin-top: 24px; letter-spacing: .14em; }
+.countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 8px; }
+.cd { text-align: center; background: var(--card); border: 2px solid var(--ink); border-radius: 16px; padding: 8px 0 4px; }
+.cd b { display: block; font-size: 30px; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.cd small { font-size: 13px; color: var(--muted); }
+.cd-done { grid-column: 1 / -1; text-align: center; font-size: 20px; color: var(--accent); }
+
+/* 故事 */
+.story { position: relative; padding-left: 8px; }
+.story::before { content: ""; position: absolute; left: 36px; top: 20px; bottom: 20px; border-left: 2px dashed color-mix(in srgb, var(--ink) 30%, transparent); }
+.st { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: 14px; align-items: center; margin-bottom: 18px; }
+.st .en { font-size: 22px; color: var(--accent); line-height: 1; }
+.ic { display: block; overflow: visible; }
+.blob { position: relative; width: 60px; height: 60px; }
+.blob > svg { width: 60px; height: 60px; }
+.band .ic > g > .fs { fill: var(--card); stroke: var(--ink); stroke-width: 1.6; }
+
+/* 婚宴流程 */
+.sched { position: relative; }
+.sched::before { content: ""; position: absolute; left: 50%; top: 10px; bottom: 10px; border-left: 2px dashed color-mix(in srgb, var(--ink) 30%, transparent); }
+.sr { position: relative; display: grid; grid-template-columns: 1fr 64px 1fr; align-items: center; gap: 10px; margin-bottom: 14px; }
+.sr .blob { grid-column: 2; margin: 0 auto; }
+.sr .txt { grid-row: 1; }
+.sr.l .txt { grid-column: 1; text-align: right; } .sr.r .txt { grid-column: 3; }
+.sr .en { font-size: 25px; line-height: 1; color: var(--accent); }
+.sr h3 { font-size: 18px; font-weight: 700; letter-spacing: .08em; }
+.sr p { font-size: 13.5px; color: var(--muted); line-height: 1.5; text-wrap: balance; }
+
+/* 服裝建議 */
+.dress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 4px; }
+.dz { text-align: center; }
+.dz svg { width: 100%; max-width: 74px; height: auto; display: block; margin: 0 auto 2px; overflow: visible; }
+.dz b { display: block; font-size: 14px; }
+.dz small { font-size: 11px; color: var(--muted); letter-spacing: .06em; }
+.dress-theme { text-align: center; margin-bottom: 18px; }
+.dress-theme b { display: inline-block; font-size: 19px; letter-spacing: .1em; padding: 2px 14px; border-radius: 999px; background: var(--soft); }
+.avoid { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 18px; font-size: 14px; color: var(--muted); }
+.avoid i { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 1.6px solid var(--ink); font-style: normal; font-size: 12px; color: var(--ink); }
+
+/* 宴席小提醒 */
+.tips { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tip { background: var(--card); border: 2px solid var(--ink); border-radius: 20px; padding: 16px 12px 14px; text-align: center; box-shadow: 4px 4px 0 var(--soft); }
+.tip .blob { margin: 0 auto 4px; }
+.tip h3 { font-size: 17px; font-weight: 700; letter-spacing: .08em; }
+.tip p { font-size: 13.5px; color: var(--muted); line-height: 1.55; text-wrap: balance; }
+
+/* 場地 */
+.venue-art { display: block; width: 100%; height: auto; overflow: visible; margin-bottom: 8px; }
+.venue-card { text-align: center; }
+.venue-card h3 { font-size: 21px; font-weight: 700; letter-spacing: .06em; }
+.venue-card .addr { color: var(--muted); font-size: 15px; }
+.trans { margin: 20px 0 6px; display: grid; gap: 10px; }
+.tr { display: grid; grid-template-columns: 44px 1fr; gap: 10px; align-items: center; background: var(--card); border: 2px solid var(--ink); border-radius: 16px; padding: 8px 14px 8px 8px; font-size: 15px; line-height: 1.5; text-align: left; }
+.tr svg { width: 44px; height: 44px; }
+
+/* 按鈕 */
+.btns { display: grid; gap: 12px; margin-top: 22px; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 18px; border-radius: 999px; border: 2px solid var(--ink);
+  background: var(--card); color: var(--ink); font: inherit; font-size: 16px; font-weight: 700; letter-spacing: .06em; text-decoration: none; cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink); transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translate(-1px, -2px) rotate(-.6deg); box-shadow: 5px 6px 0 var(--ink); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+.btn.primary { background: var(--accent); color: #fff; }
+.btn svg { width: 24px; height: 24px; flex: none; }
+.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.btn-row .btn { font-size: 15px; padding: 12px 8px; gap: 6px; }
+.cal-tip { font-size: 13px; color: var(--muted); margin: 6px 0 -4px; }
+
+/* 回覆 */
+.postcard { position: relative; background: var(--card); border: 2px solid var(--ink); border-radius: 22px; padding: 40px 22px 24px; box-shadow: 6px 6px 0 var(--soft); text-align: center; }
+.postcard::before { content: ""; position: absolute; inset: 8px; border: 2px dashed color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 16px; pointer-events: none; }
+.stamp { position: absolute; right: -8px; top: -40px; width: 70px; height: 84px; rotate: 8deg; overflow: visible; }
+.muted-sm { font-size: 14px; color: var(--muted); }
+.postcard .deadline { font-size: 26px; letter-spacing: .06em; font-weight: 700; color: var(--accent); margin: 6px 0 2px; }
+
+/* 結尾 */
+.thanks { text-align: center; padding-bottom: 0; }
+.thanks .big { font-size: 22px; font-weight: 700; letter-spacing: .1em; margin-top: 10px; }
+.garland { display: block; width: calc(100% + 48px); margin: 26px -24px 0; height: auto; overflow: visible; }
+footer { text-align: center; padding: 6px 24px 40px; font-size: 13px; color: var(--muted); background: var(--hill); }
+footer .en { font-size: 20px; color: var(--ink); }
+
+#petals { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
+.side { position: fixed; bottom: -10px; width: 260px; height: 560px; z-index: 0; display: none; overflow: visible; pointer-events: none; }
+.side.l { left: calc(50% - 520px); } .side.r { right: calc(50% - 520px); transform: scaleX(-1); }
+@media (min-width: 1000px) { .side { display: block; } }
+
+.themer { position: fixed; z-index: 40; bottom: calc(14px + env(safe-area-inset-bottom)); right: 14px; display: flex; align-items: center; gap: 6px; background: var(--card); border: 2px solid var(--ink); border-radius: 999px; padding: 5px; box-shadow: 3px 3px 0 var(--ink); }
+.themer[hidden] { display: none; }
+.themer button { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--ink); cursor: pointer; padding: 0; }
+.themer button[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 2px; }
+.themer .lab { font-size: 12px; padding: 0 4px 0 6px; color: var(--muted); }
+.toast { position: fixed; z-index: 41; bottom: calc(62px + env(safe-area-inset-bottom)); right: 14px; background: var(--ink); color: var(--paper); font-size: 13px; padding: 4px 12px; border-radius: 999px; opacity: 0; transition: opacity .3s; pointer-events: none; }
+.toast.show { opacity: 1; }
+
+.still *, .still *::before, .still *::after { transition: none !important; animation: none !important; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; } }
+</style>
+</head>
+<body class="locked">
+
+<!-- 漸層色（花朵用，跟著配色變） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="gP" cx=".42" cy=".38" r=".75"><stop offset="0" style="stop-color:var(--p-hi)"/><stop offset="1" style="stop-color:var(--p)"/></radialGradient>
+    <radialGradient id="gY" cx=".42" cy=".38" r=".75"><stop offset="0" style="stop-color:var(--y-hi)"/><stop offset="1" style="stop-color:var(--y)"/></radialGradient>
+    <radialGradient id="gW" cx=".42" cy=".38" r=".75"><stop offset="0" style="stop-color:var(--w-hi)"/><stop offset="1" style="stop-color:var(--w)"/></radialGradient>
+    <radialGradient id="gL" cx=".42" cy=".38" r=".75"><stop offset="0" style="stop-color:var(--l-hi)"/><stop offset="1" style="stop-color:var(--l)"/></radialGradient>
+    <linearGradient id="gG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--g)"/><stop offset="1" style="stop-color:var(--g-hi)"/></linearGradient>
+    <clipPath id="photoClip"><path d="M100 556 V262 a100 100 0 0 1 200 0 V556 Z"/></clipPath>
+  </defs>
+</svg>
+
+<div id="intro" role="dialog" aria-label="婚禮邀請函">
+  <div class="intro-inner">
+    <p class="intro-to en" id="to-line">To. 親愛的你</p>
+    <p class="intro-sub">你有一封婚禮邀請函</p>
+    <button id="env" type="button" aria-label="打開邀請函">
+      <svg viewBox="0 0 320 240" aria-hidden="true">
+        <g class="env-float">
+          <rect class="fs s" x="10" y="40" width="300" height="190" rx="12"/>
+          <path class="flap-back fs s" d="M12 48 L160 150 L308 48"/>
+          <g class="env-card">
+            <rect class="fw s" x="32" y="58" width="256" height="160" rx="8"/>
+            <text class="en" x="160" y="96" text-anchor="middle" font-size="22" style="fill:var(--accent)">Save the Date</text>
+            <text id="env-names" x="160" y="134" text-anchor="middle" font-size="28" font-weight="700"></text>
+            <text id="env-date" x="160" y="164" text-anchor="middle" font-size="15" letter-spacing="3"></text>
+          </g>
+          <path class="fp s" d="M10 52 L160 160 L310 52 L310 218 Q310 230 298 230 L22 230 Q10 230 10 218 Z"/>
+          <path class="s" d="M10 226 L128 136 M310 226 L192 136" opacity=".45"/>
+          <path class="flap-front fs s" d="M10 52 Q10 40 22 40 L298 40 Q310 40 310 52 L160 160 Z"/>
+          <g class="seal">
+            <circle class="fa s" cx="160" cy="156" r="26"/>
+            <circle cx="160" cy="156" r="19" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="3 4" opacity=".8"/>
+            <text id="seal-text" class="en" x="160" y="165" text-anchor="middle" font-size="24" font-weight="700" style="fill:#fff"></text>
+          </g>
+        </g>
+      </svg>
+    </button>
+    <p class="intro-hint">輕觸信封　打開邀請</p>
+  </div>
+</div>
+
+<svg class="side l" id="side-l" viewBox="0 0 260 560" aria-hidden="true"></svg>
+<svg class="side r" id="side-r" viewBox="0 0 260 560" aria-hidden="true"></svg>
+
+<main class="page">
+  <section class="hero" id="hero">
+    <svg class="cloud" style="left:6%;top:30px" viewBox="0 0 100 50" aria-hidden="true"><path class="fw s" d="M18 42a12 12 0 0 1 2-23 16 16 0 0 1 30-6 13 13 0 0 1 24 6 11 11 0 0 1 8 23z"/></svg>
+    <svg class="cloud c2" style="right:5%;top:226px" viewBox="0 0 100 50" aria-hidden="true"><path class="fw s" d="M18 42a12 12 0 0 1 2-23 16 16 0 0 1 30-6 13 13 0 0 1 24 6 11 11 0 0 1 8 23z"/></svg>
+    <div class="hero-text">
+      <span class="en">We're getting married!</span>
+      <h1 class="names" id="names"></h1>
+      <p class="hero-date" id="hero-date"></p>
+    </div>
+    <svg class="hero-art" id="hero-art" viewBox="0 96 400 512" role="img" aria-label="新人全身似顏繪與花拱門"></svg>
+  </section>
+
+  <section id="invite" data-r>
+    <svg class="monogram" id="monogram" viewBox="0 0 200 200" aria-hidden="true"></svg>
+    <p class="invite-text fade" id="invite-text"></p>
+    <div class="parents fade" style="--i:2" id="parents"></div>
+  </section>
+
+  <section id="date" class="band" data-r>
+    <header class="sh"><span class="en fade">Save the Date</span><h2 class="fade" style="--i:1">婚禮日期</h2></header>
+    <div class="cal fade" style="--i:2" id="cal"></div>
+    <p class="cd-cap fade" style="--i:3">距離婚禮還有</p>
+    <div class="countdown fade" style="--i:3" id="countdown"></div>
+  </section>
+
+  <section id="story" data-r>
+    <header class="sh"><span class="en fade">Our Story</span><h2 class="fade" style="--i:1">我們的故事</h2></header>
+    <div class="story" id="story-list"></div>
+  </section>
+
+  <section id="schedule" class="band" data-r>
+    <header class="sh"><span class="en fade">Order of the Day</span><h2 class="fade" style="--i:1">婚宴流程</h2></header>
+    <div class="sched" id="sched"></div>
+  </section>
+
+  <section id="dress-sec" data-r>
+    <header class="sh"><span class="en fade">Dress Code</span><h2 class="fade" style="--i:1">服裝建議</h2></header>
+    <p class="dress-theme fade" style="--i:2"><b id="dress-name"></b></p>
+    <p class="lead fade" style="--i:2" id="dress-text"></p>
+    <div class="dress fade" style="--i:3" id="dress"></div>
+    <p class="avoid fade" style="--i:4"><i>✕</i><span id="dress-avoid"></span></p>
+  </section>
+
+  <section id="tips-sec" class="band" data-r>
+    <header class="sh"><span class="en fade">For Our Guests</span><h2 class="fade" style="--i:1">宴席小提醒</h2></header>
+    <div class="tips" id="tips"></div>
+  </section>
+
+  <section id="venue" data-r>
+    <header class="sh"><span class="en fade">Where</span><h2 class="fade" style="--i:1">婚宴地點</h2></header>
+    <svg class="venue-art" id="venue-art" viewBox="0 0 320 210" role="img" aria-label="婚宴會館插畫"></svg>
+    <div class="venue-card">
+      <h3 class="fade" id="venue-name"></h3>
+      <p class="addr fade" style="--i:1" id="venue-addr"></p>
+      <div class="trans" id="trans"></div>
+      <div class="btns fade" style="--i:3">
+        <a class="btn primary" id="map-btn" target="_blank" rel="noopener"></a>
+        <p class="cal-tip">加到行事曆，婚禮當天不會忘記</p>
+        <div class="btn-row">
+          <a class="btn" id="gcal-btn" target="_blank" rel="noopener"></a>
+          <button class="btn" id="ics-btn" type="button"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rsvp" class="band" data-r>
+    <header class="sh"><span class="en fade">R.S.V.P.</span><h2 class="fade" style="--i:1">出席回覆</h2></header>
+    <div class="postcard fade" style="--i:2">
+      <svg class="stamp" id="stamp" viewBox="0 0 70 84" aria-hidden="true"></svg>
+      <p>期待在婚禮上見到你！</p>
+      <p class="muted-sm">請在這一天之前回覆</p>
+      <p class="deadline" id="rsvp-deadline"></p>
+      <p class="muted-sm">讓我們為你留一個好位子</p>
+      <div class="btns"><a class="btn primary" id="rsvp-btn" target="_blank" rel="noopener"></a></div>
+    </div>
+  </section>
+
+  <section class="thanks" id="thanks" data-r>
+    <span class="en fade" style="font-size:30px;color:var(--accent)">Thank you</span>
+    <p class="big fade" style="--i:1">謝謝你<br>成為我們故事的一部分</p>
+    <p class="lead fade" style="--i:2" id="thanks-sign"></p>
+    <svg class="garland" id="garland" viewBox="0 0 400 230" aria-hidden="true"></svg>
+  </section>
+  <footer><span class="en">Illustration by Alison</span></footer>
+</main>
+
+<canvas id="petals" aria-hidden="true"></canvas>
+<div class="themer" id="themer" role="group" aria-label="示範配色" hidden><span class="lab">配色</span></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== 每接一案只要改這一段 ===== */
+const WEDDING = {
+  groom: "阿哲", bride: "小晴",
+  initials: ["A", "Q"],
+  couple: "../assets/couple-kimono.webp",   // 新人全身似顏繪（去背）
+  start: "2027-03-20T11:30:00+08:00",
+  end:   "2027-03-20T14:30:00+08:00",
+  invite: "我們從大學社團認識，\n一起走過十年的日子。\n這一天，想請重要的你\n來見證我們的幸福。",
+  parents: [{ role: "男方家長", names: "王大明・林美華" }, { role: "女方家長", names: "陳志強・張淑芬" }],
+  story: [
+    { date: "2016.09", icon: "coffee", text: "社團迎新，第一次說話" },
+    { date: "2018.07", icon: "plane",  text: "第一次一起旅行，去了京都" },
+    { date: "2022.03", icon: "home",   text: "搬進我們的小窩" },
+    { date: "2026.05", icon: "rings",  text: "海邊求婚，她說了好" },
+    { date: "2027.03", icon: "heart",  text: "想請你來見證這一天" },
+  ],
+  schedule: [
+    { time: "11:00", icon: "pen",    title: "迎賓簽到", note: "留下祝福、和新人合照" },
+    { time: "11:30", icon: "rings",  title: "證婚儀式", note: "請大家一起見證" },
+    { time: "12:00", icon: "bowl",   title: "開席",     note: "美味的喜宴開始" },
+    { time: "12:40", icon: "heart",  title: "新人進場", note: "準備好掌聲" },
+    { time: "13:30", icon: "cheers", title: "敬酒時間", note: "到每一桌說聲謝謝" },
+    { time: "14:30", icon: "candy",  title: "送客喜糖", note: "帶一份甜回家" },
+  ],
+  dressCode: {
+    name: "Garden Pastel 花園粉彩",
+    text: "歡迎穿上柔和的粉彩色，和我們一起走進春天的花園。",
+    colors: [
+      { name: "櫻花粉", hex: "#f6c6d2", type: "dress" },
+      { name: "奶油黃", hex: "#fbe3a8", type: "shirt" },
+      { name: "薄荷綠", hex: "#bfe3cf", type: "dress" },
+      { name: "天空藍", hex: "#c9def5", type: "shirt" },
+    ],
+    avoid: "請避開全白（新娘的顏色）和全黑",
+  },
+  tips: [
+    { icon: "leaf",   title: "素食",     text: "回覆表單勾選即可" },
+    { icon: "baby",   title: "兒童座椅", text: "帶小朋友請先告知" },
+    { icon: "car",    title: "停車",     text: "B2 免費停 3 小時" },
+    { icon: "camera", title: "拍照區",   text: "入口設有拍照區" },
+  ],
+  venue: "（範例）婚宴會館 3F 花園廳",
+  address: "台北市○○區○○路 100 號",
+  mapQuery: "台北市政府",
+  transport: [
+    { icon: "train", text: "捷運○○站 2 號出口，步行 5 分鐘" },
+    { icon: "car",   text: "開車導航「○○婚宴會館」" },
+  ],
+  rsvpUrl: "https://forms.gle/",
+  rsvpDeadline: "2027-02-20",
+  theme: "honey",
+  showThemePicker: true,   // 示範用；正式交付給新人時改成 false
+};
+/* ============================== */
+
+const $ = (id) => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+const still = params.has("still");          // ?still：直接顯示完成畫面（截圖用）
+const embed = params.has("embed");          // ?embed：介紹頁的試用預覽，跳過信封
+const reduced = still || matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (still) document.documentElement.classList.add("still");
+let seed = 11;
+const R = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+const pick = (a) => a[Math.floor(R() * a.length)];
+const f1 = (n) => Math.round(n * 10) / 10;
+
+/* ---------- 書約風格的手繪花（黑線＋點綴色） ---------- */
+const FILL = { rp: "var(--p)", ry: "var(--y)", rw: "#fff", rl: "var(--l)" };
+const wrap = (x, y, d, inner, sway = true) =>
+  `<g transform="translate(${f1(x)} ${f1(y)})">${sway ? `<g class="sw" style="--sd:${f1(-R() * 5)}s">` : "<g>"}<g class="pop" style="--d:${f1(d)}s">${inner}</g></g></g>`;
+const ink = (w = 1.8) => `stroke:var(--ink);stroke-width:${w};stroke-linecap:round;stroke-linejoin:round`;
+// 五瓣小花：外框黑線、內部一個顏色
+function blossom(x, y, r, t, d) {
+  let o = "", fl = "";
+  const rot = R() * 72;
+  for (let k = 0; k < 5; k++) {
+    const a = (rot + k * 72) * Math.PI / 180, cx = f1(Math.cos(a) * r * .55), cy = f1(Math.sin(a) * r * .55), pr = f1(r * .5);
+    o += `<circle cx="${cx}" cy="${cy}" r="${pr}" style="fill:none;${ink(3.6)}"/>`;
+    fl += `<circle cx="${cx}" cy="${cy}" r="${pr}" style="fill:${FILL[t]}"/>`;
+  }
+  return wrap(x, y, d, o + fl + `<circle r="${f1(r * .18)}" style="fill:var(--ink)"/>`);
+}
+// 大花：一圈花瓣＋中間的螺旋
+function rose(x, y, r, t, d) {
+  let o = "", fl = "";
+  const rot = R() * 45;
+  for (let k = 0; k < 8; k++) {
+    const a = rot + k * 45;
+    const e = `cx="${f1(r * .55)}" cy="0" rx="${f1(r * .5)}" ry="${f1(r * .32)}" transform="rotate(${f1(a)})"`;
+    o += `<ellipse ${e} style="fill:none;${ink(3.6)}"/>`; fl += `<ellipse ${e} style="fill:${FILL[t]}"/>`;
+  }
+  const q = r * .3;
+  return wrap(x, y, d, o + fl + `<circle r="${f1(r * .38)}" style="fill:#fff;${ink()}"/><path d="M${f1(-q * .5)} 0a${f1(q * .5)} ${f1(q * .5)} 0 1 1 ${f1(q * .7)} ${f1(q * .3)}a${f1(q * .3)} ${f1(q * .3)} 0 1 1 ${f1(-q * .45)} ${f1(-q * .3)}" style="fill:none;${ink(1.4)}"/>`);
+}
+// 鬱金香花苞
+function ranunculus(x, y, r, t, d) {
+  const w = r * .8, h = r * 1.1;
+  return wrap(x, y, d, `<path d="M${f1(-w)} ${f1(-h * .2)}C${f1(-w)} ${f1(h * .7)} ${f1(w)} ${f1(h * .7)} ${f1(w)} ${f1(-h * .2)}L${f1(w * .45)} ${f1(-h * .05)}L0 ${f1(-h * .5)}L${f1(-w * .45)} ${f1(-h * .05)}Z" style="fill:${FILL[t]};${ink()}"/><path d="M0 ${f1(-h * .5)}V${f1(h * .2)}" style="fill:none;${ink(1.2)}"/>`);
+}
+// 莓果小枝
+function breath(x, y, s, d) {
+  let h = "";
+  const tone = pick(["var(--y)", "var(--p)", "#fff"]);
+  for (let k = 0; k < 4; k++) {
+    const a = (-140 + k * 30 + R() * 10) * Math.PI / 180, l = s * (.6 + R() * .5);
+    const ex = Math.cos(a) * l, ey = Math.sin(a) * l;
+    h += `<path d="M0 0Q${f1(ex * .4)} ${f1(ey * .7)} ${f1(ex)} ${f1(ey)}" style="fill:none;${ink(1.3)}"/><circle cx="${f1(ex)}" cy="${f1(ey)}" r="${f1(2.4 + R())}" style="fill:${tone};${ink(1.3)}"/>`;
+  }
+  return wrap(x, y, d, h);
+}
+// 葉子：黑框，白色或點綴色
+function leaf(x, y, l, ang, d, kind) {
+  l = f1(l);
+  const fill = kind === "solid" ? "var(--y)" : (R() < .25 ? "var(--y)" : "#fff");
+  const inner = `<path d="M0 0C${f1(l * .25)} ${f1(-l * .34)} ${f1(l * .7)} ${f1(-l * .3)} ${l} 0C${f1(l * .7)} ${f1(l * .3)} ${f1(l * .25)} ${f1(l * .34)} 0 0Z" style="fill:${fill};${ink(1.6)}"/><path d="M${f1(l * .1)} 0L${f1(l * .72)} 0" style="fill:none;${ink(1.1)}"/>`;
+  return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(ang)})"><g class="pop" style="--d:${f1(d)}s">${inner}</g></g>`;
+}
+// 細葉小枝（像書約邊框的蕨葉）
+function euc(x, y, ang, len, d) {
+  let h = `<path d="M0 0Q${f1(len * .5)} ${f1(-len * .12)} ${f1(len)} 0" style="fill:none;${ink(1.5)}"/>`;
+  for (let i = 1; i <= 4; i++) {
+    const px = len * i / 4.6, ll = 9 - i;
+    h += `<path d="M${f1(px)} 0q${f1(ll * .5)} ${f1(-ll)} ${f1(ll * 1.1)} ${f1(-ll * 1.1)}q${f1(-ll * .2)} ${f1(ll * .9)} ${f1(-ll * 1.1)} ${f1(ll * 1.1)}z" style="fill:#fff;${ink(1.3)}"/><path d="M${f1(px)} 0q${f1(ll * .5)} ${f1(ll)} ${f1(ll * 1.1)} ${f1(ll * 1.1)}q${f1(-ll * .2)} ${f1(-ll * .9)} ${f1(-ll * 1.1)} ${f1(-ll * 1.1)}z" style="fill:#fff;${ink(1.3)}"/>`;
+  }
+  return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(ang)})"><g class="pop" style="--d:${f1(d)}s">${h}</g></g>`;
+}
+function sparkle(x, y, s, d) {
+  return `<g transform="translate(${f1(x)} ${f1(y)})"><g class="pop" style="--d:${f1(d)}s"><path d="M0 ${-s}Q0 0 ${s} 0Q0 0 0 ${s}Q0 0 ${-s} 0Q0 0 0 ${-s}Z" style="fill:var(--y);${ink(1.2)}"/></g></g>`;
+}
+function flower(x, y, size, d) {
+  const t = pick(["ry", "rw", "rw", "rp"]), k = R();
+  if (size > 13) return k < .6 ? rose(x, y, size, t, d) : blossom(x, y, size, t, d);
+  return k < .75 ? blossom(x, y, size, t, d) : ranunculus(x, y, size, t, d);
+}
+const TONES = ["ry", "rw", "rp", "rw"];
+// 沿著莖長出葉子、花
+function grow(g, path, o) {
+  const L = path.getTotalLength(), n = Math.max(2, Math.round(L / o.step));
+  let back = "", front = "";
+  for (let i = 1; i <= n; i++) {
+    const s = Math.min(L, (i / n) * L);
+    const p = path.getPointAtLength(s), q = path.getPointAtLength(Math.max(0, s - 2));
+    const ang = Math.atan2(p.y - q.y, p.x - q.x) * 180 / Math.PI;
+    const d = (o.d0 || 0) + (s / L) * (o.span ?? 1.2);
+    const nx = -(p.y - q.y) / 2, ny = (p.x - q.x) / 2, side = i % 2 ? 1 : -1;
+    back += leaf(p.x, p.y, o.leaf * (.75 + R() * .5), ang + side * (32 + R() * 34), d);
+    if (o.euc && R() < o.euc) back += euc(p.x, p.y, ang + side * (50 + R() * 30), 26 + R() * 14, d + .1);
+    if (R() < (o.bloomP || 0)) {
+      const j = (R() - .5) * 2 * (o.jit || 0);
+      front += flower(p.x + nx * j, p.y + ny * j, o.size * (1 - (o.var || .5) / 2 + R() * (o.var || .5)), d + .15);
+    } else if (o.breath && R() < o.breath) {
+      front += breath(p.x + nx * side * 8, p.y + ny * side * 8, 12 + R() * 6, d + .3);
+    }
+  }
+  g.insertAdjacentHTML("beforeend", `<g>${back}</g><g>${front}</g>`);
+}
+function stem(g, d, delay) {
+  g.insertAdjacentHTML("beforeend", `<path class="s ln" style="--d:${delay}s;stroke-width:1.8" d="${d}"/>`);
+  return g.lastElementChild;
+}
+function prepLines(root) {
+  root.querySelectorAll(".ln").forEach((el) => {
+    const L = Math.ceil(el.getTotalLength ? el.getTotalLength() : 300) + 2;
+    el.style.strokeDasharray = L;
+    el.style.strokeDashoffset = reduced ? 0 : L;
+  });
+}
+
+/* ---------- 小圖示 ---------- */
+const ICONS = {
+  pen: `<rect class="fy s ln" x="7" y="12" width="24" height="29" rx="3"/><path class="s ln" d="M12 20h14M12 26h10M12 32h12"/><path class="fp s ln" d="M31 41l2-9 10-20 4 2-10 20z"/>`,
+  rings: `<circle class="s ln" cx="18" cy="30" r="10"/><circle class="s ln" cx="30" cy="30" r="10"/><path class="fv s ln" d="M13.5 15.5l4.5-6 4.5 6-4.5 5z"/><path class="s ln" d="M38 8v6M35 11h6"/>`,
+  bowl: `<path class="fp s ln" d="M7 25h34c0 9-7 15-17 15S7 34 7 25z"/><path class="s ln" d="M18 40h12M27 21l14-14M23 21l14-15"/><path class="s ln" d="M13 19c-2-3 2-5 0-8M19 19c-2-3 2-5 0-8"/>`,
+  heart: `<path class="fp s ln" d="M24 40C10 31 6 23 9 17c3-6 11-6 15 0 4-6 12-6 15 0 3 6-1 14-15 23z"/><path class="s ln" d="M41 6v6M38 9h6M7 7v4M5 9h4"/>`,
+  cheers: `<path class="fy s ln" d="M6 12l11-3 1 12a4.5 4.5 0 0 1-8.6 2.3z"/><path class="s ln" d="M14 27l3 11M12 39l8-2"/><path class="fy s ln" d="M42 12l-11-3-1 12a4.5 4.5 0 0 0 8.6 2.3z"/><path class="s ln" d="M34 27l-3 11M36 39l-8-2"/><path class="s ln" d="M24 3v4M19 5l2 3M29 5l-2 3"/>`,
+  candy: `<ellipse class="fp s ln" cx="24" cy="24" rx="11" ry="8.5"/><path class="fv s ln" d="M13 24l-8-7v14zM35 24l8-7v14z"/><path class="s ln" d="M20 17c2 4 2 10 0 14M27 16c2 4 2 12 0 16"/>`,
+  camera: `<rect class="fy s ln" x="6" y="15" width="36" height="25" rx="5"/><path class="s ln" d="M16 15l3-5h10l3 5"/><circle class="fw s ln" cx="24" cy="27.5" r="7"/><circle class="fp s ln" cx="36" cy="20.5" r="1.6"/>`,
+  leaf: `<path class="fl s ln" d="M10 39C8 21 20 8 41 8c0 21-12 33-31 31z"/><path class="s ln" d="M10 39L31 18M20 29h7M25 23v-6"/>`,
+  baby: `<rect class="fw s ln" x="15" y="17" width="18" height="24" rx="6"/><path class="fp s ln" d="M17 17h14v-4H17z"/><path class="fy s ln" d="M20.5 13c0-6 7-6 7 0"/><path class="s ln" d="M15 25h6M15 31h6"/>`,
+  car: `<path class="fp s ln" d="M5 33v-7l5-9h23l8 9h2v7z"/><path class="fw s ln" d="M13 20h8v6H10zM25 20h6l5 6H25z"/><circle class="fw s ln" cx="14" cy="34" r="4.5"/><circle class="fw s ln" cx="34" cy="34" r="4.5"/>`,
+  train: `<rect class="fy s ln" x="10" y="7" width="28" height="29" rx="7"/><path class="fw s ln" d="M15 13h18v10H15z"/><circle class="s ln" cx="17" cy="29.5" r="1.5"/><circle class="s ln" cx="31" cy="29.5" r="1.5"/><path class="s ln" d="M16 36l-4 6M32 36l4 6"/>`,
+  coffee: `<path class="fw s ln" d="M9 18h24v10a10 10 0 0 1-10 10h-4A10 10 0 0 1 9 28z"/><path class="s ln" d="M33 21h3a4 4 0 0 1 0 8h-3"/><path class="s ln" d="M16 13c-2-3 2-4 0-7M24 13c-2-3 2-4 0-7"/><path class="fp s ln" d="M21 33c-4.5-2.8-5.5-5.6-3.8-7.2 1.5-1.4 3.2-.6 3.8.6.6-1.2 2.3-2 3.8-.6 1.7 1.6.7 4.4-3.8 7.2z"/>`,
+  plane: `<path class="fw s ln" d="M5 25l38-15-10 30-8-11z"/><path class="fv s ln" d="M25 29l18-19-24 15z"/><path class="s ln" d="M25 29v10l5-6"/>`,
+  home: `<path class="fw s ln" d="M12 21v19h24V21"/><path class="fy s ln" d="M7 23L24 9l17 14"/><path class="fp s ln" d="M20 40v-9h8v9"/><path class="s ln" d="M32 14v-5"/>`,
+  pin: `<path class="fp s ln" d="M24 43s13-12 13-23a13 13 0 0 0-26 0c0 11 13 23 13 23z"/><circle class="fw s ln" cx="24" cy="20" r="5"/>`,
+  cal: `<rect class="fw s ln" x="8" y="11" width="32" height="30" rx="4"/><path class="fp s ln" d="M8 20h32v-5a4 4 0 0 0-4-4H12a4 4 0 0 0-4 4z"/><path class="s ln" d="M16 7v8M32 7v8"/><path class="fp s ln" d="M24 36c-5-3-6-6-4.5-8s4-1 4.5.5c.5-1.5 3-2.5 4.5-.5s.5 5-4.5 8z"/>`,
+  mail: `<rect class="fw s ln" x="5" y="11" width="38" height="27" rx="4"/><path class="s ln" d="M6 13l18 14 18-14"/>`,
+};
+const BLOB = `<path class="fs" d="M30 3c14 0 27 10 27 25S46 57 29 57 3 46 3 30 15 3 30 3z"/>`;
+const icon = (name, d = 0, blob = true) =>
+  `<svg class="ic" viewBox="${blob ? "-6 -6 60 60" : "0 0 48 48"}" style="--d:${d}s" aria-hidden="true">${blob ? `<g transform="translate(-6 -6)">${BLOB}</g>` : ""}${ICONS[name] || ICONS.heart}</svg>`;
+const BTN_ICON = (n) => `<svg viewBox="0 0 48 48" aria-hidden="true">${ICONS[n].replace(/ ln/g, "")}</svg>`;
+const DRESS = {
+  dress: (c) => `<path class="s" style="fill:${c}" d="M30 8h12l-1 10 9 12-5 40H27l-5-40 9-12z"/><path class="s" d="M27 30h18M33 8l3 6 3-6"/><path class="s" d="M36 2v6M33 2h6" opacity=".6"/>`,
+  shirt: (c) => `<path class="s" style="fill:${c}" d="M24 12l12-5 12 5 10 12-7 5v41H21V29l-7-5z"/><path class="s" d="M30 9l6 9 6-9M36 18v30"/><circle class="s" cx="36" cy="28" r=".8"/><circle class="s" cx="36" cy="38" r=".8"/>`,
+};
+
+/* ---------- 填入內容 ---------- */
+let start = new Date(WEDDING.start), end = new Date(WEDDING.end);
+const pad = (n) => String(n).padStart(2, "0");
+const WK = "日一二三四五六", WK_EN = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+const ymd = () => `${start.getFullYear()}.${pad(start.getMonth() + 1)}.${pad(start.getDate())}`;
+const title = () => `${WEDDING.groom} & ${WEDDING.bride} 婚禮`;
+const esc = (t) => String(t).replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
+
+document.documentElement.dataset.theme = params.get("theme") || WEDDING.theme;
+const toName = params.get("to");
+if (toName) $("to-line").textContent = `To. ${toName.slice(0, 20)}`;
+
+function renderNames() {
+  const chars = (s, i0) => [...s].map((c, i) => `<span class="ch" style="--i:${i0 + i}">${esc(c)}</span>`).join("");
+  const gl = [...WEDDING.groom].length;
+  $("names").innerHTML = chars(WEDDING.groom, 0) + `<span class="ch amp" style="--i:${gl}">&amp;</span>` + chars(WEDDING.bride, gl + 1);
+  $("names").setAttribute("aria-label", `${WEDDING.groom} 與 ${WEDDING.bride}`);
+  $("hero-date").textContent = `${ymd()}　${WK_EN[start.getDay()]}`;
+  const set = (id, v) => { const el = $(id); if (el) el.textContent = v; };   // 信封在開場後會被移除
+  set("env-names", `${WEDDING.groom} & ${WEDDING.bride}`);
+  set("env-date", ymd());
+  set("seal-text", WEDDING.initials.join("&"));
+  $("thanks-sign").textContent = `${WEDDING.groom} ＆ ${WEDDING.bride}　敬邀`;
+}
+function renderCal() {
+  const y = start.getFullYear(), m = start.getMonth();
+  const first = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate();
+  const MON = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let h = `<div class="cal-head"><span class="en">${MON[m]}</span><b>${y} 年 ${m + 1} 月</b></div><div class="cal-grid">`;
+  h += [...WK].map((w) => `<span class="wk">${w}</span>`).join("");
+  for (let i = 0; i < first; i++) h += "<span></span>";
+  for (let d = 1; d <= days; d++) {
+    h += d === start.getDate()
+      ? `<span class="day">${d}<svg viewBox="0 0 50 50" aria-hidden="true"><path class="s ln" style="--d:.9s;stroke:var(--accent);stroke-width:2.2" d="M25 44C9 34 3 24 7 16c4-8 14-8 18 0 4-8 14-8 18 0 4 8-2 18-18 28 0 0-2-1-4-2"/></svg></span>`
+      : `<span>${d}</span>`;
+  }
+  $("cal").innerHTML = h + "</div>";
+}
+renderNames(); renderCal();
+$("invite-text").innerHTML = WEDDING.invite.split("\n").map(esc).join("<br>");
+$("parents").innerHTML = WEDDING.parents.map((p) => `<div><small>${esc(p.role)}</small><span>${esc(p.names)}</span></div>`).join("");
+
+function tick() {
+  const ms = start - new Date();
+  if (ms <= 0) { $("countdown").innerHTML = `<p class="cd-done">謝謝你來參加我們的婚禮 ♡</p>`; return; }
+  const v = [Math.floor(ms / 864e5), Math.floor(ms / 36e5) % 24, Math.floor(ms / 6e4) % 60, Math.floor(ms / 1e3) % 60];
+  if (!$("countdown").querySelector(".cd")) $("countdown").innerHTML = ["天", "時", "分", "秒"].map((l) => `<div class="cd"><b>0</b><small>${l}</small></div>`).join("");
+  $("countdown").querySelectorAll("b").forEach((b, i) => { b.textContent = i ? pad(v[i]) : v[i]; });
+}
+tick(); setInterval(tick, 1000);
+
+$("story-list").innerHTML = WEDDING.story.map((s, i) =>
+  `<div class="st fade" style="--i:${i + 2}"><div class="blob">${icon(s.icon, .3 + i * .18)}</div><div><span class="en">${esc(s.date)}</span><p>${esc(s.text)}</p></div></div>`).join("");
+$("sched").innerHTML = WEDDING.schedule.map((s, i) =>
+  `<div class="sr ${i % 2 ? "r" : "l"} fade" style="--i:${i + 2}"><div class="blob">${icon(s.icon, .3 + i * .18)}</div><div class="txt"><span class="en">${esc(s.time)}</span><h3>${esc(s.title)}</h3><p>${esc(s.note || "")}</p></div></div>`).join("");
+$("tips").innerHTML = WEDDING.tips.map((t, i) =>
+  `<div class="tip fade" style="--i:${i + 2}"><div class="blob">${icon(t.icon, .3 + i * .15)}</div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p></div>`).join("");
+
+const dc = WEDDING.dressCode;
+$("dress-name").textContent = dc.name;
+$("dress-text").textContent = dc.text;
+$("dress-avoid").textContent = dc.avoid;
+$("dress").innerHTML = dc.colors.map((c) =>
+  `<div class="dz"><svg viewBox="0 0 72 76" aria-hidden="true">${DRESS[c.type === "shirt" ? "shirt" : "dress"](c.hex)}</svg><b>${esc(c.name)}</b><small>${esc(c.hex.toUpperCase())}</small></div>`).join("");
+
+$("venue-name").textContent = WEDDING.venue;
+$("venue-addr").textContent = WEDDING.address;
+$("trans").innerHTML = WEDDING.transport.map((t, i) =>
+  `<div class="tr fade" style="--i:${i + 2}">${icon(t.icon, .3 + i * .2, false)}<span>${esc(t.text)}</span></div>`).join("");
+const place = `${WEDDING.venue} ${WEDDING.address}`;
+const utc = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+$("map-btn").innerHTML = BTN_ICON("pin") + "開啟 Google 地圖";
+$("map-btn").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(WEDDING.mapQuery);
+$("gcal-btn").innerHTML = BTN_ICON("cal") + "Google 日曆";
+const gcal = () => "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(title()) +
+  "&dates=" + utc(start) + "/" + utc(end) + "&location=" + encodeURIComponent(place);
+$("gcal-btn").href = gcal();
+$("ics-btn").innerHTML = BTN_ICON("cal") + "iPhone 行事曆";
+$("ics-btn").addEventListener("click", () => {
+  const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//wedding-invite//TW", "BEGIN:VEVENT",
+    "UID:" + utc(start) + "@wedding-invite", "DTSTAMP:" + utc(new Date()),
+    "DTSTART:" + utc(start), "DTEND:" + utc(end), "SUMMARY:" + title(), "LOCATION:" + place,
+    "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+  a.download = "wedding.ics"; a.click();
+});
+$("rsvp-deadline").textContent = WEDDING.rsvpDeadline.replaceAll("-", ".");
+$("rsvp-btn").innerHTML = BTN_ICON("mail") + "填寫出席回覆";
+$("rsvp-btn").href = WEDDING.rsvpUrl;
+
+/* ---------- 插畫 ---------- */
+// 封面：簡約大氣的拱門＋全身似顏繪（花只放在頂端和兩個下角）
+(() => {
+  const svg = $("hero-art");
+  svg.innerHTML = `
+    <path d="M78 592 V266 A122 122 0 0 1 322 266 V592Z" style="fill:var(--sky);opacity:.9"/>
+    <path class="s ln" style="--d:.1s;stroke-width:2" d="M64 596 V264 A136 136 0 0 1 336 264 V596"/>
+    <path class="s ln" style="--d:.3s;stroke-width:1.2;opacity:.55" d="M78 596 V266 A122 122 0 0 1 322 266 V596"/>
+    <path class="s ln" style="--d:.5s;stroke-width:1.6" d="M24 592 Q120 580 200 584 T376 590"/>
+    <ellipse cx="200" cy="582" rx="92" ry="6" style="fill:var(--ink);opacity:.08"/>
+    <g id="h-couple"><image class="couple" id="couple-img" href="${WEDDING.couple}" x="104" y="186" width="192" height="392" preserveAspectRatio="xMidYMax meet"/></g>
+    <g id="h-top"></g><g id="h-bl"></g><g id="h-br"></g>`;
+  // 頂端花束
+  const top = $("h-top");
+  const tl = stem(top, "M200 128 C170 122 140 130 118 152", 1), tr = stem(top, "M200 128 C230 122 260 130 282 152", 1);
+  grow(top, tl, { step: 13, leaf: 17, bloomP: .2, size: 9, var: .5, d0: 1.1, span: .5, breath: .35 });
+  grow(top, tr, { step: 13, leaf: 17, bloomP: .2, size: 9, var: .5, d0: 1.1, span: .5, breath: .35 });
+  top.insertAdjacentHTML("beforeend",
+    euc(176, 126, -168, 40, 1.3) + euc(224, 126, -12, 40, 1.3) + leaf(200, 128, 24, -120, 1.3) + leaf(200, 128, 24, -60, 1.3, "solid") +
+    blossom(170, 134, 12, "rw", 1.5) + blossom(232, 134, 12, "rp", 1.55) + rose(200, 124, 24, "ry", 1.45) +
+    ranunculus(148, 146, 8, "ry", 1.7) + ranunculus(254, 146, 8, "rw", 1.7));
+  // 兩個下角
+  [[$("h-bl"), 1], [$("h-br"), -1]].forEach(([g, sgn], i) => {
+    const x0 = sgn > 0 ? 50 : 350;
+    const a = stem(g, `M${x0} 600 C${x0 - sgn * 14} 540 ${x0 + sgn * 6} 480 ${x0 - sgn * 4} 430`, .4 + i * .1);
+    const b = stem(g, `M${x0 + sgn * 6} 600 C${x0 + sgn * 40} 570 ${x0 + sgn * 46} 540 ${x0 + sgn * 40} 506`, .5 + i * .1);
+    grow(g, a, { step: 13, leaf: 19, bloomP: .18, size: 10, var: .5, d0: .6, span: .9, breath: .3, euc: .2 });
+    grow(g, b, { step: 13, leaf: 16, bloomP: .15, size: 9, var: .5, d0: .7, span: .6, breath: .3 });
+    g.insertAdjacentHTML("beforeend",
+      rose(x0 + sgn * 18, 576, 20, sgn > 0 ? "ry" : "rp", 1.1) + blossom(x0 + sgn * 52, 584, 11, "rw", 1.2) + blossom(x0 - sgn * 6, 426, 10, "ry", 1.4) +
+      breath(x0 + sgn * 70, 590, 16, 1.3));
+  });
+  svg.insertAdjacentHTML("beforeend", sparkle(112, 222, 6, 1.9) + sparkle(296, 206, 8, 2) + sparkle(318, 330, 4, 2.1) + sparkle(30, 360, 5, 2.2) + sparkle(372, 300, 5, 2.3));
+})();
+
+// 花圈字母
+(() => {
+  const svg = $("monogram");
+  svg.innerHTML = `<g id="m-ring"></g><text class="en" x="100" y="114" text-anchor="middle" font-size="46" font-weight="700">${esc(WEDDING.initials[0])}<tspan style="fill:var(--accent)" font-size="34" dx="2" dy="-2">&amp;</tspan><tspan dx="2" dy="2">${esc(WEDDING.initials[1])}</tspan></text>`;
+  const g = $("m-ring");
+  const l = stem(g, "M100 174 C40 172 20 110 38 70 C52 40 80 26 100 26", .1);
+  const r = stem(g, "M100 174 C160 172 180 110 162 70 C148 40 120 26 100 26", .1);
+  grow(g, l, { step: 10, leaf: 15, bloomP: .2, size: 9, var: .6, d0: .2, span: 1, breath: .25 });
+  grow(g, r, { step: 10, leaf: 15, bloomP: .2, size: 9, var: .6, d0: .2, span: 1, breath: .25 });
+  g.insertAdjacentHTML("beforeend", rose(100, 174, 15, "rp", 1.2) + blossom(80, 170, 8, "rw", 1.3) + blossom(120, 170, 8, "ry", 1.3) + ranunculus(100, 26, 9, "rl", 1.3));
+})();
+
+// 標題下的小花枝
+document.querySelectorAll(".sh").forEach((h, i) => {
+  h.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 130 34" aria-hidden="true"><path class="st-l ln" style="--d:.3s" d="M8 20 Q65 9 122 20"/>${leaf(30, 16.5, 15, -150, .6)}${leaf(38, 16, 13, -35, .7)}${leaf(100, 16.5, 15, -30, .6)}${leaf(92, 16, 13, -145, .7)}${breath(48, 15, 10, .8)}${breath(84, 15, 10, .8)}${rose(65, 14, 10, TONES[i % 4], .9)}</svg>`);
+});
+
+// 場地插畫
+(() => {
+  let aw = "M84 100h152v10";
+  for (let i = 0; i < 8; i++) aw += "q-9.5 9-19 0";
+  aw += "z";
+  const svg = $("venue-art");
+  svg.innerHTML = `
+    <path class="fh s ln" style="--d:.1s" d="M4 192 Q160 178 316 192 L316 210 L4 210Z"/>
+    <path class="fw s ln" style="--d:.1s" d="M24 52a9 9 0 0 1 2-17 12 12 0 0 1 22-4 10 10 0 0 1 18 5 8 8 0 0 1 4 16z"/>
+    <circle class="fy s ln" style="--d:.15s" cx="284" cy="34" r="13"/>
+    <path class="s ln" style="--d:.2s" d="M284 12v-5M302 20l4-3M306 36h5M262 20l-4-3"/>
+    <rect class="fw s ln" style="--d:.2s" x="72" y="72" width="176" height="114" rx="4"/>
+    <path class="fp s ln" style="--d:.35s" d="M60 74 L160 26 L260 74 Z"/>
+    <circle class="fv s ln" style="--d:.5s" cx="160" cy="56" r="9"/>
+    <path class="fy s ln" style="--d:.55s" d="${aw}"/>
+    <path class="fs s ln" style="--d:.7s" d="M92 158v-24a12 12 0 0 1 24 0v24z M204 158v-24a12 12 0 0 1 24 0v24z"/>
+    <path class="s ln" style="--d:.8s" d="M104 122v36M92 140h24M216 122v36M204 140h24"/>
+    <path class="fp s ln" style="--d:.8s" d="M142 186v-34a18 18 0 0 1 36 0v34z"/>
+    <path class="fw s ln" style="--d:.9s" d="M160 146c-5-3-6-6-4.5-8s4-1 4.5.5c.5-1.5 3-2.5 4.5-.5s.5 5-4.5 8z"/>
+    <g id="v-fl"></g>
+    <path class="s ln" style="--d:1.1s" d="M272 186v-50"/>
+    <path class="fw s ln" style="--d:1.2s" d="M252 112h44l-6 12 6 12h-44z"/>
+    <text class="en" x="272" y="130" text-anchor="middle" font-size="13" font-weight="700">here!</text>`;
+  const g = svg.querySelector("#v-fl");
+  const a = stem(g, "M60 190 C52 168 56 146 50 128", .9), b = stem(g, "M30 192 C26 176 30 160 24 148", 1);
+  grow(g, a, { step: 9, leaf: 14, bloomP: .3, size: 10, var: .6, d0: 1, span: .6, breath: .3 });
+  grow(g, b, { step: 9, leaf: 12, bloomP: .3, size: 9, var: .6, d0: 1.1, span: .6 });
+  g.insertAdjacentHTML("beforeend", rose(128, 186, 9, "ry", 1.3) + rose(192, 186, 9, "rp", 1.35) + leaf(116, 190, 12, -150, 1.2) + leaf(204, 190, 12, -30, 1.2));
+})();
+
+$("stamp").innerHTML = `<path class="fw s" d="M6 4h58v76H6z" stroke-dasharray="4 3"/><rect class="fs s" x="12" y="10" width="46" height="52" rx="2"/>
+  <g transform="translate(13 12) scale(.92)">${ICONS.heart.replace(/ ln/g, "")}</g>
+  <text class="en" x="35" y="74" text-anchor="middle" font-size="12" font-weight="700">LOVE</text>`;
+
+// 結尾：新人站在花叢裡
+(() => {
+  const svg = $("garland");
+  svg.innerHTML = `<image class="couple" href="${WEDDING.couple}" x="152" y="10" width="96" height="188"/>
+    <path class="fh" d="M-10 190 Q100 168 200 182 T410 178 L410 234 L-10 234Z"/><path class="st-l" d="M-10 190 Q100 168 200 182 T410 178"/><g id="g-fl"></g>`;
+  const g = svg.querySelector("#g-fl");
+  const l = stem(g, "M-6 192 Q70 170 140 186", .2), r = stem(g, "M260 184 Q330 168 406 180", .2);
+  grow(g, l, { step: 11, leaf: 20, bloomP: .45, size: 14, var: .9, jit: 6, d0: .3, span: .8, breath: .3 });
+  grow(g, r, { step: 11, leaf: 20, bloomP: .45, size: 14, var: .9, jit: 6, d0: .3, span: .8, breath: .3 });
+})();
+
+// 白底區塊的角落花枝
+["invite", "story", "dress-sec", "venue"].forEach((id) => {
+  const sec = $(id);
+  ["l", "r"].forEach((side, j) => {
+    sec.insertAdjacentHTML("afterbegin", `<svg class="corner ${side}" viewBox="0 0 70 120" aria-hidden="true"><g></g></svg>`);
+    const g = sec.firstElementChild.firstElementChild;
+    const st = stem(g, j ? "M6 118 C16 86 4 56 26 24" : "M4 116 C22 90 8 54 32 22", .2);
+    grow(g, st, { step: 9, leaf: 15, bloomP: .2, size: 8, var: .5, d0: .3, span: .8, breath: .3, euc: .2 });
+    g.insertAdjacentHTML("beforeend", rose(j ? 26 : 32, j ? 24 : 22, 11, pick(TONES), 1.1));
+  });
+});
+// 色帶的波浪邊
+document.querySelectorAll("section.band").forEach((sec) => {
+  const w = "M0 12 Q25 2 50 12 T100 12 T150 12 T200 12 T250 12 T300 12 T350 12 T400 12";
+  ["top", "bot"].forEach((k) => sec.insertAdjacentHTML("afterbegin",
+    `<svg class="wave ${k}" viewBox="0 0 400 22" preserveAspectRatio="none" aria-hidden="true"><path class="fill" d="${w} V23 H0Z"/><path class="edge" d="${w}"/></svg>`));
+});
+// 桌機兩側花枝
+function sideArt(svg, d0) {
+  const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  svg.appendChild(g);
+  const a = stem(g, "M60 580 C70 440 30 320 90 160 C110 110 140 80 170 60", d0);
+  const b = stem(g, "M80 580 C120 470 170 420 220 360", d0 + .3);
+  grow(g, a, { step: 11, leaf: 28, bloomP: .22, size: 22, var: 1, jit: 8, d0: d0 + .2, span: 2, breath: .3, euc: .15 });
+  grow(g, b, { step: 11, leaf: 24, bloomP: .25, size: 18, var: 1, jit: 8, d0: d0 + .5, span: 1.4, breath: .3, euc: .15 });
+}
+sideArt($("side-l"), .2); sideArt($("side-r"), .5);
+// 信封旁的花
+(() => {
+  const svg = $("env").querySelector("svg");
+  const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  svg.insertBefore(g, svg.firstChild);
+  const a = stem(g, "M-8 200 C-22 150 0 110 30 92", 0), b = stem(g, "M330 72 C348 50 342 22 312 4", 0), c = stem(g, "M300 238 C330 238 350 214 354 188", 0);
+  grow(g, a, { step: 9, leaf: 15, bloomP: .3, size: 11, var: .8, span: .01, breath: .3 });
+  grow(g, b, { step: 9, leaf: 14, bloomP: .3, size: 10, var: .8, span: .01, breath: .3 });
+  grow(g, c, { step: 9, leaf: 13, bloomP: .35, size: 10, var: .8, span: .01 });
+  g.querySelectorAll(".ln").forEach((l) => l.classList.remove("ln"));
+  g.querySelectorAll(".pop").forEach((p) => p.classList.remove("pop"));
+})();
+
+prepLines(document);
+
+/* ---------- 開場、捲動出現 ---------- */
+const io = new IntersectionObserver((es) => es.forEach((e) => {
+  if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+}), { threshold: .15, rootMargin: "0px 0px -8% 0px" });
+let begun = false;
+function begin() {
+  if (begun) return; begun = true;
+  document.body.classList.remove("locked");
+  $("hero").classList.add("in");
+  document.querySelectorAll(".side").forEach((s) => s.classList.add("in"));
+  document.querySelectorAll("[data-r]").forEach((s) => io.observe(s));
+  petals.start();
+}
+$("env").addEventListener("click", () => {
+  if ($("env").classList.contains("open")) return;
+  $("env").classList.add("open");
+  setTimeout(() => $("intro").classList.add("gone"), reduced ? 0 : 1650);
+  setTimeout(begin, reduced ? 0 : 1850);
+  setTimeout(() => $("intro").remove(), reduced ? 50 : 3000);
+});
+
+/* ---------- 落花（少量） ---------- */
+const petals = (() => {
+  const c = $("petals"), x = c.getContext("2d");
+  let W, H, list = [], cols = [], lines = [], on = false;
+  const size = () => { const r = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; c.width = W * r; c.height = H * r; x.setTransform(r, 0, 0, r, 0, 0); };
+  const colors = () => {
+    const cs = getComputedStyle(document.documentElement), v = (n) => cs.getPropertyValue(n).trim();
+    cols = [v("--p"), v("--y"), "#ffffff"]; lines = [v("--ink"), v("--ink"), v("--ink")];
+  };
+  // 像雪一樣：慢慢落下、左右輕輕擺
+  const make = (top) => ({ x: Math.random() * W, y: top ? -20 - Math.random() * H * .4 : Math.random() * H, r: 3 + Math.random() * 3,
+    v: .12 + Math.random() * .2, a: Math.random() * 6.28, s: .3 + Math.random() * .5, ph: Math.random() * 6.28, sw: 18 + Math.random() * 26, c: Math.floor(Math.random() * 3) });
+  function frame(t) {
+    if (!on) return;
+    x.clearRect(0, 0, W, H);
+    for (const p of list) {
+      p.y += p.v; p.a += .004 * p.s;
+      if (p.y > H + 20) Object.assign(p, make(true));
+      x.save(); x.translate(p.x + Math.sin(t / 2600 + p.ph) * p.sw, p.y); x.rotate(p.a + Math.sin(t / 3000 + p.ph) * .6); x.scale(1, Math.abs(Math.cos(t / 2400 + p.ph)) * .5 + .5);
+      x.beginPath(); x.moveTo(0, -p.r); x.quadraticCurveTo(p.r, 0, 0, p.r); x.quadraticCurveTo(-p.r, 0, 0, -p.r);
+      x.globalAlpha = .9; x.fillStyle = cols[p.c]; x.fill(); x.lineWidth = .8; x.strokeStyle = lines[p.c]; x.stroke();
+      x.restore();
+    }
+    requestAnimationFrame(frame);
+  }
+  addEventListener("resize", size);
+  document.addEventListener("visibilitychange", () => { if (document.hidden) on = false; else if (list.length && !on) { on = true; requestAnimationFrame(frame); } });
+  return {
+    start() { if (reduced) return; size(); colors(); list = Array.from({ length: innerWidth > 900 ? 16 : 10 }, () => make(false)); on = true; requestAnimationFrame(frame); },
+    recolor: colors,
+  };
+})();
+
+if (!reduced) {
+  const clouds = document.querySelectorAll(".cloud");
+  let ticking = false;
+  addEventListener("scroll", () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => { const y = scrollY; if (y < 900) clouds.forEach((c, i) => { c.style.transform = `translateY(${y * (i ? .35 : .22)}px)`; }); ticking = false; });
+  }, { passive: true });
+}
+
+/* ---------- 配色切換（示範用） ---------- */
+const THEMES = { honey: ["蜂蜜黃", "#f6c873"], candy: ["糖果粉", "#f7b8c8"], mint: ["薄荷綠", "#9fd3bb"], lavender: ["薰衣草", "#cdbdf0"] };
+function setTheme(k) {
+  if (!THEMES[k]) return;
+  document.documentElement.dataset.theme = k;
+  document.querySelectorAll("#themer button").forEach((o) => o.setAttribute("aria-pressed", o.dataset.k === k));
+  petals.recolor();
+}
+if (WEDDING.showThemePicker && !embed) {
+  const box = $("themer"); box.hidden = false;
+  Object.entries(THEMES).forEach(([k, [label, col]]) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.dataset.k = k; b.style.background = col; b.title = label; b.setAttribute("aria-label", "配色：" + label);
+    b.setAttribute("aria-pressed", k === document.documentElement.dataset.theme);
+    b.addEventListener("click", () => {
+      setTheme(k);
+      const t = $("toast"); t.textContent = label; t.classList.add("show");
+      clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1200);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ---------- 介紹頁的試用預覽會呼叫這個 ---------- */
+window.setPreview = ({ img, photo, groom, bride, date, theme } = {}) => {
+  if (groom) WEDDING.groom = groom.slice(0, 6);
+  if (bride) WEDDING.bride = bride.slice(0, 6);
+  if (groom || bride) WEDDING.initials = [[...WEDDING.groom][0] || "A", [...WEDDING.bride][0] || "Q"];
+  if (date) {
+    const s = new Date(date + "T11:30:00+08:00");
+    if (!isNaN(s)) { start = s; end = new Date(s.getTime() + 3 * 36e5); }
+  }
+  if (theme) setTheme(theme);
+  renderNames(); renderCal(); prepLines($("cal")); tick();
+  $("gcal-btn").href = gcal();
+  if (img) {
+    const im = $("couple-img"), box = $("h-couple");
+    im.setAttribute("href", img);
+    box.querySelector(".photo-frame")?.remove();
+    if (photo) {   // 一般照片：放進拱形相框
+      im.setAttribute("x", 100); im.setAttribute("y", 162); im.setAttribute("width", 200); im.setAttribute("height", 394);
+      im.setAttribute("preserveAspectRatio", "xMidYMid slice"); im.setAttribute("clip-path", "url(#photoClip)");
+      box.insertAdjacentHTML("beforeend", `<path class="photo-frame" d="M100 556 V262 a100 100 0 0 1 200 0 V556 Z" style="fill:none;stroke:#fff;stroke-width:6"/><path class="photo-frame" d="M100 556 V262 a100 100 0 0 1 200 0 V556 Z" style="fill:none;stroke:var(--ink);stroke-width:1.5"/>`);
+    } else {
+      im.setAttribute("x", 98); im.setAttribute("y", 150); im.setAttribute("width", 204); im.setAttribute("height", 400);
+      im.setAttribute("preserveAspectRatio", "xMidYMax meet"); im.removeAttribute("clip-path");
+    }
+  }
+};
+
+if (still || embed) {
+  $("intro").remove(); begin();
+  if (still) document.querySelectorAll("[data-r]").forEach((s) => s.classList.add("in"));
+}
+</script>
+</body>
+</html>
