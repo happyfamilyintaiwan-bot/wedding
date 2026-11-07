@@ -238,11 +238,11 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
 
 <div id="intro">
   <div class="intro-c">
-    <button id="open-btn" type="button" aria-label="打開邀請函">
+    <button id="open-btn" type="button" aria-label="打開邀請函" data-i18n-label="open_label">
       <span class="intro-en it">a winter wedding</span>
       <svg class="flake-seal" viewBox="-30 -30 60 60" aria-hidden="true"><g id="seal-flake"></g></svg>
-      <span class="intro-to2" id="to-line">To. 親愛的你</span>
-      <span class="intro-hint">輕觸　擦開霧氣</span>
+      <span class="intro-to2" id="to-line" data-i18n="to_default">To. 親愛的你</span>
+      <span class="intro-hint" data-i18n="hint_c">輕觸　擦開霧氣</span>
     </button>
   </div>
 </div>
@@ -254,7 +254,7 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
   <section class="hero" id="hero">
     <p class="top it fade">A Winter Wedding</p>
     <p class="date cg fade" style="--i:1" id="hero-date"></p>
-    <p class="v-copy fade" style="--i:4">在雪落的季節　邀請你</p>
+    <p class="v-copy fade" style="--i:4" data-i18n="vcopy_c">在雪落的季節　邀請你</p>
     <svg class="hero-art" id="hero-art" viewBox="0 110 400 440" role="img" aria-label="新人全身似顏繪與水彩花"></svg>
     <div class="names fade" style="--i:5"><b id="n-groom"></b><i></i><svg class="mini-flake" viewBox="-12 -12 24 24" aria-hidden="true"><g class="flk"></g></svg><span id="hanko-hero" hidden></span><i></i><b id="n-bride"></b></div>
   </section>
@@ -266,23 +266,23 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
   </section>
 
   <section id="date" data-r>
-    <header class="sh"><span class="no cg fade">— 01 —</span><h2 class="fade" style="--i:1">婚禮日期</h2><span class="it fade" style="--i:1">Save the Date</span></header>
+    <header class="sh"><span class="no cg fade">— 01 —</span><h2 class="fade" style="--i:1" data-i18n="h_date">婚禮日期</h2><span class="it fade" style="--i:1">Save the Date</span></header>
     <div class="fade" style="--i:2" id="cal"></div>
     <div class="countdown fade" style="--i:3" id="countdown"></div>
   </section>
 
   <section id="story" data-r>
-    <header class="sh"><span class="no cg fade">— 02 —</span><h2 class="fade" style="--i:1">我們的故事</h2><span class="it fade" style="--i:1">Our Story</span></header>
+    <header class="sh"><span class="no cg fade">— 02 —</span><h2 class="fade" style="--i:1" data-i18n="h_story">我們的故事</h2><span class="it fade" style="--i:1">Our Story</span></header>
     <div class="story" id="story-list"></div>
   </section>
 
   <section id="schedule" data-r>
-    <header class="sh"><span class="no cg fade">— 03 —</span><h2 class="fade" style="--i:1">婚宴流程</h2><span class="it fade" style="--i:1">Order of the Day</span></header>
+    <header class="sh"><span class="no cg fade">— 03 —</span><h2 class="fade" style="--i:1" data-i18n="h_sched">婚宴流程</h2><span class="it fade" style="--i:1">Order of the Day</span></header>
     <div id="sched"></div>
   </section>
 
   <section id="dress-sec" data-r>
-    <header class="sh"><span class="no cg fade">— 04 —</span><h2 class="fade" style="--i:1">服裝建議</h2><span class="it fade" style="--i:1">Dress Code</span></header>
+    <header class="sh"><span class="no cg fade">— 04 —</span><h2 class="fade" style="--i:1" data-i18n="h_dress">服裝建議</h2><span class="it fade" style="--i:1">Dress Code</span></header>
     <p class="dress-name it fade" style="--i:2" id="dress-name"></p>
     <p class="dress-text fade" style="--i:2" id="dress-text"></p>
     <div class="dress fade" style="--i:3" id="dress"></div>
@@ -290,55 +290,58 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
   </section>
 
   <section id="tips-sec" data-r>
-    <header class="sh"><span class="no cg fade">— 05 —</span><h2 class="fade" style="--i:1">宴席小提醒</h2><span class="it fade" style="--i:1">For Our Guests</span></header>
+    <header class="sh"><span class="no cg fade">— 05 —</span><h2 class="fade" style="--i:1" data-i18n="h_tips">宴席小提醒</h2><span class="it fade" style="--i:1">For Our Guests</span></header>
     <div class="tips" id="tips"></div>
   </section>
 
   <section id="venue" data-r>
-    <header class="sh"><span class="no cg fade">— 06 —</span><h2 class="fade" style="--i:1">婚宴地點</h2><span class="it fade" style="--i:1">Venue</span></header>
+    <header class="sh"><span class="no cg fade">— 06 —</span><h2 class="fade" style="--i:1" data-i18n="h_venue">婚宴地點</h2><span class="it fade" style="--i:1">Venue</span></header>
     <svg class="venue-art" id="venue-art" viewBox="0 0 320 200" role="img" aria-label="婚宴會館水彩插畫"></svg>
     <div class="venue-card">
       <h3 class="fade" id="venue-name"></h3>
       <p class="addr fade" style="--i:1" id="venue-addr"></p>
       <div class="trans" id="trans"></div>
       <div class="btns fade" style="--i:3">
-        <a class="btn primary" id="map-btn" target="_blank" rel="noopener">開啟 Google 地圖</a>
-        <p class="cal-tip">加入行事曆</p>
+        <a class="btn primary" id="map-btn" target="_blank" rel="noopener" data-i18n-ui="map">開啟 Google 地圖</a>
+        <p class="cal-tip" data-i18n="cal_tip">加入行事曆</p>
         <div class="btn-row">
-          <a class="btn" id="gcal-btn" target="_blank" rel="noopener">Google 日曆</a>
-          <button class="btn" id="ics-btn" type="button">iPhone 行事曆</button>
+          <a class="btn" id="gcal-btn" target="_blank" rel="noopener" data-i18n-ui="gcal">Google 日曆</a>
+          <button class="btn" id="ics-btn" type="button" data-i18n-ui="ics">iPhone 行事曆</button>
         </div>
       </div>
     </div>
   </section>
 
   <section id="rsvp" data-r>
-    <header class="sh"><span class="no cg fade">— 07 —</span><h2 class="fade" style="--i:1">出席回覆</h2><span class="it fade" style="--i:1">R.S.V.P.</span></header>
+    <header class="sh"><span class="no cg fade">— 07 —</span><h2 class="fade" style="--i:1" data-i18n="h_rsvp">出席回覆</h2><span class="it fade" style="--i:1">R.S.V.P.</span></header>
     <div class="card fade" style="--i:2">
       <span class="hanko" id="hanko-rsvp"></span>
-      <p>期待在婚禮上與你相見</p>
-      <p class="muted-sm">請於下列日期前回覆</p>
+      <p data-i18n="rsvp_p_b">期待在婚禮上與你相見</p>
+      <p class="muted-sm" data-i18n="rsvp_before">請於下列日期前回覆</p>
       <p class="deadline" id="rsvp-deadline"></p>
-      <p class="muted-sm">讓我們為你留一個好位子</p>
-      <div class="btns"><a class="btn primary" id="rsvp-btn" target="_blank" rel="noopener">填寫出席回覆</a></div>
+      <p class="muted-sm" data-i18n="rsvp_seat">讓我們為你留一個好位子</p>
+      <div class="btns"><a class="btn primary" id="rsvp-btn" target="_blank" rel="noopener" data-i18n-ui="rsvp">填寫出席回覆</a></div>
     </div>
   </section>
 
   <section class="thanks" id="thanks" data-r>
     <p class="it fade">Thank you</p>
-    <p class="big fade" style="--i:1">謝謝你　成為我們故事的一部分</p>
+    <p class="big fade" style="--i:1" data-i18n="thanks_b">謝謝你　成為我們故事的一部分</p>
     <svg class="end-art" id="end-art" viewBox="0 0 400 260" aria-hidden="true"></svg>
   </section>
   <footer class="cg">ILLUSTRATION BY ALISON</footer>
 </main>
 
 <canvas id="petals" aria-hidden="true"></canvas>
-<div class="themer" id="themer" role="group" aria-label="示範配色" hidden><span class="lab">配色</span></div>
+<div class="themer" id="themer" role="group" aria-label="示範配色" hidden><span class="lab" data-i18n-ui="theme">配色</span></div>
 <div class="toast" id="toast"></div>
 
+<script src="../assets/invite-i18n.js"></script>
 <script>
 /* ===== 每接一案只要改這一段 ===== */
 const WEDDING = {
+  lang: "zh",               // 喜帖語言：zh／en／ja／es（網址加 ?lang=en 可以臨時切換）
+  sample: true,             // 範例專用：切換語言時套用範例文字；正式交付給新人時刪掉這行
   groom: "阿哲", bride: "小晴",
   initials: ["哲", "晴"],                  // 印章上的字
   couple: "../assets/couple-kimono.webp",
@@ -390,6 +393,9 @@ const WEDDING = {
   theme: "ice",
   showThemePicker: true,   // 示範用；正式交付給新人時改成 false
 };
+const LANG = HYI.pick(WEDDING.lang), T = HYI.UI[LANG];
+if (WEDDING.sample && LANG !== "zh") HYI.applySample(WEDDING, LANG, "c");
+HYI.applyStatic(LANG);
 /* ============================== */
 
 const $ = (id) => document.getElementById(id);
@@ -485,10 +491,10 @@ const DRESS = {
 /* ---------- 內容 ---------- */
 let start = new Date(WEDDING.start), end = new Date(WEDDING.end);
 const pad = (n) => String(n).padStart(2, "0");
-const title = () => `${WEDDING.groom} & ${WEDDING.bride} 婚禮`;
+const title = () => T.title(WEDDING.groom, WEDDING.bride);
 document.documentElement.dataset.theme = params.get("theme") || WEDDING.theme;
 const toName = params.get("to");
-if (toName) $("to-line").textContent = `To. ${toName.slice(0, 12)}`;
+if (toName) $("to-line").textContent = `${T.to}${toName.slice(0, 12)}`;
 
 const hanko = () => [...WEDDING.initials.join("")].slice(0, 2).map(esc).join("<br>");
 function renderNames() {
@@ -500,8 +506,8 @@ function renderCal() {
   const y = start.getFullYear(), m = start.getMonth();
   const first = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate();
   const MON = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  let h = `<div class="cal-head"><span class="cg">${MON[m]}</span><small>${y} 年 ${m + 1} 月</small></div><div class="cal-grid">`;
-  h += [..."日一二三四五六"].map((w) => `<span class="wk">${w}</span>`).join("");
+  let h = `<div class="cal-head"><span class="cg">${MON[m]}</span><small>${LANG === "en" ? y : T.calHead(y, m)}</small></div><div class="cal-grid">`;
+  h += [...T.wk].map((w) => `<span class="wk">${w}</span>`).join("");
   for (let i = 0; i < first; i++) h += "<span></span>";
   for (let d = 1; d <= days; d++) h += d === start.getDate()
     ? `<span class="day">${d}<svg viewBox="-25 -25 50 50" aria-hidden="true"><circle class="wc" r="17" style="fill:var(--accent)"/></svg></span>`
@@ -513,9 +519,9 @@ $("invite-text").innerHTML = WEDDING.invite.split("\n").map(esc).join("<br>");
 $("parents").innerHTML = WEDDING.parents.map((p) => `<div><small>${esc(p.role)}</small>${esc(p.names)}</div>`).join("");
 function tick() {
   const ms = start - new Date();
-  if (ms <= 0) { $("countdown").innerHTML = `<p class="cd-done">謝謝你來參加我們的婚禮</p>`; return; }
+  if (ms <= 0) { $("countdown").innerHTML = `<p class="cd-done">${T.cdDone}</p>`; return; }
   const v = [Math.floor(ms / 864e5), Math.floor(ms / 36e5) % 24, Math.floor(ms / 6e4) % 60, Math.floor(ms / 1e3) % 60];
-  if (!$("countdown").querySelector(".cd")) $("countdown").innerHTML = ["日", "時", "分", "秒"].map((l) => `<div class="cd"><b>0</b><small>${l}</small></div>`).join("");
+  if (!$("countdown").querySelector(".cd")) $("countdown").innerHTML = T.cdB.map((l) => `<div class="cd"><b>0</b><small>${l}</small></div>`).join("");
   $("countdown").querySelectorAll("b").forEach((b, i) => { b.textContent = i ? pad(v[i]) : v[i]; });
 }
 tick(); setInterval(tick, 1000);
@@ -736,9 +742,10 @@ function setTheme(k) {
 }
 if (WEDDING.showThemePicker && !embed) {
   const box = $("themer"); box.hidden = false;
-  Object.entries(THEMES).forEach(([k, [label, col]]) => {
+  Object.entries(THEMES).forEach(([k, [label0, col]]) => {
+    const label = HYI.themeName(LANG, k, label0);
     const b = document.createElement("button");
-    b.type = "button"; b.dataset.k = k; b.style.background = col; b.title = label; b.setAttribute("aria-label", "配色：" + label);
+    b.type = "button"; b.dataset.k = k; b.style.background = col; b.title = label; b.setAttribute("aria-label", T.theme + "：" + label);
     b.setAttribute("aria-pressed", k === document.documentElement.dataset.theme);
     b.addEventListener("click", () => { setTheme(k); const t = $("toast"); t.textContent = label; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1200); });
     box.appendChild(b);
