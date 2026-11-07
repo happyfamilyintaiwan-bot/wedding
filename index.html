@@ -23,7 +23,263 @@
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #fbf4f2; --blush: #f5dfe0; --rose: #e6a9b5; --rose-d: #c97487; --wine: #5a2232; --wine-2: #6e2b3d;
+  --ink: #3a2128; --muted: #7c5d64; --line: rgba(90, 34, 50, .16); --cream: #fffaf7;
+  --serif: "Noto Serif TC", serif; --latin: "Bodoni Moda", "Noto Serif TC", serif; --sans: "Noto Sans TC", system-ui, sans-serif;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.8; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+::selection { background: var(--rose); color: var(--wine); }
+.wrap { width: min(1240px, 100% - 40px); margin-inline: auto; }
+.latin { font-family: var(--latin); }
+.it { font-family: var(--latin); font-style: italic; font-weight: 400; }
+.kicker { font-family: var(--latin); font-style: italic; font-size: 15px; letter-spacing: .02em; color: var(--rose-d); display: inline-flex; align-items: center; gap: 12px; }
+.kicker::before { content: ""; width: 34px; height: 1px; background: currentColor; }
+
+/* 品牌列＋導覽 */
+.top { position: sticky; top: 0; z-index: 30; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background: color-mix(in srgb, var(--paper) 82%, transparent); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
+.kh-brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; font-weight: 700; font-size: 14.5px; letter-spacing: .04em; white-space: nowrap; }
+.kh-brand img { width: 40px; height: 40px; border-radius: 8px; }
+.nav { display: flex; align-items: center; gap: 26px; font-size: 14px; }
+.nav a { text-decoration: none; color: var(--muted); transition: color .2s; }
+.nav a:hover { color: var(--wine); }
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 10px 22px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 15px; background: var(--rose); color: var(--wine); border: 1px solid var(--wine); transition: background .25s, transform .25s var(--ease); cursor: pointer; font-family: inherit; }
+.pill:hover { background: var(--blush); transform: translateY(-2px); }
+.pill.ghost { background: transparent; }
+.pill .arr { transition: transform .3s var(--ease); }
+.pill:hover .arr { transform: translateX(4px); }
+@media (max-width: 820px) { .nav a:not(.pill) { display: none; } .kh-brand .site { display: none; } }
+
+/* 封面 */
+.hero { position: relative; display: grid; grid-template-columns: 1fr minmax(280px, 360px) 1fr; grid-template-areas: "l a r" "c c c"; align-items: center; column-gap: clamp(16px, 3vw, 40px); padding: 40px 0 0; }
+.hero .l { grid-area: l; } .hero .r { grid-area: r; } .hero .arch-wrap { grid-area: a; } .hero-copy { grid-area: c; }
+.hero .big { white-space: nowrap; font-family: var(--latin); font-weight: 400; font-size: clamp(56px, 9.4vw, 150px); line-height: .86; letter-spacing: -.035em; color: var(--wine); }
+.hero .big em { font-style: italic; color: var(--rose-d); }
+.hero .l { justify-self: end; text-align: right; align-self: start; padding-top: 6vh; }
+.hero .r { align-self: end; padding-bottom: 4vh; }
+.arch { position: relative; aspect-ratio: 3 / 4.4; border-radius: 999px 999px 18px 18px; background: radial-gradient(70% 60% at 50% 30%, #fff 0, var(--blush) 70%); border: 1px solid var(--line); overflow: hidden; box-shadow: 0 50px 90px -50px rgba(90, 34, 50, .55); }
+.arch img { position: absolute; left: 50%; bottom: 0; width: 64%; translate: -50% 4%; filter: drop-shadow(0 18px 18px rgba(90, 34, 50, .18)); }
+.arch .sun { position: absolute; width: 46%; aspect-ratio: 1; left: 27%; top: 9%; border-radius: 50%; background: var(--rose); opacity: .35; filter: blur(2px); }
+.badge { position: absolute; width: 132px; height: 132px; right: -40px; top: 18%; z-index: 2; animation: spin 24s linear infinite; }
+.badge text { font-family: var(--latin); font-size: 11.5px; letter-spacing: .22em; fill: var(--wine); text-transform: uppercase; }
+.badge .core { fill: var(--wine); }
+@keyframes spin { to { rotate: 360deg; } }
+.hero-copy { display: flex; justify-content: space-between; align-items: end; gap: 30px; padding: 44px 0 56px; border-bottom: 1px solid var(--line); }
+.hero h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.6; letter-spacing: .08em; max-width: 15em; }
+.hero h1 b { color: var(--rose-d); font-weight: 900; }
+.hero .meta { display: grid; gap: 14px; justify-items: end; text-align: right; font-size: 14.5px; color: var(--muted); max-width: 22em; }
+.vert { position: absolute; left: 0; top: 50%; translate: 0 -50%; writing-mode: vertical-rl; font-family: var(--serif); letter-spacing: .5em; font-size: 13px; color: var(--muted); }
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; grid-template-areas: "l" "a" "r" "c"; padding: 28px 0 0; gap: 0; }
+  .hero .l, .hero .r { justify-self: start; text-align: left; padding: 0; position: relative; z-index: 2; }
+  .hero .r { justify-self: end; text-align: right; margin-top: -.55em; }
+  .arch { width: min(250px, 64vw); margin: -0.35em auto 0; }
+  .hero .big { font-size: 52px; }
+  .hero-copy { padding-top: 22px; }
+  .badge { width: 96px; height: 96px; right: 0; }
+  .hero-copy { flex-direction: column; align-items: start; padding: 34px 0 40px; }
+  .hero .meta { justify-items: start; text-align: left; }
+  .vert { display: none; }
+}
+
+/* 跑馬燈 */
+.marquee { border-block: 1px solid var(--line); overflow: hidden; background: var(--cream); }
+.marquee .track { display: flex; width: max-content; animation: run 38s linear infinite; }
+.marquee span { font-family: var(--latin); font-style: italic; font-size: clamp(26px, 3.6vw, 44px); color: var(--wine); padding: 14px 0; white-space: nowrap; }
+.marquee span i { font-style: normal; font-family: var(--serif); font-size: .62em; color: var(--rose-d); margin: 0 .9em; letter-spacing: .2em; }
+@keyframes run { to { transform: translateX(-50%); } }
+
+/* 章節 */
+section { padding: clamp(80px, 11vw, 150px) 0; position: relative; }
+.chapter { display: grid; grid-template-columns: 140px 1fr; gap: 30px; align-items: start; margin-bottom: clamp(40px, 6vw, 70px); }
+.chapter .no { font-family: var(--latin); font-size: clamp(56px, 7vw, 96px); line-height: .8; color: var(--rose); font-style: italic; }
+.chapter h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(30px, 4.4vw, 58px); line-height: 1.25; letter-spacing: .04em; color: var(--wine); margin-top: 8px; }
+.chapter p { color: var(--muted); max-width: 36em; margin-top: 14px; }
+@media (max-width: 700px) { .chapter { grid-template-columns: 1fr; gap: 6px; } }
+
+/* 價目表：餐廳菜單式 */
+.menu { border-top: 1px solid var(--wine); }
+.row { display: grid; grid-template-columns: 70px 1fr auto; gap: 18px 24px; align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--line); position: relative; }
+.row .n { font-family: var(--latin); font-style: italic; color: var(--rose-d); font-size: 20px; }
+.row h3 { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 28px); letter-spacing: .05em; display: flex; align-items: baseline; gap: 14px; }
+.row h3 small { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--wine); background: var(--blush); padding: 2px 10px; border-radius: 999px; white-space: nowrap; }
+.row p { grid-column: 2; color: var(--muted); font-size: 15px; margin-top: -10px; }
+.row .p { font-family: var(--latin); font-size: clamp(26px, 3.4vw, 44px); color: var(--wine); white-space: nowrap; line-height: 1; }
+.row .p sup { font-size: .4em; vertical-align: top; margin-right: 4px; letter-spacing: .1em; }
+.row::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 0; background: var(--wine); transition: width .8s var(--ease); }
+.row:hover::after { width: 100%; }
+@media (max-width: 600px) { .row { grid-template-columns: 1fr auto; } .row .n { grid-column: 1 / -1; } .row p { grid-column: 1 / -1; margin-top: 0; } }
+
+/* 似顏繪 */
+.duo { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(30px, 6vw, 90px); align-items: center; }
+.frame { position: relative; background: var(--blush); border-radius: 22px; padding: 8% 14% 0; overflow: hidden; }
+.frame::before { content: "Step 01"; position: absolute; top: 18px; left: 22px; font-family: var(--latin); font-style: italic; color: var(--wine); font-size: 15px; }
+.frame img { margin: 0 auto; width: 78%; }
+.quote-big { font-family: var(--serif); font-size: clamp(24px, 2.8vw, 36px); line-height: 1.55; letter-spacing: .06em; color: var(--wine); }
+.ticks { list-style: none; margin-top: 30px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.ticks li { padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; }
+.ticks b { font-family: var(--latin); font-weight: 500; color: var(--wine); white-space: nowrap; }
+@media (max-width: 820px) { .duo { grid-template-columns: 1fr; } }
+
+/* 書約：方案＋橫向畫廊 */
+.cert { background: var(--wine); color: var(--cream); }
+.cert .chapter h2 { color: var(--cream); }
+.cert .chapter p { color: #e8cfd4; }
+.cert .chapter .no { color: var(--rose); }
+.plans { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255, 255, 255, .22); }
+.plan { padding: 28px 24px 30px; border-right: 1px solid rgba(255, 255, 255, .16); display: flex; flex-direction: column; gap: 10px; transition: background .4s; }
+.plan:last-child { border-right: 0; }
+.plan:hover { background: var(--wine-2); }
+.plan .k { font-family: var(--latin); font-style: italic; color: var(--rose); }
+.plan h3 { font-family: var(--serif); font-size: 19px; letter-spacing: .05em; line-height: 1.5; }
+.plan .p { font-family: var(--latin); font-size: 40px; line-height: 1; }
+.plan .p s { font-size: 18px; color: #c9a7ae; margin-right: 8px; }
+.plan p { font-size: 14px; color: #e8cfd4; flex: 1; }
+.plan.best { background: var(--rose); color: var(--wine); }
+.plan.best .k, .plan.best p { color: var(--wine); }
+.plan.best .p s { color: var(--wine-2); opacity: .7; }
+.plan a { color: inherit; font-size: 14px; font-weight: 700; text-underline-offset: 5px; }
+@media (max-width: 1000px) { .plans { grid-template-columns: repeat(2, 1fr); } .plan:nth-child(2) { border-right: 0; } .plan:nth-child(-n+2) { border-bottom: 1px solid rgba(255, 255, 255, .16); } }
+@media (max-width: 560px) { .plans { grid-template-columns: 1fr; } .plan { border-right: 0; border-bottom: 1px solid rgba(255, 255, 255, .16); } }
+.reel { display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 50px 20px 20px; margin: 30px -20px 0; scrollbar-width: thin; scrollbar-color: var(--rose) transparent; }
+.reel figure { flex: 0 0 clamp(200px, 22vw, 270px); scroll-snap-align: start; background: #fff; padding: 10px; border-radius: 6px; transition: transform .5s var(--ease); cursor: zoom-in; }
+.reel figure:nth-child(odd) { transform: translateY(-14px) rotate(-1.2deg); }
+.reel figure:nth-child(even) { transform: translateY(10px) rotate(1deg); }
+.reel figure:hover { transform: translateY(-24px) rotate(0); }
+.reel img { aspect-ratio: 1414 / 2000; object-fit: cover; width: 100%; }
+.reel figcaption { color: var(--ink); font-size: 13px; padding-top: 8px; display: flex; justify-content: space-between; }
+.reel figcaption b { font-family: var(--latin); font-style: italic; color: var(--rose-d); font-weight: 400; }
+.cert-notes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 50px; font-size: 14.5px; color: #e8cfd4; }
+.cert-notes b { display: block; color: var(--cream); font-family: var(--serif); font-size: 16px; margin-bottom: 4px; }
+@media (max-width: 760px) { .cert-notes { grid-template-columns: 1fr; gap: 18px; } }
+dialog.zoom { border: 0; padding: 0; background: transparent; max-width: min(92vw, 620px); margin: auto; }
+dialog.zoom::backdrop { background: rgba(40, 12, 20, .82); }
+dialog.zoom img { max-height: 88vh; width: auto; margin: auto; border-radius: 6px; }
+dialog.zoom button { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--cream); font-size: 18px; cursor: pointer; }
+
+/* 電子喜帖 */
+.phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 44px); }
+.ph { display: grid; gap: 18px; justify-items: center; text-align: center; }
+.ph:nth-child(2) { translate: 0 60px; }
+.device { width: 100%; max-width: 270px; aspect-ratio: 9 / 18.5; border-radius: 38px; background: #24161b; padding: 8px; box-shadow: 0 50px 80px -40px rgba(90, 34, 50, .6); position: relative; }
+.device .screen { width: 100%; height: 100%; border-radius: 31px; overflow: hidden; background: #fff; position: relative; }
+.device iframe { position: absolute; top: 0; left: 0; width: 375px; height: 771px; border: 0; transform-origin: 0 0; }
+.device::after { content: ""; position: absolute; top: 15px; left: 50%; width: 70px; height: 18px; translate: -50% 0; background: #24161b; border-radius: 999px; }
+.ph h3 { font-family: var(--serif); font-size: 21px; letter-spacing: .06em; }
+.ph h3 span { font-family: var(--latin); font-style: normal; color: var(--rose-d); font-weight: 400; margin-right: 8px; }
+.ph p { font-size: 14px; color: var(--muted); max-width: 18em; }
+.ph a { font-size: 14px; font-weight: 700; text-underline-offset: 5px; }
+.web-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 30px; margin-top: 120px; padding-top: 30px; border-top: 1px solid var(--line); }
+.web-foot .p { font-family: var(--latin); font-size: clamp(48px, 6vw, 84px); color: var(--wine); line-height: 1; }
+.web-foot ul { list-style: none; color: var(--muted); font-size: 14.5px; display: grid; gap: 6px; max-width: 34em; }
+@media (max-width: 860px) {
+  .phones { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 18px; padding: 10px 20px 30px; margin: 0 -20px; }
+  .ph { flex: 0 0 74%; scroll-snap-align: center; }
+  .ph:nth-child(2) { translate: 0; }
+  .web-foot { margin-top: 40px; }
+}
+
+/* 流程 */
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); counter-reset: s; border-top: 1px solid var(--wine); }
+.flow li { list-style: none; padding: 24px 20px 0 0; position: relative; }
+.flow li::before { counter-increment: s; content: "0" counter(s); display: block; font-family: var(--latin); font-size: 52px; line-height: 1; color: var(--rose); font-style: italic; margin-bottom: 14px; }
+.flow b { display: block; font-family: var(--serif); font-size: 18px; color: var(--wine); }
+.flow span { font-size: 14px; color: var(--muted); }
+.promise { margin-top: 70px; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--wine); border-radius: 22px; overflow: hidden; }
+.promise > div { padding: 30px 32px; }
+.promise > div + div { border-left: 1px solid var(--wine); background: var(--blush); }
+.promise h3 { font-family: var(--serif); color: var(--wine); font-size: 20px; margin-bottom: 8px; }
+.promise p { color: var(--muted); font-size: 15px; }
+@media (max-width: 860px) { .flow { grid-template-columns: 1fr; } .flow li { display: grid; grid-template-columns: 80px 1fr; padding: 18px 0; border-bottom: 1px solid var(--line); } .flow li::before { grid-row: span 2; font-size: 40px; margin: 0; } .promise { grid-template-columns: 1fr; } .promise > div + div { border-left: 0; border-top: 1px solid var(--wine); } }
+
+/* 估價 */
+.quote { background: var(--blush); }
+.q-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+form.q { display: grid; gap: 34px; }
+.q fieldset { border: 0; display: grid; gap: 10px; min-width: 0; }
+.q legend { font-family: var(--serif); font-size: 21px; color: var(--wine); margin-bottom: 12px; display: flex; gap: 12px; align-items: baseline; }
+.q legend i { font-family: var(--latin); color: var(--rose-d); font-size: 16px; }
+.opt { display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--cream); cursor: pointer; font-size: 15px; transition: border-color .2s, background .2s; }
+.opt:has(input:checked) { border-color: var(--wine); background: #fff; box-shadow: inset 4px 0 0 var(--rose-d); }
+.opt input { accent-color: var(--rose-d); width: 18px; height: 18px; flex: none; }
+.opt .p { margin-left: auto; font-family: var(--latin); font-size: 17px; white-space: nowrap; }
+.opt.locked { cursor: default; }
+.sub-opts { display: grid; gap: 14px; padding: 16px; border-radius: 14px; background: rgba(255, 255, 255, .55); }
+.sub-opts[hidden] { display: none; }
+.field { display: grid; gap: 6px; font-size: 14.5px; min-width: 0; }
+.field > label, .field > span { font-weight: 500; }
+.q input[type=text], .q input[type=email], .q input[type=date], .q select, .q textarea { width: 100%; font: inherit; font-size: 16px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: #fff; color: var(--ink); min-width: 0; }
+.q input:focus, .q select:focus, .q textarea:focus { outline: 2px solid var(--rose-d); outline-offset: 1px; }
+.q textarea { min-height: 80px; resize: vertical; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pills label { position: relative; }
+.pills input { position: absolute; opacity: 0; pointer-events: none; }
+.pills span { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 16px; border-radius: 999px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 14px; }
+.pills input:checked + span { background: var(--rose); border-color: var(--wine); color: var(--wine); font-weight: 700; }
+.pills input:focus-visible + span { outline: 2px solid var(--rose-d); outline-offset: 2px; }
+.stepper { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; background: #fff; }
+.stepper button { width: 40px; height: 40px; border: 0; background: none; font-size: 18px; cursor: pointer; color: var(--wine); }
+.stepper output { min-width: 24px; text-align: center; font-weight: 700; }
+.note { font-size: 13px; color: var(--muted); }
+.receipt { position: sticky; top: 90px; background: var(--cream); padding: 30px 28px 34px; box-shadow: 0 40px 70px -40px rgba(90, 34, 50, .5); --z: 12px; -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / var(--z) 100%; mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / var(--z) 100%; padding-bottom: 46px; }
+.receipt small { font-family: var(--latin); font-style: italic; color: var(--rose-d); font-size: 15px; }
+.receipt .total { font-family: var(--latin); font-size: clamp(44px, 5vw, 64px); color: var(--wine); line-height: 1.1; display: block; margin: 4px 0 14px; }
+.receipt ul { list-style: none; font-size: 14px; display: grid; gap: 6px; padding: 14px 0; border-block: 1px dashed var(--line); }
+.receipt li { display: flex; justify-content: space-between; gap: 12px; }
+.receipt textarea { width: 100%; min-height: 260px; margin-top: 16px; font: 13.5px/1.7 var(--sans); border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: #fff; resize: vertical; color: var(--ink); }
+.acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.acts .pill { flex: 1; }
+.copied { color: #2f7a4f; font-weight: 700; }
+@media (max-width: 900px) { .q-grid { grid-template-columns: 1fr; } .receipt { position: static; } }
+
+/* FAQ */
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr 44px; align-items: center; gap: 16px; padding: 24px 0; font-family: var(--serif); font-size: clamp(18px, 2vw, 22px); color: var(--wine); letter-spacing: .03em; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: ""; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--wine); background: linear-gradient(var(--wine), var(--wine)) center / 14px 1px no-repeat, linear-gradient(var(--wine), var(--wine)) center / 1px 14px no-repeat; transition: rotate .4s var(--ease), background-color .3s; }
+.faq details[open] summary::after { rotate: 135deg; background-color: var(--rose); }
+.faq details p { padding: 0 60px 26px 0; color: var(--muted); max-width: 46em; }
+
+/* 結尾 */
+.end { background: var(--wine); color: var(--cream); text-align: center; padding: clamp(90px, 12vw, 160px) 0 50px; }
+.end .huge { font-family: var(--latin); font-style: italic; font-size: clamp(54px, 10vw, 150px); line-height: .9; letter-spacing: -.03em; }
+.end .huge span { color: var(--rose); }
+.end p { margin: 26px auto 34px; color: #e8cfd4; max-width: 30em; }
+.end .pill { background: var(--rose); }
+.end small { display: block; margin-top: 90px; font-size: 13px; color: #c9a7ae; }
+.end small a { color: inherit; }
+
+/* 手機好讀：說明文字不小於 15.5px、行距加大 */
+@media (max-width: 600px) {
+  body { line-height: 1.9; }
+  .row p, .plan p, .ph p, .flow span, .cert-notes, .note, .ticks li, .web-foot ul, .promise p, .faq details p { font-size: 15.5px; }
+  .chapter p, .hero .meta { font-size: 16px; }
+  .reel figure { flex-basis: 72vw; }
+  .faq details p { padding-right: 0; }
+  .kicker { font-size: 14px; }
+}
+.kh-legal { margin-top: 10px; }
+.kh-legal a { color: inherit; }
+
+/* 進場動畫 */
+.rv { opacity: 0; transform: translateY(40px); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+.rv.in { opacity: 1; transform: none; }
+.split .w { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.split .w > span { display: inline-block; transform: translateY(105%); transition: transform 1.2s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
+.split.in .w > span { transform: none; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .rv, .split .w > span { opacity: 1; transform: none; } }
+.still .rv, .still .split .w > span { opacity: 1; transform: none; transition: none; }
+</style>
 <!-- wedding 子網域：不放 Travelpayouts、不放 Google 廣告（core §1） -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQZHTYTRMQ"></script>
 <script>
@@ -41,7 +297,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
    "@type": "Service",
    "name": "似顏繪喜帖：新人似顏繪、結婚書約與電子喜帖",
    "serviceType": "客製化新人似顏繪、結婚書約設計與網頁電子喜帖",
-   "description": "手繪雙人全身彩色似顏繪 NT$1,800，可加購結婚書約（4 種方案，NT$1,000 起）與網頁電子喜帖（書約手繪、日系清新、雪景三種風格，NT$3,000）。同婚、非同婚都可以製作。一般製作 4～5 週。",
+   "description": "手繪雙人全身彩色似顏繪 NT$1,800，可加購結婚書約（4 種方案，NT$1,000 起，台灣格式，印刷版郵局掛號寄送）與網頁電子喜帖（書約手繪、日系清新、雪景三種風格，NT$3,000）。同婚、非同婚都可以製作。一般製作 4～5 週。",
    "provider": {
     "@type": "Organization",
     "name": "編織日和 Knitting Hiyori",
@@ -119,6 +375,14 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     },
     {
      "@type": "Question",
+     "name": "結婚書約可以用在台灣以外的國家嗎？印好的書約怎麼寄？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "目前結婚書約只提供台灣格式。印刷版只在台灣印製，用郵局掛號寄到你提供的台灣地址。"
+     }
+    },
+    {
+     "@type": "Question",
      "name": "要準備什麼照片？",
      "acceptedAnswer": {
       "@type": "Answer",
@@ -130,7 +394,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "name": "製作要多久？可以趕急件嗎？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "一般製作約 4～5 週。比 4 週短算急件，要看當下的案量，排得進來才會接單並告知；急件費是總價的 30%。"
+      "text": "一般製作約 4～5 週，建議在婚禮或登記前至少 2 個月詢價。比 4 週短算急件，要看當下的案量，排得進來才會接單並告知；急件費是總價的 30%。"
      }
     },
     {
@@ -186,433 +450,184 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
  ]
 }
 </script>
-<style>
-:root {
-  --paper: #fdf7f7; --paper2: #f9ecee; --card: #fffbfb; --ink: #3f3035; --muted: #7a6469; --line: #efdde1;
-  --honey: #f4b4c2; --honey-soft: #fde7ec; --pink-soft: #fbe6ea; --sage-soft: #fbeee6; --ice-soft: #e6eef5; --accent: #a3445c;
-  --dark: #4a3239;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: var(--paper); color: var(--ink); font-family: "Noto Sans TC", system-ui, sans-serif; font-size: 16px; line-height: 1.8; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-img { max-width: 100%; height: auto; display: block; }
-a { color: inherit; }
-p { text-wrap: pretty; }
-.wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-.hand { font-family: "LXGW WenKai TC", serif; }
-.it { font-family: "Cormorant Garamond", serif; font-style: italic; }
-
-/* 品牌列（core §7，寫法照 games/_template） */
-.kh-brand-row{display:flex;align-items:center;justify-content:space-between;gap:12px;box-sizing:border-box;padding:4px 0 8px;border-bottom:1px solid #e7e8ed;max-width:760px;margin:0 auto}
-.kh-brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:#16161a;text-decoration:none;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;font-size:14.4px;font-weight:700;letter-spacing:.04em;line-height:1.2;white-space:nowrap}
-.kh-brand img{width:40px;height:40px;border-radius:8px;flex:none}
-.kh-brand:hover{text-decoration:underline;text-underline-offset:4px}
-.topbar { padding: 6px 20px 0; }
-.topbar .kh-brand-row { max-width: 1100px; border-bottom-color: var(--line); }
-.nav { display: flex; gap: 18px; font-size: 14px; }
-.nav a { text-decoration: none; color: var(--muted); }
-.nav a:hover { color: var(--ink); }
-@media (max-width: 760px) { .nav { display: none; } }
-
-section { padding: 80px 0; }
-.eyebrow { display: block; font-size: 22px; color: var(--accent); line-height: 1; }
-h2 { font-family: "Noto Serif TC", serif; font-size: clamp(25px, 4.4vw, 36px); line-height: 1.4; letter-spacing: .05em; margin: 10px 0 12px; }
-h3 { font-family: "Noto Serif TC", serif; letter-spacing: .04em; }
-.sub { color: var(--muted); font-size: 16px; max-width: 640px; }
-.center { text-align: center; } .center .sub { margin: 0 auto; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 24px; border-radius: 999px; font-weight: 700; font-size: 16px; text-decoration: none; border: 2px solid var(--ink); background: var(--card); color: var(--ink); cursor: pointer; box-shadow: 4px 4px 0 var(--ink); transition: transform .15s, box-shadow .15s; font-family: inherit; }
-.btn:hover { transform: translate(-1px, -2px); box-shadow: 5px 6px 0 var(--ink); }
-.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
-.btn.primary { background: var(--honey); color: var(--ink); }
-.price { font-family: "Noto Serif TC", serif; font-weight: 700; }
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 90ms); }
-.reveal.in { opacity: 1; transform: none; }
-.rules { list-style: none; display: grid; gap: 8px; font-size: 14.5px; color: var(--muted); }
-.rules li { padding-left: 22px; position: relative; }
-.rules li::before { content: ""; position: absolute; left: 4px; top: 10px; width: 8px; height: 8px; border-radius: 50%; background: var(--honey); border: 1.5px solid var(--ink); }
-
-/* 封面 */
-.hero { padding: 50px 0 80px; background: radial-gradient(55% 70% at 78% 40%, var(--honey-soft), transparent 70%), radial-gradient(45% 55% at 15% 85%, var(--sage-soft), transparent 70%); overflow: hidden; }
-.hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
-.hero h1 { font-family: "Noto Serif TC", serif; font-size: clamp(32px, 4.6vw, 50px); line-height: 1.35; letter-spacing: .04em; margin: 14px 0 16px; }
-.hero h1 .nw { display: inline-block; }
-.hero h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--honey-soft) 62%); }
-.hero .lead { font-size: 17px; color: var(--muted); max-width: 520px; }
-.hero .cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
-.hero-art { position: relative; height: 560px; }
-.hero-art .paper { position: absolute; left: 0; top: 30px; width: 62%; height: auto; border-radius: 6px; box-shadow: 0 30px 60px -30px rgba(70,50,40,.5); transform: rotate(-5deg); }
-.phone { position: relative; width: 270px; height: 556px; border-radius: 40px; background: #26221f; padding: 8px; box-shadow: 0 40px 80px -40px rgba(70,50,40,.55); flex: none; }
-.phone .screen { width: 100%; height: 100%; border-radius: 33px; overflow: hidden; background: #fff; }
-.phone iframe { width: 375px; height: 750px; border: 0; transform: scale(.677); transform-origin: 0 0; display: block; }
-.phone::after { content: ""; position: absolute; top: 16px; left: 50%; width: 76px; height: 20px; translate: -50% 0; background: #26221f; border-radius: 999px; }
-.hero-art .phone { position: absolute; right: 0; top: 0; transform: rotate(4deg); }
-.hero-art .tag { position: absolute; background: var(--card); border: 2px solid var(--ink); border-radius: 999px; padding: 2px 14px; font-size: 14px; font-weight: 700; box-shadow: 3px 3px 0 var(--ink); z-index: 2; }
-@media (max-width: 900px) {
-  .hero .wrap { grid-template-columns: 1fr; }
-  .hero-art { height: 520px; max-width: 420px; width: 100%; margin: 0 auto; }
-  .hero-art .paper { width: 64%; }
-  .hero-art .phone { transform: rotate(4deg) scale(.86); transform-origin: top right; }
-}
-
-/* 價格總覽 */
-.menu { display: grid; grid-template-columns: 1.1fr auto 1fr auto 1fr; gap: 14px; align-items: stretch; margin-top: 40px; }
-.menu .card { background: var(--card); border: 2px solid var(--ink); border-radius: 26px; padding: 26px 22px; }
-.menu .card.base { background: var(--honey-soft); box-shadow: 6px 6px 0 var(--honey); }
-.menu .plus { align-self: center; font-size: 34px; font-weight: 700; color: var(--muted); }
-.menu small { display: block; color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: .14em; }
-.menu h3 { font-size: 21px; margin: 2px 0 4px; }
-.menu .price { font-size: 32px; line-height: 1.3; }
-.menu .price span { font-size: 14px; color: var(--muted); font-weight: 400; }
-.menu p { font-size: 14.5px; color: var(--muted); margin-top: 6px; }
-.extra { margin-top: 18px; text-align: center; font-size: 15px; }
-.extra b { background: var(--card); border: 1.5px dashed var(--line); border-radius: 999px; padding: 6px 16px; display: inline-block; }
-@media (max-width: 900px) { .menu { grid-template-columns: 1fr; } .menu .plus { justify-self: center; line-height: 1; } }
-
-/* 似顏繪 */
-.base-sec .grid { display: grid; grid-template-columns: 300px 1fr; gap: 50px; align-items: center; }
-.base-sec .pic img { width: 100%; }
-.base-sec .pic { background: var(--honey-soft); border-radius: 50% 50% 28px 28px; padding: 30px 30px 10px; border: 2px solid var(--ink); }
-@media (max-width: 760px) { .base-sec .grid { grid-template-columns: 1fr; gap: 26px; } .base-sec .pic { max-width: 260px; margin: 0 auto; } }
-
-/* 方案卡 */
-.plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 34px; }
-.plan { background: var(--card); border: 1.5px solid var(--line); border-radius: 24px; padding: 24px 22px; display: flex; flex-direction: column; }
-.plan .no { font-family: "Noto Serif TC", serif; font-size: 13px; color: var(--accent); letter-spacing: .2em; }
-.plan h3 { font-size: 19px; margin: 2px 0; }
-.plan .price { font-size: 28px; }
-.plan p { font-size: 14.5px; color: var(--muted); margin-top: 4px; flex: 1; }
-.plan.pick { border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--honey); }
-.plan .was { font-size: 16px; color: var(--muted); font-weight: 400; margin-right: 4px; }
-@media (max-width: 1000px) { .plans { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .plans { grid-template-columns: 1fr; } }
-
-/* 書約模板 */
-.sy { background: var(--paper2); }
-.sy .top { display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: center; }
-.sy .photo { width: 100%; max-width: 360px; justify-self: center; border-radius: 20px; box-shadow: 0 30px 60px -30px rgba(70,50,40,.5); }
-.gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
-.gallery figure { background: #fff; border-radius: 10px; padding: 8px; box-shadow: 0 10px 24px -16px rgba(60,40,30,.5); cursor: zoom-in; transition: transform .2s; }
-.gallery figure:hover { transform: translateY(-4px) rotate(-.6deg); }
-.gallery img { width: 100%; height: auto; border-radius: 4px; aspect-ratio: 1414 / 2000; object-fit: cover; }
-.gallery figcaption { font-size: 13px; text-align: center; padding-top: 6px; }
-.gallery figcaption b { color: var(--accent); margin-right: 4px; }
-.sy .rules { margin-top: 26px; }
-dialog.zoom { border: 0; padding: 0; background: transparent; max-width: min(92vw, 640px); margin: auto; }
-dialog.zoom::backdrop { background: rgba(30,25,22,.75); }
-dialog.zoom img { width: 100%; height: auto; max-height: 88vh; object-fit: contain; border-radius: 8px; }
-dialog.zoom button { position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; font-size: 20px; cursor: pointer; }
-@media (max-width: 860px) { .sy .top { grid-template-columns: 1fr; } .sy .photo { max-width: 280px; margin: 0 auto; } .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-
-/* 電子喜帖三風格 */
-.styles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; }
-.style { border-radius: 28px; padding: 22px 18px 24px; text-align: center; border: 2px solid var(--ink); display: grid; justify-items: center; gap: 12px; }
-.style.a { background: #fdf1d6; } .style.b { background: var(--pink-soft); } .style.c { background: var(--ice-soft); }
-.style .phone { width: 220px; height: 452px; border-radius: 34px; padding: 7px; }
-.style .phone .screen { border-radius: 28px; }
-.style .phone iframe { transform: scale(.549); }
-.style .phone::after { width: 62px; height: 16px; top: 13px; }
-.style h3 { font-size: 20px; }
-.style p { font-size: 14px; color: var(--muted); }
-.dots { display: flex; gap: 6px; justify-content: center; }
-.dots i { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,.15); }
-.style .btn { padding: 9px 18px; font-size: 14.5px; box-shadow: 3px 3px 0 var(--ink); }
-.web-rules { margin: 30px auto 0; max-width: 720px; }
-@media (max-width: 960px) { .styles { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; } }
-
-/* 估價＋詢價信 */
-.quote { background: var(--paper2); }
-.q-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 34px; }
-form.q { background: var(--card); border: 2px solid var(--ink); border-radius: 26px; padding: 26px; display: grid; gap: 22px; }
-.q fieldset { border: 0; display: grid; gap: 10px; min-width: 0; }
-.q legend { font-weight: 700; font-size: 16px; margin-bottom: 8px; display: flex; gap: 8px; align-items: center; }
-.q legend .stp { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--honey); color: var(--ink); font-size: 13px; }
-.opt { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border: 1.5px solid var(--line); border-radius: 14px; cursor: pointer; background: var(--paper); font-size: 15px; transition: border-color .2s, background .2s; }
-.opt:has(input:checked) { border-color: var(--ink); background: var(--honey-soft); }
-.opt input { accent-color: #a3445c; width: 18px; height: 18px; flex: none; }
-.opt .p { margin-left: auto; font-weight: 700; white-space: nowrap; font-size: 14.5px; }
-.opt.locked { cursor: default; }
-.sub-opts { display: grid; gap: 12px; padding: 12px 14px; border-left: 3px solid var(--honey); background: var(--paper); border-radius: 0 14px 14px 0; }
-.sub-opts[hidden] { display: none; }
-.field { display: grid; gap: 4px; font-size: 14.5px; min-width: 0; }
-.field label, .field > span { font-weight: 500; }
-.q input[type=text], .q input[type=email], .q input[type=date], .q select, .q textarea { width: 100%; font: inherit; font-size: 15px; padding: 10px 12px; border-radius: 12px; border: 1.5px solid var(--line); background: #fff; min-width: 0; }
-.q textarea { min-height: 70px; resize: vertical; }
-.q input:focus, .q select:focus, .q textarea:focus { outline: 2px solid var(--honey); outline-offset: 1px; }
-.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-@media (max-width: 480px) { .row2 { grid-template-columns: 1fr; } }
-.pills { display: flex; gap: 8px; flex-wrap: wrap; }
-.pills label { position: relative; }
-.pills input { position: absolute; opacity: 0; pointer-events: none; }
-.pills span { display: inline-block; padding: 7px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; cursor: pointer; font-size: 14px; font-weight: 400; }
-.pills input:checked + span { background: var(--honey); color: var(--ink); border-color: var(--ink); }
-.pills input:focus-visible + span { outline: 2px solid var(--honey); outline-offset: 2px; }
-.stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; }
-.stepper button { width: 36px; height: 36px; border: 0; background: none; font-size: 18px; cursor: pointer; color: var(--ink); }
-.stepper output { min-width: 26px; text-align: center; font-weight: 700; }
-.out { position: sticky; top: 16px; display: grid; gap: 16px; }
-.total { background: var(--dark); color: #fff; border-radius: 26px; padding: 22px 24px; }
-.total small { color: #d9cfc4; font-size: 13px; }
-.total .price { font-size: 40px; line-height: 1.2; display: block; }
-.total ul { list-style: none; margin-top: 10px; font-size: 14px; color: #e9e1d8; display: grid; gap: 4px; }
-.total li { display: flex; justify-content: space-between; gap: 10px; }
-.msg { background: var(--card); border: 2px solid var(--ink); border-radius: 26px; padding: 18px; }
-.msg textarea { width: 100%; min-height: 330px; font: 14px/1.7 "Noto Sans TC", sans-serif; border: 1.5px solid var(--line); border-radius: 14px; padding: 12px; background: var(--paper); resize: vertical; margin-top: 6px; }
-.msg .acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-.msg .acts .btn { flex: 1; padding: 11px 14px; font-size: 15px; }
-.note { font-size: 13px; color: var(--muted); }
-.copied { color: #3c8a5a; font-weight: 700; }
-@media (max-width: 900px) { .q-grid { grid-template-columns: 1fr; } .out { position: static; } }
-
-/* 流程 */
-.steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 40px; counter-reset: s; position: relative; }
-.steps::before { content: ""; position: absolute; top: 28px; left: 8%; right: 8%; border-top: 2px dashed var(--line); }
-.step { text-align: center; position: relative; }
-.step::before { counter-increment: s; content: counter(s); display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto 10px; border-radius: 50%; background: var(--card); border: 2px solid var(--ink); font-family: "Noto Serif TC", serif; font-weight: 700; font-size: 20px; position: relative; }
-.step b { display: block; font-size: 16px; }
-.step span { font-size: 13.5px; color: var(--muted); }
-@media (max-width: 820px) { .steps { grid-template-columns: 1fr; gap: 0; } .steps::before { top: 0; bottom: 0; left: 27px; right: auto; border-top: 0; border-left: 2px dashed var(--line); }
-  .step { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; text-align: left; padding-bottom: 18px; } .step::before { grid-row: span 2; margin: 0; } }
-
-.promise { max-width: 780px; margin: 44px auto 0; background: var(--card); border: 2px solid var(--ink); border-radius: 26px; padding: 24px 26px; }
-.promise h3 { font-size: 19px; margin-bottom: 10px; }
-
-/* FAQ */
-.faq { max-width: 780px; margin: 30px auto 0; }
-.faq details { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 4px 22px; margin-bottom: 12px; }
-.faq summary { cursor: pointer; font-weight: 700; padding: 14px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
-.faq summary::after { content: "+"; font-size: 22px; line-height: 1; color: var(--accent); transition: rotate .2s; }
-.faq details[open] summary::after { rotate: 45deg; }
-.faq details p { padding-bottom: 16px; color: var(--muted); }
-footer { border-top: 1px solid var(--line); padding: 26px 20px 40px; text-align: center; font-size: 13px; color: var(--muted); }
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
-.still .reveal { opacity: 1; transform: none; transition: none; } .still { scroll-behavior: auto; }
-</style>
 <meta name="spec-version" content="core-v1.9">
 </head>
 <body>
 
-<div class="topbar">
-  <div class="kh-brand-row">
-    <a class="kh-brand" href="https://wedding.knittinghiyori.com/" data-google-vignette="false" data-cta="brand_hub" data-cta-type="wedding"><img src="/icons/logo-knitting-120.webp" width="40" height="40" alt="">編織日和・似顏繪喜帖</a>
-    <nav class="nav" aria-label="頁面導覽"><a href="#price">價格</a><a href="#shoyaku">結婚書約</a><a href="#web">電子喜帖</a><a href="#quote">估價</a><a href="#faq">常見問題</a></nav>
+<header class="top">
+  <div class="wrap">
+    <a class="kh-brand" href="https://wedding.knittinghiyori.com/" data-google-vignette="false" data-cta="brand_hub" data-cta-type="wedding"><img src="/icons/logo-knitting-120.webp" width="40" height="40" alt="">編織日和<span class="site">・似顏繪喜帖</span></a>
+    <nav class="nav" aria-label="頁面導覽"><a href="#menu">價目表</a><a href="#cert">結婚書約</a><a href="#web">電子喜帖</a><a href="#faq">常見問題</a><a class="pill" href="#quote" data-cta="hero_quote" data-cta-type="wedding">估價 <span class="arr">→</span></a></nav>
   </div>
-</div>
+</header>
 
 <main>
-  <section class="hero">
-    <div class="wrap">
-      <div>
-        <span class="eyebrow it reveal">Illustrated Wedding</span>
-        <h1 class="reveal" style="--i:1"><span class="nw">把你們畫成<em>似顏繪</em>，</span><span class="nw">做成結婚書約</span><span class="nw">和電子喜帖</span></h1>
-        <p class="lead reveal" style="--i:2">先畫一張兩人的全身彩色似顏繪，再依需要加購結婚書約或網頁電子喜帖。同婚、非同婚都可以製作。</p>
-        <div class="cta reveal" style="--i:3"><a class="btn primary" href="#quote" data-cta="hero_quote" data-cta-type="wedding">馬上估價</a><a class="btn" href="#price" data-cta="hero_price" data-cta-type="wedding">看價格</a></div>
-      </div>
-      <div class="hero-art reveal" style="--i:2" aria-label="結婚書約與電子喜帖範例">
-        <img class="paper" src="assets/shoyaku/t6.webp" alt="印刷好的似顏繪結婚書約" width="900" height="1273">
-        <div class="phone"><div class="screen"><iframe src="a/?embed" title="電子喜帖範例" loading="lazy" tabindex="-1"></iframe></div></div>
-        <span class="tag hand" style="left:6%;bottom:40px;rotate:-4deg">結婚書約</span>
-        <span class="tag hand" style="right:20px;top:-8px;rotate:4deg">電子喜帖</span>
+  <section class="hero wrap" style="padding-top:28px">
+    <div class="l"><p class="big split" data-split>Drawn</p></div>
+    <div class="arch-wrap" style="position:relative">
+      <div class="arch rv" style="--i:2"><span class="sun"></span><img src="/assets/couple-kimono.webp" alt="雙人全身彩色似顏繪範例：和服新人" width="766" height="1500"></div>
+      <svg class="badge" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="circ" d="M66 66m-50 0a50 50 0 1 1 100 0a50 50 0 1 1 -100 0"/></defs><circle class="core" cx="66" cy="66" r="5"/><text><textPath href="#circ">Illustrated Wedding · 似顏繪喜帖 · Since 2026 ·</textPath></text></svg>
+    </div>
+    <div class="r"><p class="big split" data-split><em>in love</em></p></div>
+    <span class="vert">結婚書約・電子喜帖・似顏繪</span>
+    <div class="hero-copy">
+      <h1 class="rv" style="--i:3">把你們畫成<b>似顏繪</b>，<br>做成結婚書約和電子喜帖</h1>
+      <div class="meta rv" style="--i:4">
+        <p>先畫一張兩人的全身彩色似顏繪，再依需要加購結婚書約或網頁電子喜帖。同婚、非同婚都可以製作。</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="pill" href="#quote" data-cta="hero_quote" data-cta-type="wedding">馬上估價 <span class="arr">→</span></a><a class="pill ghost" href="#menu" data-cta="hero_price" data-cta-type="wedding">看價目表</a></div>
       </div>
     </div>
   </section>
 
-  <section id="price" style="padding-top:40px">
+  <div class="marquee" aria-hidden="true"><div class="track">
+    <span>Caricature<i>似顏繪</i>Marriage Certificate<i>結婚書約</i>Web Invitation<i>電子喜帖</i>For every love<i>同婚友善</i></span>
+    <span>Caricature<i>似顏繪</i>Marriage Certificate<i>結婚書約</i>Web Invitation<i>電子喜帖</i>For every love<i>同婚友善</i></span>
+  </div></div>
+
+  <section id="menu">
     <div class="wrap">
-      <div class="center reveal"><span class="eyebrow it">Price</span><h2>似顏繪喜帖價目表</h2><p class="sub">似顏繪是基本，書約和電子喜帖可以只選一個，也可以都加。</p></div>
+      <div class="chapter"><span class="no">01</span><div><span class="kicker">The Menu</span><h2 class="split" data-split>似顏繪喜帖價目表</h2><p>似顏繪是基本，書約和電子喜帖可以只選一個，也可以都加。價格都是新台幣。</p></div></div>
       <div class="menu">
-        <div class="card base reveal"><small>基本・必選</small><h3>雙人全身彩色似顏繪</h3><p class="price">NT$1,800</p><p>照你們喜歡的婚紗照畫，免費修改 2 次。</p></div>
-        <span class="plus" aria-hidden="true">＋</span>
-        <div class="card reveal" style="--i:1"><small>加購</small><h3>結婚書約</h3><p class="price">+NT$1,000 <span>起</span></p><p>NT$1,000 是書約的設計圖面費；PDF 電子檔、印刷 3 張可以加選。</p></div>
-        <span class="plus" aria-hidden="true">＋</span>
-        <div class="card reveal" style="--i:2"><small>加購</small><h3>網頁電子喜帖</h3><p class="price">+NT$3,000</p><p>三種風格任選，交付後可使用 6 個月。</p></div>
+        <div class="row rv"><span class="n">i.</span><h3>雙人全身彩色似顏繪<small>必選</small></h3><span class="p"><sup>NT$</sup>1,800</span><p>照你們最喜歡的婚紗照畫，免費修改 2 次。</p></div>
+        <div class="row rv"><span class="n">ii.</span><h3>加畫寵物或小孩</h3><span class="p"><sup>+NT$</sup>800</span><p>每位。毛小孩、小朋友一起入鏡。</p></div>
+        <div class="row rv"><span class="n">iii.</span><h3>結婚書約<small>4 種方案</small></h3><span class="p"><sup>+NT$</sup>1,000<span style="font-size:.4em"> 起</span></span><p>NT$1,000 是設計圖面費；PDF 電子檔、印刷 3 張可以加選。</p></div>
+        <div class="row rv"><span class="n">iv.</span><h3>網頁電子喜帖<small>3 種風格同價</small></h3><span class="p"><sup>+NT$</sup>3,000</span><p>交付後使用 6 個月，延長每月 +NT$300。</p></div>
       </div>
-      <p class="extra reveal"><b>加畫寵物或小孩　每位 +NT$800</b></p>
     </div>
   </section>
 
-  <section class="base-sec">
-    <div class="wrap grid">
-      <div class="pic reveal"><img src="assets/couple-kimono.webp" alt="雙人全身彩色似顏繪範例" width="766" height="1500"></div>
-      <div class="reveal" style="--i:1">
-        <span class="eyebrow it">Step 1</span>
-        <h2>先畫一張你們的似顏繪</h2>
-        <p class="sub">所有方案都從這張似顏繪開始。書約和電子喜帖都會用同一張圖，看起來是一整套。</p>
-        <ul class="rules" style="margin-top:18px">
-          <li>雙人全身、彩色，NT$1,800</li>
-          <li>會照著照片畫，請選一張你們最喜歡的婚紗照</li>
-          <li>免費修改 2 次</li>
-          <li>想把寵物或小孩一起畫進去，每位 +NT$800</li>
+  <section style="padding-top:0">
+    <div class="wrap duo">
+      <div class="frame rv"><img src="/assets/couple-kimono.webp" alt="和服新人全身彩色似顏繪" width="766" height="1500" loading="lazy"></div>
+      <div class="rv" style="--i:1">
+        <span class="kicker">Everything starts here</span>
+        <p class="quote-big" style="margin-top:14px">所有方案都從這張似顏繪開始。<br>書約和喜帖用同一張圖，<br>看起來是一整套。</p>
+        <ul class="ticks">
+          <li>雙人全身、彩色<b>NT$1,800</b></li>
+          <li>照片：一張最喜歡的婚紗照<b>Email 寄給我們</b></li>
+          <li>免費修改<b>2 次</b></li>
+          <li>加畫寵物或小孩<b>+NT$800 / 位</b></li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section class="sy" id="shoyaku">
+  <section class="cert" id="cert">
     <div class="wrap">
-      <div class="top">
-        <div class="reveal">
-          <span class="eyebrow it">Marriage Certificate</span>
-          <h2>結婚書約：4 種方案</h2>
-          <p class="sub">把似顏繪放進手繪邊框的書約裡，登記那天拿在手上拍照最好看。同婚、非同婚都有對應的法條版本。</p>
-        </div>
-        <img class="photo reveal" style="--i:1" src="assets/shoyaku/t6.webp" alt="似顏繪結婚書約印刷成品" loading="lazy" width="900" height="1273">
-      </div>
+      <div class="chapter"><span class="no">02</span><div><span class="kicker" style="color:var(--rose)">Marriage Certificate</span><h2 class="split" data-split>結婚書約：4 種方案</h2><p>把似顏繪放進手繪邊框的書約裡，登記那天拿在手上拍照最好看。同婚、非同婚都有對應的法條版本。</p></div></div>
       <div class="plans">
-        <article class="plan reveal"><span class="no">方案 1</span><h3>書約設計</h3><p class="price">+NT$1,000</p><p>純設計圖面費用：交付設計預覽，不含圖檔。需要可以印的檔案或實體，請選方案 2～4。</p></article>
-        <article class="plan reveal" style="--i:1"><span class="no">方案 2</span><h3>書約設計＋PDF 電子檔</h3><p class="price">+NT$1,600</p><p>設計＋可列印的 PDF 電子檔（PDF +NT$600），可以自己拿去印。</p></article>
-        <article class="plan reveal" style="--i:2"><span class="no">方案 3</span><h3>書約設計＋印刷 3 張</h3><p class="price">+NT$2,380</p><p>設計＋直接幫你印好 3 張（印刷 +NT$1,380），不用自己找印刷。</p></article>
-        <article class="plan pick reveal" style="--i:3"><span class="no">方案 4・組合價</span><h3>書約設計＋印刷 3 張＋PDF 電子檔</h3><p class="price"><s class="was">NT$2,980</s> +NT$2,880</p><p>印好的 3 張書約，再加一份 PDF 電子檔留存。</p></article>
+        <article class="plan rv"><span class="k">Plan 1</span><h3>書約設計</h3><span class="p latin">+1,000</span><p>純設計圖面費用：交付設計預覽，不含圖檔。</p><a href="#quote" data-pick-sy="1">選這個 →</a></article>
+        <article class="plan rv" style="--i:1"><span class="k">Plan 2</span><h3>書約設計＋PDF 電子檔</h3><span class="p latin">+1,600</span><p>可列印的 PDF（+600），自己拿去印。</p><a href="#quote" data-pick-sy="2">選這個 →</a></article>
+        <article class="plan rv" style="--i:2"><span class="k">Plan 3</span><h3>書約設計＋印刷 3 張</h3><span class="p latin">+2,380</span><p>直接幫你印好 3 張（印刷 +1,380）。</p><a href="#quote" data-pick-sy="3">選這個 →</a></article>
+        <article class="plan best rv" style="--i:3"><span class="k">Plan 4・組合價</span><h3>設計＋印刷 3 張＋PDF</h3><span class="p latin"><s>2,980</s>+2,880</span><p>印好的 3 張，再加一份 PDF 留存。</p><a href="#quote" data-pick-sy="4">選這個 →</a></article>
       </div>
-      <h3 class="reveal" style="margin-top:46px;font-size:20px">書約模板（點圖可以放大）</h3>
-      <div class="gallery" id="gallery"></div>
-      <ul class="rules reveal">
-        <li>書約是模板，不能改整體設計；最多可以換 3 個小圖示（例如咖啡杯、富士山、樂器）</li>
-        <li>簡單的小圖示不用加錢；寵物這類比較複雜的圖示要另外加費用。需求請寫在詢價信，寄到 theperfectmatchfilters@gmail.com</li>
-        <li>同婚、非同婚都可以製作，會用對應的法條文字</li>
-      </ul>
+      <div class="reel" id="reel" aria-label="書約模板，可以左右滑動，點圖放大"></div>
+      <div class="cert-notes">
+        <div class="rv"><b>模板設計</b>書約是模板，不能改整體設計。</div>
+        <div class="rv" style="--i:1"><b>最多換 3 個小圖示</b>簡單的不加錢；寵物這類複雜的圖示另外報價。</div>
+        <div class="rv" style="--i:2"><b>同婚・非同婚</b>都可以做，會用對應的法條文字。</div>
+        <div class="rv"><b>台灣格式・郵局掛號</b>目前書約只提供台灣格式；印刷版在台灣印製，用郵局掛號寄到你提供的台灣地址。</div>
+      </div>
     </div>
   </section>
 
   <section id="web">
     <div class="wrap">
-      <div class="center reveal"><span class="eyebrow it">Web Invitation</span><h2>電子喜帖：3 種風格</h2><p class="sub">手機一點就開的喜帖網頁：開場動畫、婚禮倒數、婚宴流程、Dress code、地圖、加入行事曆、出席回覆都在裡面。三種風格同價 +NT$3,000。</p></div>
-      <div class="styles">
-        <article class="style a reveal">
-          <div class="phone"><div class="screen"><iframe src="a/?embed" title="A 書約手繪風範例" loading="lazy" tabindex="-1"></iframe></div></div>
-          <h3>A・書約手繪風</h3><p>黑色線條小花和拱門，跟書約是同一套畫風</p>
-          <div class="dots" aria-label="配色：蜂蜜黃、糖果粉、薄荷綠、薰衣草"><i style="background:#f6c873"></i><i style="background:#f7b8c8"></i><i style="background:#9fd3bb"></i><i style="background:#cdbdf0"></i></div>
-          <a class="btn" href="a/" target="_blank" rel="noopener" data-cta="style_a" data-cta-type="wedding">看完整範例 ↗</a>
-        </article>
-        <article class="style b reveal" style="--i:1">
-          <div class="phone"><div class="screen"><iframe src="b/?embed" title="B 日系清新範例" loading="lazy" tabindex="-1"></iframe></div></div>
-          <h3>B・日系清新</h3><p>拉門開場、直書邀請文、印章，大量留白</p>
-          <div class="dots" aria-label="配色：霧玫瑰、鼠尾草、霧藍、奶茶"><i style="background:#f2d4cd"></i><i style="background:#dbe6cf"></i><i style="background:#d3e0eb"></i><i style="background:#eedcc6"></i></div>
-          <a class="btn" href="b/" target="_blank" rel="noopener" data-cta="style_b" data-cta-type="wedding">看完整範例 ↗</a>
-        </article>
-        <article class="style c reveal" style="--i:2">
-          <div class="phone"><div class="screen"><iframe src="c/?embed" title="C 雪景範例" loading="lazy" tabindex="-1"></iframe></div></div>
-          <h3>C・雪景</h3><p>雪山、松樹和慢慢飄落的雪，適合冬天的婚禮</p>
-          <div class="dots" aria-label="配色：雪白藍、銀灰、粉雪、冬夜"><i style="background:#cfdff0"></i><i style="background:#d3d6dc"></i><i style="background:#efd6df"></i><i style="background:#2a3647"></i></div>
-          <a class="btn" href="c/" target="_blank" rel="noopener" data-cta="style_c" data-cta-type="wedding">看完整範例 ↗</a>
-        </article>
+      <div class="chapter"><span class="no">03</span><div><span class="kicker">Web Invitation</span><h2 class="split" data-split>電子喜帖：3 種風格</h2><p>手機一點就開的喜帖網頁：開場動畫、婚禮倒數、婚宴流程、Dress code、地圖、加入行事曆、出席回覆都在裡面。</p></div></div>
+      <div class="phones">
+        <article class="ph rv"><div class="device"><div class="screen"><iframe data-src="/a/?embed" title="A 書約手繪風範例" loading="lazy" tabindex="-1"></iframe></div></div><h3><span>A</span>書約手繪風</h3><p>黑色線條小花和拱門，跟書約同一套畫風。</p><a href="/a/" target="_blank" rel="noopener" data-cta="style_a" data-cta-type="wedding">看完整範例 ↗</a></article>
+        <article class="ph rv" style="--i:1"><div class="device"><div class="screen"><iframe data-src="/b/?embed" title="B 日系清新範例" loading="lazy" tabindex="-1"></iframe></div></div><h3><span>B</span>日系清新</h3><p>拉門開場、直書邀請文、印章，大量留白。</p><a href="/b/" target="_blank" rel="noopener" data-cta="style_b" data-cta-type="wedding">看完整範例 ↗</a></article>
+        <article class="ph rv" style="--i:2"><div class="device"><div class="screen"><iframe data-src="/c/?embed" title="C 雪景範例" loading="lazy" tabindex="-1"></iframe></div></div><h3><span>C</span>雪景</h3><p>雪山、燈串和聖誕吊飾，適合冬天的婚禮。</p><a href="/c/" target="_blank" rel="noopener" data-cta="style_c" data-cta-type="wedding">看完整範例 ↗</a></article>
       </div>
-      <ul class="rules web-rules reveal">
-        <li>喜帖是模板，可以改文字和資訊內容（名字、日期、地點、流程、Dress code），不能改設計</li>
-        <li>交付後可以使用 6 個月，每延長 1 個月 +NT$300</li>
-        <li>每對新人一串不公開的網址，不讓搜尋引擎收錄，只有拿到連結的人看得到</li>
-        <li>出席回覆用新人自己的 Google 表單，賓客資料只在新人手上</li>
-      </ul>
+      <div class="web-foot rv">
+        <div><span class="kicker">One price</span><p class="p">+NT$3,000</p></div>
+        <ul><li>可以改文字和資訊內容（名字、日期、地點、流程、Dress code），不能改設計</li><li>交付後使用 6 個月，每延長 1 個月 +NT$300</li><li>每對新人一串不公開的網址，不讓搜尋引擎收錄</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="chapter"><span class="no">04</span><div><span class="kicker">How it works</span><h2 class="split" data-split>從詢價到交件</h2><p>一般製作約 4～5 週，建議在婚禮或登記前<b>至少 2 個月</b>詢價。</p></div></div>
+      <ol class="flow">
+        <li class="rv"><b>線上估價</b><span>勾選項目，產生詢價信</span></li>
+        <li class="rv" style="--i:1"><b>寄 Email＋照片</b><span>附上喜歡的婚紗照</span></li>
+        <li class="rv" style="--i:2"><b>收到最終報價</b><span>確認細節後提供匯款帳號</span></li>
+        <li class="rv" style="--i:3"><b>全額匯款</b><span>收到款項後開始製作</span></li>
+        <li class="rv" style="--i:4"><b>製作與交件</b><span>約 4～5 週，似顏繪免費修改 2 次</span></li>
+      </ol>
+      <div class="promise rv">
+        <div><h3>急件</h3><p>比 4 週短算急件：要看當下案量，排得進來才接，急件費是總價的 30%。</p></div>
+        <div><h3>作品公開說明</h3><p>完成的似顏繪、書約和喜帖設計，可能放在網站或社群作為作品展示；但不會公開每位客人的個人資料和你們提供的照片。</p></div>
+      </div>
     </div>
   </section>
 
   <section class="quote" id="quote">
     <div class="wrap">
-      <div class="center reveal"><span class="eyebrow it">Quote</span><h2>選好就能估價，順便幫你寫好詢價信</h2><p class="sub">勾選想要的項目，下方會算出初步價格，並產生一封詢價信。複製或直接開啟 Email 寄出，記得附上婚紗照。實際價格以我們回覆的報價為準。</p></div>
+      <div class="chapter"><span class="no">05</span><div><span class="kicker">Your quote</span><h2 class="split" data-split>選好就能估價</h2><p>勾選想要的項目，右邊會算出初步價格，並寫好一封詢價信。實際價格以我們回覆的報價為準。</p></div></div>
       <div class="q-grid">
         <form class="q" id="q" onsubmit="return false">
           <fieldset>
-            <legend><span class="stp">1</span>似顏繪</legend>
-            <label class="opt locked"><input type="checkbox" checked disabled> 雙人全身彩色似顏繪<span class="p">NT$1,800</span></label>
-            <div class="opt locked">加畫寵物或小孩（每位 +800）
-              <span class="p"><span class="stepper"><button type="button" data-step="-1" aria-label="減少一位">−</button><output id="pets">0</output><button type="button" data-step="1" aria-label="增加一位">＋</button></span></span>
-            </div>
+            <legend><i>i.</i>似顏繪</legend>
+            <label class="opt locked"><input type="checkbox" checked disabled> 雙人全身彩色似顏繪<span class="p">1,800</span></label>
+            <div class="opt locked">加畫寵物或小孩（每位 +800）<span class="p"><span class="stepper"><button type="button" data-step="-1" aria-label="減少一位">−</button><output id="pets">0</output><button type="button" data-step="1" aria-label="增加一位">＋</button></span></span></div>
           </fieldset>
-
           <fieldset>
-            <legend><span class="stp">2</span>結婚書約</legend>
+            <legend><i>ii.</i>結婚書約</legend>
             <label class="opt"><input type="radio" name="sy" value="" checked> 不需要</label>
             <label class="opt"><input type="radio" name="sy" value="1"> 方案 1：書約設計（設計圖面，不含圖檔）<span class="p">+1,000</span></label>
             <label class="opt"><input type="radio" name="sy" value="2"> 方案 2：書約設計＋PDF 電子檔<span class="p">+1,600</span></label>
             <label class="opt"><input type="radio" name="sy" value="3"> 方案 3：書約設計＋印刷 3 張<span class="p">+2,380</span></label>
-            <label class="opt"><input type="radio" name="sy" value="4"> 方案 4：書約設計＋印刷 3 張＋PDF（組合價）<span class="p">+2,880</span></label>
+            <label class="opt"><input type="radio" name="sy" value="4"> 方案 4：設計＋印刷 3 張＋PDF（組合價）<span class="p">+2,880</span></label>
             <div class="sub-opts" id="sy-more" hidden>
               <div class="field"><span>法條版本</span><div class="pills"><label><input type="radio" name="law" value="一般版（民法第 982 條）" checked><span>一般版</span></label><label><input type="radio" name="law" value="同婚版（釋字第 748 號施行法）"><span>同婚版</span></label></div></div>
               <div class="field"><label for="tpl">喜歡的模板</label><select id="tpl"></select></div>
               <div class="field"><label for="icons">想換的小圖示（最多 3 個，選填）</label><input type="text" id="icons" placeholder="例：咖啡杯、富士山、我們家的柯基"><span class="note">簡單的圖示不加錢；寵物這類複雜的圖示另外報價。</span></div>
             </div>
           </fieldset>
-
           <fieldset>
-            <legend><span class="stp">3</span>網頁電子喜帖</legend>
+            <legend><i>iii.</i>網頁電子喜帖</legend>
             <label class="opt"><input type="radio" name="web" value="" checked> 不需要</label>
             <label class="opt"><input type="radio" name="web" value="A"> A・書約手繪風<span class="p">+3,000</span></label>
             <label class="opt"><input type="radio" name="web" value="B"> B・日系清新<span class="p">+3,000</span></label>
             <label class="opt"><input type="radio" name="web" value="C"> C・雪景<span class="p">+3,000</span></label>
             <div class="sub-opts" id="web-more" hidden>
               <div class="field"><span>配色</span><div class="pills" id="colors"></div></div>
-              <div class="field"><span>使用期間（含 6 個月，延長每月 +300）</span>
-                <div class="pills"><label><input type="radio" name="ext" value="0" checked><span>6 個月</span></label><label><input type="radio" name="ext" value="3"><span>延長 3 個月</span></label><label><input type="radio" name="ext" value="6"><span>延長 6 個月</span></label></div></div>
+              <div class="field"><span>使用期間（含 6 個月，延長每月 +300）</span><div class="pills"><label><input type="radio" name="ext" value="0" checked><span>6 個月</span></label><label><input type="radio" name="ext" value="3"><span>延長 3 個月</span></label><label><input type="radio" name="ext" value="6"><span>延長 6 個月</span></label></div></div>
             </div>
           </fieldset>
-
           <fieldset>
-            <legend><span class="stp">4</span>你的資料</legend>
-            <div class="row2">
-              <div class="field"><label for="who">怎麼稱呼你</label><input type="text" id="who" maxlength="20" placeholder="例：小晴"></div>
-              <div class="field"><label for="mail">你的 Email</label><input type="email" id="mail" placeholder="回覆報價用"></div>
-            </div>
-            <div class="row2">
-              <div class="field"><label for="n1">新人名字 1</label><input type="text" id="n1" maxlength="20" placeholder="例：阿哲"></div>
-              <div class="field"><label for="n2">新人名字 2</label><input type="text" id="n2" maxlength="20" placeholder="例：小晴"></div>
-            </div>
+            <legend><i>iv.</i>你的資料</legend>
+            <div class="row2"><div class="field"><label for="who">怎麼稱呼你</label><input type="text" id="who" maxlength="20" placeholder="例：小晴"></div><div class="field"><label for="mail">你的 Email</label><input type="email" id="mail" placeholder="回覆報價用"></div></div>
+            <div class="row2"><div class="field"><label for="n1">新人名字 1</label><input type="text" id="n1" maxlength="20" placeholder="例：阿哲"></div><div class="field"><label for="n2">新人名字 2</label><input type="text" id="n2" maxlength="20" placeholder="例：小晴"></div></div>
             <p class="note">寫你們想印在電子喜帖、似顏繪上的名字（可以是暱稱）。書約上正式的個人資料，會在 Email 裡再跟你確認。</p>
-            <div class="row2">
-              <div class="field"><label for="wd">婚禮／登記日期</label><input type="date" id="wd"></div>
-              <div class="field"><label for="need">希望拿到成品的日期</label><input type="date" id="need"><span class="note" id="rush-note">一般製作約 4～5 週。</span></div>
-            </div>
+            <div class="row2"><div class="field"><label for="wd">婚禮／登記日期</label><input type="date" id="wd"></div><div class="field"><label for="need">希望拿到成品的日期</label><input type="date" id="need"><span class="note" id="rush-note">一般製作約 4～5 週。</span></div></div>
             <div class="field"><label for="memo">其他想說的（選填）</label><textarea id="memo" placeholder="例：想穿和服、希望畫進我們的貓"></textarea></div>
           </fieldset>
         </form>
-
-        <div class="out">
-          <div class="total" aria-live="polite">
-            <small>初步估價（實際以報價為準）</small>
-            <span class="price" id="sum">NT$1,800</span>
-            <ul id="lines"></ul>
-          </div>
-          <div class="msg">
-            <label for="msg" style="font-weight:700;font-size:15px">詢價信（自動產生，可以再修改）</label>
-            <textarea id="msg" spellcheck="false"></textarea>
-            <div class="acts">
-              <button class="btn" type="button" id="copy" data-cta="quote_copy" data-cta-type="other">複製訊息</button>
-              <a class="btn primary" id="mailto" data-cta="quote_email" data-cta-type="other">用 Email 寄出</a>
-            </div>
-            <p class="note" style="margin-top:10px">寄到 <b>theperfectmatchfilters@gmail.com</b>｜📎 記得附上婚紗照（或每人 2～3 張正面照＋1 張合照）<span class="copied" id="copied" hidden>　已複製！</span></p>
-          </div>
-        </div>
+        <aside class="receipt" aria-live="polite">
+          <small>Estimate・初步估價</small>
+          <span class="total" id="sum">NT$1,800</span>
+          <ul id="lines"></ul>
+          <label for="msg" style="display:block;margin-top:16px;font-weight:700;font-size:14.5px">詢價信（自動產生，可以再修改）</label>
+          <textarea id="msg" spellcheck="false"></textarea>
+          <div class="acts"><button class="pill ghost" type="button" id="copy" data-cta="quote_copy" data-cta-type="other">複製訊息</button><a class="pill" id="mailto" data-cta="quote_email" data-cta-type="other">用 Email 寄出 <span class="arr">→</span></a></div>
+          <p class="note" style="margin-top:12px">寄到 theperfectmatchfilters@gmail.com，記得附上婚紗照。<span class="copied" id="copied" hidden>　已複製！</span></p>
+        </aside>
       </div>
     </div>
   </section>
 
-  <section id="how">
+  <section id="faq">
     <div class="wrap">
-      <div class="center reveal"><span class="eyebrow it">How it works</span><h2>從詢價到交件，5 個步驟</h2><p class="sub">一般製作約 4～5 週，建議婚禮或登記前 2 個月來詢價。</p></div>
-      <div class="steps">
-        <div class="step reveal"><b>線上估價</b><span>勾選項目，產生詢價信</span></div>
-        <div class="step reveal" style="--i:1"><b>寄 Email＋照片</b><span>附上喜歡的婚紗照</span></div>
-        <div class="step reveal" style="--i:2"><b>收到最終報價</b><span>確認細節後提供匯款帳號</span></div>
-        <div class="step reveal" style="--i:3"><b>全額匯款</b><span>收到款項後開始製作</span></div>
-        <div class="step reveal" style="--i:4"><b>製作與交件</b><span>一般 4～5 週，似顏繪免費修改 2 次</span></div>
-      </div>
-      <div class="promise reveal">
-        <h3>製作時間與作品公開</h3>
-        <ul class="rules">
-          <li>一般製作約 4～5 週。比 4 週短算急件：要看當下案量，排得進來才接，急件費是總價的 30%</li>
-          <li>確認細節、回覆最終報價後提供匯款帳號，收到全額才開始製作</li>
-          <li>我們先說明：完成的似顏繪、書約和喜帖設計，可能放在網站或社群作為作品展示；但不會公開每位客人的個人資料和你們提供的照片</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq" style="background:var(--paper2)">
-    <div class="wrap">
-      <div class="center reveal"><span class="eyebrow it">FAQ</span><h2>常見問題</h2></div>
+      <div class="chapter"><span class="no">06</span><div><span class="kicker">FAQ</span><h2 class="split" data-split>常見問題</h2></div></div>
       <div class="faq">
         <details><summary>似顏繪喜帖包含哪些東西？價格怎麼算？</summary><p>基本是雙人全身彩色似顏繪 NT$1,800，必選。可以再加購結婚書約（NT$1,000 起，有 4 種方案）和網頁電子喜帖（NT$3,000，三種風格同價）。加畫寵物或小孩每位 +NT$800。</p></details>
         <details><summary>結婚書約 4 種方案差在哪裡？</summary><p>方案 1 是設計圖面費 NT$1,000，交付設計預覽，不含圖檔。方案 2 加可列印的 PDF 電子檔，共 NT$1,600。方案 3 加印刷 3 張，共 NT$2,380。方案 4 是設計＋印刷 3 張＋PDF 的組合價 NT$2,880（原價 NT$2,980）。</p></details>
+        <details><summary>結婚書約可以用在台灣以外的國家嗎？印好的書約怎麼寄？</summary><p>目前結婚書約只提供台灣格式。印刷版只在台灣印製，用郵局掛號寄到你提供的台灣地址。</p></details>
         <details><summary>要準備什麼照片？</summary><p>似顏繪會照著照片畫，請選一張你們最喜歡的婚紗照，或每人 2～3 張清楚的正面照加 1 張合照，用 Email 寄給我們。</p></details>
-        <details><summary>製作要多久？可以趕急件嗎？</summary><p>一般製作約 4～5 週。比 4 週短算急件，要看當下的案量，排得進來才會接單並告知；急件費是總價的 30%。</p></details>
+        <details><summary>製作要多久？可以趕急件嗎？</summary><p>一般製作約 4～5 週，建議在婚禮或登記前至少 2 個月詢價。比 4 週短算急件，要看當下的案量，排得進來才會接單並告知；急件費是總價的 30%。</p></details>
         <details><summary>怎麼付款？什麼時候開始製作？</summary><p>先用本頁的估價工具寄出詢價信到 theperfectmatchfilters@gmail.com。我們確認細節、回覆最終報價後提供匯款帳號，收到全額匯款才開始製作。</p></details>
         <details><summary>可以修改幾次？</summary><p>似顏繪可以免費修改 2 次。結婚書約和電子喜帖都是模板，不能改設計；書約最多可以換 3 個小圖示，電子喜帖可以改文字和資訊內容。</p></details>
         <details><summary>書約的小圖示可以換成我們的寵物嗎？</summary><p>可以。書約最多可以換 3 個小圖示。簡單的圖示不用加錢；寵物這類比較複雜的圖示要另外加費用，請把需求寫在詢價信裡。</p></details>
@@ -624,104 +639,139 @@ footer { border-top: 1px solid var(--line); padding: 26px 20px 40px; text-align:
   </section>
 </main>
 
-<dialog class="zoom" id="zoom"><img alt=""><button type="button" aria-label="關閉">✕</button></dialog>
-
-<footer>
-  <p>聯絡人與插畫：Zoe @KnittingHiyori｜Email：theperfectmatchfilters@gmail.com｜<a href="https://knittinghiyori.com/">編織日和</a></p>
-  <p class="kh-legal">本站使用 Cookie 進行流量分析（Google Analytics）。<a href="https://knittinghiyori.com/privacy-policy/">隱私權政策</a></p>
+<footer class="end">
+  <div class="wrap">
+    <p class="huge split" data-split>Let’s draw <span>your day.</span></p>
+    <p>聯絡人與插畫：Zoe @KnittingHiyori<br>只用 Email 聯絡：theperfectmatchfilters@gmail.com</p>
+    <a class="pill" href="#quote" data-cta="hero_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a>
+    <small><a href="https://knittinghiyori.com/">編織日和 Knitting Hiyori</a></small>
+    <p class="kh-legal" style="font-size:13px;color:#c9a7ae;margin:8px 0 0">本站使用 Cookie 進行流量分析（Google Analytics）。<a href="https://knittinghiyori.com/privacy-policy/">隱私權政策</a></p>
+  </div>
 </footer>
 
+<dialog class="zoom" id="zoom"><img alt=""><button type="button" aria-label="關閉">✕</button></dialog>
+
 <script>
-const $ = (id) => document.getElementById(id);
-if (new URLSearchParams(location.search).has("still")) document.documentElement.classList.add("still");   // 截圖用
+/* 估價＋詢價信 */
+(() => {
+  const $ = (id) => document.getElementById(id);
+  if (!$("q")) return;
+  const TPL = [
+    ["t1", "和服・富士山"], ["t2", "紅橘花朵"], ["t3", "黑白線稿"], ["t4", "柑橘果實"],
+    ["t5", "和服・淡藍"], ["t7", "貓咪"], ["t8", "音樂"], ["t9", "粉彩花園"],
+  ];
+  const SY = { "1": ["方案 1：書約設計（設計圖面，不含圖檔）", 1000], "2": ["方案 2：書約設計＋PDF 電子檔", 1600], "3": ["方案 3：書約設計＋印刷 3 張", 2380], "4": ["方案 4：書約設計＋印刷 3 張＋PDF（組合價）", 2880] };
+  const WEB = { A: "A・書約手繪風", B: "B・日系清新", C: "C・雪景" };
+  const COLORS = { A: ["蜂蜜黃", "糖果粉", "薄荷綠", "薰衣草"], B: ["霧玫瑰", "鼠尾草", "霧藍", "奶茶"], C: ["雪白藍", "銀灰", "粉雪", "冬夜"] };
+  const MAIL = "theperfectmatchfilters@gmail.com";
+  let pets = 0;
+  const money = (n) => "NT$" + n.toLocaleString("en-US");
+  const checked = (name) => (document.querySelector(`input[name=${name}]:checked`) || {}).value || "";
+  const v = (id) => ($(id) ? $(id).value.trim() : "");
+  const date = (id) => v(id) ? v(id).replaceAll("-", "/") : "（未填）";
 
-// 書約模板
-const TPL = [
-  ["t1", "和服・富士山"], ["t2", "紅橘花朵"], ["t3", "黑白線稿"], ["t4", "柑橘果實"],
-  ["t5", "和服・淡藍"], ["t7", "貓咪"], ["t8", "音樂"], ["t9", "粉彩花園"],
-];
-$("gallery").innerHTML = TPL.map(([f, name], i) =>
-  `<figure class="reveal" style="--i:${i % 4}" data-src="assets/shoyaku/${f}.webp"><img src="assets/shoyaku/${f}.webp" alt="結婚書約模板 ${i + 1}：${name}" loading="lazy" width="900" height="1273"><figcaption><b>No.${i + 1}</b>${name}</figcaption></figure>`).join("");
-$("tpl").innerHTML = `<option value="">還沒決定</option>` + TPL.map(([, name], i) => `<option value="No.${i + 1} ${name}">No.${i + 1} ${name}</option>`).join("");
-const zoom = $("zoom");
-$("gallery").addEventListener("click", (e) => {
-  const f = e.target.closest("figure"); if (!f) return;
-  const im = zoom.querySelector("img"); im.src = f.dataset.src; im.alt = f.querySelector("img").alt; zoom.showModal();
-});
-zoom.addEventListener("click", (e) => { if (e.target === zoom || e.target.tagName === "BUTTON") zoom.close(); });
+  $("tpl").innerHTML = `<option value="">還沒決定</option>` + TPL.map(([, name], i) => `<option value="No.${i + 1} ${name}">No.${i + 1} ${name}</option>`).join("");
+  const colorPills = (style) => {
+    $("colors").innerHTML = COLORS[style].map((c, i) => `<label><input type="radio" name="color" value="${c}"${i ? "" : " checked"}><span>${c}</span></label>`).join("");
+  };
 
-// 捲動出現
-const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .1 });
-document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  function update() {
+    const sy = checked("sy"), web = checked("web"), ext = +checked("ext") || 0;
+    $("sy-more").hidden = !sy; $("web-more").hidden = !web;
+    const items = [["雙人全身彩色似顏繪", 1800]];
+    if (pets) items.push([`加畫寵物或小孩 ×${pets}`, pets * 800]);
+    if (sy) items.push([`結婚書約 ${SY[sy][0]}`, SY[sy][1]]);
+    if (web) items.push([`電子喜帖 ${WEB[web]}`, 3000]);
+    if (web && ext) items.push([`喜帖延長 ${ext} 個月`, ext * 300]);
+    const days = v("need") ? Math.ceil((new Date(v("need")) - new Date()) / 864e5) : 99;
+    const rush = days < 28;
+    const base = items.reduce((a, [, p]) => a + p, 0);
+    if (rush) items.push(["急件費（總價 30%）", Math.round(base * .3)]);
+    const total = items.reduce((a, [, p]) => a + p, 0);
+    $("sum").textContent = money(total);
+    $("lines").innerHTML = items.map(([n, p]) => `<li><span>${n}</span><span>${money(p)}</span></li>`).join("");
+    $("rush-note").textContent = rush ? "不到 4 週算急件：要看當下案量，排得進來才接，急件費是總價的 30%。" : "一般製作約 4～5 週。";
 
-// 估價＋詢價信
-const SY = { "1": ["方案 1：書約設計（設計圖面，不含圖檔）", 1000], "2": ["方案 2：書約設計＋PDF 電子檔", 1600], "3": ["方案 3：書約設計＋印刷 3 張", 2380], "4": ["方案 4：書約設計＋印刷 3 張＋PDF（組合價）", 2880] };
-const WEB = { A: "A・書約手繪風", B: "B・日系清新", C: "C・雪景" };
-const COLORS = { A: ["蜂蜜黃", "糖果粉", "薄荷綠", "薰衣草"], B: ["霧玫瑰", "鼠尾草", "霧藍", "奶茶"], C: ["雪白藍", "銀灰", "粉雪", "冬夜"] };
-const MAIL = "theperfectmatchfilters@gmail.com";
-let pets = 0;
-const money = (n) => "NT$" + n.toLocaleString("en-US");
-const checked = (name) => (document.querySelector(`input[name=${name}]:checked`) || {}).value || "";
-const v = (id) => $(id).value.trim();
-const date = (id) => v(id) ? v(id).replaceAll("-", "/") : "（未填）";
-
-function colorPills(style) {
-  $("colors").innerHTML = COLORS[style].map((c, i) => `<label><input type="radio" name="color" value="${c}"${i ? "" : " checked"}><span>${c}</span></label>`).join("");
-}
-function update() {
-  const sy = checked("sy"), web = checked("web"), ext = +checked("ext") || 0;
-  $("sy-more").hidden = !sy; $("web-more").hidden = !web;
-  const items = [["雙人全身彩色似顏繪", 1800]];
-  if (pets) items.push([`加畫寵物或小孩 ×${pets}`, pets * 800]);
-  if (sy) items.push([`結婚書約 ${SY[sy][0]}`, SY[sy][1]]);
-  if (web) items.push([`電子喜帖 ${WEB[web]}`, 3000]);
-  if (web && ext) items.push([`喜帖延長 ${ext} 個月`, ext * 300]);
-  // 急件：希望拿到的日期離今天不到 4 週（28 天），加總價 30%（要先確認排得進來）
-  const days = v("need") ? Math.ceil((new Date(v("need")) - new Date()) / 864e5) : 99;
-  const rush = days < 28;
-  const base = items.reduce((a, [, p]) => a + p, 0);
-  if (rush) items.push(["急件費（總價 30%，要先確認排得進來）", Math.round(base * .3)]);
-  const total = items.reduce((a, [, p]) => a + p, 0);
-  $("rush-note").textContent = rush ? "不到 4 週算急件：要看當下案量，排得進來才接，急件費是總價的 30%。" : "一般製作約 4～5 週。";
-  $("sum").textContent = money(total);
-  $("lines").innerHTML = items.map(([n, p]) => `<li><span>${n}</span><span>${money(p)}</span></li>`).join("");
-
-  const L = ["【似顏繪喜帖 詢價單】", "",
-    `稱呼：${v("who") || "（未填）"}`, `Email：${v("mail") || "（未填）"}`,
-    `新人名字（印在喜帖上）：${v("n1") || "（未填）"}、${v("n2") || "（未填）"}`,
-    `婚禮／登記日期：${date("wd")}`, `希望拿到成品：${date("need")}${rush ? "（急件）" : ""}`, "",
-    "── 想要的項目 ──", `✔ 雙人全身彩色似顏繪　${money(1800)}`];
-  if (pets) L.push(`✔ 加畫寵物或小孩 ×${pets}　${money(pets * 800)}`);
-  if (sy) {
-    L.push(`✔ 結婚書約 ${SY[sy][0]}　${money(SY[sy][1])}`, `　・版本：${checked("law")}`, `　・模板：${$("tpl").value || "還沒決定"}`);
-    if (v("icons")) L.push(`　・想換的小圖示：${v("icons")}`);
-  } else L.push("✘ 結婚書約：不需要");
-  if (web) {
-    L.push(`✔ 電子喜帖 ${WEB[web]}　${money(3000)}`, `　・配色：${checked("color")}`);
-    L.push(ext ? `　・使用期間：6 個月＋延長 ${ext} 個月　${money(ext * 300)}` : "　・使用期間：6 個月");
-  } else L.push("✘ 電子喜帖：不需要");
-  if (rush) L.push(`✔ 急件費（總價 30%）　${money(Math.round(base * .3))}`);
-  L.push("", `初步估價：${money(total)}（實際以報價為準）`, "");
-  if (v("memo")) L.push(`其他：${v("memo")}`, "");
-  L.push("📎 附件：婚紗照 ___ 張", "", "我已了解：完成的設計可能放在網站或社群作為作品展示，但不會公開我們的個人資料和照片。");
-  const text = L.join("\n");
-  $("msg").value = text;
-  const subject = `【喜帖詢價】${v("who") || "新人"}｜${v("wd") ? date("wd") : "日期未定"}｜${money(total)}`;
-  $("mailto").href = `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
-}
-document.querySelectorAll("[data-step]").forEach((b) => b.addEventListener("click", () => {
-  pets = Math.max(0, Math.min(6, pets + +b.dataset.step)); $("pets").textContent = pets; update();
-}));
-document.querySelectorAll("input[name=web]").forEach((r) => r.addEventListener("change", () => { if (r.value) colorPills(r.value); }));
-$("q").addEventListener("input", update);
-$("q").addEventListener("change", update);
-$("copy").addEventListener("click", async () => {
-  try { await navigator.clipboard.writeText($("msg").value); }
-  catch { $("msg").select(); document.execCommand("copy"); }
-  $("copied").hidden = false; setTimeout(() => { $("copied").hidden = true; }, 1800);
-});
-colorPills("A");
-update();
+    const L = ["【似顏繪喜帖 詢價單】", "",
+      `稱呼：${v("who") || "（未填）"}`, `Email：${v("mail") || "（未填）"}`,
+      `新人名字（印在喜帖上）：${v("n1") || "（未填）"}、${v("n2") || "（未填）"}`,
+      `婚禮／登記日期：${date("wd")}`, `希望拿到成品：${date("need")}${rush ? "（急件）" : ""}`, "",
+      "── 想要的項目 ──", `✔ 雙人全身彩色似顏繪　${money(1800)}`];
+    if (pets) L.push(`✔ 加畫寵物或小孩 ×${pets}　${money(pets * 800)}`);
+    if (sy) {
+      L.push(`✔ 結婚書約 ${SY[sy][0]}　${money(SY[sy][1])}`, `　・版本：${checked("law")}`, `　・模板：${$("tpl").value || "還沒決定"}`);
+      if (v("icons")) L.push(`　・想換的小圖示：${v("icons")}`);
+    } else L.push("✘ 結婚書約：不需要");
+    if (web) {
+      L.push(`✔ 電子喜帖 ${WEB[web]}　${money(3000)}`, `　・配色：${checked("color")}`);
+      L.push(ext ? `　・使用期間：6 個月＋延長 ${ext} 個月　${money(ext * 300)}` : "　・使用期間：6 個月");
+    } else L.push("✘ 電子喜帖：不需要");
+    if (rush) L.push(`✔ 急件費（總價 30%）　${money(Math.round(base * .3))}`);
+    L.push("", `初步估價：${money(total)}（實際以報價為準）`, "");
+    if (v("memo")) L.push(`其他：${v("memo")}`, "");
+    L.push("📎 附件：婚紗照 ___ 張", "", "我已了解：完成的設計可能放在網站或社群作為作品展示，但不會公開我們的個人資料和照片。");
+    const text = L.join("\n");
+    $("msg").value = text;
+    const subject = `【喜帖詢價】${v("who") || "新人"}｜${v("wd") ? date("wd") : "日期未定"}｜${money(total)}`;
+    $("mailto").href = `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+  }
+  document.querySelectorAll("[data-step]").forEach((b) => b.addEventListener("click", () => {
+    pets = Math.max(0, Math.min(6, pets + +b.dataset.step)); $("pets").textContent = pets; update();
+  }));
+  document.querySelectorAll("input[name=web]").forEach((r) => r.addEventListener("change", () => { if (r.value) colorPills(r.value); }));
+  $("q").addEventListener("input", update);
+  $("q").addEventListener("change", update);
+  $("copy").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText($("msg").value); }
+    catch { $("msg").select(); document.execCommand("copy"); }
+    $("copied").hidden = false; setTimeout(() => { $("copied").hidden = true; }, 1800);
+  });
+  // 從價目區「選這個方案」直接帶入估價
+  document.querySelectorAll("[data-pick-sy]").forEach((a) => a.addEventListener("click", () => {
+    const r = document.querySelector(`input[name=sy][value="${a.dataset.pickSy}"]`); if (r) { r.checked = true; update(); }
+  }));
+  document.querySelectorAll("[data-pick-web]").forEach((a) => a.addEventListener("click", () => {
+    const r = document.querySelector(`input[name=web][value="${a.dataset.pickWeb}"]`); if (r) { r.checked = true; colorPills(r.value); update(); }
+  }));
+  colorPills("A");
+  update();
+  window.HY_TPL = TPL;
+})();
+</script>
+<script>
+(() => {
+  const still = new URLSearchParams(location.search).has("still");
+  if (still) document.documentElement.classList.add("still");
+  // 書約橫向畫廊
+  const reel = document.getElementById("reel");
+  reel.innerHTML = (window.HY_TPL || []).map(([f, name], i) => `<figure data-src="/assets/shoyaku/${f}.webp"><img src="/assets/shoyaku/${f}.webp" alt="結婚書約模板 ${i + 1}：${name}" loading="lazy" width="900" height="1273"><figcaption><span>${name}</span><b>No.${i + 1}</b></figcaption></figure>`).join("");
+  const zoom = document.getElementById("zoom");
+  reel.addEventListener("click", (e) => { const f = e.target.closest("figure"); if (!f) return; const im = zoom.querySelector("img"); im.src = f.dataset.src; im.alt = f.querySelector("img").alt; zoom.showModal(); });
+  zoom.addEventListener("click", (e) => { if (e.target === zoom || e.target.tagName === "BUTTON") zoom.close(); });
+  // 標題逐字出現
+  document.querySelectorAll("[data-split]").forEach((el) => {
+    const walk = (node) => [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (n.textContent.match(/[A-Za-z’'.,]+|\s+|./gu) || []).forEach((ch) => {
+          if (/^\s+$/.test(ch)) { frag.appendChild(document.createTextNode(" ")); return; }
+          const w = document.createElement("span"); w.className = "w"; const s = document.createElement("span"); s.textContent = ch; w.appendChild(s); frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else walk(n);
+    });
+    walk(el);
+    el.querySelectorAll(".w > span").forEach((s, i) => s.style.setProperty("--i", i));
+  });
+  // 進場
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll(".rv, [data-split]").forEach((el) => io.observe(el));
+  // 手機框裡的範例：依框的寬度縮放，捲到附近才載入
+  const fit = () => document.querySelectorAll(".device iframe").forEach((f) => { const w = f.parentElement.clientWidth; f.style.transform = `scale(${w / 375})`; f.style.height = `${f.parentElement.clientHeight / (w / 375)}px`; });
+  const lio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { const f = e.target; f.src = f.dataset.src; lio.unobserve(f); } }), { rootMargin: "300px" });
+  document.querySelectorAll(".device iframe").forEach((f) => lio.observe(f));
+  fit(); addEventListener("resize", fit);
+})();
 </script>
 <script>
 /* 點擊追蹤：有 data-cta 的連結與按鈕送 cta_click；追蹤壞掉不影響頁面 */
