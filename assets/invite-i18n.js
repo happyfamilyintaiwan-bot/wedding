@@ -152,6 +152,7 @@ window.HYI = (() => {
         ".v-copy { position: static !important; margin: 10px auto 0; text-align: center; max-width: 18em; }" +
         ".vert { text-align: center !important; max-width: 22em; }" +
         ".names b { letter-spacing: .06em !important; font-size: 26px !important; } .names { gap: 10px; }" +
+        "h1.names { font-size: clamp(28px, 9vw, 44px) !important; letter-spacing: .02em !important; }" +
         ".sh h2 { letter-spacing: .08em !important; } .sr h3, .tip h3, .st p { letter-spacing: .03em !important; }";
       document.head.appendChild(st);
     }
