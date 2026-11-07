@@ -6,6 +6,11 @@
 <title>似顏繪喜帖價目表｜新人似顏繪、結婚書約、電子喜帖客製｜編織日和</title>
 <meta name="description" content="似顏繪喜帖價目表：雙人全身彩色似顏繪 NT$1,800，結婚書約 4 種方案 NT$1,000 起（設計、PDF、印刷 3 張），網頁電子喜帖 NT$3,000 三種風格。同婚、非同婚都可以做，一般製作 4～5 週，線上估價產生詢價信。">
 <link rel="canonical" href="https://wedding.knittinghiyori.com/">
+<link rel="alternate" hreflang="zh-Hant" href="https://wedding.knittinghiyori.com/">
+<link rel="alternate" hreflang="en" href="https://wedding.knittinghiyori.com/en/">
+<link rel="alternate" hreflang="ja" href="https://wedding.knittinghiyori.com/ja/">
+<link rel="alternate" hreflang="es" href="https://wedding.knittinghiyori.com/es/">
+<link rel="alternate" hreflang="x-default" href="https://wedding.knittinghiyori.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="編織日和">
 <meta property="og:title" content="似顏繪喜帖價目表｜新人似顏繪、結婚書約、電子喜帖客製">
@@ -269,6 +274,11 @@ form.q { display: grid; gap: 34px; }
   .kicker { font-size: 14px; }
 }
 .kh-legal { margin-top: 10px; }
+.langs { display: flex; gap: 4px; font-size: 13px; }
+.nav .langs a { display: inline-block !important; text-decoration: none; padding: 4px 8px; border-radius: 999px; color: var(--muted); }
+.langs a[aria-current] { background: var(--blush); color: var(--wine); font-weight: 700; }
+@media (max-width: 760px) { .nav .langs a { padding: 4px 6px; } }
+@media (max-width: 420px) { .top .nav > .pill { display: none; } }
 .kh-legal a { color: inherit; }
 
 /* 進場動畫 */
@@ -348,7 +358,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     },
     {
      "@type": "Offer",
-     "name": "網頁電子喜帖（含 6 個月使用）",
+     "name": "網頁電子喜帖（含交付起 3 個月維護）",
      "price": "3000",
      "priceCurrency": "TWD"
     }
@@ -434,7 +444,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "name": "電子喜帖可以用多久？會被搜尋到嗎？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "交付後可以使用 6 個月，每延長 1 個月加 NT$300。每對新人的喜帖是一串只有你們知道的網址，不讓搜尋引擎收錄，只有拿到連結的人看得到。"
+      "text": "從交付當天起提供 3 個月的上線與維護，每延長 1 個月加 NT$600。每對新人的喜帖是一串只有你們知道的網址，不讓搜尋引擎收錄，只有拿到連結的人看得到。"
      }
     },
     {
@@ -457,7 +467,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
 <header class="top">
   <div class="wrap">
     <a class="kh-brand" href="https://wedding.knittinghiyori.com/" data-google-vignette="false" data-cta="brand_hub" data-cta-type="wedding"><img src="/icons/logo-knitting-120.webp" width="40" height="40" alt="">編織日和<span class="site">・似顏繪喜帖</span></a>
-    <nav class="nav" aria-label="頁面導覽"><a href="#menu">價目表</a><a href="#cert">結婚書約</a><a href="#web">電子喜帖</a><a href="#faq">常見問題</a><a class="pill" href="#quote" data-cta="hero_quote" data-cta-type="wedding">估價 <span class="arr">→</span></a></nav>
+    <nav class="nav" aria-label="頁面導覽"><a href="#menu">價目表</a><a href="#cert">結婚書約</a><a href="#web">電子喜帖</a><a href="#faq">常見問題</a><span class="langs"><a href="/" hreflang="zh-Hant" aria-current="page" data-cta="lang_switch" data-cta-type="wedding">中文</a><a href="/en/" hreflang="en" data-cta="lang_switch" data-cta-type="wedding">EN</a><a href="/ja/" hreflang="ja" data-cta="lang_switch" data-cta-type="wedding">日本語</a><a href="/es/" hreflang="es" data-cta="lang_switch" data-cta-type="wedding">ES</a></span><a class="pill" href="#quote" data-cta="hero_quote" data-cta-type="wedding">估價 <span class="arr">→</span></a></nav>
   </div>
 </header>
 
@@ -491,7 +501,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
         <div class="row rv"><span class="n">i.</span><h3>雙人全身彩色似顏繪<small>必選</small></h3><span class="p"><sup>NT$</sup>1,800</span><p>照你們最喜歡的婚紗照畫，免費修改 2 次。</p></div>
         <div class="row rv"><span class="n">ii.</span><h3>加畫寵物或小孩</h3><span class="p"><sup>+NT$</sup>800</span><p>每位。毛小孩、小朋友一起入鏡。</p></div>
         <div class="row rv"><span class="n">iii.</span><h3>結婚書約<small>4 種方案</small></h3><span class="p"><sup>+NT$</sup>1,000<span style="font-size:.4em"> 起</span></span><p>NT$1,000 是設計圖面費；PDF 電子檔、印刷 3 張可以加選。</p></div>
-        <div class="row rv"><span class="n">iv.</span><h3>網頁電子喜帖<small>3 種風格同價</small></h3><span class="p"><sup>+NT$</sup>3,000</span><p>交付後使用 6 個月，延長每月 +NT$300。</p></div>
+        <div class="row rv"><span class="n">iv.</span><h3>網頁電子喜帖<small>3 種風格同價</small></h3><span class="p"><sup>+NT$</sup>3,000</span><p>從交付當天起維護 3 個月，延長每月 +NT$600。</p></div>
       </div>
     </div>
   </section>
@@ -541,7 +551,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
       </div>
       <div class="web-foot rv">
         <div><span class="kicker">One price</span><p class="p">+NT$3,000</p></div>
-        <ul><li>可以改文字和資訊內容（名字、日期、地點、流程、Dress code），不能改設計</li><li>交付後使用 6 個月，每延長 1 個月 +NT$300</li><li>每對新人一串不公開的網址，不讓搜尋引擎收錄</li></ul>
+        <ul><li>可以改文字和資訊內容（名字、日期、地點、流程、Dress code），不能改設計</li><li>從交付當天起提供 3 個月的上線與維護，每延長 1 個月 +NT$600</li><li>每對新人一串不公開的網址，不讓搜尋引擎收錄</li></ul>
       </div>
     </div>
   </section>
@@ -594,7 +604,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
             <label class="opt"><input type="radio" name="web" value="C"> C・雪景<span class="p">+3,000</span></label>
             <div class="sub-opts" id="web-more" hidden>
               <div class="field"><span>配色</span><div class="pills" id="colors"></div></div>
-              <div class="field"><span>使用期間（含 6 個月，延長每月 +300）</span><div class="pills"><label><input type="radio" name="ext" value="0" checked><span>6 個月</span></label><label><input type="radio" name="ext" value="3"><span>延長 3 個月</span></label><label><input type="radio" name="ext" value="6"><span>延長 6 個月</span></label></div></div>
+              <div class="field"><span>使用期間（交付起含 3 個月維護，延長每月 +600）</span><div class="pills"><label><input type="radio" name="ext" value="0" checked><span>3 個月</span></label><label><input type="radio" name="ext" value="1"><span>延長 1 個月</span></label><label><input type="radio" name="ext" value="3"><span>延長 3 個月</span></label></div></div>
             </div>
           </fieldset>
           <fieldset>
@@ -632,7 +642,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
         <details><summary>可以修改幾次？</summary><p>似顏繪可以免費修改 2 次。結婚書約和電子喜帖都是模板，不能改設計；書約最多可以換 3 個小圖示，電子喜帖可以改文字和資訊內容。</p></details>
         <details><summary>書約的小圖示可以換成我們的寵物嗎？</summary><p>可以。書約最多可以換 3 個小圖示。簡單的圖示不用加錢；寵物這類比較複雜的圖示要另外加費用，請把需求寫在詢價信裡。</p></details>
         <details><summary>同婚可以做嗎？</summary><p>可以。同婚、非同婚都可以製作，結婚書約會用對應的法條版本。</p></details>
-        <details><summary>電子喜帖可以用多久？會被搜尋到嗎？</summary><p>交付後可以使用 6 個月，每延長 1 個月加 NT$300。每對新人的喜帖是一串只有你們知道的網址，不讓搜尋引擎收錄，只有拿到連結的人看得到。</p></details>
+        <details><summary>電子喜帖可以用多久？會被搜尋到嗎？</summary><p>從交付當天起提供 3 個月的上線與維護，每延長 1 個月加 NT$600。每對新人的喜帖是一串只有你們知道的網址，不讓搜尋引擎收錄，只有拿到連結的人看得到。</p></details>
         <details><summary>你們會公開我們的作品嗎？</summary><p>我們先說明：完成的似顏繪、結婚書約和電子喜帖設計，可能放在網站或社群作為作品展示；但不會公開每位客人的個人資料（例如全名、地址、婚宴資訊）和你們提供的照片。</p></details>
       </div>
     </div>
@@ -682,7 +692,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     if (pets) items.push([`加畫寵物或小孩 ×${pets}`, pets * 800]);
     if (sy) items.push([`結婚書約 ${SY[sy][0]}`, SY[sy][1]]);
     if (web) items.push([`電子喜帖 ${WEB[web]}`, 3000]);
-    if (web && ext) items.push([`喜帖延長 ${ext} 個月`, ext * 300]);
+    if (web && ext) items.push([`喜帖延長 ${ext} 個月`, ext * 600]);
     const days = v("need") ? Math.ceil((new Date(v("need")) - new Date()) / 864e5) : 99;
     const rush = days < 28;
     const base = items.reduce((a, [, p]) => a + p, 0);
@@ -704,7 +714,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     } else L.push("✘ 結婚書約：不需要");
     if (web) {
       L.push(`✔ 電子喜帖 ${WEB[web]}　${money(3000)}`, `　・配色：${checked("color")}`);
-      L.push(ext ? `　・使用期間：6 個月＋延長 ${ext} 個月　${money(ext * 300)}` : "　・使用期間：6 個月");
+      L.push(ext ? `　・使用期間：交付起 3 個月＋延長 ${ext} 個月　${money(ext * 600)}` : "　・使用期間：交付起 3 個月");
     } else L.push("✘ 電子喜帖：不需要");
     if (rush) L.push(`✔ 急件費（總價 30%）　${money(Math.round(base * .3))}`);
     L.push("", `初步估價：${money(total)}（實際以報價為準）`, "");
