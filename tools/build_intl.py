@@ -5,6 +5,7 @@
 """
 import json, os, re, sys
 from intl_strings import S, PRICES, MAIL
+import folio
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIVE = "--live" in sys.argv
@@ -181,7 +182,7 @@ def build(lang):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?{t['fonts']}&display=swap" rel="stylesheet">
-{STYLE}{EXTRA_CSS.replace('SERIF', t['serif']).replace('SANS', t['sans'])}
+{STYLE}{folio.CSS}{EXTRA_CSS.replace('SERIF', t['serif']).replace('SANS', t['sans'])}
 <!-- wedding 子網域：不放 Travelpayouts、不放 Google 廣告（core §1） -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQZHTYTRMQ"></script>
 <script>
@@ -245,7 +246,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{{cookie_doma
     </div>
   </section>
 
-  <section id="web" style="background:var(--blush)">
+{folio.section(lang)}  <section id="web" style="background:var(--blush)">
     <div class="wrap">
       <div class="chapter"><span class="no">02</span><div><span class="kicker">{t['web_kicker']}</span><h2 class="split" data-split>{t['web_h2']}</h2><p>{t['web_p']}</p></div></div>
       <div class="phones">
