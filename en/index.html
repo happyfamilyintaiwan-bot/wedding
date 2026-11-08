@@ -291,6 +291,19 @@ form.q { display: grid; gap: 34px; }
 .still .rv, .still .split .w > span { opacity: 1; transform: none; transition: none; }
 </style>
 <style>
+.folio-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.folio-grid figure { margin: 0; background: #fff; padding: 10px 10px 12px; border-radius: 10px; box-shadow: 0 24px 40px -28px rgba(90, 34, 50, .45); cursor: zoom-in; transition: transform .5s cubic-bezier(.2,.7,.1,1); }
+.folio-grid figure:nth-child(odd) { transform: rotate(-1deg); } .folio-grid figure:nth-child(even) { transform: rotate(1deg) translateY(14px); }
+.folio-grid figure:hover { transform: rotate(0) translateY(-6px); }
+.folio-grid img { width: 100%; height: auto; border-radius: 4px; }
+.folio-grid figcaption { font-size: 14px; color: var(--muted); padding-top: 8px; text-align: center; line-height: 1.5; }
+dialog.folio-zoom { border: 0; padding: 0; background: transparent; max-width: min(92vw, 640px); margin: auto; }
+dialog.folio-zoom::backdrop { background: rgba(40, 12, 20, .82); }
+dialog.folio-zoom img { max-height: 88vh; width: auto; max-width: 100%; margin: auto; border-radius: 6px; display: block; }
+dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fff; font-size: 18px; cursor: pointer; }
+@media (max-width: 860px) { .folio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } }
+</style>
+<style>
 :root { --serif: "Bodoni Moda", serif; --sans: "Inter", system-ui, sans-serif; }
 .langs { display: flex; gap: 4px; font-size: 13px; }
 .nav .langs a { display: inline-block !important; }
@@ -510,6 +523,26 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     </div>
   </section>
 
+
+  <section id="portfolio" style="padding-top:0">
+    <div class="wrap">
+      <div class="chapter"><span class="no">✦</span><div><span class="kicker">Portfolio</span><h2>Couple portraits we’ve drawn</h2><p>Wedding gowns, kimono, Chinese wedding attire, and pets too. Shared with each couple’s permission.</p></div></div>
+      <div class="folio-grid" id="folio">
+        <figure class="rv" style="--i:0" data-src="/assets/portfolio/couple-portrait-western-wedding-dress-lift.webp"><img src="/assets/portfolio/couple-portrait-western-wedding-dress-lift.webp" alt="Hand-drawn couple portrait: groom lifting the bride in her wedding dress" width="607" height="808" loading="lazy"><figcaption>Wedding dress, the lift</figcaption></figure>
+        <figure class="rv" style="--i:1" data-src="/assets/portfolio/couple-portrait-kimono-furisode-wedding.webp"><img src="/assets/portfolio/couple-portrait-kimono-furisode-wedding.webp" alt="Hand-drawn couple portrait: couple in kimono and a red furisode sitting side by side" width="800" height="800" loading="lazy"><figcaption>Kimono, side by side</figcaption></figure>
+        <figure class="rv" style="--i:2" data-src="/assets/portfolio/couple-portrait-wedding-dress-cats-balloons.webp"><img src="/assets/portfolio/couple-portrait-wedding-dress-cats-balloons.webp" alt="Hand-drawn couple portrait: bride and groom with two cats and balloons" width="800" height="800" loading="lazy"><figcaption>Wedding dress with two cats (pet add-on)</figcaption></figure>
+        <figure class="rv" style="--i:3" data-src="/assets/portfolio/couple-portrait-chinese-wedding-dress-dog.webp"><img src="/assets/portfolio/couple-portrait-chinese-wedding-dress-dog.webp" alt="Hand-drawn couple portrait: couple in Chinese wedding attire with a German Shepherd" width="757" height="1008" loading="lazy"><figcaption>Chinese wedding attire with their dog (pet add-on)</figcaption></figure>
+      </div>
+    </div>
+  </section>
+<dialog class="folio-zoom" id="folio-zoom"><img alt=""><button type="button" aria-label="Close">✕</button></dialog>
+<script>
+(() => { try {
+  const z = document.getElementById("folio-zoom"), g = document.getElementById("folio");
+  g.addEventListener("click", (e) => { const f = e.target.closest("figure"); if (!f) return; const im = z.querySelector("img"); im.src = f.dataset.src; im.alt = f.querySelector("img").alt; z.showModal(); });
+  z.addEventListener("click", (e) => { if (e.target === z || e.target.tagName === "BUTTON") z.close(); });
+} catch (err) {} })();
+</script>
   <section id="web" style="background:var(--blush)">
     <div class="wrap">
       <div class="chapter"><span class="no">02</span><div><span class="kicker">Web Invitation</span><h2 class="split" data-split>Three invitation styles</h2><p>A wedding website your guests open on their phone: opening animation, countdown, schedule, dress code, map, add-to-calendar and RSVP.</p></div></div>
