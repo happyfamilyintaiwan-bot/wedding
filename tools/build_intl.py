@@ -65,7 +65,7 @@ JS = r"""
   function update() {
     const pkg = pick("pkg");
     $("style-more").hidden = pkg !== "bundle";
-    const items = [[pkg === "bundle" ? T.ln_bundle : T.ln_portrait, pkg === "bundle" ? P.bundle_launch : P.portrait]];
+    const items = [[pkg === "bundle" ? T.ln_bundle : T.ln_portrait, pkg === "bundle" ? P.bundle : P.portrait]];
     if (pets) items.push([`${T.ln_pet} ×${pets}`, pets * P.pet]);
     if (pkg === "bundle" && months) items.push([`${T.ln_month} ×${months}`, months * P.month]);
     const days = val("need") ? Math.ceil((new Date(val("need")) - new Date()) / 864e5) : 99;
@@ -137,7 +137,7 @@ def build(lang):
         {"@type": "Service", "name": t["og_title"], "description": t["desc"], "url": url, "areaServed": "Worldwide",
          "provider": {"@type": "Organization", "name": "編織日和 Knitting Hiyori", "url": "https://knittinghiyori.com/", "email": MAIL},
          "offers": [
-             {"@type": "Offer", "name": strip_tags(t["rows"][0][1]), "price": str(PRICES["bundle_launch"]), "priceCurrency": "USD"},
+             {"@type": "Offer", "name": strip_tags(t["rows"][0][1]), "price": str(PRICES["bundle"]), "priceCurrency": "USD"},
              {"@type": "Offer", "name": strip_tags(t["rows"][1][1]), "price": str(PRICES["portrait"]), "priceCurrency": "USD"},
              {"@type": "Offer", "name": strip_tags(t["rows"][2][1]), "price": str(PRICES["pet"]), "priceCurrency": "USD"}]},
         {"@type": "FAQPage", "mainEntity": faq_ld}]}
@@ -252,7 +252,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{{cookie_doma
 {phones}
       </div>
       <div class="web-foot rv" style="margin-top:40px">
-        <div><span class="kicker">{t['web_price_k']}</span><p class="p">US${PRICES['bundle_launch']}</p></div>
+        <div><span class="kicker">{t['web_price_k']}</span><p class="p">US${PRICES['bundle']}</p></div>
         <ul>{''.join(f'<li>{r}</li>' for r in t['web_rules'])}</ul>
       </div>
     </div>
@@ -286,7 +286,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{{cookie_doma
         <form class="q" id="q" onsubmit="return false">
           <fieldset>
             <legend><i>i.</i>{t['q_pkg']}</legend>
-            <label class="opt"><input type="radio" name="pkg" value="bundle" checked> {t['q_bundle']}<span class="p">US${PRICES['bundle_launch']}</span></label>
+            <label class="opt"><input type="radio" name="pkg" value="bundle" checked> {t['q_bundle']}<span class="p">US${PRICES['bundle']}</span></label>
             <label class="opt"><input type="radio" name="pkg" value="portrait"> {t['q_portrait']}<span class="p">US${PRICES['portrait']}</span></label>
             <div class="opt locked">{t['q_pets']}<span class="p"><span class="stepper"><button type="button" data-k="pets" data-step="-1" aria-label="−">−</button><output id="pets">0</output><button type="button" data-k="pets" data-step="1" aria-label="+">＋</button></span></span></div>
             <div class="sub-opts" id="style-more">
@@ -305,7 +305,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{{cookie_doma
         </form>
         <aside class="receipt" aria-live="polite">
           <small>{t['est']}</small>
-          <span class="total" id="sum">US${PRICES['bundle_launch']}</span>
+          <span class="total" id="sum">US${PRICES['bundle']}</span>
           <ul id="lines"></ul>
           <label for="msg" style="display:block;margin-top:16px;font-weight:700;font-size:14.5px">{t['msg_label']}</label>
           <textarea id="msg" spellcheck="false"></textarea>
