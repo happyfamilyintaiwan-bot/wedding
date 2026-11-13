@@ -186,6 +186,8 @@ section { position: relative; padding: 72px 30px; }
 .thanks .it { font-size: 30px; color: var(--accent); }
 .thanks .big { font-size: 17px; letter-spacing: .3em; margin-top: 6px; }
 .end-art { display: block; width: 100%; height: auto; margin-top: 18px; overflow: visible; }
+footer a.credit { color: inherit; text-decoration: none; }
+.tr-link { color: var(--accent); white-space: nowrap; }
 footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: var(--muted); letter-spacing: .3em; }
 
 #petals { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
@@ -321,7 +323,7 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
     <p class="big fade" style="--i:1" data-i18n="thanks_b">謝謝你　成為我們故事的一部分</p>
     <svg class="end-art" id="end-art" viewBox="0 0 400 260" aria-hidden="true"></svg>
   </section>
-  <footer class="cg">Illustration by Zoe @KnittingHiyori</footer>
+  <footer class="cg"><a class="credit" href="https://wedding.knittinghiyori.com/" target="_blank" rel="noopener">Illustration by Zoe @KnittingHiyori</a></footer>
 </main>
 
 <canvas id="petals" aria-hidden="true"></canvas>
@@ -376,6 +378,8 @@ const WEDDING = {
   venue: "（範例）婚宴會館 3F 花園廳",
   address: "台北市○○區○○路 100 號",
   mapQuery: "台北市政府",
+  mapUrl: "",              // 有 Google 地圖分享連結就貼這裡（優先於 mapQuery）
+  hide: [],                // 不需要的段落：story／dress／tips／parents／schedule
   transport: [
     { icon: "train", text: "捷運○○站 2 號出口，步行 5 分鐘" },
     { icon: "car",   text: "開車導航「○○婚宴會館」" },
@@ -532,11 +536,11 @@ $("dress-name").textContent = dc.name; $("dress-text").textContent = dc.text; $(
 $("dress").innerHTML = dc.colors.map((c) =>
   `<div class="dz"><svg viewBox="0 0 72 80" aria-hidden="true">${DRESS[c.type === "shirt" ? "shirt" : "dress"](c.hex)}</svg>${esc(c.name)}<small>${esc(c.hex.toUpperCase())}</small></div>`).join("");
 $("venue-name").textContent = WEDDING.venue; $("venue-addr").textContent = WEDDING.address;
-$("trans").innerHTML = WEDDING.transport.map((t, i) => `<div class="tr fade" style="--i:${i + 2}">${icon(t.icon)}<span>${esc(t.text)}</span></div>`).join("");
+$("trans").innerHTML = WEDDING.transport.map((t, i) => `<div class="tr fade" style="--i:${i + 2}">${icon(t.icon)}<span>${esc(t.text)}${t.link ? ` <a class="tr-link" href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.linkText || "↗")}</a>` : ""}</span></div>`).join("");
 const place = `${WEDDING.venue} ${WEDDING.address}`;
 const utc = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 const gcal = () => "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(title()) + "&dates=" + utc(start) + "/" + utc(end) + "&location=" + encodeURIComponent(place);
-$("map-btn").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(WEDDING.mapQuery);
+$("map-btn").href = (WEDDING.mapUrl || "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(WEDDING.mapQuery));
 $("gcal-btn").href = gcal();
 $("ics-btn").addEventListener("click", () => {
   const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//wedding-invite//TW", "BEGIN:VEVENT", "UID:" + utc(start) + "@wedding-invite", "DTSTAMP:" + utc(new Date()),
@@ -546,6 +550,8 @@ $("ics-btn").addEventListener("click", () => {
 $("rsvp-deadline").textContent = WEDDING.rsvpDeadline.replaceAll("-", " . ");
 $("rsvp-btn").href = WEDDING.rsvpUrl;
 HYI.renderContacts(WEDDING, LANG, $("contact"));
+
+HYI.applyLayout(WEDDING);   // 內容填好後才拿掉不需要的段落
 
 /* ---------- 插畫 ---------- */
 // 封面：大片水彩暈染＋不對稱花枝（日式留白）＋全身似顏繪

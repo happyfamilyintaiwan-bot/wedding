@@ -190,6 +190,16 @@ window.HYI = (() => {
     }
   }
 
+  // 版面：WEDDING.hide 可以拿掉不需要的段落（story／dress／tips／parents／schedule），
+  // 拿掉後 A 的色帶重新交錯、B／C 的段落編號重新排
+  const HIDE = { story: "story", dress: "dress-sec", tips: "tips-sec", parents: "parents", schedule: "schedule" };
+  function applyLayout(W) {
+    (W.hide || []).forEach((k) => { const el = document.getElementById(HIDE[k] || k); if (el) el.remove(); });
+    const secs = [...document.querySelectorAll("section[data-r]")].filter((s) => !["hero", "invite", "thanks"].includes(s.id));
+    if (secs.some((s) => s.classList.contains("band"))) secs.forEach((s, i) => s.classList.toggle("band", i % 2 === 0));
+    document.querySelectorAll(".sh .no").forEach((n, i) => { n.textContent = `— ${String(i + 1).padStart(2, "0")} —`; });
+  }
+
   const themeName = (lang, k, zh) => ((SAMPLE[lang] || {}).themes || {})[k] || zh;
-  return { UI, SAMPLE, pick, applySample, applyStatic, themeName, renderContacts };
+  return { UI, SAMPLE, pick, applySample, applyStatic, applyLayout, themeName, renderContacts };
 })();
