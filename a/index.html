@@ -461,6 +461,7 @@ const WEDDING = {
   mapUrl: "",              // 有 Google 地圖分享連結就貼這裡（優先於 mapQuery）
   hide: [],                // 不需要的段落：story／dress／tips／parents／schedule
   heroBox: null,           // 似顏繪比較寬時設 [72, 186, 256, 392] 放大
+  endBox: null,            // 結尾的似顏繪 [x, y, 寬, 高]；比較寬的圖可設 [110, -50, 180, 240]
   transport: [
     { icon: "train", text: "捷運○○站 2 號出口，步行 5 分鐘" },
     { icon: "car",   text: "開車導航「○○婚宴會館」" },
@@ -805,7 +806,8 @@ $("stamp").innerHTML = `<path class="fw s" d="M6 4h58v76H6z" stroke-dasharray="4
 // 結尾：新人站在花叢裡
 (() => {
   const svg = $("garland");
-  svg.innerHTML = `<image class="couple" href="${WEDDING.couple}" x="152" y="10" width="96" height="188"/>
+  const EB = WEDDING.endBox || [152, 10, 96, 188];   // 結尾似顏繪 [x, y, 寬, 高]，腳踩在草地上（底部對齊）
+  svg.innerHTML = `<image class="couple" href="${WEDDING.couple}" x="${EB[0]}" y="${EB[1]}" width="${EB[2]}" height="${EB[3]}" preserveAspectRatio="xMidYMax meet"/>
     <path class="fh" d="M-10 190 Q100 168 200 182 T410 178 L410 234 L-10 234Z"/><path class="st-l" d="M-10 190 Q100 168 200 182 T410 178"/><g id="g-fl"></g>`;
   const g = svg.querySelector("#g-fl");
   const l = stem(g, "M-6 192 Q70 170 140 186", .2), r = stem(g, "M260 184 Q330 168 406 180", .2);
