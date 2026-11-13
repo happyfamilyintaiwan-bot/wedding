@@ -460,6 +460,7 @@ const WEDDING = {
   mapQuery: "台北市政府",
   mapUrl: "",              // 有 Google 地圖分享連結就貼這裡（優先於 mapQuery）
   hide: [],                // 不需要的段落：story／dress／tips／parents／schedule
+  heroBox: null,           // 似顏繪比較寬時設 [72, 186, 256, 392] 放大
   transport: [
     { icon: "train", text: "捷運○○站 2 號出口，步行 5 分鐘" },
     { icon: "car",   text: "開車導航「○○婚宴會館」" },
@@ -718,13 +719,14 @@ HYI.applyLayout(WEDDING);   // 內容填好後才拿掉不需要的段落
 // 封面：簡約大氣的拱門＋全身似顏繪（花只放在頂端和兩個下角）
 (() => {
   const svg = $("hero-art");
+  const HB = WEDDING.heroBox || [104, 186, 192, 392];   // 似顏繪在拱門裡的位置 [x, y, 寬, 高]；橫向的圖可以加寬
   svg.innerHTML = `
     <path d="M78 592 V266 A122 122 0 0 1 322 266 V592Z" style="fill:var(--sky);opacity:.9"/>
     <path class="s ln" style="--d:.1s;stroke-width:2" d="M64 596 V264 A136 136 0 0 1 336 264 V596"/>
     <path class="s ln" style="--d:.3s;stroke-width:1.2;opacity:.55" d="M78 596 V266 A122 122 0 0 1 322 266 V596"/>
     <path class="s ln" style="--d:.5s;stroke-width:1.6" d="M24 592 Q120 580 200 584 T376 590"/>
     <ellipse cx="200" cy="582" rx="92" ry="6" style="fill:var(--ink);opacity:.08"/>
-    <g id="h-couple"><image class="couple" id="couple-img" href="${WEDDING.couple}" x="104" y="186" width="192" height="392" preserveAspectRatio="xMidYMax meet"/></g>
+    <g id="h-couple"><image class="couple" id="couple-img" href="${WEDDING.couple}" x="${HB[0]}" y="${HB[1]}" width="${HB[2]}" height="${HB[3]}" preserveAspectRatio="xMidYMax meet"/></g>
     <g id="h-top"></g><g id="h-bl"></g><g id="h-br"></g>`;
   // 頂端花束
   const top = $("h-top");
