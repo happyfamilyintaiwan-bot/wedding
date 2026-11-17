@@ -6,7 +6,7 @@
    - invite_open：打開信封／拉門（option=personal 有 ?to 的專屬連結；direct 一般連結）
    - invite_section：看到某一段（option=段落 id，每段只送一次）
    - cta_click：rsvp、map、calendar_google、calendar_ics、transport_link、credit（點署名回介紹頁）
-   用法：WEDDING.ga = { id: "270124-xz", style: "a" } */
+   用法：WEDDING.ga = { id: "270124-xz", style: "a", until: "022827" }（until 會接在 page_title 的「成品喜帖」後面） */
 (() => {
   try {
     if (typeof WEDDING === "undefined" || !WEDDING.ga || !WEDDING.ga.id) return;
@@ -19,7 +19,7 @@
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { dataLayer.push(arguments); };
     gtag("js", new Date());
-    const page_title = "喜帖|成品喜帖|" + style;
+    const page_title = "喜帖|成品喜帖" + (WEDDING.ga.until || "") + "|" + style;   // until：上線到期日，例 022827（Zoe 2026-11-18）
     const base = { content_group: "wedding", page_lang: lang, invite_id: WEDDING.ga.id };   // 每個事件都直接帶（set 不一定會送出）
     gtag("set", base);
     const cfg = Object.assign({ cookie_domain: ".knittinghiyori.com", page_title, page_location: location.origin + location.pathname }, base);   // 不帶 ?to= 賓客名字
