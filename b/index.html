@@ -386,6 +386,7 @@ const WEDDING = {
   ],
   rsvpUrl: "https://forms.gle/",
   rsvpDeadline: "2027-02-20",
+  ga: null,                // 成品喜帖要追蹤時設 { id: "<婚禮日-姓氏縮寫>", style: "b" }；範例不追蹤，也不會送賓客名字
   contacts: [              // 聯絡新人：type 可以是 email／line／instagram；value 留空會顯示「待填寫」
     { who: "groom", type: "email", value: "" },
     { who: "bride", type: "email", value: "" },
@@ -726,6 +727,7 @@ if (still || embed) {
   if (still) document.querySelectorAll("[data-r]").forEach((s) => s.classList.add("in"));
 }
 </script>
+<script src="../assets/invite-ga.js"></script>
 <script src="../assets/invite-reveal.js"></script>
 </body>
 </html>
