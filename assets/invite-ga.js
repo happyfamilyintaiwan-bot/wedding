@@ -20,11 +20,12 @@
     window.gtag = function () { dataLayer.push(arguments); };
     gtag("js", new Date());
     const page_title = "喜帖|成品喜帖|" + style;
-    gtag("set", { content_group: "wedding", page_lang: lang, page_title, invite_id: WEDDING.ga.id });
-    const cfg = { cookie_domain: ".knittinghiyori.com", page_title, page_location: location.origin + location.pathname };   // 不帶 ?to= 賓客名字
+    const base = { content_group: "wedding", page_lang: lang, invite_id: WEDDING.ga.id };   // 每個事件都直接帶（set 不一定會送出）
+    gtag("set", base);
+    const cfg = Object.assign({ cookie_domain: ".knittinghiyori.com", page_title, page_location: location.origin + location.pathname }, base);   // 不帶 ?to= 賓客名字
     if (dbg) cfg.debug_mode = true;
     gtag("config", ID, cfg);
-    const send = (name, p) => { try { if (dbg) console.log("[hy-invite]", name, p); gtag("event", name, p); } catch (e) {} };
+    const send = (name, p) => { try { const q = Object.assign({}, base, p); if (dbg) console.log("[hy-invite]", name, q); gtag("event", name, q); } catch (e) {} };
 
     // 打開信封／拉門
     const personal = P.has("to") ? "personal" : "direct";
