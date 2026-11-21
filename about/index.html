@@ -66,6 +66,12 @@ a { color: inherit; }
   .pages-m a { flex: 0 0 auto; text-decoration: none; font-size: 14px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; min-height: 36px; display: inline-flex; align-items: center; background: var(--cream); }
   .pages-m a[aria-current="page"] { color: var(--wine); border-color: var(--wine); font-weight: 700; }
 }
+.bundle { margin-top: 28px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px 32px; align-items: center; background: var(--cream); border: 1px solid var(--wine); border-radius: 18px; padding: 26px 28px; }
+.bundle h3 { font-family: var(--serif); color: var(--wine); font-size: 22px; margin: 6px 0 8px; }
+.bundle ul { list-style: none; font-size: 14.5px; display: grid; gap: 4px; }
+.bundle li { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed var(--line); padding: 4px 0; }
+.bundle .sum { font-family: var(--latin); font-size: 34px; color: var(--wine); line-height: 1.1; margin: 8px 0 14px; }
+@media (max-width: 760px) { .bundle { grid-template-columns: 1fr; padding: 22px 18px; } }
 .more { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; font-weight: 700; color: var(--wine); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
 .more:hover { color: var(--rose-d); }
 
@@ -368,9 +374,9 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
 <header class="top">
   <div class="wrap">
     <a class="kh-brand" href="https://wedding.knittinghiyori.com/" data-google-vignette="false" data-cta="brand_hub" data-cta-type="wedding"><img src="/icons/logo-knitting-120.webp" width="40" height="40" alt="">編織日和<span class="site">・似顏繪喜帖</span></a>
-<!--HY-NAV--><nav class="nav" aria-label="網站選單"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/about/" aria-current="page">關於我們</a><a href="/blog/">部落格</a><a class="pill" href="/#quote" data-cta="hero_quote" data-cta-type="wedding">估價 <span class="arr">→</span></a></nav><!--/HY-NAV-->
+<!--HY-NAV--><nav class="nav" aria-label="網站選單"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/paper-invitation/">紙本喜帖</a><a href="/about/" aria-current="page">關於我們</a><a href="/blog/">部落格</a><a class="pill" href="/#quote" data-cta="hero_quote" data-cta-type="wedding">估價 <span class="arr">→</span></a></nav><!--/HY-NAV-->
   </div>
-<!--HY-NAV-M--><nav class="pages-m" aria-label="網站選單（手機）"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/about/" aria-current="page">關於我們</a><a href="/blog/">部落格</a></nav><!--/HY-NAV-M-->
+<!--HY-NAV-M--><nav class="pages-m" aria-label="網站選單（手機）"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/paper-invitation/">紙本喜帖</a><a href="/about/" aria-current="page">關於我們</a><a href="/blog/">部落格</a></nav><!--/HY-NAV-M-->
 </header>
 
 <main>

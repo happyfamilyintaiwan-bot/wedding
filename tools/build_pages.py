@@ -20,6 +20,7 @@ PAGES = [  # (網址, 選單文字)
     ("/caricature/", "似顏繪"),
     ("/marriage-certificate/", "結婚書約"),
     ("/web-invitation/", "電子喜帖"),
+    ("/paper-invitation/", "紙本喜帖"),
     ("/about/", "關於我們"),
     ("/blog/", "部落格"),
 ]
@@ -231,6 +232,15 @@ def cta_sec(text, href):
     </div>
   </section>"""
 
+BUNDLE = """  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="bundle" style="grid-template-columns:1fr">
+        <div><span class="kicker">All in one</span><h3>想一次搞定？全套方案 NT$12,830 起</h3><p>似顏繪＋結婚書約＋網頁電子喜帖＋紙本喜帖，同一張似顏繪延伸成整套設計。估價工具會幫你全部勾好，再依需要調整。</p></div>
+        <div><a class="pill" href="/?all=1#quote" data-cta="bundle_quote" data-cta-type="wedding">一次估價全套 <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </section>"""
+
 built = []
 
 # ── 結婚書約 ──
@@ -250,7 +260,7 @@ law_sec = """  <section style="padding-top:0">
 cert_body = hero("結婚書約", "似顏繪結婚書約：<br>把你們畫進登記那天的書約",
                  "先畫好你們兩人的全身彩色似顏繪（NT$1,800），再放進手繪邊框的結婚書約。書約有 4 種方案，NT$1,000 起；同婚、非同婚都有對應的法條版本。",
                  '<a class="pill" href="/?sy=4#quote" data-cta="page_quote" data-cta-type="wedding">估價這個方案 <span class="arr">→</span></a><a class="pill ghost" href="#cert">看 4 種方案</a>') + \
-    "\n" + cert_sec + "\n" + law_sec + "\n" + flow_sec + "\n" + faq_sec(cert_qa) + "\n" + cta_sec("開始估價結婚書約", "/?sy=4#quote")
+    "\n" + cert_sec + "\n" + law_sec + "\n" + flow_sec + "\n" + faq_sec(cert_qa) + "\n" + cta_sec("開始估價結婚書約", "/?sy=4#quote") + "\n" + BUNDLE
 cert_ld = [{"@type": "Service", "name": "似顏繪結婚書約客製", "serviceType": "結婚書約設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
             "offers": [offer("方案 1：書約設計", 1000, "設計圖面費，交付設計預覽，不含圖檔（另需雙人似顏繪 NT$1,800）"), offer("方案 2：書約設計＋PDF 電子檔", 1600, "可列印的 PDF"),
                        offer("方案 3：書約設計＋印刷 3 張", 2380, "台灣印製，郵局掛號寄台灣地址"), offer("方案 4：設計＋印刷 3 張＋PDF", 2880, "組合價")]}, faq_ld(cert_qa)]
@@ -263,7 +273,7 @@ cari_qa = faqs("要準備什麼照片？", "可以修改幾次？", "製作要�
 cari_body = hero("似顏繪", "新人似顏繪：<br>照你們最喜歡的婚紗照畫",
                  "雙人全身彩色似顏繪 NT$1,800，免費修改 2 次；毛小孩、小朋友每位加 NT$800 一起畫進來。這張圖之後可以放進結婚書約和電子喜帖，整套看起來是同一個風格。",
                  '<a class="pill" href="/#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#portfolio">看作品</a>') + \
-    "\n" + folio_sec + "\n" + duo_sec + "\n" + flow_sec + "\n" + faq_sec(cari_qa) + "\n" + cta_sec("開始估價似顏繪", "/#quote")
+    "\n" + folio_sec + "\n" + duo_sec + "\n" + flow_sec + "\n" + faq_sec(cari_qa) + "\n" + cta_sec("開始估價似顏繪", "/#quote") + "\n" + BUNDLE
 cari_ld = [{"@type": "Service", "name": "新人似顏繪客製", "serviceType": "婚禮似顏繪", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
             "offers": [offer("雙人全身彩色似顏繪", 1800, "免費修改 2 次"), offer("加畫寵物或小孩（每位）", 800, "毛小孩、小朋友一起入鏡")]}, faq_ld(cari_qa)]
 built.append(page("/caricature/", "似顏繪", "新人似顏繪客製｜雙人全身彩色 NT$1,800、可加畫寵物｜編織日和",
@@ -275,12 +285,90 @@ web_qa = faqs("電子喜帖可以用多久？會被搜尋到嗎？", "可以修�
 web_body = hero("電子喜帖", "網頁電子喜帖：<br>手機一點就開，賓客線上回覆出席",
                 "把你們的似顏繪做成喜帖網頁：開場動畫、婚禮倒數、婚宴流程、Dress code、地圖、加入行事曆、出席回覆都在裡面。3 種風格同價 NT$3,000（另需雙人似顏繪 NT$1,800）。",
                 '<a class="pill" href="/?web=A#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#web">看 3 種風格</a>') + \
-    "\n" + web_sec + "\n" + flow_sec + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote")
+    "\n" + web_sec + "\n" + flow_sec + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote") + "\n" + BUNDLE
 web_ld = [{"@type": "Service", "name": "似顏繪網頁電子喜帖", "serviceType": "電子喜帖設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
            "offers": [offer("網頁電子喜帖（3 種風格同價）", 3000, "交付起 3 個月上線與維護"), offer("延長上線（每月）", 600, "交付 3 個月後每延長 1 個月")]}, faq_ld(web_qa)]
 built.append(page("/web-invitation/", "電子喜帖", "網頁電子喜帖客製｜似顏繪＋出席回覆、地圖、倒數 3 種風格 NT$3,000｜編織日和",
                   "似顏繪網頁電子喜帖：開場動畫、婚禮倒數、流程、Dress code、地圖、加入行事曆、出席回覆。書約手繪風、日系清新、雪景 3 種風格同價 NT$3,000，網址不公開、不被搜尋引擎收錄。",
                   "喜帖|電子喜帖|似顏繪網頁電子喜帖", web_body, web_ld))
+
+# ── 紙本喜帖（2026-11-21 新增，價格與規格由 Alison 提供） ──
+ENV = ["橘", "紅", "酒紅", "奶茶", "咖啡", "深咖啡", "駝色", "米白", "淺卡其", "淺綠", "橄欖綠", "墨綠", "淺灰", "灰", "深藍", "乾燥玫瑰", "淺粉", "灰紫", "淺灰白", "白", "白（無字）"]
+PAPER_FOLIO = [
+    ("paper-invitation-welcome-pink-two-pages", "紙本喜帖作品：粉色花園，正面 Welcome 似顏繪、背面邀請資訊", "兩頁設計・粉色花園", 800, 1066),
+    ("paper-invitation-garden-cats", "紙本喜帖作品：花拱門下的新人和兩隻貓", "花拱門＋兩隻貓", 700, 935),
+    ("paper-invitation-beach-cats", "紙本喜帖作品：海邊的新人和兩隻虎斑貓", "海邊＋虎斑貓", 700, 935),
+    ("paper-invitation-beach-heart", "紙本喜帖作品：海邊主題的邀請頁，愛心框裡放似顏繪", "海邊邀請頁", 700, 933),
+    ("paper-invitation-welcome-black-dress", "紙本喜帖作品：黑色禮服新娘和西裝新郎在花拱門前", "黑色禮服・花拱門", 700, 935),
+    ("paper-invitation-red-wedding-day", "紙本喜帖作品：紅底 Happy Wedding Day，新郎掀起頭紗", "紅底・Wedding Day", 700, 935),
+    ("paper-invitation-timeline-dress-code", "紙本喜帖作品：婚禮流程時間軸與 Dress code 色票", "流程與 Dress code 頁", 700, 933),
+]
+paper_folio = """  <section id="portfolio">
+    <div class="wrap">
+      <div class="chapter"><span class="no">✦</span><div><span class="kicker">Portfolio</span><h2>紙本喜帖作品</h2><p>可以沿用作品集的設計，也可以討論新的設計；兩種都會收設計費，確保每一份都符合你們。點圖可以放大。</p></div></div>
+      <div class="folio-grid" id="folio">
+""" + "\n".join(f'        <figure class="rv" style="--i:{i % 4}" data-src="/assets/paper/{f}.webp"><img src="/assets/paper/{f}.webp" alt="{alt}" width="{w}" height="{h}" loading="lazy"><figcaption>{cap}</figcaption></figure>' for i, (f, alt, cap, w, h) in enumerate(PAPER_FOLIO)) + """
+      </div>
+    </div>
+  </section>"""
+paper_spec = """  <section style="padding-top:0">
+    <div class="wrap prose">
+      <span class="kicker">What you get</span>
+      <h2>價格與規格</h2>
+      <ul>
+        <li><b>兩頁設計費 NT$2,000</b>：例如正面似顏繪＋背面邀請資訊。複雜的設計另外報價。</li>
+        <li><b>印刷每份 NT$105</b>：同款式 <b>30 份起印</b>（30 份 NT$3,150）。</li>
+        <li><b>一組包含</b>：1 張喜帖（148×105mm）、1 個信封（185×125mm，燙金 Save the Date）、1 枚信封貼紙（古銅色玫瑰蠟封貼，直徑 3cm，背面有雙面膠）。</li>
+        <li><b>只寄台灣地址</b>；只提供給訂製似顏繪的新人加購。</li>
+        <li>建議在<b>需要拿到喜帖的 4～5 週前</b>訂製。</li>
+      </ul>
+      <div class="folio-grid" style="margin-top:22px">
+        <figure data-src="/assets/paper/card-size-save-the-date.webp"><img src="/assets/paper/card-size-save-the-date.webp" alt="信封尺寸 18.5×12.5cm，燙金 Save the Date" width="900" height="593" loading="lazy"><figcaption>信封 18.5×12.5cm</figcaption></figure>
+        <figure data-src="/assets/paper/envelope-burgundy-photo.webp"><img src="/assets/paper/envelope-burgundy-photo.webp" alt="酒紅色信封，燙金 Save the Date 實拍" width="900" height="609" loading="lazy"><figcaption>燙金 Save the Date 實拍</figcaption></figure>
+        <figure data-src="/assets/paper/seal-sticker-rose.webp"><img src="/assets/paper/seal-sticker-rose.webp" alt="古銅色玫瑰蠟封信封貼紙" width="500" height="518" loading="lazy"><figcaption>古銅色玫瑰信封貼</figcaption></figure>
+      </div>
+    </div>
+  </section>"""
+env_sec = """  <section id="envelope" style="padding-top:0">
+    <div class="wrap prose">
+      <span class="kicker">Envelope colors</span>
+      <h2>信封顏色：21 色</h2>
+      <p>下訂時備註信封編號就可以。顏色名稱只是方便溝通，實際以色卡為準。</p>
+      <div class="folio-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <figure data-src="/assets/paper/envelope-colors-1-12.webp"><img src="/assets/paper/envelope-colors-1-12.webp" alt="信封色卡 1 到 12 號" width="900" height="1030" loading="lazy"><figcaption>1～12 號</figcaption></figure>
+        <figure data-src="/assets/paper/envelope-colors-13-21.webp"><img src="/assets/paper/envelope-colors-13-21.webp" alt="信封色卡 13 到 21 號" width="900" height="797" loading="lazy"><figcaption>13～21 號</figcaption></figure>
+      </div>
+      <p style="margin-top:16px">""" + "、".join(f"{i + 1}. {c}" for i, c in enumerate(ENV)) + """</p>
+    </div>
+  </section>"""
+paper_flow = """  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="chapter"><span class="no">✦</span><div><span class="kicker">How to order</span><h2>訂製步驟</h2><p>確認細節與報價後，我們會提供帳戶，請用匯款付款（目前還沒有信用卡付款）。</p></div></div>
+      <ol class="flow">
+        <li class="rv"><b>估價＋寄信</b><span>用估價工具勾選，寫好詢價信，附上婚紗照</span></li>
+        <li class="rv" style="--i:1"><b>討論設計</b><span>似顏繪、喜帖、結婚書約一起確認</span></li>
+        <li class="rv" style="--i:2"><b>確認樣式後下訂</b><span>收到報價與帳戶，匯款後開始製作</span></li>
+        <li class="rv" style="--i:3"><b>備註信封顏色</b><span>下訂喜帖時寫信封編號（1～21）</span></li>
+        <li class="rv" style="--i:4"><b>印刷寄送</b><span>台灣印製，寄到台灣地址</span></li>
+      </ol>
+    </div>
+  </section>"""
+paper_qa = [
+    ("紙本喜帖多少錢？", "兩頁設計費 NT$2,000，印刷每份 NT$105，同款式 30 份起印（30 份是 NT$3,150）。另外需要雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價。"),
+    ("一組紙本喜帖包含什麼？", "1 張喜帖（148×105mm）、1 個信封（185×125mm，燙金 Save the Date，21 色可選）、1 枚古銅色玫瑰信封貼紙（直徑 3cm）。"),
+    ("可以只印喜帖、不訂似顏繪嗎？", "不行。印刷喜帖只提供給訂製似顏繪與喜帖設計的新人加購。可以沿用作品集的設計，也可以討論新設計，兩種都會收設計費。"),
+    ("要多久前訂？可以寄到國外嗎？", "建議在需要拿到喜帖的 4～5 週前訂製。紙本喜帖只寄台灣地址；海外新人可以選網頁電子喜帖。"),
+    ("怎麼付款？", "確認細節與報價後，我們會提供帳戶，請用匯款付款；目前還沒有信用卡付款。"),
+]
+paper_body = hero("紙本喜帖", "似顏繪紙本喜帖：<br>把你們的似顏繪印成喜帖",
+                  "用你們的似顏繪設計兩頁喜帖，連同燙金信封和蠟封貼紙一起印好。兩頁設計 NT$2,000，印刷每份 NT$105（30 份起），只寄台灣。",
+                  '<a class="pill" href="/?paper=1#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#portfolio">看作品</a>') + \
+    "\n" + paper_folio + "\n" + paper_spec + "\n" + env_sec + "\n" + paper_flow + "\n" + faq_sec(paper_qa) + "\n" + cta_sec("開始估價紙本喜帖", "/?paper=1#quote") + "\n" + BUNDLE
+paper_ld = [{"@type": "Service", "name": "似顏繪紙本喜帖", "serviceType": "紙本喜帖設計與印刷", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
+             "offers": [offer("紙本喜帖 兩頁設計", 2000, "可沿用作品集設計或討論新設計"), offer("紙本喜帖 印刷（每份）", 105, "同款式 30 份起印，含信封與信封貼紙，只寄台灣")]}, faq_ld(paper_qa)]
+built.append(page("/paper-invitation/", "紙本喜帖", "似顏繪紙本喜帖客製｜兩頁設計 NT$2,000、每份 NT$105 起印｜編織日和",
+                  "似顏繪紙本喜帖：兩頁設計 NT$2,000，印刷每份 NT$105、30 份起印，含 148×105mm 喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。只寄台灣，建議 4～5 週前訂製。",
+                  "喜帖|紙本喜帖|似顏繪紙本喜帖", paper_body, paper_ld))
 
 # ── 關於我們（文字依 Alison 2026-11-21 提供） ──
 about_body = hero("關於我們", "關於我們",
