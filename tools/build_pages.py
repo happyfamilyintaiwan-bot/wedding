@@ -279,6 +279,16 @@ BUNDLE = """  <section style="padding-top:0">
     </div>
   </section>"""
 
+def read_more(*links):
+    """服務頁底部連到相關文章（文章與服務頁互相導引）"""
+    return """  <section style="padding-top:0">
+    <div class="wrap prose"><span class="kicker">Read more</span><h2>延伸閱讀</h2><ul>""" + "".join(f'<li><a href="{u}" data-cta="related_link" data-cta-type="wedding">{t}</a></li>' for u, t in links) + """</ul></div>
+  </section>"""
+
+
+SONGS_LINK = ("/blog/wedding-songs/", "婚禮歌單：依迎賓、一進、二進、用餐、敬酒、送客分好的婚禮歌曲")
+SSM_LINK = ("/blog/same-sex-marriage-registration-taiwan/", "台灣同性結婚登記全攻略：流程、要帶什麼、書約法條與跨國伴侶規定")
+
 built = []
 
 # ── 結婚書約 ──
@@ -298,7 +308,7 @@ law_sec = """  <section style="padding-top:0">
 cert_body = hero("結婚書約", "似顏繪結婚書約：<br>把你們畫進登記那天的書約",
                  "先畫好你們兩人的全身彩色似顏繪（NT$1,800），再放進手繪邊框的結婚書約。書約有 4 種方案，NT$1,000 起；同婚、非同婚都有對應的法條版本。",
                  '<a class="pill" href="/?sy=4#quote" data-cta="page_quote" data-cta-type="wedding">估價這個方案 <span class="arr">→</span></a><a class="pill ghost" href="#cert">看 4 種方案</a>') + \
-    "\n" + cert_sec + "\n" + law_sec + "\n" + flow_sec + "\n" + faq_sec(cert_qa) + "\n" + cta_sec("開始估價結婚書約", "/?sy=4#quote") + "\n" + BUNDLE
+    "\n" + cert_sec + "\n" + law_sec + "\n" + flow_sec + "\n" + read_more(SSM_LINK) + "\n" + faq_sec(cert_qa) + "\n" + cta_sec("開始估價結婚書約", "/?sy=4#quote") + "\n" + BUNDLE
 cert_ld = [{"@type": "Service", "name": "似顏繪結婚書約客製", "serviceType": "結婚書約設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
             "offers": [offer("方案 1：書約設計", 1000, "設計圖面費，交付設計預覽，不含圖檔（另需雙人似顏繪 NT$1,800）"), offer("方案 2：書約設計＋PDF 電子檔", 1600, "可列印的 PDF"),
                        offer("方案 3：書約設計＋印刷 3 張", 2380, "台灣印製，郵局掛號寄台灣地址"), offer("方案 4：設計＋印刷 3 張＋PDF", 2880, "組合價")]}, faq_ld(cert_qa)]
@@ -323,7 +333,7 @@ web_qa = faqs("電子喜帖可以用多久？會被搜尋到嗎？", "可以修�
 web_body = hero("電子喜帖", "網頁電子喜帖：<br>手機一點就開，賓客線上回覆出席",
                 "把你們的似顏繪做成喜帖網頁：開場動畫、婚禮倒數、婚宴流程、Dress code、地圖、加入行事曆、出席回覆都在裡面。3 種風格同價 NT$3,000（另需雙人似顏繪 NT$1,800）。",
                 '<a class="pill" href="/?web=A#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#web">看 3 種風格</a>') + \
-    "\n" + web_sec + "\n" + flow_sec + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote") + "\n" + BUNDLE
+    "\n" + web_sec + "\n" + flow_sec + "\n" + read_more(SONGS_LINK) + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote") + "\n" + BUNDLE
 web_ld = [{"@type": "Service", "name": "似顏繪網頁電子喜帖", "serviceType": "電子喜帖設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
            "offers": [offer("網頁電子喜帖（3 種風格同價）", 3000, "交付起 3 個月上線與維護"), offer("延長上線（每月）", 600, "交付 3 個月後每延長 1 個月")]}, faq_ld(web_qa)]
 built.append(page("/web-invitation/", "電子喜帖", "網頁電子喜帖客製｜似顏繪＋出席回覆、地圖、倒數 3 種風格 NT$3,000｜編織日和",
@@ -356,7 +366,7 @@ paper_spec = """  <section style="padding-top:0">
       <ul>
         <li><b>兩頁設計費 NT$2,000</b>：例如正面似顏繪＋背面邀請資訊。複雜的設計另外報價。</li>
         <li><b>印刷每份 NT$105</b>：同款式 <b>30 份起印</b>（30 份 NT$3,150）。</li>
-        <li><b>一組包含</b>：1 張喜帖（148×105mm）、1 個信封（185×125mm，燙金 Save the Date）、1 枚信封貼紙（古銅色玫瑰蠟封貼，直徑 3cm，背面有雙面膠）。</li>
+        <li><b>一組包含</b>：1 張喜帖（148×105mm，300 磅雪銅紙）、1 個信封（185×125mm，燙金 Save the Date）、1 枚信封貼紙（古銅色玫瑰蠟封貼，直徑 3cm，背面有雙面膠）。</li>
         <li><b>只寄台灣地址</b>；只提供給訂製似顏繪的新人加購。</li>
         <li>建議在<b>需要拿到喜帖的 4～5 週前</b>訂製。</li>
       </ul>
@@ -393,7 +403,7 @@ paper_flow = """  <section style="padding-top:0">
   </section>"""
 paper_qa = [
     ("紙本喜帖多少錢？", "兩頁設計費 NT$2,000，印刷每份 NT$105，同款式 30 份起印（30 份是 NT$3,150）。另外需要雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價。"),
-    ("一組紙本喜帖包含什麼？", "1 張喜帖（148×105mm）、1 個信封（185×125mm，燙金 Save the Date，21 色可選）、1 枚古銅色玫瑰信封貼紙（直徑 3cm）。"),
+    ("一組紙本喜帖包含什麼？", "1 張喜帖（148×105mm，300 磅雪銅紙）、1 個信封（185×125mm，燙金 Save the Date，21 色可選）、1 枚古銅色玫瑰信封貼紙（直徑 3cm）。"),
     ("可以只印喜帖、不訂似顏繪嗎？", "不行。印刷喜帖只提供給訂製似顏繪與喜帖設計的新人加購。可以沿用作品集的設計，也可以討論新設計，兩種都會收設計費。"),
     ("要多久前訂？可以寄到國外嗎？", "建議在需要拿到喜帖的 4～5 週前訂製。紙本喜帖只寄台灣地址；海外新人可以選網頁電子喜帖。"),
     ("怎麼付款？", "確認細節與報價後，我們會提供帳戶，請用匯款付款；目前還沒有信用卡付款。"),
@@ -401,11 +411,11 @@ paper_qa = [
 paper_body = hero("紙本喜帖", "似顏繪紙本喜帖：<br>把你們的似顏繪印成喜帖",
                   "用你們的似顏繪設計兩頁喜帖，連同燙金信封和蠟封貼紙一起印好。兩頁設計 NT$2,000，印刷每份 NT$105（30 份起），只寄台灣。",
                   '<a class="pill" href="/?paper=1#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#portfolio">看作品</a>') + \
-    "\n" + paper_folio + "\n" + paper_spec + "\n" + env_sec + "\n" + paper_flow + "\n" + faq_sec(paper_qa) + "\n" + cta_sec("開始估價紙本喜帖", "/?paper=1#quote") + "\n" + BUNDLE
+    "\n" + paper_folio + "\n" + paper_spec + "\n" + env_sec + "\n" + paper_flow + "\n" + read_more(SONGS_LINK) + "\n" + faq_sec(paper_qa) + "\n" + cta_sec("開始估價紙本喜帖", "/?paper=1#quote") + "\n" + BUNDLE
 paper_ld = [{"@type": "Service", "name": "似顏繪紙本喜帖", "serviceType": "紙本喜帖設計與印刷", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
              "offers": [offer("紙本喜帖 兩頁設計", 2000, "可沿用作品集設計或討論新設計"), offer("紙本喜帖 印刷（每份）", 105, "同款式 30 份起印，含信封與信封貼紙，只寄台灣")]}, faq_ld(paper_qa)]
 built.append(page("/paper-invitation/", "紙本喜帖", "似顏繪紙本喜帖客製｜兩頁設計 NT$2,000、每份 NT$105 起印｜編織日和",
-                  "似顏繪紙本喜帖：兩頁設計 NT$2,000，印刷每份 NT$105、30 份起印，含 148×105mm 喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。只寄台灣，建議 4～5 週前訂製。",
+                  "似顏繪紙本喜帖：兩頁設計 NT$2,000，印刷每份 NT$105、30 份起印，含 148×105mm 300 磅雪銅喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。只寄台灣，建議 4～5 週前訂製。",
                   "喜帖|紙本喜帖|似顏繪紙本喜帖", paper_body, paper_ld))
 
 # ── 關於我們（文字依 Alison 2026-11-21 提供） ──
@@ -433,6 +443,20 @@ built.append(page("/about/", "關於我們", "關於我們｜同婚伴侶經營�
                   "喜帖|關於我們|同婚伴侶經營的似顏繪喜帖", about_body))
 
 # ── 部落格文章與首頁 ──
+# 文章互相連結：每篇「延伸閱讀」列出其他文章＋相關服務頁（RELATED_PAGES 依 slug 指定）
+RELATED_PAGES = {
+    "same-sex-marriage-registration-taiwan": [("/marriage-certificate/", "似顏繪結婚書約（同婚版・一般版）")],
+    "wedding-songs": [("/web-invitation/", "網頁電子喜帖（婚宴流程放進喜帖）"), ("/paper-invitation/", "似顏繪紙本喜帖")],
+}
+
+
+def related(P):
+    others = [(f"/blog/{o['slug']}/", re.sub("<[^>]+>", "", o["h1"])) for o in POSTS if o["slug"] != P["slug"]]
+    items = others + RELATED_PAGES.get(P["slug"], [])
+    if not items:
+        return ""
+    return '<h2 id="related">延伸閱讀</h2><ul class="check">' + "".join(f'<li><a href="{u}" data-cta="related_link" data-cta-type="wedding">{t}</a></li>' for u, t in items) + "</ul>"
+
 AUTHOR = [{"@type": "Person", "name": "Zoe"}, {"@type": "Person", "name": "Alison"}]
 for P in POSTS:
     url = f"/blog/{P['slug']}/"
@@ -449,6 +473,7 @@ for P in POSTS:
   <section style="padding-top:0">
     <article class="wrap post">
 {P['body']}
+      {related(P)}
       <h2 id="faq">常見問題</h2>
       {faq_html(P['faq'])}
       <h2 id="sources">資料來源</h2>
