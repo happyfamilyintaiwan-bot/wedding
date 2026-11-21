@@ -28,4 +28,11 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://wedding.knittinghiyori.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wedding.knittinghiyori.com/"/>
   </url>
+  <!--HY-PAGES-->
+  <url><loc>https://wedding.knittinghiyori.com/marriage-certificate/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://wedding.knittinghiyori.com/caricature/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://wedding.knittinghiyori.com/web-invitation/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://wedding.knittinghiyori.com/paper-invitation/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://wedding.knittinghiyori.com/about/</loc><lastmod>2026-11-21</lastmod></url>
+  <!--/HY-PAGES-->
 </urlset>
