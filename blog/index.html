@@ -349,9 +349,18 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .post th, .post td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
 .post th { background: var(--blush); color: var(--wine); }
 .post ul.songs { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.post ul.songs li { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; margin: 0; line-height: 1.5; }
+.post ul.songs li { margin: 0; line-height: 1.5; }
+.post ul.songs li > a { display: block; height: 100%; text-decoration: none; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; transition: border-color .2s, transform .2s; }
+.post ul.songs li > a:hover { border-color: var(--wine); transform: translateY(-2px); }
 .post ul.songs b { display: block; color: var(--wine); }
-.post ul.songs span { font-size: 14px; color: var(--muted); }
+.post ul.songs b .play { display: inline; font-size: 11px; color: var(--rose-d); }
+.post ul.songs span { display: block; font-size: 14px; color: var(--muted); }
+.post ul.songs small { display: block; font-size: 13px; color: var(--ink); margin-top: 2px; }
+.post .tags { margin-top: 4px; }
+.post .tag { font-style: normal; font-size: 12px; border-radius: 999px; padding: 1px 8px; margin-right: 4px; display: inline-block; }
+.post .tag.a { background: var(--rose); color: var(--wine); }
+.post .tag.t { background: var(--blush); color: var(--muted); }
+.post .tag.f { background: #efe6d6; color: #6b4e00; }
 .post .cta-inline { background: var(--blush); border-radius: 12px; padding: 12px 16px; }
 .post .meta { font-size: 14px; color: var(--muted); }
 .post .sources { font-size: 14px; color: var(--muted); }
@@ -415,7 +424,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     </div>
   </section>
   <section style="padding-top:0">
-    <div class="wrap"><div class="post-list"><a href="/blog/same-sex-marriage-registration-taiwan/" data-cta="blog_card" data-cta-type="wedding"><b>台灣同性結婚登記全攻略：流程、要帶什麼、書約法條與跨國伴侶規定</b><span>台灣同性結婚登記一次看懂：誰可以登記（台灣人、外籍、港澳、中國大陸配偶與兩位外國人）、要帶哪些證件、同婚書約要引用哪條法條、一定要戶口名簿嗎、不能到場怎麼辦。依…</span></a><a href="/blog/wedding-songs/" data-cta="blog_card" data-cta-type="wedding"><b>婚禮歌單：網友推爆的感人婚禮歌曲，依進場、敬酒、送客分好了</b><span>婚禮歌單整理：Threads 上一篇「求感人婚禮歌單」的網友推薦，整理成新人進場、和爸爸進場、純音樂、敬酒送客，以及華語、台灣獨立樂團、韓日、經典老歌；另外挑出…</span></a></div></div>
+    <div class="wrap"><div class="post-list"><a href="/blog/wedding-songs/" data-cta="blog_card" data-cta-type="wedding"><b>婚禮歌單：82 首婚禮歌曲，依迎賓、一進、二進、用餐、敬酒、送客分好了</b><span>婚禮歌曲 82 首，依迎賓、一進、二進、用餐、逐桌敬酒、送客六個時刻分類，每首點了就能在 YouTube 試聽。我們私心推薦＋Threads 網友真實婚禮用歌，…</span></a><a href="/blog/same-sex-marriage-registration-taiwan/" data-cta="blog_card" data-cta-type="wedding"><b>台灣同性結婚登記全攻略：流程、要帶什麼、書約法條與跨國伴侶規定</b><span>台灣同性結婚登記一次看懂：誰可以登記（台灣人、外籍、港澳、中國大陸配偶與兩位外國人）、要帶哪些證件、同婚書約要引用哪條法條、一定要戶口名簿嗎、不能到場怎麼辦。依…</span></a></div></div>
   </section>
 </main>
 
