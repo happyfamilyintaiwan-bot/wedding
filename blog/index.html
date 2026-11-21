@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>婚禮筆記｜婚禮歌單、結婚登記與同婚書約｜編織日和</title>
-<meta name="description" content="編織日和的婚禮筆記：婚禮歌單、結婚登記流程、同婚書約法條等籌備婚禮用得到的資訊。">
+<title>婚禮筆記｜婚禮歌單、同性結婚登記與結婚書約｜編織日和</title>
+<meta name="description" content="編織日和的婚禮筆記：婚禮歌單、台灣同性結婚登記流程與書約法條等籌備婚禮用得到的資訊。">
 <link rel="canonical" href="https://wedding.knittinghiyori.com/blog/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="編織日和">
-<meta property="og:title" content="婚禮筆記｜婚禮歌單、結婚登記與同婚書約">
-<meta property="og:description" content="編織日和的婚禮筆記：婚禮歌單、結婚登記流程、同婚書約法條等籌備婚禮用得到的資訊。">
+<meta property="og:title" content="婚禮筆記｜婚禮歌單、同性結婚登記與結婚書約">
+<meta property="og:description" content="編織日和的婚禮筆記：婚禮歌單、台灣同性結婚登記流程與書約法條等籌備婚禮用得到的資訊。">
 <meta property="og:url" content="https://wedding.knittinghiyori.com/blog/">
 <meta property="og:image" content="https://wedding.knittinghiyori.com/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wedding.knittinghiyori.com/assets/og.jpg">
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="icon" href="/icons/favicon.ico?v=2" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
@@ -334,6 +334,32 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .note-box { margin-top: 18px; font-size: 14.5px; color: var(--muted); }
 .draft { background: #fff3cd; border: 1px dashed #b8860b; padding: 10px 14px; border-radius: 10px; font-size: 14px; color: #6b4e00; }
 @media (max-width: 700px) { .law { grid-template-columns: 1fr; } .page-hero { padding-top: 32px; } }
+/* 部落格文章 */
+.post { max-width: 760px; font-size: 17px; }
+.post h2 { font-family: var(--serif); color: var(--wine); font-size: clamp(22px, 3vw, 29px); margin: 44px 0 12px; line-height: 1.4; }
+.post h3 { font-family: var(--serif); color: var(--wine); font-size: 19px; margin: 26px 0 8px; }
+.post p { margin-bottom: 14px; }
+.post a { color: var(--wine); }
+.post ul, .post ol { padding-left: 1.3em; margin-bottom: 14px; }
+.post li { margin-bottom: 6px; }
+.post .tldr { background: var(--cream); border: 1px solid var(--wine); border-radius: 16px; padding: 18px 22px 8px; margin: 8px 0 18px; }
+.post .tldr b { font-family: var(--serif); color: var(--wine); }
+.post .tbl { overflow-x: auto; margin: 10px 0 18px; }
+.post table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: 15px; background: #fff; }
+.post th, .post td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+.post th { background: var(--blush); color: var(--wine); }
+.post ul.songs { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.post ul.songs li { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; margin: 0; line-height: 1.5; }
+.post ul.songs b { display: block; color: var(--wine); }
+.post ul.songs span { font-size: 14px; color: var(--muted); }
+.post .cta-inline { background: var(--blush); border-radius: 12px; padding: 12px 16px; }
+.post .meta { font-size: 14px; color: var(--muted); }
+.post .sources { font-size: 14px; color: var(--muted); }
+.post-list { display: grid; gap: 16px; max-width: 760px; }
+.post-list a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; }
+.post-list b { font-family: var(--serif); color: var(--wine); font-size: 19px; display: block; margin-bottom: 4px; }
+.post-list span { color: var(--muted); font-size: 15px; }
+@media (max-width: 560px) { .post ul.songs { grid-template-columns: 1fr; } .post { font-size: 16px; } }
 </style>
 <!-- wedding 子網域：不放 Travelpayouts、不放 Google 廣告（core §1） -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQZHTYTRMQ"></script>
@@ -389,9 +415,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     </div>
   </section>
   <section style="padding-top:0">
-    <div class="wrap prose">
-      <p>第一篇文章準備中。</p>
-    </div>
+    <div class="wrap"><div class="post-list"><a href="/blog/same-sex-marriage-registration-taiwan/" data-cta="blog_card" data-cta-type="wedding"><b>台灣同性結婚登記全攻略：流程、要帶什麼、書約法條與跨國伴侶規定</b><span>台灣同性結婚登記一次看懂：誰可以登記（台灣人、外籍、港澳、中國大陸配偶與兩位外國人）、要帶哪些證件、同婚書約要引用哪條法條、一定要戶口名簿嗎、不能到場怎麼辦。依…</span></a><a href="/blog/wedding-songs/" data-cta="blog_card" data-cta-type="wedding"><b>婚禮歌單：網友推爆的感人婚禮歌曲，依進場、敬酒、送客分好了</b><span>婚禮歌單整理：Threads 上一篇「求感人婚禮歌單」的網友推薦，整理成新人進場、和爸爸進場、純音樂、敬酒送客，以及華語、台灣獨立樂團、韓日、經典老歌；另外挑出…</span></a></div></div>
   </section>
 </main>
 

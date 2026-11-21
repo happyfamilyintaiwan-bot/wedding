@@ -334,6 +334,32 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .note-box { margin-top: 18px; font-size: 14.5px; color: var(--muted); }
 .draft { background: #fff3cd; border: 1px dashed #b8860b; padding: 10px 14px; border-radius: 10px; font-size: 14px; color: #6b4e00; }
 @media (max-width: 700px) { .law { grid-template-columns: 1fr; } .page-hero { padding-top: 32px; } }
+/* 部落格文章 */
+.post { max-width: 760px; font-size: 17px; }
+.post h2 { font-family: var(--serif); color: var(--wine); font-size: clamp(22px, 3vw, 29px); margin: 44px 0 12px; line-height: 1.4; }
+.post h3 { font-family: var(--serif); color: var(--wine); font-size: 19px; margin: 26px 0 8px; }
+.post p { margin-bottom: 14px; }
+.post a { color: var(--wine); }
+.post ul, .post ol { padding-left: 1.3em; margin-bottom: 14px; }
+.post li { margin-bottom: 6px; }
+.post .tldr { background: var(--cream); border: 1px solid var(--wine); border-radius: 16px; padding: 18px 22px 8px; margin: 8px 0 18px; }
+.post .tldr b { font-family: var(--serif); color: var(--wine); }
+.post .tbl { overflow-x: auto; margin: 10px 0 18px; }
+.post table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: 15px; background: #fff; }
+.post th, .post td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+.post th { background: var(--blush); color: var(--wine); }
+.post ul.songs { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.post ul.songs li { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; margin: 0; line-height: 1.5; }
+.post ul.songs b { display: block; color: var(--wine); }
+.post ul.songs span { font-size: 14px; color: var(--muted); }
+.post .cta-inline { background: var(--blush); border-radius: 12px; padding: 12px 16px; }
+.post .meta { font-size: 14px; color: var(--muted); }
+.post .sources { font-size: 14px; color: var(--muted); }
+.post-list { display: grid; gap: 16px; max-width: 760px; }
+.post-list a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; }
+.post-list b { font-family: var(--serif); color: var(--wine); font-size: 19px; display: block; margin-bottom: 4px; }
+.post-list span { color: var(--muted); font-size: 15px; }
+@media (max-width: 560px) { .post ul.songs { grid-template-columns: 1fr; } .post { font-size: 16px; } }
 </style>
 <!-- wedding 子網域：不放 Travelpayouts、不放 Google 廣告（core §1） -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQZHTYTRMQ"></script>

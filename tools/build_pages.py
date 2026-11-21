@@ -9,7 +9,9 @@
 3. 更新 sitemap.xml 的中文分頁（英日西三頁保持原樣）
 估價工具只在首頁；分頁的估價按鈕連 /?sy=…#quote 或 /?web=…#quote，首頁會帶入方案。
 """
-import html, json, os, re
+import html, json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from blog_posts import POSTS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://wedding.knittinghiyori.com"
@@ -114,6 +116,32 @@ PAGE_CSS = """<style>
 .note-box { margin-top: 18px; font-size: 14.5px; color: var(--muted); }
 .draft { background: #fff3cd; border: 1px dashed #b8860b; padding: 10px 14px; border-radius: 10px; font-size: 14px; color: #6b4e00; }
 @media (max-width: 700px) { .law { grid-template-columns: 1fr; } .page-hero { padding-top: 32px; } }
+/* 部落格文章 */
+.post { max-width: 760px; font-size: 17px; }
+.post h2 { font-family: var(--serif); color: var(--wine); font-size: clamp(22px, 3vw, 29px); margin: 44px 0 12px; line-height: 1.4; }
+.post h3 { font-family: var(--serif); color: var(--wine); font-size: 19px; margin: 26px 0 8px; }
+.post p { margin-bottom: 14px; }
+.post a { color: var(--wine); }
+.post ul, .post ol { padding-left: 1.3em; margin-bottom: 14px; }
+.post li { margin-bottom: 6px; }
+.post .tldr { background: var(--cream); border: 1px solid var(--wine); border-radius: 16px; padding: 18px 22px 8px; margin: 8px 0 18px; }
+.post .tldr b { font-family: var(--serif); color: var(--wine); }
+.post .tbl { overflow-x: auto; margin: 10px 0 18px; }
+.post table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: 15px; background: #fff; }
+.post th, .post td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+.post th { background: var(--blush); color: var(--wine); }
+.post ul.songs { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.post ul.songs li { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; margin: 0; line-height: 1.5; }
+.post ul.songs b { display: block; color: var(--wine); }
+.post ul.songs span { font-size: 14px; color: var(--muted); }
+.post .cta-inline { background: var(--blush); border-radius: 12px; padding: 12px 16px; }
+.post .meta { font-size: 14px; color: var(--muted); }
+.post .sources { font-size: 14px; color: var(--muted); }
+.post-list { display: grid; gap: 16px; max-width: 760px; }
+.post-list a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; }
+.post-list b { font-family: var(--serif); color: var(--wine); font-size: 19px; display: block; margin-bottom: 4px; }
+.post-list span { color: var(--muted); font-size: 15px; }
+@media (max-width: 560px) { .post ul.songs { grid-template-columns: 1fr; } .post { font-size: 16px; } }
 </style>"""
 
 
@@ -126,9 +154,9 @@ def faq_ld(qa):
 
 
 def crumbs_ld(url, name):
+    trail = [("似顏繪喜帖", "/")] + ([("部落格", "/blog/")] if url.startswith("/blog/") and url != "/blog/" else []) + [(name, url)]
     return {"@type": "BreadcrumbList", "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "似顏繪喜帖", "item": SITE + "/"},
-        {"@type": "ListItem", "position": 2, "name": name, "item": SITE + url}]}
+        {"@type": "ListItem", "position": i + 1, "name": n, "item": SITE + u} for i, (n, u) in enumerate(trail)]}
 
 
 def page(url, name, title, desc, ga_title, body, ld=(), robots="index, follow, max-image-preview:large", extra_js=""):
@@ -254,7 +282,7 @@ law_sec = """  <section style="padding-top:0">
         <div><b>一般版</b>依《民法》第 982 條的結婚要件撰寫，適用異性伴侶。</div>
         <div><b>同婚版</b>依《司法院釋字第 748 號解釋施行法》撰寫，適用同性伴侶。</div>
       </div>
-      <p class="note-box">登記規定可能調整，登記前請先向戶政事務所確認最新的書約格式與應備文件。</p>
+      <p class="note-box">登記規定可能調整，登記前請先向戶政事務所確認最新的書約格式與應備文件。同性結婚登記要帶什麼、跨國伴侶能不能登記，整理在<a href="/blog/same-sex-marriage-registration-taiwan/">台灣同性結婚登記全攻略</a>。</p>
     </div>
   </section>"""
 cert_body = hero("結婚書約", "似顏繪結婚書約：<br>把你們畫進登記那天的書約",
@@ -393,18 +421,44 @@ built.append(page("/about/", "關於我們", "關於我們｜同婚伴侶經營�
                   "編織日和的似顏繪喜帖由同婚伴侶經營：相信好的設計帶來美感與力量，與各地數位遊牧的設計師朋友合作，打造似顏繪、結婚書約與電子喜帖。",
                   "喜帖|關於我們|同婚伴侶經營的似顏繪喜帖", about_body))
 
-# ── 部落格（第一篇上線前 noindex） ──
+# ── 部落格文章與首頁 ──
+AUTHOR = [{"@type": "Person", "name": "Zoe"}, {"@type": "Person", "name": "Alison"}]
+for P in POSTS:
+    url = f"/blog/{P['slug']}/"
+    meta = f'<p class="meta">Zoe & Alison｜發布 {P["published"]}' + (f'｜更新 {P["modified"]}' if P["modified"] != P["published"] else "") + "</p>"
+    src = "".join(f'<li><a href="{u}" rel="noopener" target="_blank">{n}</a></li>' for n, u in P["sources"])
+    body = f"""  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="/">似顏繪喜帖</a> › <a href="/blog/">部落格</a></p>
+      <h1>{P['h1']}</h1>
+      {meta}
+      <p class="lead">{P['lead']}</p>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <article class="wrap post">
+{P['body']}
+      <h2 id="faq">常見問題</h2>
+      {faq_html(P['faq'])}
+      <h2 id="sources">資料來源</h2>
+      <ul class="sources">{src}</ul>
+    </article>
+  </section>
+""" + BUNDLE
+    ld = [{"@type": "BlogPosting", "headline": re.sub("<[^>]+>", "", P["h1"]), "description": P["desc"], "datePublished": P["published"], "dateModified": P["modified"],
+           "author": AUTHOR, "publisher": PROVIDER, "mainEntityOfPage": SITE + url, "image": SITE + "/assets/og.jpg", "inLanguage": "zh-Hant-TW"}, faq_ld(P["faq"])]
+    built.append(page(url, re.sub("<[^>]+>", "", P["h1"]).split("：")[0], P["title"], P["desc"], f"喜帖|部落格|{P['ga']}", body, ld))
+
+cards = "".join(f'<a href="/blog/{P["slug"]}/" data-cta="blog_card" data-cta-type="wedding"><b>{re.sub("<[^>]+>", "", P["h1"])}</b><span>{P["desc"][:80]}…</span></a>' for P in sorted(POSTS, key=lambda x: x["modified"], reverse=True))
 blog_body = hero("部落格", "婚禮筆記",
                  "婚禮歌單、結婚登記、同婚書約要注意的地方⋯⋯我們把籌備婚禮時用得到的資訊整理在這裡。",
-                 '<a class="pill ghost" href="/">回似顏繪喜帖</a>') + """
+                 '<a class="pill ghost" href="/">回似顏繪喜帖</a>') + f"""
   <section style="padding-top:0">
-    <div class="wrap prose">
-      <p>第一篇文章準備中。</p>
-    </div>
+    <div class="wrap"><div class="post-list">{cards or "<p>第一篇文章準備中。</p>"}</div></div>
   </section>"""
-built.append(page("/blog/", "部落格", "婚禮筆記｜婚禮歌單、結婚登記與同婚書約｜編織日和",
-                  "編織日和的婚禮筆記：婚禮歌單、結婚登記流程、同婚書約法條等籌備婚禮用得到的資訊。",
-                  "喜帖|部落格|婚禮筆記", blog_body, robots="noindex, follow"))
+built.append(page("/blog/", "部落格", "婚禮筆記｜婚禮歌單、同性結婚登記與結婚書約｜編織日和",
+                  "編織日和的婚禮筆記：婚禮歌單、台灣同性結婚登記流程與書約法條等籌備婚禮用得到的資訊。",
+                  "喜帖|部落格|婚禮筆記", blog_body, robots="index, follow, max-image-preview:large" if POSTS else "noindex, follow"))
 
 # 3. sitemap：英日西保持原樣，中文分頁只放可收錄的頁
 sm_path = os.path.join(ROOT, "sitemap.xml")
