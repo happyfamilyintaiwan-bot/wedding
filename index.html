@@ -812,7 +812,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   const v = (id) => ($(id) ? $(id).value.trim() : "");
   const date = (id) => v(id) ? v(id).replaceAll("-", "/") : "（未填）";
 
-  $("env").innerHTML = `<option value="">還沒決定</option>` + ENV.map((c, i) => `<option value="${i + 1}. ${c}">${i + 1}. ${c}</option>`).join("");
+  $("env").innerHTML = `<option value="" selected disabled>請選一個信封顏色（必選）</option>` + ENV.map((c, i) => `<option value="${i + 1}. ${c}">${i + 1}. ${c}</option>`).join("");
   $("tpl").innerHTML = `<option value="">還沒決定</option>` + TPL.map(([, name], i) => `<option value="No.${i + 1} ${name}">No.${i + 1} ${name}</option>`).join("");
   const colorPills = (style) => {
     $("colors").innerHTML = COLORS[style].map((c, i) => `<label><input type="radio" name="color" value="${c}"${i ? "" : " checked"}><span>${c}</span></label>`).join("");
@@ -853,7 +853,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
       L.push(`✔ 電子喜帖 ${WEB[web]}　${money(3000)}`, `　・配色：${checked("color")}`);
       L.push(ext ? `　・使用期間：交付起 3 個月＋延長 ${ext} 個月　${money(ext * 600)}` : "　・使用期間：交付起 3 個月");
     } else L.push("✘ 電子喜帖：不需要");
-    if (paper) L.push(`✔ 紙本喜帖 兩頁設計　${money(PAPER_DESIGN)}`, `✔ 紙本喜帖 印刷 ${pq} 份　${money(pq * PAPER_EACH)}`, `　・信封顏色：${$("env").value || "還沒決定"}`);
+    if (paper) L.push(`✔ 紙本喜帖 兩頁設計　${money(PAPER_DESIGN)}`, `✔ 紙本喜帖 印刷 ${pq} 份　${money(pq * PAPER_EACH)}`, `　・信封顏色：${$("env").value || "（請先選信封顏色）"}`);
     else L.push("✘ 紙本喜帖：不需要");
     if (bundle) L.push(`✔ 全套優惠（四樣都選）　${money(-BUNDLE_OFF)}`);
     if (rush) L.push(`✔ 急件費（總價 30%）　${money(Math.round(base * .3))}`);
@@ -871,6 +871,14 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   document.querySelectorAll("input[name=web]").forEach((r) => r.addEventListener("change", () => { if (r.value) colorPills(r.value); }));
   $("q").addEventListener("input", update);
   $("q").addEventListener("change", update);
+  // 紙本喜帖：信封顏色一定要選，沒選不能複製或寄出
+  const envMissing = () => checked("paper") && !$("env").value;
+  ["copy", "mailto"].forEach((id) => $(id).addEventListener("click", (e) => {
+    if (!envMissing()) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    $("env").focus(); $("env").scrollIntoView({ block: "center" });
+    alert("訂紙本喜帖請先選一個信封顏色，再複製或寄出詢價信。");
+  }, true));
   $("copy").addEventListener("click", async () => {
     try { await navigator.clipboard.writeText($("msg").value); }
     catch { $("msg").select(); document.execCommand("copy"); }
