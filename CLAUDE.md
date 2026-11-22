@@ -11,3 +11,5 @@
 - **中文分頁與部落格**（2026-11-21）：`/caricature/ /marriage-certificate/ /web-invitation/ /paper-invitation/ /about/ /blog/` 由 `tools/build_pages.py` 產生（CSS、品牌列、頁尾、首頁選單都從 `index.html` 取），文章寫在 `tools/blog_posts.py`。改完跑 `python3 tools/build_pages.py`，它也會更新 sitemap 的 `<!--HY-PAGES-->` 段。估價工具只在首頁，分頁用 `/?sy=…`、`/?web=…`、`/?paper=1`、`/?all=1` 帶入方案。價格改了多一處：`build_pages.py`。
 - **成品喜帖網址**（Zoe 2026-11-22）：`<婚禮日期 YYMMDD>-<新人英文名>`，例 `270124-zoe-alison`。GA4 `WEDDING.ga.until` 填上線到期日 YYMMDD（例 `270228`），報表看到過期就去關掉。
 - **分享預覽**：每份成品喜帖的 `<head>` 都要改 og:title、og:description、og:image（完整網址），預覽圖用 `python3 tools/make_og.py --couple 去背似顏繪.png --names "名字 & 名字" --date "2027.03.20  SAT" --line2 "一句話" --style a|b|c --out og.jpg` 產生，放進喜帖資料夾一起上傳。
+
+- **工作模式**（Zoe 2026-11-22，Alison 同樣適用）：見 `docs/WORKFLOW.md`。子對話把各自的頁面、文章系列、客戶做好；主對話是整體顧問。
