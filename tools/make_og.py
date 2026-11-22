@@ -1,6 +1,7 @@
 """產生喜帖的分享預覽圖（LINE、Messenger、FB 貼連結時出現的那張圖），1200×630。
 用法：
   python3 tools/make_og.py --couple 似顏繪去背.png --names "阿哲 & 小晴" --date "2027.03.20 SAT" --style a --out og.jpg
+  --style 可以是 a／b／c 或 lavender（配合喜帖的配色）
   --line2 可加一行小字（例：會場城市），--title 可換上方英文字（預設 We're getting married!）
 做好後，喜帖 <head> 的 og:image 填這張圖的完整網址（https://invite.knittinghiyori.com/<網址代號>/og.jpg）。
 """
@@ -12,6 +13,7 @@ STYLE = {   # 背景、亮點、主字色、細字色
     "a": ((251, 245, 233), (246, 200, 115), (59, 52, 49), (133, 122, 115)),
     "b": ((251, 248, 244), (216, 180, 171), (74, 67, 64), (141, 132, 126)),
     "c": ((240, 245, 250), (207, 223, 240), (51, 65, 80), (125, 138, 150)),
+    "lavender": ((247, 243, 252), (196, 176, 236), (56, 48, 72), (126, 114, 146)),   # A 的薰衣草紫配色
 }
 
 ap = argparse.ArgumentParser()
