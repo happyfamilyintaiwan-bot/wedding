@@ -114,6 +114,7 @@ POSTS.append(dict(
 # YouTube id 由 Alison 提供或 2026-11-22 搜尋官方頻道，換影片只改這裡
 SCENE_SONGS = [
     ("welcome", "迎賓歌單", "賓客入場、簽到、找座位的時候播。挑輕快、溫暖、大家都聽得舒服的歌，音量不用太大。", [
+        ("Stay with Me", "裘德", "UQgBwAzGgd8", "ao", "陸劇《今天是太陽雨》（2026）治癒主題曲"),
         ("有你的快樂", "王若琳", "qZiNigAO-zQ", "a", ""),
         ("想和你看五月的晚霞", "陳華 feat. 呂植宇", "ljd9ISixsWo", "a", ""),
         ("I'm Yours", "Jason Mraz", "EkHTsc9PU2A", "a", ""),
@@ -238,6 +239,8 @@ FILMS = [  # 電影／影集裡的婚禮場景
     ("影集《歡樂合唱團》（Glee）", "Marry You", "Bruno Mars", "婚禮上的合唱"),
     ("陸劇《當我飛奔向你》", "I Do（當我走向你）", "楊默依 Moi Yang", "蘇在在與張陸讓的結婚曲"),
 ]
+PICK = "Stay with Me"  # 編輯私心推薦第 1 首（Zoe 2026-11-22）
+PICK_WHY = "陸劇《今天是太陽雨》（2026，楊超越、董思成主演）的治癒主題曲。歌名「Stay with Me」就是一句「留在我身邊」，是婚禮上最想對另一半說的話；放在迎賓或用餐時間，看過這部劇的賓客一聽就會會心一笑。"
 NEUTRAL = ["A Thousand Years", "Can't Help Falling in Love", "Make You Feel My Love", "How Long Will I Love You", "Lucky", "Special Person"]
 
 
@@ -257,6 +260,11 @@ def _scene(sid, name, intro, rows, level="h2"):
 
 _scenes = dict((s[0], s) for s in SCENE_SONGS)
 _body = f"""
+<div class="tldr" id="pick">
+  <b>編輯私心推薦第 1 首</b>
+  <ul class="songs" style="grid-template-columns:1fr;margin:10px 0 6px">{_song_li(*_ALL[PICK])}</ul>
+  <p>{PICK_WHY}</p>
+</div>
 <div class="tldr">
   <b>婚禮歌單怎麼分？</b>
   <ul>
