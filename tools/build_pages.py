@@ -151,6 +151,28 @@ PAGE_CSS = """<style>
 .post-list a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; }
 .post-list b { font-family: var(--serif); color: var(--wine); font-size: 19px; display: block; margin-bottom: 4px; }
 .post-list span { color: var(--muted); font-size: 15px; }
+/* 電子喜帖：範例入口、安心說明、三步驟 */
+.samples { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.samples a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; transition: border-color .2s, transform .2s; }
+.samples a:hover { border-color: var(--wine); transform: translateY(-2px); }
+.samples b { display: block; font-family: var(--serif); color: var(--wine); font-size: 18px; }
+.samples b i { font-style: normal; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--blush); margin-right: 8px; font-size: 14px; }
+.samples span { display: block; color: var(--muted); font-size: 14.5px; margin-top: 4px; }
+.samples em { display: block; font-style: normal; color: var(--rose-d); font-size: 14px; font-weight: 700; margin-top: 8px; }
+.trust { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.trust > div { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; }
+.trust svg { width: 44px; height: 44px; }
+.trust b { display: block; font-family: var(--serif); color: var(--wine); font-size: 17.5px; margin-bottom: 2px; }
+.trust p { margin: 0; font-size: 15px; color: var(--ink); }
+.steps { list-style: none; padding: 0; margin: 22px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: st; }
+.steps li { position: relative; background: var(--cream); border: 1px solid var(--line); border-radius: 18px; padding: 22px 20px 20px; }
+.steps .no { position: absolute; top: -14px; left: 18px; font-family: var(--latin); font-size: 13px; letter-spacing: .14em; color: var(--wine); background: var(--blush); border: 1px solid var(--wine); border-radius: 999px; padding: 3px 12px; }
+.steps svg { display: block; width: 100%; max-width: 220px; height: auto; margin: 8px auto 12px; }
+.steps b { display: block; font-family: var(--serif); color: var(--wine); font-size: 19px; margin-bottom: 6px; }
+.steps p { margin: 0; font-size: 15px; }
+.steps small { display: block; margin-top: 8px; color: var(--muted); font-size: 13.5px; }
+@media (max-width: 860px) { .samples { grid-template-columns: repeat(2, minmax(0, 1fr)); } .steps { grid-template-columns: 1fr; gap: 26px; } .steps svg { max-width: 260px; } }
+@media (max-width: 560px) { .trust { grid-template-columns: 1fr; } .samples { gap: 10px; } .samples a { padding: 14px; } }
 @media (max-width: 560px) { .post ul.songs { grid-template-columns: 1fr; } .post { font-size: 16px; } }
 </style>"""
 
@@ -328,12 +350,102 @@ built.append(page("/caricature/", "似顏繪", "新人似顏繪客製｜雙人�
                   "新人似顏繪：照婚紗照畫雙人全身彩色似顏繪 NT$1,800，免費修改 2 次，加畫寵物或小孩每位 NT$800。西式婚紗、和服、中式禮服都能畫，可延伸做結婚書約與電子喜帖。",
                   "喜帖|似顏繪|新人似顏繪客製", cari_body, cari_ld, extra_js=""))
 
+# 電子喜帖：直接打開範例
+SAMPLES = """  <section style="padding-top:0">
+    <div class="wrap prose" style="max-width:none">
+      <span class="kicker">Live demo</span>
+      <h2>直接打開範例喜帖</h2>
+      <p>範例就是成品的樣子，用手機打開最準。右下角可以切換配色。</p>
+      <div class="samples">
+        <a href="/a/" target="_blank" rel="noopener" data-cta="style_a" data-cta-type="wedding"><b><i>A</i>書約手繪風</b><span>黑線小花和拱門</span><em>打開範例 ↗</em></a>
+        <a href="/b/" target="_blank" rel="noopener" data-cta="style_b" data-cta-type="wedding"><b><i>B</i>日系清新</b><span>拉門開場、直書</span><em>打開範例 ↗</em></a>
+        <a href="/c/" target="_blank" rel="noopener" data-cta="style_c" data-cta-type="wedding"><b><i>C</i>雪景</b><span>雪山和燈串</span><em>打開範例 ↗</em></a>
+        <a href="/a/?photo" target="_blank" rel="noopener" data-cta="style_photo" data-cta-type="wedding"><b><i>♡</i>婚紗照版</b><span>不畫似顏繪，放你們的照片</span><em>打開範例 ↗</em></a>
+      </div>
+    </div>
+  </section>"""
+
+# 線條小圖示（酒紅線＋粉色塊，跟首頁同色系）
+def ico(body):
+    return f'<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{body}</svg>'
+
+TRUST_ITEMS = [
+    ('<path d="M24 5l15 6v11c0 10-6.5 17-15 21C15.5 39 9 32 9 22V11z" fill="#f5dfe0"/><path d="M17 24l5 5 9-10"/>',
+     "賓客資料留在你們手上", "喜帖是我們在台灣製作的獨立網頁，不是外部平台或 App。賓客不用下載、不用註冊，也不會被要求留下個資。"),
+    ('<rect x="7" y="9" width="34" height="30" rx="5" fill="#f5dfe0"/><path d="M14 18h20M14 25h14M14 32h9"/><path d="M33 29l6 6M39 29l-6 6"/>',
+     "全繁體中文，沒有廣告", "頁面上只有你們的內容：沒有簡體字、沒有跳出來的廣告，也沒有別人家的商標。"),
+    ('<rect x="5" y="10" width="28" height="20" rx="3"/><path d="M13 36h12M19 30v6"/><rect x="31" y="16" width="12" height="22" rx="3" fill="#f5dfe0"/><path d="M35.5 34h3"/>',
+     "手機、電腦都好讀", "先照手機畫面設計，賓客在 LINE 裡點開就能看；用電腦打開版面一樣完整。"),
+    ('<circle cx="16" cy="18" r="7" fill="#f5dfe0"/><circle cx="31" cy="15" r="6"/><circle cx="33" cy="31" r="7" fill="#e6a9b5"/><circle cx="17" cy="33" r="5"/>',
+     "文字、照片、配色可以換", "名字、日期、流程、Dress code 和照片都照你們的寫；每種風格有幾款配色可選。動畫、版型和字型是固定設計，這樣才能把品質和交期顧好。"),
+    ('<rect x="6" y="12" width="26" height="28" rx="3" fill="#f5dfe0"/><rect x="14" y="7" width="28" height="28" rx="3" fill="#fffaf7"/><path d="M18 30l7-8 5 5 4-4 6 7"/><circle cx="33" cy="15" r="2.5"/>',
+     "最多放 20 張照片", "婚紗照、生活照都可以，做成左右滑的照片區，點開看大圖。"),
+    ('<rect x="9" y="6" width="30" height="36" rx="4" fill="#f5dfe0"/><path d="M16 16h16M16 23h16M16 30h9"/><path d="M28 32l3 3 6-7"/>',
+     "出席回覆用你們自己的表單", "回覆表單由你們用習慣的 Google 表單或 SurveyCake 建立，喜帖放上連結。回覆直接進你們的帳號，我們拿不到賓客的個人資料。"),
+    ('<path d="M20 28l8-8"/><path d="M23 13l4-4a7 7 0 0 1 10 10l-4 4"/><path d="M25 35l-4 4a7 7 0 0 1-10-10l4-4"/><rect x="28" y="30" width="15" height="11" rx="2" fill="#f5dfe0"/>',
+     "專屬網址＋分享預覽圖", "每對新人一個網址（用婚禮日期和英文名），貼到 LINE、Facebook 會出現你們的預覽圖。不讓搜尋引擎收錄，只有拿到連結的人看得到。"),
+    ('<rect x="7" y="10" width="34" height="31" rx="4" fill="#f5dfe0"/><path d="M7 19h34M16 6v8M32 6v8"/><path d="M17 30l5 5 9-10"/>',
+     "交付起 3 個月保證打得開", "從交付當天算起 3 個月內網址都有效，婚禮後也能回來看；想放久一點，每延長 1 個月 NT$600。"),
+]
+TRUST = """  <section style="padding-top:0">
+    <div class="wrap prose" style="max-width:none">
+      <span class="kicker">Peace of mind</span>
+      <h2>寄給長輩和朋友之前，你可能想知道的事</h2>
+      <div class="trust">
+""" + "\n".join(f"        <div>{ico(i)}<div><b>{t}</b><p>{d}</p></div></div>" for i, t, d in TRUST_ITEMS) + """
+      </div>
+    </div>
+  </section>"""
+
+# 三步驟（每一步一張小插圖）
+STEP_ART = [
+    # 1. 手機上的估價單＋信封
+    '<svg viewBox="0 0 220 130" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+    '<ellipse cx="110" cy="118" rx="88" ry="7" fill="#f5dfe0" stroke="none"/>'
+    '<rect x="48" y="8" width="62" height="108" rx="10" fill="#fffaf7"/><path d="M70 16h18"/>'
+    '<rect x="57" y="28" width="44" height="10" rx="3" fill="#f5dfe0"/><path d="M58 48h10M74 48h26M58 58h10M74 58h20M58 68h10M74 68h24"/>'
+    '<path d="M58 82h42"/><path d="M80 92h20" stroke-width="3"/>'
+    '<rect x="57" y="100" width="44" height="10" rx="5" fill="#e6a9b5"/>'
+    '<g transform="translate(122 46) rotate(-8)"><rect width="66" height="44" rx="4" fill="#fffaf7"/><path d="M2 3l31 22L64 3"/><circle cx="33" cy="30" r="6" fill="#e6a9b5"/></g>'
+    '<path d="M114 40c6-8 14-10 22-8" stroke-dasharray="3 5"/></svg>',
+    # 2. 報價單＋勾勾
+    '<svg viewBox="0 0 220 130" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+    '<ellipse cx="110" cy="118" rx="88" ry="7" fill="#f5dfe0" stroke="none"/>'
+    '<path d="M60 10h70l14 14v90H60z" fill="#fffaf7"/><path d="M130 10v14h14"/>'
+    '<path d="M72 34h40M72 46h52M72 58h46M72 70h52"/><path d="M72 88h22M108 88h24" stroke-width="3"/>'
+    '<circle cx="150" cy="92" r="20" fill="#e6a9b5"/><path d="M141 92l7 7 12-14" stroke-width="2.4"/>'
+    '<path d="M40 40l-8-4M40 54h-10M40 68l-8 4"/></svg>',
+    # 3. 手機上的成品喜帖＋照片＋愛心
+    '<svg viewBox="0 0 220 130" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+    '<ellipse cx="110" cy="118" rx="88" ry="7" fill="#f5dfe0" stroke="none"/>'
+    '<g transform="translate(30 30) rotate(-10)"><rect width="46" height="56" rx="3" fill="#fffaf7"/><rect x="5" y="5" width="36" height="36" fill="#f5dfe0"/><path d="M8 38l10-12 8 8 6-5 9 9"/></g>'
+    '<rect x="84" y="8" width="62" height="108" rx="10" fill="#fffaf7"/><path d="M106 16h18"/>'
+    '<path d="M98 76V46a17 17 0 0 1 34 0v30z" fill="#f5dfe0"/><path d="M104 32c2-4 6-6 11-6"/>'
+    '<path d="M96 88h38M102 98h26"/>'
+    '<path d="M174 40c-9-6-12-11-10-15 2-3 7-3 10 1 3-4 8-4 10-1 2 4-1 9-10 15z" fill="#e6a9b5"/>'
+    '<path d="M164 70l18-6M166 84l16 2" stroke-dasharray="3 5"/></svg>',
+]
+STEP_TXT = [
+    ("估價、寄出詢價信", "在估價工具選風格和配色（要不要加似顏繪也在這裡選），價格馬上算好，按一下就寄出詢價信。", "看得到總價才寄，不用先私訊問價。"),
+    ("確認報價、付款", "我們回信確認細節和最終報價，附上匯款帳號；收到全額匯款就幫你們排進製作。", "開始畫草稿前取消可以全額退款。"),
+    ("給資料與照片、看草稿、交付", "寄來喜帖文字和照片，我們做好草稿給你們確認，修改後交付專屬網址和分享預覽圖。", "一般約 4～5 週，建議婚禮前 2 個月詢價。"),
+]
+STEPS = """  <section style="padding-top:0">
+    <div class="wrap prose" style="max-width:none">
+      <span class="kicker">How to order</span>
+      <h2>簡單三步驟訂購</h2>
+      <ol class="steps">
+""" + "\n".join(f'        <li><span class="no">STEP {i + 1}</span>{art}<b>{t}</b><p>{d}</p><small>{n}</small></li>' for i, (art, (t, d, n)) in enumerate(zip(STEP_ART, STEP_TXT))) + """
+      </ol>
+    </div>
+  </section>"""
+
 # ── 電子喜帖 ──
 web_qa = faqs("電子喜帖可以用多久？會被搜尋到嗎？", "可以修改幾次？", "製作要多久？可以趕急件嗎？", "怎麼付款？什麼時候開始製作？")
 web_body = hero("電子喜帖", "網頁電子喜帖：<br>手機一點就開，賓客線上回覆出席",
                 "把你們的似顏繪做成喜帖網頁：開場動畫、婚禮倒數、婚宴流程、Dress code、地圖、加入行事曆、出席回覆都在裡面。3 種風格同價 NT$3,800（另需雙人似顏繪 NT$1,800）。",
                 '<a class="pill" href="/?web=A#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#web">看 3 種風格</a>') + \
-    "\n" + web_sec + "\n" + flow_sec + "\n" + read_more(SONGS_LINK) + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote") + "\n" + BUNDLE
+    "\n" + web_sec + "\n" + SAMPLES + "\n" + TRUST + "\n" + STEPS + "\n" + read_more(SONGS_LINK) + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote") + "\n" + BUNDLE
 web_ld = [{"@type": "Service", "name": "似顏繪網頁電子喜帖", "serviceType": "電子喜帖設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
            "offers": [offer("網頁電子喜帖（3 種風格同價）", 3800, "交付起 3 個月上線與維護"), offer("延長上線（每月）", 600, "交付 3 個月後每延長 1 個月")]}, faq_ld(web_qa)]
 built.append(page("/web-invitation/", "電子喜帖", "網頁電子喜帖客製｜似顏繪＋出席回覆、地圖、倒數 3 種風格 NT$3,800｜編織日和",

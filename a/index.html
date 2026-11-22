@@ -129,7 +129,7 @@ svg text { fill: var(--ink); }
 @keyframes blink { 50% { opacity: .35; } }
 
 /* ===== 版面 ===== */
-.page { position: relative; max-width: 480px; margin: 0 auto; background: var(--paper); overflow: hidden; }
+.page { position: relative; max-width: 480px; margin: 0 auto; background: var(--paper); overflow: hidden; overflow: clip; }
 @media (min-width: 900px) { .page { box-shadow: 0 0 0 2px var(--ink), 14px 14px 0 var(--soft); margin: 40px auto; border-radius: 28px; } }
 section { position: relative; padding: 60px 24px; }
 section.band { background: color-mix(in srgb, var(--soft) 50%, var(--paper)); margin: 30px 0; }
@@ -357,6 +357,11 @@ footer a.credit { color: inherit; text-decoration: none; }
     <div class="story" id="story-list"></div>
   </section>
 
+  <section id="gallery" data-r>
+    <header class="sh"><span class="en fade">All About Love</span><h2 class="fade" style="--i:1" data-i18n="h_gallery">我們的照片</h2></header>
+    <div class="fade" style="--i:2" id="gallery-box"></div>
+  </section>
+
   <section id="schedule" class="band" data-r>
     <header class="sh"><span class="en fade">Order of the Day</span><h2 class="fade" style="--i:1" data-i18n="h_sched">婚宴流程</h2></header>
     <div class="sched" id="sched"></div>
@@ -420,6 +425,7 @@ footer a.credit { color: inherit; text-decoration: none; }
 <div class="toast" id="toast"></div>
 
 <script src="../assets/invite-i18n.js"></script>
+<script src="../assets/invite-gallery.js"></script>
 <script>
 /* ===== 每接一案只要改這一段 ===== */
 const WEDDING = {
@@ -427,7 +433,9 @@ const WEDDING = {
   sample: true,             // 範例專用：切換語言時套用範例文字；正式交付給新人時刪掉這行
   groom: "阿哲", bride: "小晴",
   initials: ["A", "Q"],
-  couple: "../assets/couple-kimono.webp",   // 新人全身似顏繪（去背）
+  couple: "../assets/couple-kimono.webp",   // 新人全身似顏繪（去背）；婚紗照版放一張直式婚紗照
+  couplePhoto: false,       // 婚紗照版設 true：封面照片放進拱形相框
+  photos: [],               // 婚紗照輪播，最多 20 張："photo-1.webp" 或 { src: "photo-2.webp", caption: "一句話" }；空的就不顯示這段
   start: "2027-03-20T11:30:00+08:00",
   end:   "2027-03-20T14:30:00+08:00",
   invite: "我們從大學社團認識，\n一起走過十年的日子。\n這一天，想請重要的你\n來見證我們的幸福。",
@@ -468,7 +476,7 @@ const WEDDING = {
   address: "台北市○○區○○路 100 號",
   mapQuery: "台北市政府",
   mapUrl: "",              // 有 Google 地圖分享連結就貼這裡（優先於 mapQuery）
-  hide: [],                // 不需要的段落：story／dress／tips／parents／schedule
+  hide: [],                // 不需要的段落：story／gallery／dress／tips／parents／schedule
   heroBox: null,           // 似顏繪比較寬時設 [72, 186, 256, 392] 放大
   endBox: null,            // 結尾的似顏繪 [x, y, 寬, 高]；比較寬的圖可設 [110, -50, 180, 240]
   transport: [
@@ -496,6 +504,11 @@ const still = params.has("still");          // ?still：直接顯示完成畫面
 const embed = params.has("embed");          // ?embed：介紹頁的試用預覽，跳過信封
 const reduced = still || matchMedia("(prefers-reduced-motion: reduce)").matches;
 if (still) document.documentElement.classList.add("still");
+// ?photo：範例的婚紗照版（示意照片）
+if (WEDDING.sample && params.has("photo")) Object.assign(WEDDING, {
+  couple: "../assets/sample-photos/hero.webp", couplePhoto: true,
+  photos: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `../assets/sample-photos/photo-${n}.webp`),
+});
 let seed = 11;
 const R = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
 const pick = (a) => a[Math.floor(R() * a.length)];
@@ -724,6 +737,7 @@ $("rsvp-btn").innerHTML = BTN_ICON("mail") + T.rsvp;
 $("rsvp-btn").href = WEDDING.rsvpUrl;
 HYI.renderContacts(WEDDING, LANG, $("contact"));
 
+try { HYG.render(WEDDING, LANG, $("gallery-box")); } catch (e) { $("gallery")?.remove(); }
 HYI.applyLayout(WEDDING);   // 內容填好後才拿掉不需要的段落
 
 /* ---------- 插畫 ---------- */
@@ -817,7 +831,7 @@ $("stamp").innerHTML = `<path class="fw s" d="M6 4h58v76H6z" stroke-dasharray="4
 (() => {
   const svg = $("garland");
   const EB = WEDDING.endBox || [152, 10, 96, 188];   // 結尾似顏繪 [x, y, 寬, 高]，腳踩在草地上（底部對齊）
-  svg.innerHTML = `<image class="couple" href="${WEDDING.couple}" x="${EB[0]}" y="${EB[1]}" width="${EB[2]}" height="${EB[3]}" preserveAspectRatio="xMidYMax meet"/>
+  svg.innerHTML = (WEDDING.couplePhoto ? "" : `<image class="couple" href="${WEDDING.couple}" x="${EB[0]}" y="${EB[1]}" width="${EB[2]}" height="${EB[3]}" preserveAspectRatio="xMidYMax meet"/>`) + `
     <path class="fh" d="M-10 190 Q100 168 200 182 T410 178 L410 234 L-10 234Z"/><path class="st-l" d="M-10 190 Q100 168 200 182 T410 178"/><g id="g-fl"></g>`;
   const g = svg.querySelector("#g-fl");
   const l = stem(g, "M-6 192 Q70 170 140 186", .2), r = stem(g, "M260 184 Q330 168 406 180", .2);
@@ -966,7 +980,9 @@ window.setPreview = ({ img, photo, groom, bride, date, theme } = {}) => {
   if (theme) setTheme(theme);
   renderNames(); renderCal(); prepLines($("cal")); tick();
   $("gcal-btn").href = gcal();
-  if (img) {
+  if (img) heroImg(img, photo);
+};
+function heroImg(img, photo) {
     const im = $("couple-img"), box = $("h-couple");
     im.setAttribute("href", img);
     box.querySelector(".photo-frame")?.remove();
@@ -978,8 +994,8 @@ window.setPreview = ({ img, photo, groom, bride, date, theme } = {}) => {
       im.setAttribute("x", 98); im.setAttribute("y", 150); im.setAttribute("width", 204); im.setAttribute("height", 400);
       im.setAttribute("preserveAspectRatio", "xMidYMax meet"); im.removeAttribute("clip-path");
     }
-  }
-};
+}
+if (WEDDING.couplePhoto) heroImg(WEDDING.couple, true);
 
 if (still || embed) {
   $("intro").remove(); begin();
