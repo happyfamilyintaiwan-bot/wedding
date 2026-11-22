@@ -114,7 +114,6 @@ POSTS.append(dict(
 # YouTube id 由 Alison 提供或 2026-11-22 搜尋官方頻道，換影片只改這裡
 SCENE_SONGS = [
     ("welcome", "迎賓歌單", "賓客入場、簽到、找座位的時候播。挑輕快、溫暖、大家都聽得舒服的歌，音量不用太大。", [
-        ("Stay with Me", "裘德", "UQgBwAzGgd8", "ao", "陸劇《今天是太陽雨》（2026）治癒主題曲"),
         ("有你的快樂", "王若琳", "qZiNigAO-zQ", "a", ""),
         ("想和你看五月的晚霞", "陳華 feat. 呂植宇", "ljd9ISixsWo", "a", ""),
         ("I'm Yours", "Jason Mraz", "EkHTsc9PU2A", "a", ""),
@@ -145,6 +144,7 @@ SCENE_SONGS = [
         ("It's You", "HENRY", "0dLezZIZOAQ", "t", ""),
         ("I Belong to You", "Jacob Lee", "vtcBNdIq1ms", "t", "比較小眾，不容易撞歌"),
         ("Always in My Heart", "Tamaru Yamada", "FxcGYS2Ca7U", "t", ""),
+        ("Stay with Me", "裘德", "UQgBwAzGgd8", "ao", "陸劇《今天是太陽雨》（2026）治癒主題曲"),
     ]),
     ("family-entrance", "和爸爸、家人一起進場", "從父母把孩子交出去的角度寫的歌，很容易讓全場一起紅眼眶。", [
         ("Give Me Away", "Riley Roth", "vYHBlymJAxg", "t", ""),
@@ -155,7 +155,6 @@ SCENE_SONGS = [
         ("Canon in D（卡農）", "Brooklyn Duo", "Ptk_1Dc2iPY", "t", ""),
         ("拉赫曼尼諾夫 第二號交響曲 第三樂章", "古典", "QNRxHyZDU-Q", "t", "網友說聽了會哭"),
         ("Married Life", "Michael Giacchino", "S1uWHjhluTI", "fo", "動畫電影《天外奇蹟》（Up，2009）開場的婚禮與婚後人生"),
-        ("Wedding Processional & Maria", "《真善美》原聲帶", "gyP7-OSixNk", "fo", "電影《真善美》（The Sound of Music，1965）瑪莉亞走向教堂聖壇"),
     ]),
     ("second-entrance", "二進歌單（換裝後第二次進場）", "換好第二套禮服再進場，氣氛可以輕快、甜一點，適合邊走邊和賓客互動。", [
         ("Marry You", "Bruno Mars", "dElRVQFqj-k", "af", "影集《歡樂合唱團》婚禮上的合唱"),
@@ -225,7 +224,6 @@ TOP = ["A Thousand Years", "Can't Help Falling in Love", "Perfect", "My Only", "
 TOP_WHY = {"A Thousand Years": "網友心中的「感人婚禮歌」代表", "Can't Help Falling in Love": "我們最推 Kina Grannis 版", "Perfect": "進場經典，網友推最多次之一",
            "My Only": "網友推了 3 次", "Beautiful in White": "經典進場曲", "You Are the Reason": "我們和網友都推", "第一支舞 feat. 劉若英": "華語進場首選", "Speechless": "網友推了 2 次"}
 FILMS = [  # 電影／影集裡的婚禮場景
-    ("真善美（The Sound of Music，1965）", "Wedding Processional & Maria", "《真善美》原聲帶", "瑪莉亞走向教堂聖壇"),
     ("愛是您，愛是我（Love Actually，2003）", "All You Need Is Love", "Lynden David Hall", "教堂婚禮的驚喜演出"),
     ("婚禮終結者（Wedding Crashers，2005）", "Shout", "The Isley Brothers", "婚宴上全場跳舞"),
     ("媽媽咪呀！（Mamma Mia!，2008）", "I Do, I Do, I Do, I Do, I Do", "ABBA", "婚禮"),
@@ -239,8 +237,6 @@ FILMS = [  # 電影／影集裡的婚禮場景
     ("影集《歡樂合唱團》（Glee）", "Marry You", "Bruno Mars", "婚禮上的合唱"),
     ("陸劇《當我飛奔向你》", "I Do（當我走向你）", "楊默依 Moi Yang", "蘇在在與張陸讓的結婚曲"),
 ]
-PICK = "Stay with Me"  # 編輯私心推薦第 1 首（Zoe 2026-11-22）
-PICK_WHY = "陸劇《今天是太陽雨》（2026，楊超越、董思成主演）的治癒主題曲。歌名「Stay with Me」就是一句「留在我身邊」，是婚禮上最想對另一半說的話；放在迎賓或用餐時間，看過這部劇的賓客一聽就會會心一笑。"
 NEUTRAL = ["A Thousand Years", "Can't Help Falling in Love", "Make You Feel My Love", "How Long Will I Love You", "Lucky", "Special Person"]
 
 
@@ -249,7 +245,7 @@ def _yt(v):
 
 
 def _song_li(t, a, v, m, n):
-    tags = ("<i class=\"tag a\">我們推</i>" if "a" in m else "") + ("<i class=\"tag t\">網友推</i>" if "t" in m else "") + ("<i class=\"tag f\">🎬 婚禮場景</i>" if "f" in m else "") + ("<i class=\"tag o\">🎵 影視原聲</i>" if "o" in m else "")
+    tags = ("<i class=\"tag a\">我們推</i>" if "a" in m else "") + ("<i class=\"tag t\">網友推</i>" if "t" in m else "") + ("<i class=\"tag f\">🎬 婚禮場景</i>" if "f" in m else "") + ("<i class=\"tag o\">🎵 影視原聲</i>" if "o" in m else "") + ("<i class=\"tag\" style=\"background:#ece6f5;color:#4b3a6b\">🌈 同婚也適合</i>" if t in NEUTRAL else "")
     note = f"<small>{n}</small>" if n else ""
     return f'<li><a href="{_yt(v)}" target="_blank" rel="noopener" data-cta="song_play" data-cta-type="wedding"><b>{t} <span class="play">▶</span></b><span>{a}</span>{note}<span class="tags">{tags}</span></a></li>'
 
@@ -260,11 +256,6 @@ def _scene(sid, name, intro, rows, level="h2"):
 
 _scenes = dict((s[0], s) for s in SCENE_SONGS)
 _body = f"""
-<div class="tldr" id="pick">
-  <b>編輯私心推薦第 1 首</b>
-  <ul class="songs" style="grid-template-columns:1fr;margin:10px 0 6px">{_song_li(*_ALL[PICK])}</ul>
-  <p>{PICK_WHY}</p>
-</div>
 <div class="tldr">
   <b>婚禮歌單怎麼分？</b>
   <ul>
@@ -274,6 +265,7 @@ _body = f"""
     <li><b>用餐</b>：最長的一段，準備一份溫柔不搶話的長歌單。</li>
     <li><b>逐桌敬酒</b>：長輩多，放大家都會哼的經典老歌。</li>
     <li><b>送客</b>：合照、送客，快樂收尾。</li>
+    <li><b>🌈 同婚也適合</b>：我們自己是同婚伴侶，另外挑出<a href="#same-sex">歌詞不分性別的歌</a>，歌單裡標「同婚也適合」。</li>
   </ul>
 </div>
 <p class="note-box">點歌名會開 YouTube 影片，可以直接試聽。「我們推」是我們自己喜歡的歌；「網友推」整理自 Threads 網友推薦（2026-11-21 擷取，很多是新人自己婚禮真的用過的）；「🎬 婚禮場景」是在電影或影集婚禮裡出現過的歌；「🎵 影視原聲」是電影或戲劇原聲帶裡的歌。</p>
@@ -301,10 +293,12 @@ _body = f"""
 <div class="tbl"><table><thead><tr><th>歌名</th><th>歌手</th><th>出處</th></tr></thead><tbody>""" + "".join(
     f'<tr><td><a href="{_yt(v)}" target="_blank" rel="noopener" data-cta="song_play" data-cta-type="wedding">{t} ▶</a></td><td>{a}</td><td>{n}</td></tr>' for t, a, v, m, n in _ALL.values() if "o" in m) + """</tbody></table></div>
 
-<h2 id="same-sex">同婚婚禮也適合：歌詞不分性別的歌</h2>
+<div class="tldr" style="margin-top:28px">
+<h2 id="same-sex" style="margin-top:4px">🌈 同婚婚禮也適合：歌詞不分性別的歌</h2>
 <p>我們自己是同婚伴侶，挑歌時會多看一眼歌詞：很多經典情歌寫的是「她」或「他」、「新郎」或「新娘」。下面這幾首的歌詞沒有限定性別，同婚、異性婚都適合：</p>
 <ul class="songs">""" + "".join(_song_li(*_ALL[t]) for t in NEUTRAL) + """</ul>
 <p class="note-box">用在儀式前，建議再讀一次完整歌詞，確認每一段都是你們想說的話。</p>
+</div>
 
 <h2 id="invite">把你們的歌放進喜帖</h2>
 <p>挑好歌之後，可以把歌名寫進婚宴流程，例如「一進：〈Can't Help Falling in Love〉」，賓客聽到時就知道這首歌對你們的意義。我們的<a href="/web-invitation/">網頁電子喜帖</a>有婚宴流程區塊，<a href="/paper-invitation/">紙本喜帖</a>也可以設計一頁放流程和 Dress code。</p>
@@ -318,13 +312,13 @@ POSTS.append(dict(
     ga="婚禮歌單",
     published="2026-11-21",
     modified="2026-11-22",
-    lead="這份婚禮歌單，一半是我們自己私心喜歡的歌，一半來自 Threads 上一篇「求感人婚禮歌單」的網友推薦——上百則留言裡，很多是新人分享自己婚禮真的用過的歌。我們把它們依婚禮流程分成六個時刻，每首都能直接點開聽，挑歌時省一點力氣。",
+    lead="這份婚禮歌單，一半是我們自己私心喜歡的歌，一半來自 Threads 上一篇「求感人婚禮歌單」的網友推薦——上百則留言裡，很多是新人分享自己婚禮真的用過的歌。我們把它們依婚禮流程分成六個時刻，每首都能直接點開聽，挑歌時省一點力氣。我們自己是同婚伴侶，也特別整理了歌詞不分性別、同婚婚禮也適合的歌。",
     body=_body,
     faq=[
         ("一進、二進是什麼意思？", "一進是新人在婚宴開場第一次進場，二進是新人換第二套禮服後再次進場。一進通常選最感人、最有意義的歌，二進可以輕快甜一點。"),
         ("婚禮歌單要準備幾首？", "儀式歌（一進、二進、和家人進場、送客）各挑 1 首，大約 4～6 首；迎賓、用餐、敬酒用背景歌單循環播放，長度抓整場婚宴的時間，常見 2～3 小時。"),
         ("婚禮一進歌推薦哪些？", "我們最推 Kina Grannis 版〈Can't Help Falling in Love〉（電影《瘋狂亞洲富豪》婚禮紅毯曲），網友推最多的還有〈A Thousand Years〉、Ed Sheeran〈Perfect〉、Shane Filan〈Beautiful in White〉、傻子與白痴〈第一支舞〉。"),
-        ("哪些電影婚禮場景的歌適合用在婚禮？", "進場可以選《瘋狂亞洲富豪》的〈Can't Help Falling in Love〉、《暮光之城：破曉 上》的〈Turning Page〉、《真善美》的婚禮進行曲；純音樂可以選《天外奇蹟》的〈Married Life〉；送客想熱鬧一點，可以選《婚禮終結者》的〈Shout〉、《伴娘我最大》的〈Hold On〉、《媽媽咪呀！》的〈I Do, I Do, I Do, I Do, I Do〉、《愛是您，愛是我》的〈All You Need Is Love〉。"),
+        ("哪些電影婚禮場景的歌適合用在婚禮？", "進場可以選《瘋狂亞洲富豪》的〈Can't Help Falling in Love〉、《暮光之城：破曉 上》的〈Turning Page〉；純音樂可以選《天外奇蹟》的〈Married Life〉；送客想熱鬧一點，可以選《婚禮終結者》的〈Shout〉、《伴娘我最大》的〈Hold On〉、《媽媽咪呀！》的〈I Do, I Do, I Do, I Do, I Do〉、《愛是您，愛是我》的〈All You Need Is Love〉。"),
         ("敬酒的時候適合放什麼歌？", "敬酒時長輩比較多，放大家都會哼的經典老歌最保險，例如蘇芮〈牽手〉、張宇〈給你們〉、趙詠華〈最浪漫的事〉、西城男孩〈Nothing's Gonna Change My Love for You〉。"),
         ("同婚婚禮適合放什麼歌？", "可以選歌詞不限定性別的歌，例如〈A Thousand Years〉、〈Can't Help Falling in Love〉、Adele〈Make You Feel My Love〉、Ellie Goulding〈How Long Will I Love You〉、〈Lucky〉、方大同〈Special Person〉。用之前建議再讀一次完整歌詞。"),
     ],
