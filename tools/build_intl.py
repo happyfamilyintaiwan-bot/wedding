@@ -68,6 +68,7 @@ JS = r"""
     $("style-more").hidden = pkg !== "bundle";
     const items = [[pkg === "bundle" ? T.ln_bundle : T.ln_portrait, pkg === "bundle" ? P.bundle : P.portrait]];
     if (pets) items.push([`${T.ln_pet} ×${pets}`, pets * P.pet]);
+    if ($("cert").checked) items.push([T.ln_cert, pkg === "bundle" ? P.cert_with : P.cert]);
     if (pkg === "bundle" && months) items.push([`${T.ln_month} ×${months}`, months * P.month]);
     const days = val("need") ? Math.ceil((new Date(val("need")) - new Date()) / 864e5) : 99;
     const rush = days < 28, base = items.reduce((a, [, p]) => a + p, 0);
@@ -140,7 +141,8 @@ def build(lang):
          "offers": [
              {"@type": "Offer", "name": strip_tags(t["rows"][0][1]), "price": str(PRICES["bundle"]), "priceCurrency": "USD"},
              {"@type": "Offer", "name": strip_tags(t["rows"][1][1]), "price": str(PRICES["portrait"]), "priceCurrency": "USD"},
-             {"@type": "Offer", "name": strip_tags(t["rows"][2][1]), "price": str(PRICES["pet"]), "priceCurrency": "USD"}]},
+             {"@type": "Offer", "name": strip_tags(t["rows"][2][1]), "price": str(PRICES["pet"]), "priceCurrency": "USD"},
+             {"@type": "Offer", "name": strip_tags(t["rows"][4][1]), "price": str(PRICES["cert"]), "priceCurrency": "USD"}]},
         {"@type": "FAQPage", "mainEntity": faq_ld}]}
     langs = "".join(f'<a href="{p}" hreflang="{"zh-Hant" if c == "zh" else c}"{CUR if c == lang else ""} data-cta="lang_switch" data-cta-type="wedding">{n}</a>' for c, n, p in LANG_NAMES)
     rows = "\n".join(f'        <div class="row rv"><span class="n">{n}</span><h3>{h}<small>{sm}</small></h3><span class="p">{p}</span><p>{d}</p></div>' for n, h, sm, p, d in t["rows"])
@@ -151,7 +153,7 @@ def build(lang):
     faq = "\n".join(f"        <details><summary>{q}</summary><p>{a}</p></details>" for q, a in t["faq"])
     marquee = "".join(f"{t['marquee'][i]}<i>{t['marquee'][i + 1]}</i>" for i in range(0, len(t["marquee"]), 2))
     styles_radio = "".join(f'<label><input type="radio" name="style" value="{k} {h}"{" checked" if k == "A" else ""}><span>{k}・{h}</span></label>' for k, h, _ in t["styles"])
-    js_t = {k: t[k] for k in ["ln_bundle", "ln_portrait", "ln_pet", "ln_month", "ln_rush", "q_rush", "q_rush_on", "m_head", "m_name", "m_mail", "m_names", "m_country", "m_wd", "m_need", "m_items", "m_style", "m_color", "m_total", "m_memo", "m_photo", "m_agree", "m_subject", "m_unset", "m_pay"]}
+    js_t = {k: t[k] for k in ["ln_cert", "ln_bundle", "ln_portrait", "ln_pet", "ln_month", "ln_rush", "q_rush", "q_rush_on", "m_head", "m_name", "m_mail", "m_names", "m_country", "m_wd", "m_need", "m_items", "m_style", "m_color", "m_total", "m_memo", "m_photo", "m_agree", "m_subject", "m_unset", "m_pay"]}
     js_t["mail"] = MAIL
     js = JS.replace("__T__", json.dumps(js_t, ensure_ascii=False)).replace("__P__", json.dumps(PRICES))
     robots = "noindex, nofollow" if not LIVE else "index, follow, max-image-preview:large"
@@ -232,6 +234,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{{cookie_doma
       <div class="menu">
 {rows}
       </div>
+      <p class="note" style="margin-top:18px;font-size:15px">{t['pkg_link']}</p>
     </div>
   </section>
 
@@ -290,6 +293,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{{cookie_doma
             <label class="opt"><input type="radio" name="pkg" value="bundle" checked> {t['q_bundle']}<span class="p">US${PRICES['bundle']}</span></label>
             <label class="opt"><input type="radio" name="pkg" value="portrait"> {t['q_portrait']}<span class="p">US${PRICES['portrait']}</span></label>
             <div class="opt locked">{t['q_pets']}<span class="p"><span class="stepper"><button type="button" data-k="pets" data-step="-1" aria-label="−">−</button><output id="pets">0</output><button type="button" data-k="pets" data-step="1" aria-label="+">＋</button></span></span></div>
+            <label class="opt"><input type="checkbox" id="cert"> {t['q_cert']}<span class="p">+US${PRICES['cert']}</span></label>
             <div class="sub-opts" id="style-more">
               <div class="field"><span>{t['q_style']}</span><div class="pills">{styles_radio}</div></div>
               <div class="field"><span>{t['q_months']}</span><span class="stepper" style="width:max-content"><button type="button" data-k="months" data-step="-1" aria-label="−">−</button><output id="months">0</output><button type="button" data-k="months" data-step="1" aria-label="+">＋</button></span></div>

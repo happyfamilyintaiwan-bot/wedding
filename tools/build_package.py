@@ -120,7 +120,7 @@ T = {
     ],
     addon="Need printing? Printed certificates or paper invitations can be added and sent by registered mail to your address in Taiwan (quoted separately).",
     cmp_k="Compare", cmp_h="Package vs. single items", cmp_head=["Item", "Single items", "Taiwan wedding package"],
-    cmp=[("Invitation language", "One language", "Chinese and English, switchable"), ("Invitation online", "3 months from delivery", "6 months from delivery"), ("Portrait revisions", "2", "4"), ("Pet or child", "+US$25 each", "1 included"),
+    cmp=[("Marriage certificate PDF", "+US$50", "Included"), ("Portrait revisions", "2", "4"), ("Pet or child", "+US$25 each", "1 included"),
          ("RSVP form", "You set it up", "Bilingual template provided"), ("Guide for overseas guests", "No", "Yes"), ("Welcome sign and save-the-date", "No", "Yes")],
     price_k="One price", price_h="Package price", price_alt=f"or NT${PRICE_TWD}",
     price_li=["US dollars: pay by Wise", "Taiwan dollars: bank transfer to a Taiwan account", "We start after full payment", "Full refund before we start the first sketch; no refund once drawing has started"],
