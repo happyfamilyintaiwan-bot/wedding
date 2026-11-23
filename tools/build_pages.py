@@ -12,6 +12,7 @@
 import html, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from blog_posts import POSTS
+from blog_kit import CHEAT, SERVICES, end_card
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://wedding.knittinghiyori.com"
@@ -152,6 +153,87 @@ PAGE_CSS = """<style>
 .post-list b { font-family: var(--serif); color: var(--wine); font-size: 19px; display: block; margin-bottom: 4px; }
 .post-list span { color: var(--muted); font-size: 15px; }
 @media (max-width: 560px) { .post ul.songs { grid-template-columns: 1fr; } .post { font-size: 16px; } }
+/* 文章元件（build_pages.py） */
+.post-cover { margin: 0 0 18px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 1200 / 630; background: var(--blush); }
+.post-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.sum3 { position: relative; background: var(--cream); border: 2px solid var(--wine); border-radius: 18px; padding: 22px 22px 14px; margin: 0 0 20px; box-shadow: 6px 6px 0 var(--rose); }
+.sum3 > b { position: absolute; top: -14px; left: 18px; background: var(--wine); color: var(--cream); font-family: var(--serif); font-size: 14px; letter-spacing: .08em; padding: 3px 12px; border-radius: 999px; }
+.sum3 ol { list-style: none; padding: 0; margin: 4px 0 0; counter-reset: s; }
+.sum3 li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; gap: 10px; margin-bottom: 10px; font-size: 16.5px; line-height: 1.65; }
+.sum3 li::before { content: counter(s); width: 26px; height: 26px; border-radius: 50%; background: var(--rose); color: var(--wine); font-family: var(--latin); font-weight: 700; display: grid; place-items: center; margin-top: 2px; }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; padding: 0; list-style: none; }
+.toc a { display: inline-block; font-size: 14px; text-decoration: none; color: var(--wine); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; }
+.toc a:hover { border-color: var(--wine); }
+.post ol.steps { list-style: none; padding: 0; counter-reset: st; margin: 12px 0 20px; }
+.post ol.steps > li { counter-increment: st; position: relative; padding: 0 0 18px 50px; margin: 0; }
+.post ol.steps > li::before { content: counter(st); position: absolute; left: 0; top: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--wine); color: var(--cream); font-family: var(--latin); font-weight: 700; font-size: 17px; display: grid; place-items: center; }
+.post ol.steps > li:not(:last-child)::after { content: ""; position: absolute; left: 16.5px; top: 38px; bottom: 4px; width: 1px; background: var(--rose); }
+.post ol.steps > li > b { display: block; color: var(--wine); font-size: 17.5px; margin-bottom: 2px; }
+.post ul.check { list-style: none; padding: 0; }
+.post ul.check > li { position: relative; padding-left: 28px; }
+.post ul.check > li::before { content: "✓"; position: absolute; left: 4px; top: 0; color: var(--rose-d); font-weight: 700; }
+.box { border-radius: 14px; padding: 14px 18px 4px; margin: 16px 0 20px; border-left: 5px solid; }
+.box > b { display: block; font-size: 15.5px; margin-bottom: 4px; }
+.box p { margin-bottom: 10px; }
+.box.tip { background: var(--blush); border-color: var(--rose-d); }
+.box.tip > b { color: var(--wine); }
+.box.warn { background: #fff4d6; border-color: #c9962b; }
+.box.warn > b { color: #6b4e00; }
+.box.note { background: #e9f0f5; border-color: #5b7d99; }
+.box.note > b { color: #2f4a63; }
+.cheat { margin: 26px 0; text-align: center; }
+.cheat img { width: 100%; max-width: 480px; height: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 20px 40px -26px rgba(90, 34, 50, .55); }
+.cheat figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+.cheat .acts { display: flex; gap: 8px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+.cheat .acts .pill { min-height: 38px; padding: 6px 16px; font-size: 14px; }
+.svc-mid { display: grid; grid-template-columns: 84px 1fr; gap: 14px; align-items: center; text-decoration: none; color: var(--ink); background: #fff; border: 1px solid var(--wine); border-radius: 16px; padding: 12px 16px 12px 12px; margin: 22px 0; transition: transform .25s var(--ease), box-shadow .25s; }
+.svc-mid:hover { transform: translateY(-2px); box-shadow: 0 14px 26px -18px rgba(90, 34, 50, .6); }
+.svc-mid img { width: 84px; height: 84px; object-fit: cover; border-radius: 12px; background: var(--blush); }
+.svc-mid i { font-style: normal; display: block; font-size: 13.5px; color: var(--rose-d); }
+.svc-mid b { display: block; font-family: var(--serif); color: var(--wine); font-size: 17px; line-height: 1.4; }
+.svc-mid span { display: block; font-size: 14px; color: var(--muted); }
+.svc-end { display: grid; grid-template-columns: 200px 1fr; gap: 22px; align-items: center; background: var(--cream); border: 2px solid var(--wine); border-radius: 20px; padding: 20px; margin: 40px 0 10px; }
+.svc-end img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; background: var(--blush); }
+.svc-end h3 { font-family: var(--serif); color: var(--wine); font-size: 22px; margin: 4px 0 8px; line-height: 1.35; }
+.svc-end ul { list-style: none; padding: 0; margin: 0 0 12px; font-size: 15px; }
+.svc-end li { margin: 0 0 4px; padding-left: 20px; position: relative; }
+.svc-end li::before { content: "✦"; position: absolute; left: 0; color: var(--rose-d); font-size: 12px; top: 3px; }
+.svc-end .price { font-family: var(--latin); color: var(--wine); font-size: 26px; margin-bottom: 12px; }
+.svc-end .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 560px) {
+  .svc-end { grid-template-columns: 1fr; padding: 16px; }
+  .svc-end img { aspect-ratio: 4 / 3; object-position: center 70%; }
+  .svc-end .acts .pill { flex: 1; }
+  .post .tbl.stack table, .post .tbl.stack tbody, .post .tbl.stack tr, .post .tbl.stack td { display: block; min-width: 0; width: 100%; }
+  .post .tbl.stack thead { display: none; }
+  .post .tbl.stack tr { border: 1px solid var(--line); border-radius: 12px; margin-bottom: 10px; background: #fff; overflow: hidden; }
+  .post .tbl.stack td { border: 0; border-bottom: 1px dashed var(--line); display: grid; grid-template-columns: 7.5em 1fr; gap: 8px; }
+  .post .tbl.stack td:last-child { border-bottom: 0; }
+  .post .tbl.stack td::before { content: attr(data-th); color: var(--muted); font-size: 13.5px; }
+  .post .tbl.stack td:first-child { background: var(--blush); color: var(--wine); font-weight: 700; grid-template-columns: 1fr; }
+  .post .tbl.stack td:first-child::before { display: none; }
+}
+.post-hero h1 { font-size: clamp(26px, 4.2vw, 42px); }
+.post .lead-p { font-size: 17px; }
+.post .note-box { font-size: 14.5px; color: var(--muted); }
+.rel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 10px 0 18px; }
+.rel a, .post-list a.card { display: grid; grid-template-rows: auto 1fr; text-decoration: none; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; transition: transform .25s var(--ease), border-color .25s; }
+.rel a:hover, .post-list a.card:hover { transform: translateY(-2px); border-color: var(--wine); }
+.rel img, .post-list a.card img { display: block; width: 100%; aspect-ratio: 1200 / 630; object-fit: cover; background: var(--blush); }
+.rel a div, .post-list a.card div { padding: 12px 14px 14px; }
+.rel i, .post-list a.card i { font-style: normal; font-size: 12.5px; color: var(--rose-d); display: block; margin-bottom: 2px; }
+.rel b { font-family: var(--serif); color: var(--wine); font-size: 16.5px; line-height: 1.45; display: block; }
+.cats { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 26px; }
+.cats a { display: inline-block; text-decoration: none; color: var(--wine); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 14.5px; }
+.cats a:hover { border-color: var(--wine); }
+.blog-cat { margin-bottom: 40px; }
+.blog-cat h2 { font-family: var(--serif); color: var(--wine); font-size: clamp(22px, 3vw, 28px); margin-bottom: 4px; }
+.blog-cat > p { color: var(--muted); margin-bottom: 14px; max-width: 40em; }
+.post-list.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 980px; }
+.post-list a.card { padding: 0; }
+.post-list a.card b { margin-bottom: 6px; }
+.post-list a.card small { display: block; font-size: 13px; color: var(--muted); margin-top: 8px; }
+@media (max-width: 640px) { .rel, .post-list.grid { grid-template-columns: 1fr; } }
 </style>"""
 
 
@@ -169,8 +251,11 @@ def crumbs_ld(url, name):
         {"@type": "ListItem", "position": i + 1, "name": n, "item": SITE + u} for i, (n, u) in enumerate(trail)]}
 
 
-def page(url, name, title, desc, ga_title, body, ld=(), robots="index, follow, max-image-preview:large", extra_js=""):
+def page(url, name, title, desc, ga_title, body, ld=(), robots="index, follow, max-image-preview:large", extra_js="", og_image="/assets/og.jpg", og_alt="", article=None):
     graph = {"@context": "https://schema.org", "@graph": [crumbs_ld(url, name), *ld]}
+    alt_tag = f'\n<meta property="og:image:alt" content="{html.escape(og_alt)}">' if og_alt else ""
+    art_tags = (f'\n<meta property="article:published_time" content="{article[0]}">'
+                f'\n<meta property="article:modified_time" content="{article[1]}">') if article else ""
     head = f"""<!doctype html>
 <html lang="zh-Hant-TW">
 <head>
@@ -179,17 +264,17 @@ def page(url, name, title, desc, ga_title, body, ld=(), robots="index, follow, m
 <title>{title}</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="{SITE}{url}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="{'article' if article else 'website'}">
 <meta property="og:site_name" content="編織日和">
 <meta property="og:title" content="{html.escape(title.rsplit('｜', 1)[0])}">
 <meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:url" content="{SITE}{url}">
-<meta property="og:image" content="{SITE}/assets/og.jpg">
+<meta property="og:image" content="{SITE}{og_image}">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="zh_TW">
+<meta property="og:image:height" content="630">{alt_tag}
+<meta property="og:locale" content="zh_TW">{art_tags}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{SITE}/assets/og.jpg">
+<meta name="twitter:image" content="{SITE}{og_image}">
 <meta name="robots" content="{robots}">
 {icons_fonts}
 {styles}
@@ -286,8 +371,86 @@ def read_more(*links):
   </section>"""
 
 
-SONGS_LINK = ("/blog/wedding-songs/", "婚禮歌單：依迎賓、一進、二進、用餐、敬酒、送客分好的婚禮歌曲")
-SSM_LINK = ("/blog/same-sex-marriage-registration-taiwan/", "台灣同性結婚登記全攻略：流程、要帶什麼、書約法條與跨國伴侶規定")
+# ── 部落格共用（文章元件：tools/blog_kit.py；寫作規範：CLAUDE.md「部落格寫作規範」） ──
+CATS = [  # (代號, 分類名稱, 一句說明)；每篇的 cat 填代號，部落格首頁照這個順序分區
+    ("registration", "結婚登記與法規", "結婚登記要帶什麼、書約怎麼寫、跨國與同婚伴侶的規定，照官方公告整理。"),
+    ("planning", "婚禮籌備", "歌單、流程、喜帖與婚禮小細節，挑歌挑設計時用得到。"),
+]
+CAT_NAME = dict((c, n) for c, n, _ in CATS)
+
+
+def strip(s):
+    return re.sub("<[^>]+>", "", s)
+
+
+def post_url(P):
+    return f"/blog/{P['slug']}/"
+
+
+def check_post(P):
+    """每篇的固定元素，少了就停下來（規範見 CLAUDE.md）"""
+    s, err = P["slug"], []
+    for k in ("cat", "cover", "summary", "cheat", "service"):
+        if not P.get(k):
+            err.append(f"缺 {k}")
+    if P.get("cat") and P["cat"] not in CAT_NAME:
+        err.append(f"cat「{P['cat']}」不在 CATS 裡")
+    if P.get("summary") and len(P["summary"]) != 3:
+        err.append(f"summary 要剛好 3 句（現在 {len(P['summary'])} 句）")
+    if P.get("service") and P["service"] not in SERVICES:
+        err.append(f"service「{P['service']}」不在 blog_kit.SERVICES 裡")
+    n_mid = P["body"].count('class="svc-mid"')
+    if n_mid != 1:
+        err.append(f"內文中間的情境卡 mid(...) 要剛好 1 張（現在 {n_mid} 張）")
+    if P["body"].count(CHEAT) != 1:
+        err.append("內文要放 1 次 {CHEAT}（懶人包圖的位置）")
+    for k in ("cover", "cheat"):
+        c = P.get(k) or {}
+        if c and not (c.get("img") and c.get("alt")):
+            err.append(f"{k} 要有 img 和 alt")
+        if c.get("img") and not os.path.exists(os.path.join(ROOT, "assets", "blog", c["img"])):
+            err.append(f"找不到 assets/blog/{c['img']}，先跑 python3 tools/make_blog_img.py {s}")
+    if re.search("[–—]", P["body"] + P["title"] + P["desc"] + "".join(q + a for q, a in P["faq"])):
+        err.append("有 em dash 或 en dash（—、–），改成逗號、冒號或括號")
+    if err:
+        sys.exit(f"文章 {s} 沒過檢查：\n- " + "\n- ".join(err))
+
+
+def links_to(P, url):
+    return f'href="{url}' in P["body"] or SERVICES[P["service"]]["url"] == url
+
+
+def read_more_auto(url):
+    """服務頁底部的延伸閱讀：自動列出連到這個服務頁的文章"""
+    links = [(post_url(P), strip(P["h1"])) for P in POSTS if links_to(P, url)]
+    return read_more(*links) if links else ""
+
+
+def card(P, cta, small=True):
+    c = P["cover"]
+    return (f'<a class="card" href="{post_url(P)}" data-cta="{cta}" data-cta-type="wedding"><img src="/assets/blog/{c["img"]}" alt="{html.escape(c["alt"])}" loading="lazy" width="1200" height="630">'
+            f'<div><i>{CAT_NAME[P["cat"]]}</i><b>{strip(P["h1"])}</b>' + (f'<span>{P["desc"][:64]}…</span><small>更新 {P["modified"]}</small>' if small else "") + "</div></a>")
+
+
+def related(P):
+    """延伸閱讀：同分類的文章排前面，最多 4 篇（服務頁交給兩張服務卡）"""
+    others = sorted((o for o in POSTS if o["slug"] != P["slug"]), key=lambda o: o["modified"], reverse=True)
+    others = sorted(others, key=lambda o: o["cat"] != P["cat"])   # 同分類排前面，各自新的在前
+    others = others[:4]
+    if not others:
+        return ""
+    return '<h2 id="related">延伸閱讀</h2><div class="rel">' + "".join(
+        f'<a href="{post_url(o)}" data-cta="related_link" data-cta-type="wedding"><img src="/assets/blog/{o["cover"]["img"]}" alt="{html.escape(o["cover"]["alt"])}" loading="lazy" width="1200" height="630"><div><i>{CAT_NAME[o["cat"]]}</i><b>{strip(o["h1"])}</b></div></a>'
+        for o in others) + "</div>"
+
+
+def toc(P):
+    heads = re.findall(r'<h2 id="([^"]+)"[^>]*>(.*?)</h2>', P["body"])
+    names = P.get("toc", {})
+    items = [(i, names.get(i, strip(t).rstrip("？?"))) for i, t in heads] + [("faq", "常見問題")]
+    return '<ul class="toc" aria-label="文章目錄">' + "".join(f'<li><a href="#{i}">{t}</a></li>' for i, t in items) + "</ul>"
+
+
 
 built = []
 
@@ -308,7 +471,7 @@ law_sec = """  <section style="padding-top:0">
 cert_body = hero("結婚書約", "似顏繪結婚書約：<br>把你們畫進登記那天的書約",
                  "先畫好你們兩人的全身彩色似顏繪（NT$1,800），再放進手繪邊框的結婚書約。書約有 4 種方案，NT$1,000 起；同婚、非同婚都有對應的法條版本。",
                  '<a class="pill" href="/?sy=4#quote" data-cta="page_quote" data-cta-type="wedding">估價這個方案 <span class="arr">→</span></a><a class="pill ghost" href="#cert">看 4 種方案</a>') + \
-    "\n" + cert_sec + "\n" + law_sec + "\n" + flow_sec + "\n" + read_more(SSM_LINK) + "\n" + faq_sec(cert_qa) + "\n" + cta_sec("開始估價結婚書約", "/?sy=4#quote") + "\n" + BUNDLE
+    "\n" + cert_sec + "\n" + law_sec + "\n" + flow_sec + "\n" + read_more_auto("/marriage-certificate/") + "\n" + faq_sec(cert_qa) + "\n" + cta_sec("開始估價結婚書約", "/?sy=4#quote") + "\n" + BUNDLE
 cert_ld = [{"@type": "Service", "name": "似顏繪結婚書約客製", "serviceType": "結婚書約設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
             "offers": [offer("方案 1：書約設計", 1000, "設計圖面費，交付設計預覽，不含圖檔（另需雙人似顏繪 NT$1,800）"), offer("方案 2：書約設計＋PDF 電子檔", 1600, "可列印的 PDF"),
                        offer("方案 3：書約設計＋印刷 3 張", 2380, "台灣印製，郵局掛號寄台灣地址"), offer("方案 4：設計＋印刷 3 張＋PDF", 2880, "組合價")]}, faq_ld(cert_qa)]
@@ -321,7 +484,7 @@ cari_qa = faqs("要準備什麼照片？", "可以修改幾次？", "製作要�
 cari_body = hero("似顏繪", "新人似顏繪：<br>照你們最喜歡的婚紗照畫",
                  "雙人全身彩色似顏繪 NT$1,800，免費修改 2 次；毛小孩、小朋友每位加 NT$800 一起畫進來。這張圖之後可以放進結婚書約和電子喜帖，整套看起來是同一個風格。",
                  '<a class="pill" href="/#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#portfolio">看作品</a>') + \
-    "\n" + folio_sec + "\n" + duo_sec + "\n" + flow_sec + "\n" + faq_sec(cari_qa) + "\n" + cta_sec("開始估價似顏繪", "/#quote") + "\n" + BUNDLE
+    "\n" + folio_sec + "\n" + duo_sec + "\n" + flow_sec + "\n" + read_more_auto("/caricature/") + "\n" + faq_sec(cari_qa) + "\n" + cta_sec("開始估價似顏繪", "/#quote") + "\n" + BUNDLE
 cari_ld = [{"@type": "Service", "name": "新人似顏繪客製", "serviceType": "婚禮似顏繪", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
             "offers": [offer("雙人全身彩色似顏繪", 1800, "免費修改 2 次"), offer("加畫寵物或小孩（每位）", 800, "毛小孩、小朋友一起入鏡")]}, faq_ld(cari_qa)]
 built.append(page("/caricature/", "似顏繪", "新人似顏繪客製｜雙人全身彩色 NT$1,800、可加畫寵物｜編織日和",
@@ -333,7 +496,7 @@ web_qa = faqs("電子喜帖可以用多久？會被搜尋到嗎？", "可以修�
 web_body = hero("電子喜帖", "網頁電子喜帖：<br>手機一點就開，賓客線上回覆出席",
                 "把你們的似顏繪做成喜帖網頁：開場動畫、婚禮倒數、婚宴流程、Dress code、地圖、加入行事曆、出席回覆都在裡面。3 種風格同價 NT$3,800（另需雙人似顏繪 NT$1,800）。",
                 '<a class="pill" href="/?web=A#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#web">看 3 種風格</a>') + \
-    "\n" + web_sec + "\n" + flow_sec + "\n" + read_more(SONGS_LINK) + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote") + "\n" + BUNDLE
+    "\n" + web_sec + "\n" + flow_sec + "\n" + read_more_auto("/web-invitation/") + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote") + "\n" + BUNDLE
 web_ld = [{"@type": "Service", "name": "似顏繪網頁電子喜帖", "serviceType": "電子喜帖設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
            "offers": [offer("網頁電子喜帖（3 種風格同價）", 3800, "交付起 3 個月上線與維護"), offer("延長上線（每月）", 600, "交付 3 個月後每延長 1 個月")]}, faq_ld(web_qa)]
 built.append(page("/web-invitation/", "電子喜帖", "網頁電子喜帖客製｜似顏繪＋出席回覆、地圖、倒數 3 種風格 NT$3,800｜編織日和",
@@ -412,7 +575,7 @@ paper_qa = [
 paper_body = hero("紙本喜帖", "似顏繪紙本喜帖：<br>把你們的似顏繪印成喜帖",
                   "用你們的似顏繪設計兩頁喜帖，連同燙金信封和蠟封貼紙一起印好。兩頁設計 NT$2,500，印刷每份 NT$105（30 份起），只寄台灣。",
                   '<a class="pill" href="/?paper=1#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#portfolio">看作品</a>') + \
-    "\n" + paper_folio + "\n" + paper_spec + "\n" + env_sec + "\n" + paper_flow + "\n" + read_more(SONGS_LINK) + "\n" + faq_sec(paper_qa) + "\n" + cta_sec("開始估價紙本喜帖", "/?paper=1#quote") + "\n" + BUNDLE
+    "\n" + paper_folio + "\n" + paper_spec + "\n" + env_sec + "\n" + paper_flow + "\n" + read_more_auto("/paper-invitation/") + "\n" + faq_sec(paper_qa) + "\n" + cta_sec("開始估價紙本喜帖", "/?paper=1#quote") + "\n" + BUNDLE
 paper_ld = [{"@type": "Service", "name": "似顏繪紙本喜帖", "serviceType": "紙本喜帖設計與印刷", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
              "offers": [offer("紙本喜帖 兩頁設計", 2500, "可沿用作品集設計或討論新設計"), offer("紙本喜帖 印刷（每份）", 105, "同款式 30 份起印，含信封與信封貼紙，只寄台灣")]}, faq_ld(paper_qa)]
 built.append(page("/paper-invitation/", "紙本喜帖", "似顏繪紙本喜帖客製｜兩頁設計 NT$2,500、每份 NT$105 起印｜編織日和",
@@ -443,38 +606,33 @@ built.append(page("/about/", "關於我們", "關於我們｜同婚伴侶經營�
                   "編織日和的似顏繪喜帖由同婚伴侶經營：相信好的設計帶來美感與力量，與各地數位遊牧的設計師朋友合作，打造似顏繪、結婚書約與電子喜帖。",
                   "喜帖|關於我們|同婚伴侶經營的似顏繪喜帖", about_body))
 
-# ── 部落格文章與首頁 ──
-# 文章互相連結：每篇「延伸閱讀」列出其他文章＋相關服務頁（RELATED_PAGES 依 slug 指定）
-RELATED_PAGES = {
-    "same-sex-marriage-registration-taiwan": [("/marriage-certificate/", "似顏繪結婚書約（同婚版・一般版）")],
-    "foreigner-marriage-registration-taiwan": [("/taiwan-wedding/", "回台結婚全包專案（住在國外的新人）"), ("/marriage-certificate/", "似顏繪結婚書約（一般版・同婚版）")],
-    "wedding-songs": [("/web-invitation/", "網頁電子喜帖（婚宴流程放進喜帖）"), ("/paper-invitation/", "似顏繪紙本喜帖")],
-}
-
-
-def related(P):
-    others = [(f"/blog/{o['slug']}/", re.sub("<[^>]+>", "", o["h1"])) for o in POSTS if o["slug"] != P["slug"]]
-    items = others + RELATED_PAGES.get(P["slug"], [])
-    if not items:
-        return ""
-    return '<h2 id="related">延伸閱讀</h2><ul class="check">' + "".join(f'<li><a href="{u}" data-cta="related_link" data-cta-type="wedding">{t}</a></li>' for u, t in items) + "</ul>"
-
+# ── 部落格文章與首頁（輔助函式在上面「部落格共用」） ──
 AUTHOR = [{"@type": "Person", "name": "Zoe"}, {"@type": "Person", "name": "Alison"}]
 for P in POSTS:
-    url = f"/blog/{P['slug']}/"
-    meta = f'<p class="meta">Zoe & Alison｜發布 {P["published"]}' + (f'｜更新 {P["modified"]}' if P["modified"] != P["published"] else "") + "</p>"
+    check_post(P)
+    url = post_url(P)
+    cv, ch = P["cover"], P["cheat"]
+    meta = f'<p class="meta">{CAT_NAME[P["cat"]]}｜Zoe & Alison｜發布 {P["published"]}' + (f'｜更新 {P["modified"]}' if P["modified"] != P["published"] else "") + "</p>"
     src = "".join(f'<li><a href="{u}" rel="noopener" target="_blank">{n}</a></li>' for n, u in P["sources"])
-    body = f"""  <section class="page-hero">
-    <div class="wrap">
-      <p class="crumb"><a href="/">似顏繪喜帖</a> › <a href="/blog/">部落格</a></p>
+    cheat_fig = (f'<figure class="cheat"><img src="/assets/blog/{ch["img"]}" alt="{html.escape(ch["alt"])}" loading="lazy" width="1080" height="1350">'
+                 f'<figcaption>{ch.get("caption", strip(ch["title"]).replace(chr(10), ""))}</figcaption>'
+                 f'<div class="acts"><a class="pill ghost" href="/assets/blog/{ch["img"]}" download data-cta="cheat_save" data-cta-type="wedding">⬇ 存圖</a></div></figure>')
+    sum3 = '<div class="sum3"><b>3 句話看懂</b><ol>' + "".join(f"<li><span>{x}</span></li>" for x in P["summary"]) + "</ol></div>"
+    body = f"""  <section class="page-hero post-hero">
+    <div class="wrap post" style="padding:0">
+      <p class="crumb"><a href="/">似顏繪喜帖</a> › <a href="/blog/">部落格</a> › <a href="/blog/#{P['cat']}">{CAT_NAME[P['cat']]}</a></p>
       <h1>{P['h1']}</h1>
       {meta}
-      <p class="lead">{P['lead']}</p>
     </div>
   </section>
   <section style="padding-top:0">
     <article class="wrap post">
-{P['body']}
+      <figure class="post-cover"><img src="/assets/blog/{cv['img']}" alt="{html.escape(cv['alt'])}" width="1200" height="630" fetchpriority="high"></figure>
+      {sum3}
+      {toc(P)}
+      <p class="lead-p">{P['lead']}</p>
+{P['body'].replace(CHEAT, cheat_fig)}
+      {end_card(P['service'])}
       {related(P)}
       <h2 id="faq">常見問題</h2>
       {faq_html(P['faq'])}
@@ -482,27 +640,40 @@ for P in POSTS:
       <ul class="sources">{src}</ul>
     </article>
   </section>
-""" + BUNDLE
-    ld = [{"@type": "BlogPosting", "headline": re.sub("<[^>]+>", "", P["h1"]), "description": P["desc"], "datePublished": P["published"], "dateModified": P["modified"],
-           "author": AUTHOR, "publisher": PROVIDER, "mainEntityOfPage": SITE + url, "image": SITE + "/assets/og.jpg", "inLanguage": "zh-Hant-TW"}, faq_ld(P["faq"])]
-    built.append(page(url, re.sub("<[^>]+>", "", P["h1"]).split("：")[0], P["title"], P["desc"], f"喜帖|部落格|{P['ga']}", body, ld))
+"""
+    ld = [{"@type": "BlogPosting", "headline": strip(P["h1"]), "description": P["desc"], "datePublished": P["published"], "dateModified": P["modified"],
+           "author": AUTHOR, "publisher": PROVIDER, "mainEntityOfPage": SITE + url, "inLanguage": "zh-Hant-TW", "articleSection": CAT_NAME[P["cat"]],
+           "image": [{"@type": "ImageObject", "url": f"{SITE}/assets/blog/{cv['img']}", "width": 1200, "height": 630, "caption": cv["alt"]},
+                     {"@type": "ImageObject", "url": f"{SITE}/assets/blog/{ch['img']}", "width": 1080, "height": 1350, "caption": ch["alt"]}]},
+          faq_ld(P["faq"])]
+    built.append(page(url, strip(P["h1"]).split("：")[0], P["title"], P["desc"], f"喜帖|部落格|{P['ga']}", body, ld,
+                      og_image=f"/assets/blog/{cv['img']}", og_alt=cv["alt"], article=(P["published"], P["modified"])))
 
-cards = "".join(f'<a href="/blog/{P["slug"]}/" data-cta="blog_card" data-cta-type="wedding"><b>{re.sub("<[^>]+>", "", P["h1"])}</b><span>{P["desc"][:80]}…</span></a>' for P in sorted(POSTS, key=lambda x: x["modified"], reverse=True))
+by_cat = [(c, n, d, sorted((P for P in POSTS if P["cat"] == c), key=lambda x: x["modified"], reverse=True)) for c, n, d in CATS]
+by_cat = [x for x in by_cat if x[3]]
 blog_body = hero("部落格", "婚禮筆記",
-                 "婚禮歌單、結婚登記、同婚書約要注意的地方⋯⋯我們把籌備婚禮時用得到的資訊整理在這裡。",
-                 '<a class="pill ghost" href="/">回似顏繪喜帖</a>') + f"""
+                 "結婚登記要帶什麼、書約法條怎麼寫、婚禮歌單怎麼挑⋯⋯我們把籌備婚禮時用得到的資訊整理在這裡，每篇開頭都先給 3 句話結論。",
+                 "") + f"""
   <section style="padding-top:0">
-    <div class="wrap"><div class="post-list">{cards or "<p>第一篇文章準備中。</p>"}</div></div>
+    <div class="wrap">
+      <ul class="cats" aria-label="文章分類">{"".join(f'<li><a href="#{c}">{n}（{len(ps)}）</a></li>' for c, n, _, ps in by_cat)}</ul>
+      {"".join(f'<div class="blog-cat" id="{c}"><h2>{n}</h2><p>{d}</p><div class="post-list grid">' + "".join(card(P, "blog_card") for P in ps) + "</div></div>" for c, n, d, ps in by_cat) or "<p>第一篇文章準備中。</p>"}
+    </div>
   </section>"""
-built.append(page("/blog/", "部落格", "婚禮筆記｜婚禮歌單、同性結婚登記與結婚書約｜編織日和",
-                  "編織日和的婚禮筆記：婚禮歌單、台灣同性結婚登記流程與書約法條等籌備婚禮用得到的資訊。",
-                  "喜帖|部落格|婚禮筆記", blog_body, robots="index, follow, max-image-preview:large" if POSTS else "noindex, follow"))
+blog_ld = [{"@type": "Blog", "name": "婚禮筆記｜編織日和", "url": SITE + "/blog/", "inLanguage": "zh-Hant-TW", "publisher": PROVIDER,
+            "blogPost": [{"@type": "BlogPosting", "headline": strip(P["h1"]), "url": SITE + post_url(P), "datePublished": P["published"], "dateModified": P["modified"],
+                          "image": f"{SITE}/assets/blog/{P['cover']['img']}"} for P in POSTS]}]
+built.append(page("/blog/", "部落格", "婚禮筆記｜結婚登記、同婚書約與婚禮歌單｜編織日和",
+                  "編織日和的婚禮筆記：結婚登記與法規（同性結婚登記、跨國婚姻）、婚禮籌備（婚禮歌單）等籌備婚禮用得到的資訊，每篇開頭先給 3 句話結論。",
+                  "喜帖|部落格|婚禮筆記", blog_body, blog_ld, robots="index, follow, max-image-preview:large" if POSTS else "noindex, follow"))
 
 # 3. sitemap：英日西保持原樣，中文分頁只放可收錄的頁
 sm_path = os.path.join(ROOT, "sitemap.xml")
 sm = open(sm_path, encoding="utf-8").read()
 sm = re.sub(r"  <!--HY-PAGES-->.*?<!--/HY-PAGES-->\n", "", sm, flags=re.S)
-rows = "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u, ok in built if ok)
+LASTMOD = {post_url(P): P["modified"] for P in POSTS}
+LASTMOD["/blog/"] = max(LASTMOD.values(), default=TODAY)
+rows = "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{max(TODAY, LASTMOD.get(u, TODAY))}</lastmod></url>\n" for u, ok in built if ok)
 sm = sm.replace("</urlset>", f"  <!--HY-PAGES-->\n{rows}  <!--/HY-PAGES-->\n</urlset>")
 open(sm_path, "w", encoding="utf-8").write(sm)
 print("built:", ", ".join(u + ("" if ok else "（noindex）") for u, ok in built))

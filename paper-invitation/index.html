@@ -370,6 +370,87 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .post-list b { font-family: var(--serif); color: var(--wine); font-size: 19px; display: block; margin-bottom: 4px; }
 .post-list span { color: var(--muted); font-size: 15px; }
 @media (max-width: 560px) { .post ul.songs { grid-template-columns: 1fr; } .post { font-size: 16px; } }
+/* 文章元件（build_pages.py） */
+.post-cover { margin: 0 0 18px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 1200 / 630; background: var(--blush); }
+.post-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.sum3 { position: relative; background: var(--cream); border: 2px solid var(--wine); border-radius: 18px; padding: 22px 22px 14px; margin: 0 0 20px; box-shadow: 6px 6px 0 var(--rose); }
+.sum3 > b { position: absolute; top: -14px; left: 18px; background: var(--wine); color: var(--cream); font-family: var(--serif); font-size: 14px; letter-spacing: .08em; padding: 3px 12px; border-radius: 999px; }
+.sum3 ol { list-style: none; padding: 0; margin: 4px 0 0; counter-reset: s; }
+.sum3 li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; gap: 10px; margin-bottom: 10px; font-size: 16.5px; line-height: 1.65; }
+.sum3 li::before { content: counter(s); width: 26px; height: 26px; border-radius: 50%; background: var(--rose); color: var(--wine); font-family: var(--latin); font-weight: 700; display: grid; place-items: center; margin-top: 2px; }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; padding: 0; list-style: none; }
+.toc a { display: inline-block; font-size: 14px; text-decoration: none; color: var(--wine); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; }
+.toc a:hover { border-color: var(--wine); }
+.post ol.steps { list-style: none; padding: 0; counter-reset: st; margin: 12px 0 20px; }
+.post ol.steps > li { counter-increment: st; position: relative; padding: 0 0 18px 50px; margin: 0; }
+.post ol.steps > li::before { content: counter(st); position: absolute; left: 0; top: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--wine); color: var(--cream); font-family: var(--latin); font-weight: 700; font-size: 17px; display: grid; place-items: center; }
+.post ol.steps > li:not(:last-child)::after { content: ""; position: absolute; left: 16.5px; top: 38px; bottom: 4px; width: 1px; background: var(--rose); }
+.post ol.steps > li > b { display: block; color: var(--wine); font-size: 17.5px; margin-bottom: 2px; }
+.post ul.check { list-style: none; padding: 0; }
+.post ul.check > li { position: relative; padding-left: 28px; }
+.post ul.check > li::before { content: "✓"; position: absolute; left: 4px; top: 0; color: var(--rose-d); font-weight: 700; }
+.box { border-radius: 14px; padding: 14px 18px 4px; margin: 16px 0 20px; border-left: 5px solid; }
+.box > b { display: block; font-size: 15.5px; margin-bottom: 4px; }
+.box p { margin-bottom: 10px; }
+.box.tip { background: var(--blush); border-color: var(--rose-d); }
+.box.tip > b { color: var(--wine); }
+.box.warn { background: #fff4d6; border-color: #c9962b; }
+.box.warn > b { color: #6b4e00; }
+.box.note { background: #e9f0f5; border-color: #5b7d99; }
+.box.note > b { color: #2f4a63; }
+.cheat { margin: 26px 0; text-align: center; }
+.cheat img { width: 100%; max-width: 480px; height: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 20px 40px -26px rgba(90, 34, 50, .55); }
+.cheat figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+.cheat .acts { display: flex; gap: 8px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+.cheat .acts .pill { min-height: 38px; padding: 6px 16px; font-size: 14px; }
+.svc-mid { display: grid; grid-template-columns: 84px 1fr; gap: 14px; align-items: center; text-decoration: none; color: var(--ink); background: #fff; border: 1px solid var(--wine); border-radius: 16px; padding: 12px 16px 12px 12px; margin: 22px 0; transition: transform .25s var(--ease), box-shadow .25s; }
+.svc-mid:hover { transform: translateY(-2px); box-shadow: 0 14px 26px -18px rgba(90, 34, 50, .6); }
+.svc-mid img { width: 84px; height: 84px; object-fit: cover; border-radius: 12px; background: var(--blush); }
+.svc-mid i { font-style: normal; display: block; font-size: 13.5px; color: var(--rose-d); }
+.svc-mid b { display: block; font-family: var(--serif); color: var(--wine); font-size: 17px; line-height: 1.4; }
+.svc-mid span { display: block; font-size: 14px; color: var(--muted); }
+.svc-end { display: grid; grid-template-columns: 200px 1fr; gap: 22px; align-items: center; background: var(--cream); border: 2px solid var(--wine); border-radius: 20px; padding: 20px; margin: 40px 0 10px; }
+.svc-end img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; background: var(--blush); }
+.svc-end h3 { font-family: var(--serif); color: var(--wine); font-size: 22px; margin: 4px 0 8px; line-height: 1.35; }
+.svc-end ul { list-style: none; padding: 0; margin: 0 0 12px; font-size: 15px; }
+.svc-end li { margin: 0 0 4px; padding-left: 20px; position: relative; }
+.svc-end li::before { content: "✦"; position: absolute; left: 0; color: var(--rose-d); font-size: 12px; top: 3px; }
+.svc-end .price { font-family: var(--latin); color: var(--wine); font-size: 26px; margin-bottom: 12px; }
+.svc-end .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 560px) {
+  .svc-end { grid-template-columns: 1fr; padding: 16px; }
+  .svc-end img { aspect-ratio: 4 / 3; object-position: center 70%; }
+  .svc-end .acts .pill { flex: 1; }
+  .post .tbl.stack table, .post .tbl.stack tbody, .post .tbl.stack tr, .post .tbl.stack td { display: block; min-width: 0; width: 100%; }
+  .post .tbl.stack thead { display: none; }
+  .post .tbl.stack tr { border: 1px solid var(--line); border-radius: 12px; margin-bottom: 10px; background: #fff; overflow: hidden; }
+  .post .tbl.stack td { border: 0; border-bottom: 1px dashed var(--line); display: grid; grid-template-columns: 7.5em 1fr; gap: 8px; }
+  .post .tbl.stack td:last-child { border-bottom: 0; }
+  .post .tbl.stack td::before { content: attr(data-th); color: var(--muted); font-size: 13.5px; }
+  .post .tbl.stack td:first-child { background: var(--blush); color: var(--wine); font-weight: 700; grid-template-columns: 1fr; }
+  .post .tbl.stack td:first-child::before { display: none; }
+}
+.post-hero h1 { font-size: clamp(26px, 4.2vw, 42px); }
+.post .lead-p { font-size: 17px; }
+.post .note-box { font-size: 14.5px; color: var(--muted); }
+.rel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 10px 0 18px; }
+.rel a, .post-list a.card { display: grid; grid-template-rows: auto 1fr; text-decoration: none; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; transition: transform .25s var(--ease), border-color .25s; }
+.rel a:hover, .post-list a.card:hover { transform: translateY(-2px); border-color: var(--wine); }
+.rel img, .post-list a.card img { display: block; width: 100%; aspect-ratio: 1200 / 630; object-fit: cover; background: var(--blush); }
+.rel a div, .post-list a.card div { padding: 12px 14px 14px; }
+.rel i, .post-list a.card i { font-style: normal; font-size: 12.5px; color: var(--rose-d); display: block; margin-bottom: 2px; }
+.rel b { font-family: var(--serif); color: var(--wine); font-size: 16.5px; line-height: 1.45; display: block; }
+.cats { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 26px; }
+.cats a { display: inline-block; text-decoration: none; color: var(--wine); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 14.5px; }
+.cats a:hover { border-color: var(--wine); }
+.blog-cat { margin-bottom: 40px; }
+.blog-cat h2 { font-family: var(--serif); color: var(--wine); font-size: clamp(22px, 3vw, 28px); margin-bottom: 4px; }
+.blog-cat > p { color: var(--muted); margin-bottom: 14px; max-width: 40em; }
+.post-list.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 980px; }
+.post-list a.card { padding: 0; }
+.post-list a.card b { margin-bottom: 6px; }
+.post-list a.card small { display: block; font-size: 13px; color: var(--muted); margin-top: 8px; }
+@media (max-width: 640px) { .rel, .post-list.grid { grid-template-columns: 1fr; } }
 </style>
 <!-- wedding 子網域：不放 Travelpayouts、不放 Google 廣告（core §1） -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQZHTYTRMQ"></script>
@@ -559,7 +640,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     </div>
   </section>
   <section style="padding-top:0">
-    <div class="wrap prose"><span class="kicker">Read more</span><h2>延伸閱讀</h2><ul><li><a href="/blog/wedding-songs/" data-cta="related_link" data-cta-type="wedding">婚禮歌單：依迎賓、一進、二進、用餐、敬酒、送客分好的婚禮歌曲</a></li></ul></div>
+    <div class="wrap prose"><span class="kicker">Read more</span><h2>延伸閱讀</h2><ul><li><a href="/blog/wedding-songs/" data-cta="related_link" data-cta-type="wedding">婚禮歌單：88 首婚禮歌曲，依迎賓、一進、二進、用餐、敬酒、送客分好了</a></li></ul></div>
   </section>
   <section id="faq">
     <div class="wrap">
