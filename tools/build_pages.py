@@ -447,6 +447,7 @@ built.append(page("/about/", "關於我們", "關於我們｜同婚伴侶經營�
 # 文章互相連結：每篇「延伸閱讀」列出其他文章＋相關服務頁（RELATED_PAGES 依 slug 指定）
 RELATED_PAGES = {
     "same-sex-marriage-registration-taiwan": [("/marriage-certificate/", "似顏繪結婚書約（同婚版・一般版）")],
+    "foreigner-marriage-registration-taiwan": [("/taiwan-wedding/", "回台結婚全包專案（住在國外的新人）"), ("/marriage-certificate/", "似顏繪結婚書約（一般版・同婚版）")],
     "wedding-songs": [("/web-invitation/", "網頁電子喜帖（婚宴流程放進喜帖）"), ("/paper-invitation/", "似顏繪紙本喜帖")],
 }
 
