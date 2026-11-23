@@ -358,7 +358,7 @@ def cta_sec(text, href):
 BUNDLE = """  <section style="padding-top:0">
     <div class="wrap">
       <div class="bundle" style="grid-template-columns:1fr">
-        <div><span class="kicker">All in one</span><h3>想一次搞定？全套方案加送兩份贈品</h3><p>似顏繪＋結婚書約＋網頁電子喜帖＋紙本喜帖四樣都選，加送 Save the Date 分享圖和迎賓板列印檔（例：書約方案 4＋紙本喜帖 30 份，全套 NT$14,130）。同一張似顏繪延伸成整套設計，估價工具會幫你全部勾好，再依需要調整。</p></div>
+        <div><span class="kicker">All in one</span><h3>想一次搞定？全套方案加送兩份贈品</h3><p>似顏繪＋結婚書約＋網頁電子喜帖＋紙本喜帖四樣都選，加送 Save the Date 分享圖和迎賓板列印檔（例：書約方案 4＋紙本喜帖 30 份，全套 NT$13,630）。同一張似顏繪延伸成整套設計，估價工具會幫你全部勾好，再依需要調整。</p></div>
         <div><a class="pill" href="/?all=1#quote" data-cta="bundle_quote" data-cta-type="wedding">一次估價全套 <span class="arr">→</span></a></div>
       </div>
     </div>
@@ -527,7 +527,7 @@ paper_spec = """  <section style="padding-top:0">
       <span class="kicker">What you get</span>
       <h2>價格與規格</h2>
       <ul>
-        <li><b>固定正反兩頁，設計費 NT$2,500</b>：正面是似顏繪封面，背面是邀請細節與婚宴流程（不做單頁）。背景主題依你們的婚禮客製；複雜的設計另外報價。</li>
+        <li><b>固定正反兩頁，設計費 NT$2,000</b>：正面是似顏繪封面，背面是邀請細節與婚宴流程（不做單頁）。背景主題依你們的婚禮客製；複雜的設計另外報價。</li>
         <li><b>信封顏色要先選定</b>：詢價時請從色卡選一個顏色，確定後才排印刷。</li>
         <li><b>印刷每份 NT$105</b>：同款式 <b>30 份起印</b>（30 份 NT$3,150）。</li>
         <li><b>一組包含</b>：1 張喜帖（148×105mm，300 磅雪銅紙）、1 個信封（185×125mm，燙金 Save the Date）、1 枚信封貼紙（古銅色玫瑰蠟封貼，直徑 3cm，背面有雙面膠）。</li>
@@ -566,20 +566,20 @@ paper_flow = """  <section style="padding-top:0">
     </div>
   </section>"""
 paper_qa = [
-    ("紙本喜帖多少錢？", "兩頁設計費 NT$2,500，印刷每份 NT$105，同款式 30 份起印（30 份是 NT$3,150）。另外需要雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價。"),
+    ("紙本喜帖多少錢？", "兩頁設計費 NT$2,000，印刷每份 NT$105，同款式 30 份起印（30 份是 NT$3,150）。另外需要雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價。"),
     ("一組紙本喜帖包含什麼？", "1 張喜帖（148×105mm，300 磅雪銅紙）、1 個信封（185×125mm，燙金 Save the Date，21 色可選）、1 枚古銅色玫瑰信封貼紙（直徑 3cm）。"),
     ("可以只印喜帖、不訂似顏繪嗎？", "不行。印刷喜帖只提供給訂製似顏繪與喜帖設計的新人加購。可以沿用作品集的設計，也可以討論新設計，兩種都會收設計費。"),
     ("要多久前訂？可以寄到國外嗎？", "建議在需要拿到喜帖的 4～5 週前訂製。紙本喜帖只寄台灣地址；海外新人可以選網頁電子喜帖。"),
     ("怎麼付款？", "確認細節與報價後，我們會提供帳戶，請用匯款付款；目前還沒有信用卡付款。"),
 ]
 paper_body = hero("紙本喜帖", "似顏繪紙本喜帖：<br>把你們的似顏繪印成喜帖",
-                  "用你們的似顏繪設計兩頁喜帖，連同燙金信封和蠟封貼紙一起印好。兩頁設計 NT$2,500，印刷每份 NT$105（30 份起），只寄台灣。",
+                  "用你們的似顏繪設計兩頁喜帖，連同燙金信封和蠟封貼紙一起印好。兩頁設計 NT$2,000，印刷每份 NT$105（30 份起），只寄台灣。",
                   '<a class="pill" href="/?paper=1#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#portfolio">看作品</a>') + \
     "\n" + paper_folio + "\n" + paper_spec + "\n" + env_sec + "\n" + paper_flow + "\n" + read_more_auto("/paper-invitation/") + "\n" + faq_sec(paper_qa) + "\n" + cta_sec("開始估價紙本喜帖", "/?paper=1#quote") + "\n" + BUNDLE
 paper_ld = [{"@type": "Service", "name": "似顏繪紙本喜帖", "serviceType": "紙本喜帖設計與印刷", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
-             "offers": [offer("紙本喜帖 兩頁設計", 2500, "可沿用作品集設計或討論新設計"), offer("紙本喜帖 印刷（每份）", 105, "同款式 30 份起印，含信封與信封貼紙，只寄台灣")]}, faq_ld(paper_qa)]
-built.append(page("/paper-invitation/", "紙本喜帖", "似顏繪紙本喜帖客製｜兩頁設計 NT$2,500、每份 NT$105 起印｜編織日和",
-                  "似顏繪紙本喜帖：兩頁設計 NT$2,500，印刷每份 NT$105、30 份起印，含 148×105mm 300 磅雪銅喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。只寄台灣，建議 4～5 週前訂製。",
+             "offers": [offer("紙本喜帖 兩頁設計", 2000, "可沿用作品集設計或討論新設計"), offer("紙本喜帖 印刷（每份）", 105, "同款式 30 份起印，含信封與信封貼紙，只寄台灣")]}, faq_ld(paper_qa)]
+built.append(page("/paper-invitation/", "紙本喜帖", "似顏繪紙本喜帖客製｜兩頁設計 NT$2,000、每份 NT$105 起印｜編織日和",
+                  "似顏繪紙本喜帖：兩頁設計 NT$2,000，印刷每份 NT$105、30 份起印，含 148×105mm 300 磅雪銅喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。只寄台灣，建議 4～5 週前訂製。",
                   "喜帖|紙本喜帖|似顏繪紙本喜帖", paper_body, paper_ld))
 
 # ── 關於我們（文字依 Alison 2026-11-21 提供） ──

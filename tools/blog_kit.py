@@ -28,10 +28,10 @@ SERVICES = {
         price="NT$3,800", more="看 3 種風格"),
     "paper": dict(
         url="/paper-invitation/", quote="/?paper=1#quote", img="/assets/paper/paper-invitation-welcome-pink-two-pages.webp",
-        name="似顏繪紙本喜帖", line="兩頁設計 NT$2,500，印刷每份 NT$105",
+        name="似顏繪紙本喜帖", line="兩頁設計 NT$2,000，印刷每份 NT$105",
         title="把似顏繪<br>印成紙本喜帖",
         points=["正面似顏繪封面，背面邀請細節與流程", "燙金 Save the Date 信封 21 色、玫瑰蠟封貼", "30 份起印，只寄台灣地址"],
-        price="NT$2,500＋每份 NT$105", more="看作品"),
+        price="NT$2,000＋每份 NT$105", more="看作品"),
     "package": dict(
         url="/taiwan-wedding/", quote="/taiwan-wedding/#price", quote_label="看專案價格", img="/assets/couple-kimono.webp",
         name="回台結婚全包專案", line="住國外、回台灣結婚的新人一次備齊，NT$22,000",
