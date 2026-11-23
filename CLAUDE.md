@@ -1,6 +1,6 @@
 # wedding.knittinghiyori.com：給 Claude Code 的規則
 
-- 似顏繪喜帖介紹頁（接案用）。**2026-11-07 起 Zoe 完全接手**（原本由 Alison 製作，2026-11-05 交接）。
+- 似顏繪喜帖介紹頁（接案用）。**2026-11-07 起 Zoe 完全接手**（原本由 Alison 製作，2026-11-05 交接）。**2026-11-23 起交接給 Alison**（主對話＋所有子對話），接手先讀 `docs/HANDOVER.md`；Alison 在 `alison/<主題>` 分支開 PR，由 Zoe 這邊合併。
 - 規則以 knittinghiyori-specs 的 `core.md` §7-1 為準（沒有另開站別檔），cta_id 見 `registry.md`「似顏繪喜帖」。開工前先在 `~/Sites/knittinghiyori/knittinghiyori-specs` `git pull` 再讀。
 - 不放 AdSense、不放 Travelpayouts；只放 GA4（content_group `wedding`）。
 - `/a/ /b/ /c/` 是範例喜帖：`noindex, nofollow`、不放 GA4、robots.txt 不擋。
