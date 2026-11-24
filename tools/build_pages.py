@@ -480,15 +480,55 @@ built.append(page("/marriage-certificate/", "結婚書約", "似顏繪結婚書�
                   "喜帖|結婚書約|似顏繪結婚書約客製", cert_body, cert_ld))
 
 # ── 似顏繪 ──
-cari_qa = faqs("要準備什麼照片？", "可以修改幾次？", "製作要多久？可以趕急件嗎？", "你們會公開我們的作品嗎？", "似顏繪喜帖包含哪些東西？價格怎麼算？")
+cari_qa = faqs("似顏繪喜帖包含哪些東西？價格怎麼算？") + [
+    ("可以只畫似顏繪，不做書約和喜帖嗎？", "可以。雙人全身彩色似顏繪 NT$1,800 可以單獨訂，用估價工具只留似顏繪就好。之後想加結婚書約、電子喜帖或紙本喜帖，再用同一張圖延伸。"),
+    ("只買似顏繪會拿到什麼檔案？", "高解析 JPG 和去背 PNG 各一份，用 Email 寄給你們。可以自己拿去做謝卡、桌卡、社群頭貼這類個人用途；不能商用或轉售。"),
+    ("似顏繪可以印成大圖或迎賓板嗎？", "可以。似顏繪以 60×90cm、300dpi 繪製（約 7087×10630 px），印成迎賓板也清楚，縮小放進書約和喜帖也不會失真。四樣都選的全套方案，另外加送排好版的迎賓板列印檔（PDF）。"),
+] + faqs("要準備什麼照片？", "可以修改幾次？", "製作要多久？可以趕急件嗎？", "你們會公開我們的作品嗎？")
+uses_sec = """  <section style="padding-top:0">
+    <div class="wrap prose">
+      <span class="kicker">One portrait, every detail</span>
+      <h2>一張圖，整場婚禮都用得到</h2>
+      <p>似顏繪是整套設計的起點。同一張圖放進書約、喜帖和婚禮當天的小物，看起來就是同一套。</p>
+      <div class="law">
+        <div><b>結婚書約</b>放進手繪邊框的書約，登記那天拿在手上拍照。<a href="/marriage-certificate/">看結婚書約</a></div>
+        <div><b>網頁電子喜帖</b>開場動畫的主角，賓客手機一點就看到你們。<a href="/web-invitation/">看電子喜帖</a></div>
+        <div><b>紙本喜帖</b>印在喜帖正面，寄給長輩也好看。<a href="/paper-invitation/">看紙本喜帖</a></div>
+        <div><b>Save the Date 分享圖</b>1080×1350，可以直接發社群通知好友。全套方案贈送。</div>
+        <div><b>迎賓板</b>婚禮入口的大圖，交付排好版的列印檔（PDF）。全套方案贈送。</div>
+        <div><b>謝卡、桌卡、頭貼</b>只買似顏繪也會拿到高解析 JPG 和去背 PNG，可以自己做個人用途的小物。</div>
+      </div>
+      <p class="note-box">似顏繪以 60×90cm、300dpi 繪製（約 7087×10630 px）。大圖縮小用不會失真，印成迎賓板也清楚。</p>
+    </div>
+  </section>"""
+prep_sec = """  <section style="padding-top:0">
+    <div class="wrap prose">
+      <span class="kicker">Before you send</span>
+      <h2>照片準備清單</h2>
+      <ul>
+        <li>一張你們最喜歡的婚紗照或合照；或每人 2～3 張清楚的正面照，加 1 張合照。</li>
+        <li>臉要看得清楚：光線不要太暗，不要被頭紗、手或帽子擋住。</li>
+        <li>想一起畫的毛小孩或小朋友，另外附 1～2 張清楚的照片。</li>
+        <li>想穿的服裝、想放的小物（例如和服、貓咪坐在腳邊），寫在詢價信裡。</li>
+        <li>用 Email 寄原始照片，通訊軟體傳過的圖會被壓縮，細節會變少。</li>
+      </ul>
+      <h2 style="margin-top:36px">安心清單</h2>
+      <div class="law">
+        <div><b>免費修改 2 次</b>不滿意的地方直接說，超過 2 次每次 NT$500。</div>
+        <div><b>草稿前可全額退款</b>開始畫草稿之前取消，全額退款；草稿交出之後就不退款。</div>
+        <div><b>照片不公開</b>你們寄來的照片不會公開。作品展示也不會放全名、地址和婚宴資訊。</div>
+        <div><b>高解析交件</b>60×90cm、300dpi 繪製，交付高解析 JPG 和去背 PNG。</div>
+      </div>
+    </div>
+  </section>"""
 cari_body = hero("似顏繪", "新人似顏繪：<br>照你們最喜歡的婚紗照畫",
-                 "雙人全身彩色似顏繪 NT$1,800，免費修改 2 次；毛小孩、小朋友每位加 NT$800 一起畫進來。這張圖之後可以放進結婚書約和電子喜帖，整套看起來是同一個風格。",
+                 "雙人全身彩色似顏繪 NT$1,800，免費修改 2 次；毛小孩、小朋友每位加 NT$800。以 60×90cm 高解析度繪製，同一張圖從結婚書約、喜帖一路用到迎賓板。",
                  '<a class="pill" href="/#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#portfolio">看作品</a>') + \
-    "\n" + folio_sec + "\n" + duo_sec + "\n" + flow_sec + "\n" + read_more_auto("/caricature/") + "\n" + faq_sec(cari_qa) + "\n" + cta_sec("開始估價似顏繪", "/#quote") + "\n" + BUNDLE
+    "\n" + uses_sec + "\n" + folio_sec + "\n" + duo_sec + "\n" + prep_sec + "\n" + flow_sec + "\n" + read_more_auto("/caricature/") + "\n" + faq_sec(cari_qa) + "\n" + cta_sec("開始估價似顏繪", "/#quote") + "\n" + BUNDLE
 cari_ld = [{"@type": "Service", "name": "新人似顏繪客製", "serviceType": "婚禮似顏繪", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
-            "offers": [offer("雙人全身彩色似顏繪", 1800, "免費修改 2 次"), offer("加畫寵物或小孩（每位）", 800, "毛小孩、小朋友一起入鏡")]}, faq_ld(cari_qa)]
+            "offers": [offer("雙人全身彩色似顏繪", 1800, "免費修改 2 次；60×90cm、300dpi 繪製，交付高解析 JPG 與去背 PNG"), offer("加畫寵物或小孩（每位）", 800, "毛小孩、小朋友一起入鏡")]}, faq_ld(cari_qa)]
 built.append(page("/caricature/", "似顏繪", "新人似顏繪客製｜雙人全身彩色 NT$1,800、可加畫寵物｜編織日和",
-                  "新人似顏繪：照婚紗照畫雙人全身彩色似顏繪 NT$1,800，免費修改 2 次，加畫寵物或小孩每位 NT$800。西式婚紗、和服、中式禮服都能畫，可延伸做結婚書約與電子喜帖。",
+                  "新人似顏繪：照婚紗照畫雙人全身彩色似顏繪 NT$1,800，免費修改 2 次，加畫寵物或小孩每位 NT$800。60×90cm 高解析繪製，交付 JPG 與去背 PNG，可延伸做結婚書約、喜帖與迎賓板。",
                   "喜帖|似顏繪|新人似顏繪客製", cari_body, cari_ld, extra_js=""))
 
 # ── 電子喜帖 ──
