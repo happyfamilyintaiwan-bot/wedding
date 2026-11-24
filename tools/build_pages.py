@@ -152,6 +152,35 @@ PAGE_CSS = """<style>
 .post-list a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; }
 .post-list b { font-family: var(--serif); color: var(--wine); font-size: 19px; display: block; margin-bottom: 4px; }
 .post-list span { color: var(--muted); font-size: 15px; }
+/* 紙本喜帖：價格小卡 */
+.pcard { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 22px 32px; align-items: center; background: var(--cream); border: 2px solid var(--wine); border-radius: 20px; padding: 24px 26px; box-shadow: 6px 6px 0 var(--rose); }
+.pcard-n { font-family: var(--serif); color: var(--wine); font-size: 22px; margin: 4px 0 2px; line-height: 1.3; }
+.pcard-n b { font-family: var(--latin); font-weight: 400; font-size: clamp(40px, 6vw, 56px); letter-spacing: -.01em; margin-left: 4px; }
+.pcard-eq { font-weight: 700; color: var(--ink); margin: 0 0 10px; }
+.pcard-more { padding-left: 1.1em; margin: 0 0 16px; font-size: 14.5px; color: var(--muted); }
+.pcard-more li { margin-bottom: 4px; }
+.pcard-kit-t { font-family: var(--serif); color: var(--wine); font-weight: 700; margin: 0 0 10px; }
+.kit3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.kit3 figure { margin: 0; }
+.kit3 img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); background: #fff; }
+.kit3 figcaption { font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 6px; }
+.kit3 figcaption b { display: block; font-family: var(--serif); color: var(--wine); font-size: 16px; }
+@media (max-width: 760px) { .pcard { grid-template-columns: 1fr; padding: 20px 18px; } .kit3 { gap: 8px; } .kit3 figcaption { font-size: 12px; } }
+/* 服務頁共用：安心清單、三步驟（和電子喜帖頁同一套） */
+.trust { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.trust > div { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; }
+.trust svg { width: 44px; height: 44px; }
+.trust b { display: block; font-family: var(--serif); color: var(--wine); font-size: 17.5px; margin-bottom: 2px; }
+.trust p { margin: 0; font-size: 15px; color: var(--ink); }
+.steps { list-style: none; padding: 0; margin: 22px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: st; }
+.steps li { position: relative; background: var(--cream); border: 1px solid var(--line); border-radius: 18px; padding: 22px 20px 20px; }
+.steps .no { position: absolute; top: -14px; left: 18px; font-family: var(--latin); font-size: 13px; letter-spacing: .14em; color: var(--wine); background: var(--blush); border: 1px solid var(--wine); border-radius: 999px; padding: 3px 12px; }
+.steps svg { display: block; width: 100%; max-width: 220px; height: auto; margin: 8px auto 12px; }
+.steps b { display: block; font-family: var(--serif); color: var(--wine); font-size: 19px; margin-bottom: 6px; }
+.steps p { margin: 0; font-size: 15px; }
+.steps small { display: block; margin-top: 8px; color: var(--muted); font-size: 13.5px; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr; gap: 26px; } .steps svg { max-width: 260px; } }
+@media (max-width: 560px) { .trust { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .post ul.songs { grid-template-columns: 1fr; } .post { font-size: 16px; } }
 /* 文章元件（build_pages.py） */
 .post-cover { margin: 0 0 18px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 1200 / 630; background: var(--blush); }
@@ -514,30 +543,43 @@ PAPER_FOLIO = [
     ("paper-invitation-red-wedding-day", "紙本喜帖作品：紅底 Happy Wedding Day，新郎掀起頭紗", "紅底・Wedding Day", 700, 935),
     ("paper-invitation-timeline-dress-code", "紙本喜帖作品：婚禮流程時間軸與 Dress code 色票", "流程與 Dress code 頁", 700, 933),
 ]
-paper_folio = """  <section id="portfolio">
+# 紙本喜帖：第一屏價格小卡（30 份總價直接算好）＋一組包含的 3 樣東西
+PAPER_DESIGN, PAPER_EACH, PAPER_MIN = 2000, 105, 30
+def ntd(n):
+    return f"NT${n:,}"
+PAPER_KIT = [
+    ("paper-invitation-welcome-pink-two-pages", "似顏繪紙本喜帖，正面似顏繪封面、背面邀請資訊", 800, 1066, "喜帖", "148×105mm，300 磅雪銅紙，正反兩頁"),
+    ("envelope-burgundy-photo", "酒紅色信封，燙金 Save the Date 實拍", 900, 609, "燙金信封", "185×125mm，燙金 Save the Date，21 色"),
+    ("seal-sticker-rose", "古銅色玫瑰蠟封信封貼紙", 500, 518, "蠟封貼紙", "古銅色玫瑰，直徑 3cm，背面有雙面膠"),
+]
+paper_price = f"""  <section id="price" style="padding-top:0">
     <div class="wrap">
-      <div class="chapter"><span class="no">✦</span><div><span class="kicker">Portfolio</span><h2>紙本喜帖作品</h2><p>可以沿用作品集的設計，也可以討論新的設計；兩種都會收設計費，確保每一份都符合你們。點圖可以放大。</p></div></div>
-      <div class="folio-grid" id="folio">
-""" + "\n".join(f'        <figure class="rv" style="--i:{i % 4}" data-src="/assets/paper/{f}.webp"><img src="/assets/paper/{f}.webp" alt="{alt}" width="{w}" height="{h}" loading="lazy"><figcaption>{cap}</figcaption></figure>' for i, (f, alt, cap, w, h) in enumerate(PAPER_FOLIO)) + """
+      <div class="pcard">
+        <div class="pcard-sum">
+          <span class="kicker">Price</span>
+          <p class="pcard-n">30 份 <b>{ntd(PAPER_DESIGN + PAPER_EACH * PAPER_MIN)}</b></p>
+          <p class="pcard-eq">兩頁設計 {ntd(PAPER_DESIGN)}＋印刷 {ntd(PAPER_EACH * PAPER_MIN)}（每份 {ntd(PAPER_EACH)}）</p>
+          <ul class="pcard-more">
+            <li>每多 1 份 +{ntd(PAPER_EACH)}：40 份 {ntd(PAPER_DESIGN + PAPER_EACH * 40)}、50 份 {ntd(PAPER_DESIGN + PAPER_EACH * 50)}</li>
+            <li>同款式 30 份起印，加印也是 30 份起</li>
+            <li>另需雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價</li>
+          </ul>
+          <a class="pill" href="/?paper=1#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a>
+        </div>
+        <div class="pcard-kit">
+          <p class="pcard-kit-t">一組包含這 3 樣</p>
+          <div class="kit3">
+""" + "\n".join(f'            <figure data-src="/assets/paper/{f}.webp"><img src="/assets/paper/{f}.webp" alt="{alt}" width="{w}" height="{h}" loading="lazy"><figcaption><b>{t}</b>{d}</figcaption></figure>' for f, alt, w, h, t, d in PAPER_KIT) + """
+          </div>
+        </div>
       </div>
     </div>
   </section>"""
-paper_spec = """  <section style="padding-top:0">
-    <div class="wrap prose">
-      <span class="kicker">What you get</span>
-      <h2>價格與規格</h2>
-      <ul>
-        <li><b>固定正反兩頁，設計費 NT$2,000</b>：正面是似顏繪封面，背面是邀請細節與婚宴流程（不做單頁）。背景主題依你們的婚禮客製；複雜的設計另外報價。</li>
-        <li><b>信封顏色要先選定</b>：詢價時請從色卡選一個顏色，確定後才排印刷。</li>
-        <li><b>印刷每份 NT$105</b>：同款式 <b>30 份起印</b>（30 份 NT$3,150）。</li>
-        <li><b>一組包含</b>：1 張喜帖（148×105mm，300 磅雪銅紙）、1 個信封（185×125mm，燙金 Save the Date）、1 枚信封貼紙（古銅色玫瑰蠟封貼，直徑 3cm，背面有雙面膠）。</li>
-        <li><b>只寄台灣地址</b>；只提供給訂製似顏繪的新人加購。</li>
-        <li>建議在<b>需要拿到喜帖的 4～5 週前</b>訂製。</li>
-      </ul>
-      <div class="folio-grid" style="margin-top:22px">
-        <figure data-src="/assets/paper/card-size-save-the-date.webp"><img src="/assets/paper/card-size-save-the-date.webp" alt="信封尺寸 18.5×12.5cm，燙金 Save the Date" width="900" height="593" loading="lazy"><figcaption>信封 18.5×12.5cm</figcaption></figure>
-        <figure data-src="/assets/paper/envelope-burgundy-photo.webp"><img src="/assets/paper/envelope-burgundy-photo.webp" alt="酒紅色信封，燙金 Save the Date 實拍" width="900" height="609" loading="lazy"><figcaption>燙金 Save the Date 實拍</figcaption></figure>
-        <figure data-src="/assets/paper/seal-sticker-rose.webp"><img src="/assets/paper/seal-sticker-rose.webp" alt="古銅色玫瑰蠟封信封貼紙" width="500" height="518" loading="lazy"><figcaption>古銅色玫瑰信封貼</figcaption></figure>
+paper_folio = """  <section id="portfolio" style="padding-top:0">
+    <div class="wrap">
+      <div class="chapter"><span class="no">✦</span><div><span class="kicker">Portfolio</span><h2>紙本喜帖作品</h2><p>可以沿用作品集的設計，也可以依你們的婚禮主題設計新的。正面是似顏繪封面，背面是邀請細節與婚宴流程（固定兩頁，不做單頁）。</p></div></div>
+      <div class="folio-grid" id="folio">
+""" + "\n".join(f'        <figure class="rv" style="--i:{i % 4}" data-src="/assets/paper/{f}.webp"><img src="/assets/paper/{f}.webp" alt="{alt}" width="{w}" height="{h}" loading="lazy"><figcaption>{cap}</figcaption></figure>' for i, (f, alt, cap, w, h) in enumerate(PAPER_FOLIO)) + """
       </div>
     </div>
   </section>"""
@@ -545,7 +587,7 @@ env_sec = """  <section id="envelope" style="padding-top:0">
     <div class="wrap prose">
       <span class="kicker">Envelope colors</span>
       <h2>信封顏色：21 色</h2>
-      <p>下訂時備註信封編號就可以。顏色名稱只是方便溝通，實際以色卡為準。</p>
+      <p>詢價時從色卡選一個顏色，寫上編號就可以；確定顏色後才排印刷。顏色名稱只是方便溝通，實際以色卡為準。</p>
       <div class="folio-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
         <figure data-src="/assets/paper/envelope-colors-1-12.webp"><img src="/assets/paper/envelope-colors-1-12.webp" alt="信封色卡 1 到 12 號" width="900" height="1030" loading="lazy"><figcaption>1～12 號</figcaption></figure>
         <figure data-src="/assets/paper/envelope-colors-13-21.webp"><img src="/assets/paper/envelope-colors-13-21.webp" alt="信封色卡 13 到 21 號" width="900" height="797" loading="lazy"><figcaption>13～21 號</figcaption></figure>
@@ -553,33 +595,80 @@ env_sec = """  <section id="envelope" style="padding-top:0">
       <p style="margin-top:16px">""" + "、".join(f"{i + 1}. {c}" for i, c in enumerate(ENV)) + """</p>
     </div>
   </section>"""
-paper_flow = """  <section style="padding-top:0">
-    <div class="wrap">
-      <div class="chapter"><span class="no">✦</span><div><span class="kicker">How to order</span><h2>訂製步驟</h2><p>確認細節與報價後，我們會提供帳戶，請用匯款付款（目前還沒有信用卡付款）。</p></div></div>
-      <ol class="flow">
-        <li class="rv"><b>估價＋寄信</b><span>用估價工具勾選，寫好詢價信，附上婚紗照</span></li>
-        <li class="rv" style="--i:1"><b>討論設計</b><span>似顏繪、喜帖、結婚書約一起確認</span></li>
-        <li class="rv" style="--i:2"><b>確認樣式後下訂</b><span>收到報價與帳戶，匯款後開始製作</span></li>
-        <li class="rv" style="--i:3"><b>備註信封顏色</b><span>下訂喜帖時寫信封編號（1～21）</span></li>
-        <li class="rv" style="--i:4"><b>印刷寄送</b><span>台灣印製，寄到台灣地址</span></li>
+
+# 安心清單、三步驟（版型和電子喜帖頁一樣：.trust、.steps）
+def ico(body):
+    return f'<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{body}</svg>'
+
+PAPER_TRUST_ITEMS = [
+    ('<path d="M24 5l15 6v11c0 10-6.5 17-15 21C15.5 39 9 32 9 22V11z" fill="#f5dfe0"/><path d="M17 24l5 5 9-10"/>',
+     "台灣印製", "喜帖、信封、貼紙都在台灣印製，印好直接寄到你們指定的台灣地址。"),
+    ('<rect x="9" y="6" width="30" height="36" rx="4" fill="#f5dfe0"/><path d="M16 16h16M16 23h16M16 30h9"/><path d="M28 32l3 3 6-7"/>',
+     "校稿確認才印", "設計可以免費修改 2 次，你們確認校稿後才送印。定稿後就不能再改；超過免費次數或定稿後要修改，會酌收費用。"),
+    ('<circle cx="18" cy="24" r="12" fill="#f5dfe0"/><circle cx="30" cy="24" r="12"/><path d="M24 14v20"/>',
+     "先知道會有一點色差", "螢幕發光、紙張印墨水，印出來的顏色通常比螢幕上稍微暗、稍微淡一點。信封顏色以色卡為準。"),
+    ('<path d="M6 16h24v18H6z" fill="#f5dfe0"/><path d="M30 22h7l5 6v6H30z"/><circle cx="13" cy="36" r="3.5" fill="#fffaf7"/><circle cx="35" cy="36" r="3.5" fill="#fffaf7"/>',
+     "只寄台灣地址", "紙本喜帖只寄台灣；海外新人可以選網頁電子喜帖，用連結傳給賓客。"),
+]
+PAPER_TRUST = """  <section style="padding-top:0">
+    <div class="wrap prose" style="max-width:none">
+      <span class="kicker">Peace of mind</span>
+      <h2>下訂之前，你可能想知道的事</h2>
+      <div class="trust">
+""" + "\n".join(f"        <div>{ico(i)}<div><b>{t}</b><p>{d}</p></div></div>" for i, t, d in PAPER_TRUST_ITEMS) + """
+      </div>
+    </div>
+  </section>"""
+
+_SV = '<svg viewBox="0 0 220 130" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="110" cy="118" rx="88" ry="7" fill="#f5dfe0" stroke="none"/>'
+PAPER_STEP_ART = [
+    # 1. 手機上的估價單＋信封
+    _SV + '<rect x="48" y="8" width="62" height="108" rx="10" fill="#fffaf7"/><path d="M70 16h18"/>'
+    '<rect x="57" y="28" width="44" height="10" rx="3" fill="#f5dfe0"/><path d="M58 48h10M74 48h26M58 58h10M74 58h20M58 68h10M74 68h24"/>'
+    '<path d="M58 82h42"/><path d="M80 92h20" stroke-width="3"/><rect x="57" y="100" width="44" height="10" rx="5" fill="#e6a9b5"/>'
+    '<g transform="translate(122 46) rotate(-8)"><rect width="66" height="44" rx="4" fill="#fffaf7"/><path d="M2 3l31 22L64 3"/><circle cx="33" cy="30" r="6" fill="#e6a9b5"/></g>'
+    '<path d="M114 40c6-8 14-10 22-8" stroke-dasharray="3 5"/></svg>',
+    # 2. 喜帖草稿＋勾勾
+    _SV + '<rect x="46" y="14" width="64" height="92" rx="4" fill="#fffaf7"/><path d="M60 64V40a18 18 0 0 1 36 0v24z" fill="#f5dfe0"/><path d="M60 78h36M66 88h24"/>'
+    '<rect x="118" y="14" width="64" height="92" rx="4" fill="#fffaf7"/><path d="M130 30h40M130 42h32M130 54h40M130 66h28M130 78h36"/>'
+    '<circle cx="172" cy="96" r="18" fill="#e6a9b5"/><path d="M164 96l6 6 11-13" stroke-width="2.4"/></svg>',
+    # 3. 印好的喜帖＋蠟封信封
+    _SV + '<g transform="translate(40 26) rotate(-8)"><rect width="56" height="76" rx="3" fill="#fffaf7"/><path d="M12 48V30a16 16 0 0 1 32 0v18z" fill="#f5dfe0"/><path d="M12 60h32"/></g>'
+    '<rect x="104" y="42" width="84" height="58" rx="4" fill="#fffaf7"/><path d="M106 45l40 28 40-28"/><circle cx="146" cy="74" r="9" fill="#e6a9b5"/>'
+    '<path d="M118 92h20" stroke-width="2.4" stroke="#c97487"/><path d="M168 24l4 8 8 2-8 3-4 8-3-8-8-3 8-2z" fill="#f5dfe0"/></svg>',
+]
+PAPER_STEP_TXT = [
+    ("估價、寄出詢價信", "在估價工具勾選紙本喜帖、填份數，總價馬上算好，按一下寄出詢價信，附上婚紗照和想要的信封顏色。", "建議在需要拿到喜帖的 3～5 週前詢價。"),
+    ("確認設計並付款", "似顏繪、喜帖設計一起討論，確認樣式和最終報價後，我們提供帳戶，匯款後開始製作。", "目前只能匯款，還沒有信用卡付款。"),
+    ("校稿、印刷、寄送", "設計可以免費修改 2 次，你們確認校稿後送印，台灣印製，寄到台灣地址。", "定稿後不能再改；之後要修改會酌收費用。"),
+]
+PAPER_STEPS = """  <section style="padding-top:0">
+    <div class="wrap prose" style="max-width:none">
+      <span class="kicker">How to order</span>
+      <h2>簡單三步驟訂購</h2>
+      <ol class="steps">
+""" + "\n".join(f'        <li><span class="no">STEP {i + 1}</span>{art}<b>{t}</b><p>{d}</p><small>{n}</small></li>' for i, (art, (t, d, n)) in enumerate(zip(PAPER_STEP_ART, PAPER_STEP_TXT))) + """
       </ol>
     </div>
   </section>"""
 paper_qa = [
-    ("紙本喜帖多少錢？", "兩頁設計費 NT$2,000，印刷每份 NT$105，同款式 30 份起印（30 份是 NT$3,150）。另外需要雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價。"),
+    ("紙本喜帖多少錢？", "兩頁設計費 NT$2,000，印刷每份 NT$105，同款式 30 份起印，所以 30 份總共 NT$5,150（設計 NT$2,000＋印刷 NT$3,150）。另外需要雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價。"),
     ("一組紙本喜帖包含什麼？", "1 張喜帖（148×105mm，300 磅雪銅紙）、1 個信封（185×125mm，燙金 Save the Date，21 色可選）、1 枚古銅色玫瑰信封貼紙（直徑 3cm）。"),
+    ("設計可以改幾次？", "設計可以免費修改 2 次。你們確認校稿（定稿）後就會送印，不能再改；超過免費次數或定稿後要修改，會酌收費用。"),
+    ("會有色差嗎？", "會有一點。螢幕是發光顯示，紙張是用墨水印刷，印出來的顏色通常會比螢幕上稍微暗、稍微淡一點，每支手機和電腦螢幕看到的也不太一樣。信封顏色請以色卡為準。"),
+    ("可以加印嗎？", "可以。加印一樣是同款式 30 份起印，每份 NT$105（30 份 NT$3,150）。份數不確定的話，建議第一次訂就把可能要的份數一起算進去。"),
     ("可以只印喜帖、不訂似顏繪嗎？", "不行。印刷喜帖只提供給訂製似顏繪與喜帖設計的新人加購。可以沿用作品集的設計，也可以討論新設計，兩種都會收設計費。"),
-    ("要多久前訂？可以寄到國外嗎？", "建議在需要拿到喜帖的 4～5 週前訂製。紙本喜帖只寄台灣地址；海外新人可以選網頁電子喜帖。"),
+    ("要多久前訂？可以寄到國外嗎？", "建議在需要拿到喜帖的 3～5 週前訂製。紙本喜帖只寄台灣地址；海外新人可以選網頁電子喜帖。"),
     ("怎麼付款？", "確認細節與報價後，我們會提供帳戶，請用匯款付款；目前還沒有信用卡付款。"),
 ]
 paper_body = hero("紙本喜帖", "似顏繪紙本喜帖：<br>把你們的似顏繪印成喜帖",
-                  "用你們的似顏繪設計兩頁喜帖，連同燙金信封和蠟封貼紙一起印好。兩頁設計 NT$2,000，印刷每份 NT$105（30 份起），只寄台灣。",
-                  '<a class="pill" href="/?paper=1#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#portfolio">看作品</a>') + \
-    "\n" + paper_folio + "\n" + paper_spec + "\n" + env_sec + "\n" + paper_flow + "\n" + read_more_auto("/paper-invitation/") + "\n" + faq_sec(paper_qa) + "\n" + cta_sec("開始估價紙本喜帖", "/?paper=1#quote") + "\n" + BUNDLE
+                  "用你們的似顏繪設計兩頁喜帖，連同燙金信封和蠟封貼紙一起在台灣印好，寄到台灣地址。",
+                  '<a class="pill ghost" href="#portfolio">看作品</a><a class="pill ghost" href="#faq">常見問題</a>') + \
+    "\n" + paper_price + "\n" + PAPER_TRUST + "\n" + PAPER_STEPS + "\n" + paper_folio + "\n" + env_sec + "\n" + read_more_auto("/paper-invitation/") + "\n" + faq_sec(paper_qa) + "\n" + cta_sec("開始估價紙本喜帖", "/?paper=1#quote") + "\n" + BUNDLE
 paper_ld = [{"@type": "Service", "name": "似顏繪紙本喜帖", "serviceType": "紙本喜帖設計與印刷", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
-             "offers": [offer("紙本喜帖 兩頁設計", 2000, "可沿用作品集設計或討論新設計"), offer("紙本喜帖 印刷（每份）", 105, "同款式 30 份起印，含信封與信封貼紙，只寄台灣")]}, faq_ld(paper_qa)]
-built.append(page("/paper-invitation/", "紙本喜帖", "似顏繪紙本喜帖客製｜兩頁設計 NT$2,000、每份 NT$105 起印｜編織日和",
-                  "似顏繪紙本喜帖：兩頁設計 NT$2,000，印刷每份 NT$105、30 份起印，含 148×105mm 300 磅雪銅喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。只寄台灣，建議 4～5 週前訂製。",
+             "offers": [offer("紙本喜帖 兩頁設計", PAPER_DESIGN, "可沿用作品集設計或討論新設計，免費修改 2 次"), offer("紙本喜帖 印刷（每份）", PAPER_EACH, "同款式 30 份起印（加印也是），含信封與信封貼紙，只寄台灣")]}, faq_ld(paper_qa)]
+built.append(page("/paper-invitation/", "紙本喜帖", "似顏繪紙本喜帖客製｜30 份 NT$5,150（設計 NT$2,000＋每份 NT$105）｜編織日和",
+                  "似顏繪紙本喜帖：30 份 NT$5,150（兩頁設計 NT$2,000＋印刷每份 NT$105，30 份起印），含 300 磅雪銅喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。免費修改 2 次，台灣印製只寄台灣，建議 3～5 週前訂製。",
                   "喜帖|紙本喜帖|似顏繪紙本喜帖", paper_body, paper_ld))
 
 # ── 關於我們（文字依 Alison 2026-11-21 提供） ──
