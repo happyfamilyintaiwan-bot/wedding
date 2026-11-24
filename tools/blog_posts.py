@@ -3,6 +3,7 @@
 每篇：slug、cat、title（<title>）、h1、desc、ga（page_title 第三段）、published、modified、cover、summary（3 句）、toc（選填）、cheat、service、
 lead、body（f-string HTML，用 blog_kit 的元件）、faq [(問, 答)]、sources [(名稱, 網址)]。寫法見 CLAUDE.md「部落格寫作規範」。
 """
+import json
 from blog_kit import CHEAT, steps, table, box, mid
 
 POSTS = []
@@ -224,6 +225,219 @@ SCENE_SONGS = [
     ]),
 ]
 SONG_COUNT = sum(len(s[3]) for s in SCENE_SONGS)
+
+# ── 「我的婚禮歌單」小工具（2026-11-24，Alison）：選歌 → 1080×1350 圖＋文字清單 ──
+# 歌單文字照舊是上面的靜態 HTML；這裡的選項由 JS 從 PICK_DATA 產生（core §8：JS 只管互動）。
+# GA4 只送 export（method＝image／copy_text、item_count＝選了幾首），不送歌名、名字、日期。
+PICK_SCENES = [("welcome", "迎賓", ["welcome"]), ("first", "一進", ["first-entrance", "family-entrance", "instrumental"]),
+               ("second", "二進", ["second-entrance"]), ("dinner", "用餐", ["dinner"]), ("toast", "敬酒", ["toast"]), ("farewell", "送客", ["farewell"])]
+_by_id = {s[0]: s[3] for s in SCENE_SONGS}
+PICK_DATA = json.dumps([{"id": i, "name": n, "songs": [[t, a] for sid in ids for t, a, *_ in _by_id[sid]]} for i, n, ids in PICK_SCENES],
+                       ensure_ascii=False).replace("&", "\\u0026").replace("<", "\\u003c")
+PICKER = """
+<h2 id="my-playlist">做一份你們的婚禮歌單</h2>
+<style>
+.pk { background: var(--cream); border: 1px solid var(--line); border-radius: 18px; padding: 18px 18px 20px; margin: 10px 0 22px; }
+.pk .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.pk label.f { display: block; font-size: 14px; color: var(--muted); }
+.pk input[type=text] { display: block; width: 100%; margin-top: 4px; font: inherit; font-size: 16px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); }
+.pk .tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin: 0 -4px 10px; padding-left: 4px; }
+.pk .tabs button { flex: 0 0 auto; min-height: 44px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--wine); font: inherit; font-size: 15px; cursor: pointer; }
+.pk .tabs button[aria-selected=true] { background: var(--rose); border-color: var(--wine); font-weight: 700; }
+.pk .tabs i { font-style: normal; font-size: 12.5px; color: var(--muted); margin-left: 4px; }
+.pk .hint { font-size: 14px; color: var(--muted); margin: 0 0 8px; }
+.pk ul.opts { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; max-height: 420px; overflow-y: auto; }
+.pk ul.opts li { margin: 0; }
+.pk ul.opts label { display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 6px 12px; background: #fff; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; line-height: 1.35; }
+.pk ul.opts input { width: 20px; height: 20px; flex: 0 0 auto; accent-color: var(--wine); }
+.pk ul.opts b { display: block; color: var(--wine); font-size: 15px; }
+.pk ul.opts span { display: block; font-size: 13px; color: var(--muted); }
+.pk ul.opts label:has(input:checked) { border-color: var(--wine); background: var(--blush); }
+.pk ul.opts label:has(input:disabled:not(:checked)) { opacity: .5; }
+.pk .acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; align-items: center; }
+.pk .acts .pill { min-height: 44px; white-space: nowrap; flex: 0 0 auto; }
+.pk .msg { font-size: 14px; color: var(--muted); min-height: 1.5em; margin: 8px 0 0; }
+.pk .out { margin-top: 14px; text-align: center; }
+.pk .out img { width: 100%; max-width: 420px; height: auto; border-radius: 14px; border: 1px solid var(--line); }
+@media (max-width: 560px) { .pk ul.opts { grid-template-columns: 1fr; } .pk .row { grid-template-columns: 1fr; } .pk #pk-make { flex: 1 1 100%; } .pk .acts .ghost { flex: 1 1 0; padding: 10px 12px; } }
+</style>
+<p>上面的歌聽一輪後，在這裡每個時刻勾 1～3 首，就能存成一張「我們的婚禮歌單」圖，傳給另一半、主持人或婚顧；也可以複製成文字清單。名字和日期只會畫在你自己的圖上，不會傳到任何地方。</p>
+<div class="pk" id="picker">
+  <div class="row">
+    <label class="f">你們的名字（選填）<input type="text" id="pk-names" maxlength="24" placeholder="例：小安＆小日" autocomplete="off"></label>
+    <label class="f">婚禮日期（選填）<input type="text" id="pk-date" maxlength="24" placeholder="例：2027.01.24" autocomplete="off"></label>
+  </div>
+  <div class="tabs" role="tablist" id="pk-tabs"></div>
+  <p class="hint" id="pk-hint">這個小工具需要開啟 JavaScript；沒辦法使用的話，也可以直接存上面的懶人包圖。</p>
+  <ul class="opts" id="pk-opts"></ul>
+  <div class="acts">
+    <button type="button" class="pill" id="pk-make">產生我的歌單圖</button>
+    <button type="button" class="pill ghost" id="pk-copy">複製文字清單</button>
+    <button type="button" class="pill ghost" id="pk-clear">清除重選</button>
+  </div>
+  <p class="msg" id="pk-msg" aria-live="polite"></p>
+  <div class="out" id="pk-out" hidden>
+    <img id="pk-img" alt="我們的婚禮歌單圖" width="1080" height="1350">
+    <div class="acts" style="justify-content:center"><a class="pill" id="pk-dl" download="my-wedding-playlist.jpg" href="#">⬇ 存圖</a></div>
+    <p class="msg">手機也可以長按圖片儲存。</p>
+  </div>
+</div>
+<script type="application/json" id="pk-data">""" + PICK_DATA + """</script>
+"""
+PICKER_JS = r"""<script>
+/* 我的婚禮歌單：選歌、畫圖、複製文字（每個部分各自 try/catch；GA4 只送 export 與首數） */
+(function () {
+  var MAX = 3, URL_TXT = "wedding.knittinghiyori.com/blog/wedding-songs/", KEY = "hy_wedding_picks";
+  var root = document.getElementById("picker");
+  if (!root) return;
+  var $ = function (id) { return document.getElementById(id); };
+  var data, picks = {}, cur;
+  try { data = JSON.parse($("pk-data").textContent); } catch (e) { return; }
+  data.forEach(function (s) { picks[s.id] = []; });
+  cur = data[0].id;
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || "null"); if (saved) data.forEach(function (s) { if (Array.isArray(saved[s.id])) picks[s.id] = saved[s.id].filter(function (i) { return s.songs[i]; }).slice(0, MAX); }); } catch (e) {}
+  var save = function () { try { localStorage.setItem(KEY, JSON.stringify(picks)); } catch (e) {} };
+  var total = function () { var n = 0; data.forEach(function (s) { n += picks[s.id].length; }); return n; };
+  var msg = function (t) { $("pk-msg").textContent = t; };
+  var track = function (method) {
+    try {
+      var p = { method: method, item_count: total() };
+      if (/[?]hy_debug=1/.test(location.search)) console.log("[hy-wedding] export", p);
+      if (typeof gtag === "function") gtag("event", "export", p);
+    } catch (e) {}
+  };
+
+  function renderTabs() {
+    try {
+      $("pk-tabs").innerHTML = "";
+      data.forEach(function (s) {
+        var b = document.createElement("button");
+        b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", s.id === cur ? "true" : "false");
+        b.textContent = s.name;
+        var i = document.createElement("i"); i.textContent = picks[s.id].length + "/" + MAX; b.appendChild(i);
+        b.addEventListener("click", function () { cur = s.id; renderTabs(); renderOpts(); });
+        $("pk-tabs").appendChild(b);
+      });
+    } catch (e) {}
+  }
+  function renderOpts() {
+    try {
+      var s = data.filter(function (x) { return x.id === cur; })[0], ul = $("pk-opts"), full = picks[cur].length >= MAX;
+      $("pk-hint").textContent = s.name + "：勾 1～" + MAX + " 首（共 " + s.songs.length + " 首可以選）";
+      ul.innerHTML = "";
+      s.songs.forEach(function (song, i) {
+        var li = document.createElement("li"), lb = document.createElement("label"), cb = document.createElement("input"), tx = document.createElement("div"), b = document.createElement("b"), sp = document.createElement("span");
+        cb.type = "checkbox"; cb.checked = picks[cur].indexOf(i) > -1; cb.disabled = full ? !cb.checked : false;
+        b.textContent = song[0]; sp.textContent = song[1];
+        tx.appendChild(b); tx.appendChild(sp); lb.appendChild(cb); lb.appendChild(tx); li.appendChild(lb); ul.appendChild(li);
+        cb.addEventListener("change", function () {
+          var a = picks[cur], k = a.indexOf(i);
+          if (cb.checked) { if (k < 0) a.push(i); } else if (k > -1) a.splice(k, 1);
+          save(); renderTabs(); renderOpts();
+          if (a.length >= MAX) msg(s.name + "已經選滿 " + MAX + " 首，可以換下一個時刻。"); else msg("");
+        });
+      });
+    } catch (e) {}
+  }
+
+  function chosen() { return data.filter(function (s) { return picks[s.id].length; }).map(function (s) { return { name: s.name, songs: picks[s.id].map(function (i) { return s.songs[i]; }) }; }); }
+  function val(id) { try { return $(id).value.trim(); } catch (e) { return ""; } }
+
+  function fit(ctx, t, w) {
+    if (ctx.measureText(t).width <= w) return t;
+    while (t.length > 1) { t = t.slice(0, -1); if (ctx.measureText(t + "…").width <= w) return t + "…"; }
+    return t;
+  }
+  function rr(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+
+  function draw(list) {
+    var W = 1080, H = 1350, c = document.createElement("canvas"); c.width = W; c.height = H;
+    var x = c.getContext("2d"), SERIF = '"Noto Serif TC", "Songti TC", serif', LATIN = '"Bodoni Moda", "Noto Serif TC", serif';
+    var WINE = "#5a2232", ROSE = "#e6a9b5", ROSE_D = "#c97487", INK = "#3a2128", MUTED = "#7c5d64", PAPER = "#fbf4f2";
+    var names = val("pk-names"), date = val("pk-date");
+    x.fillStyle = PAPER; x.fillRect(0, 0, W, H);
+    var head = date ? 300 : 260;
+    x.fillStyle = WINE; x.fillRect(0, 0, W, head);
+    x.textBaseline = "alphabetic";
+    x.fillStyle = ROSE; x.font = "italic 34px " + LATIN; x.fillText("My wedding playlist", 72, 96);
+    var tt = names ? names : "我們的婚禮歌單", fs = 76;
+    x.font = "900 76px " + SERIF;
+    while (fs > 48 ? x.measureText(tt).width > W - 144 : false) { fs -= 4; x.font = "900 " + fs + "px " + SERIF; }
+    x.fillStyle = "#fff"; x.fillText(fit(x, tt, W - 144), 72, 192);
+    if (date) { x.fillStyle = ROSE; x.font = "500 38px " + SERIF; x.fillText(fit(x, date, W - 144), 72, 254); }
+    // 卡片高度依首數決定，太多時整體縮小
+    var top = head + 40, bottom = H - 120, gap = 18, rows = 0;
+    list.forEach(function (g) { rows += g.songs.length; });
+    var need = list.length * 96 + rows * 46 + (list.length - 1) * gap, k = Math.min(1, (bottom - top) / need);
+    var y = top + Math.max(0, (bottom - top - need * k) / 3);
+    list.forEach(function (g, gi) {
+      var h = (96 + g.songs.length * 46) * k;
+      x.fillStyle = "#fff"; rr(x, 60, y, W - 120, h, 26 * k); x.fill();
+      x.strokeStyle = "rgba(201,116,135,.35)"; x.lineWidth = 2; x.stroke();
+      x.fillStyle = ROSE; x.beginPath(); x.arc(118, y + 46 * k, 28 * k, 0, Math.PI * 2); x.fill();
+      x.fillStyle = WINE; x.font = "500 " + Math.round(30 * k) + "px " + LATIN; x.textAlign = "center"; x.fillText(String(gi + 1), 118, y + 57 * k); x.textAlign = "left";
+      x.fillStyle = WINE; x.font = "700 " + Math.round(38 * k) + "px " + SERIF; x.fillText(g.name, 172, y + 60 * k);
+      g.songs.forEach(function (s, si) {
+        var ly = y + (74 + 38 + si * 46) * k;
+        x.font = "500 " + Math.round(30 * k) + "px " + SERIF; x.fillStyle = INK;
+        var t = fit(x, "〈" + s[0] + "〉", 560); x.fillText(t, 172, ly);
+        var tw = x.measureText(t).width;
+        x.font = "400 " + Math.round(25 * k) + "px " + SERIF; x.fillStyle = MUTED;
+        x.fillText(fit(x, s[1], W - 120 - 40 - 172 - tw - 16), 172 + tw + 16, ly);
+      });
+      y += h + gap * k;
+    });
+    x.fillStyle = MUTED; x.font = "400 30px " + LATIN; x.textAlign = "center"; x.fillText(URL_TXT.split("/")[0], W / 2, H - 62);
+    x.fillStyle = ROSE_D; x.font = "400 22px " + SERIF; x.fillText("在這裡做一份你們的婚禮歌單", W / 2, H - 26);
+    return c.toDataURL("image/jpeg", 0.92);
+  }
+
+  $("pk-make").addEventListener("click", function () {
+    try {
+      var list = chosen();
+      if (!list.length) { msg("先在任一個時刻勾 1 首歌喔。"); return; }
+      msg("畫圖中…");
+      var go = function () {
+        try {
+          var url = draw(list);
+          $("pk-img").src = url; $("pk-dl").href = url; $("pk-out").hidden = false;
+          msg("好了！共 " + total() + " 首，可以存圖傳給另一半。");
+          $("pk-out").scrollIntoView({ behavior: "smooth", block: "nearest" });
+          track("image");
+        } catch (e) { msg("圖沒有畫成功，可以改用「複製文字清單」。"); }
+      };
+      var f = document.fonts;
+      if (f) Promise.all([f.load('900 76px "Noto Serif TC"', "我們的婚禮歌單"), f.load('italic 34px "Bodoni Moda"')]).then(go, go); else go();
+    } catch (e) { msg("圖沒有畫成功，可以改用「複製文字清單」。"); }
+  });
+
+  $("pk-copy").addEventListener("click", function () {
+    try {
+      var list = chosen();
+      if (!list.length) { msg("先在任一個時刻勾 1 首歌喔。"); return; }
+      var names = val("pk-names"), date = val("pk-date"), lines = [];
+      lines.push((names ? names + " 的" : "我們的") + "婚禮歌單" + (date ? "（" + date + "）" : ""));
+      list.forEach(function (g) { lines.push(""); lines.push("【" + g.name + "】"); g.songs.forEach(function (s) { lines.push("・〈" + s[0] + "〉" + s[1]); }); });
+      lines.push(""); lines.push("做一份你們的婚禮歌單：https://" + URL_TXT + "#my-playlist");
+      var text = lines.join("\n"), done = function () { msg("已複製，可以貼到 LINE 或備忘錄。"); track("copy_text"); };
+      var fallback = function () {
+        var ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        try { if (document.execCommand("copy")) done(); else msg("沒辦法自動複製，請改用存圖。"); } catch (e) { msg("沒辦法自動複製，請改用存圖。"); }
+        document.body.removeChild(ta);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+    } catch (e) { msg("沒辦法自動複製，請改用存圖。"); }
+  });
+
+  $("pk-clear").addEventListener("click", function () {
+    try { data.forEach(function (s) { picks[s.id] = []; }); save(); $("pk-out").hidden = true; msg("已清除，可以重新選。"); renderTabs(); renderOpts(); } catch (e) {}
+  });
+
+  renderTabs(); renderOpts();
+})();
+</script>
+"""
 _ALL = {t: (t, a, v, m, n) for _, _, _, rows in SCENE_SONGS for t, a, v, m, n in rows}
 TOP = ["A Thousand Years", "Can't Help Falling in Love", "Perfect", "My Only", "Beautiful in White", "You Are the Reason", "第一支舞 feat. 劉若英", "Speechless"]
 TOP_WHY = {"A Thousand Years": "網友心中的「感人婚禮歌」代表", "Can't Help Falling in Love": "我們最推 Kina Grannis 版", "Perfect": "進場經典，網友推最多次之一",
@@ -259,6 +473,8 @@ def _scene(sid, name, intro, rows, level="h2"):
     return f'<{level} id="{sid}">{name}</{level}><p>{intro}</p><ul class="songs">' + "".join(_song_li(*r) for r in rows) + "</ul>"
 
 
+_STAY = """<p id="stay-with-me"><b>一進我們私心最推〈Stay with Me〉。</b>剛看完陸劇《今天是太陽雨》，越聽越覺得這首就是為一進寫的：想像站在紅毯盡頭等待的那一位，看著另一半一步一步走過來，心裡沒說出口的那些話，大概就是這首歌。不管是誰走向誰，都很適合。</p>
+"""
 _scenes = dict((s[0], s) for s in SCENE_SONGS)
 _body = f"""
 <h2 id="scenes">婚禮歌單怎麼分？</h2>
@@ -279,13 +495,14 @@ _body = f"""
 </ul>
 {box("tip", "一進從前奏到走到台前大約 1～2 分鐘，先把歌剪好段落，交給場地或主持人時就不會手忙腳亂。")}
 {CHEAT}
+<p>想要一份只屬於你們的歌單？聽完下面的歌，到<a href="#my-playlist">做一份你們的婚禮歌單</a>每個時刻勾幾首，就能存成圖傳給另一半。</p>
 
 <h2 id="top">網友推最多、我們也最推的婚禮歌</h2>
 <div class="tbl"><table><thead><tr><th>歌名</th><th>歌手</th><th>為什麼推</th></tr></thead><tbody>""" + "".join(
     f'<tr><td><a href="{_yt(_ALL[t][2])}" target="_blank" rel="noopener" data-cta="song_play" data-cta-type="wedding">{t} ▶</a></td><td>{_ALL[t][1]}</td><td>{TOP_WHY[t]}</td></tr>' for t in TOP) + """</tbody></table></div>
 <p><b>我們特別推 Kina Grannis 版的〈Can't Help Falling in Love〉。</b>電影《瘋狂亞洲富豪》的婚禮，新娘走紅毯時就是 Kina Grannis 本人在片中演唱這首，比原唱更溫柔，非常適合一進。</p>
-""" + _scene(*_scenes["welcome"]) + _scene(*_scenes["first-entrance"]) + _scene(*_scenes["family-entrance"], level="h3") + _scene(*_scenes["instrumental"], level="h3") + \
-    _scene(*_scenes["second-entrance"]) + _scene(*_scenes["dinner"]) + _scene(*_scenes["toast"]) + _scene(*_scenes["farewell"]) + """
+""" + _scene(*_scenes["welcome"]) + _scene(*_scenes["first-entrance"]) + _STAY + _scene(*_scenes["family-entrance"], level="h3") + _scene(*_scenes["instrumental"], level="h3") + \
+    _scene(*_scenes["second-entrance"]) + _scene(*_scenes["dinner"]) + _scene(*_scenes["toast"]) + _scene(*_scenes["farewell"]) + PICKER + """
 <h2 id="movies">電影、影集婚禮場景裡的歌</h2>
 <p>想要「一聽就有畫面」的歌，可以從電影婚禮場景找。賓客認出來的時候，也會多一份驚喜：</p>
 <div class="tbl"><table><thead><tr><th>電影／影集</th><th>歌名</th><th>歌手</th><th>出現在哪裡</th></tr></thead><tbody>""" + "".join(
@@ -313,10 +530,11 @@ POSTS.append(dict(
     cat="planning",
     title=f"婚禮歌單 2026｜{SONG_COUNT} 首婚禮歌曲依迎賓、一進、二進、敬酒、送客分好，每首直接聽｜編織日和",
     h1=f"婚禮歌單：{SONG_COUNT} 首婚禮歌曲，<br>依迎賓、一進、二進、用餐、敬酒、送客分好了",
-    desc=f"婚禮歌曲 {SONG_COUNT} 首，依迎賓、一進、二進、用餐、逐桌敬酒、送客六個時刻分類，每首點了就能在 YouTube 試聽。我們私心推薦＋Threads 網友真實婚禮用歌，另外整理電影婚禮場景的歌，和歌詞不分性別、同婚也適合的歌。",
+    desc=f"婚禮歌曲 {SONG_COUNT} 首，依迎賓、一進、二進、用餐、逐桌敬酒、送客六個時刻分類，每首點了就能在 YouTube 試聽。我們私心推薦＋Threads 網友真實婚禮用歌，另外整理電影婚禮場景的歌，和歌詞不分性別、同婚也適合的歌。挑好還能勾選做成你們自己的婚禮歌單圖，傳給另一半和主持人。",
+    js=PICKER_JS,
     ga="婚禮歌單",
     published="2026-11-21",
-    modified="2026-11-23",
+    modified="2026-11-24",
     cover=dict(img="wedding-songs.jpg", alt=f"婚禮歌單 {SONG_COUNT} 首：依迎賓、一進、二進、用餐、敬酒、送客分好的婚禮歌曲",
                art="assets/couple-kimono.webp", kicker="Wedding playlist", title=f"婚禮歌單 {SONG_COUNT} 首", sub="迎賓、一進、二進、用餐、\n敬酒、送客都分好了"),
     summary=[
@@ -325,7 +543,7 @@ POSTS.append(dict(
         "一進我們最推 <b>Kina Grannis 版〈Can't Help Falling in Love〉</b>；同婚婚禮可以挑標「🌈 同婚也適合」、歌詞不分性別的歌。",
     ],
     toc={"scenes": "怎麼分", "how-many": "要準備幾首", "top": "最推的歌", "welcome": "迎賓", "first-entrance": "一進", "second-entrance": "二進",
-         "dinner": "用餐", "toast": "敬酒", "farewell": "送客", "movies": "電影婚禮場景", "ost": "影視原聲", "same-sex": "同婚也適合", "invite": "放進喜帖"},
+         "dinner": "用餐", "toast": "敬酒", "farewell": "送客", "my-playlist": "做我的歌單", "movies": "電影婚禮場景", "ost": "影視原聲", "same-sex": "同婚也適合", "invite": "放進喜帖"},
     cheat=dict(img="wedding-songs-cheatsheet.jpg", alt="婚禮歌單懶人包：迎賓、一進、二進、用餐、敬酒、送客各放什麼歌",
                kicker="懶人包｜婚禮歌單", title="婚禮 6 個時刻\n各放什麼歌", caption="婚禮 6 個時刻各放什麼歌（可以存起來傳給另一半）",
                points=[("迎賓：輕快溫暖", "〈有你的快樂〉、〈I'm Yours〉"), ("一進：最感人的一首", "〈Can't Help Falling in Love〉Kina Grannis 版"),
