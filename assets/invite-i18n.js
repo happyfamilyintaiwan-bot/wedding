@@ -82,7 +82,7 @@ window.HYI = (() => {
         b: { name: "Muted Garden", text: "Soft, muted tones, like a light watercolor painting.", colors: ["Dusty rose", "Oat milk", "Sage", "Mist blue"], avoid: "Please avoid all white (the bride's color) and all black" },
         c: { name: "Snowy Pastel", text: "A touch of color in the snow: ice blue, oatmeal, dusty pink or pine green.", colors: ["Ice blue", "Oatmeal", "Dusty pink", "Pine green"], avoid: "Please avoid all white (the bride's color) and all black" },
       },
-      themes: { honey: "Honey", candy: "Candy pink", mint: "Mint", lavender: "Lavender", rose: "Dusty rose", sage: "Sage", mist: "Mist blue", milktea: "Milk tea", ice: "Ice blue", silver: "Silver", rosy: "Pink snow", night: "Winter night" },
+      themes: { honey: "Honey", candy: "Candy pink", mint: "Mint", lavender: "Lavender", sakura: "Spring sakura", sea: "Summer sea", maple: "Autumn maple", rose: "Dusty rose", sage: "Sage", mist: "Mist blue", milktea: "Milk tea", ice: "Ice blue", silver: "Silver", rosy: "Pink snow", night: "Winter night" },
     },
     ja: {
       groom: "哲也", bride: "晴香", initials: ["T", "H"], sealB: ["哲", "晴"],
@@ -98,7 +98,7 @@ window.HYI = (() => {
         b: { name: "Muted Garden", text: "淡い水彩画のような、やさしく落ち着いた色でお越しください。", colors: ["灰桜", "オーツミルク", "セージ", "霧の青"], avoid: "全身白（花嫁の色）と全身黒はお控えください" },
         c: { name: "Snowy Pastel", text: "雪景色に映える色を。アイスブルー、オートミール、くすみピンク、松の緑がおすすめです。", colors: ["アイスブルー", "オートミール", "くすみピンク", "松の緑"], avoid: "全身白（花嫁の色）と全身黒はお控えください" },
       },
-      themes: { honey: "はちみつ", candy: "キャンディピンク", mint: "ミント", lavender: "ラベンダー", rose: "灰桜", sage: "セージ", mist: "霧の青", milktea: "ミルクティー", ice: "アイスブルー", silver: "シルバー", rosy: "桜雪", night: "冬の夜" },
+      themes: { honey: "はちみつ", candy: "キャンディピンク", mint: "ミント", lavender: "ラベンダー", sakura: "春の桜", sea: "夏の海", maple: "秋の紅葉", rose: "灰桜", sage: "セージ", mist: "霧の青", milktea: "ミルクティー", ice: "アイスブルー", silver: "シルバー", rosy: "桜雪", night: "冬の夜" },
     },
     es: {
       groom: "Andrés", bride: "Lucía", initials: ["A", "L"], sealB: ["A", "L"],
@@ -114,7 +114,7 @@ window.HYI = (() => {
         b: { name: "Muted Garden", text: "Tonos suaves y apagados, como una acuarela ligera.", colors: ["Rosa empolvado", "Avena", "Salvia", "Azul niebla"], avoid: "Por favor evita vestir todo de blanco (el color de la novia) o todo de negro" },
         c: { name: "Snowy Pastel", text: "Un toque de color en la nieve: azul hielo, avena, rosa empolvado o verde pino.", colors: ["Azul hielo", "Avena", "Rosa empolvado", "Verde pino"], avoid: "Por favor evita vestir todo de blanco (el color de la novia) o todo de negro" },
       },
-      themes: { honey: "Miel", candy: "Rosa dulce", mint: "Menta", lavender: "Lavanda", rose: "Rosa empolvado", sage: "Salvia", mist: "Azul niebla", milktea: "Té con leche", ice: "Azul hielo", silver: "Plata", rosy: "Nieve rosa", night: "Noche de invierno" },
+      themes: { honey: "Miel", candy: "Rosa dulce", mint: "Menta", lavender: "Lavanda", sakura: "Cerezo de primavera", sea: "Mar de verano", maple: "Arce de otoño", rose: "Rosa empolvado", sage: "Salvia", mist: "Azul niebla", milktea: "Té con leche", ice: "Azul hielo", silver: "Plata", rosy: "Nieve rosa", night: "Noche de invierno" },
     },
   };
 

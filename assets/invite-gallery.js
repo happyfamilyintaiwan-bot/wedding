@@ -2,6 +2,7 @@
    - 照片寫在 WEDDING.photos：["photo-1.webp", { src: "photo-2.webp", caption: "第一次旅行" }, ...]，最多 20 張
    - 左右滑一次一張，旁邊露出下一張；點照片全螢幕看大圖，也可以左右滑
    - 沒有照片（或 hide 裡有 "gallery"）就整段拿掉
+   - 左右滿版：範本的 section 左右 padding 不是 24px 時，在範本設 --hyg-pad
    - 顏色用各範本自己的 --ink、--accent、--paper，不寫死 */
 window.HYG = (() => {
   const MAX = 20;
@@ -12,7 +13,7 @@ window.HYG = (() => {
     es: { region: "Galería de fotos", open: (n) => `Abrir foto ${n}`, prev: "Anterior", next: "Siguiente", close: "Cerrar", photo: (n) => `Foto ${n}` },
   };
   const CSS = `
-.hyg { position: relative; margin: 0 -24px; --w: min(76vw, 340px); }
+.hyg { position: relative; margin: 0 calc(-1 * var(--hyg-pad, 24px)); --w: min(76vw, 340px); }
 .hyg-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10px calc(50% - var(--w) / 2) 22px; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
 .hyg-track::-webkit-scrollbar { display: none; }
 .hyg-track:focus-visible { outline: 2px dashed var(--accent); outline-offset: -6px; }

@@ -523,7 +523,7 @@ SAMPLES = """  <section style="padding-top:0">
         <a href="/a/" target="_blank" rel="noopener" data-cta="style_a" data-cta-type="wedding"><b><i>A</i>書約手繪風</b><span>黑線小花和拱門</span><em>打開範例 ↗</em></a>
         <a href="/b/" target="_blank" rel="noopener" data-cta="style_b" data-cta-type="wedding"><b><i>B</i>日系清新</b><span>拉門開場、直書</span><em>打開範例 ↗</em></a>
         <a href="/c/" target="_blank" rel="noopener" data-cta="style_c" data-cta-type="wedding"><b><i>C</i>雪景</b><span>雪山和燈串</span><em>打開範例 ↗</em></a>
-        <a href="/a/?photo" target="_blank" rel="noopener" data-cta="style_photo" data-cta-type="wedding"><b><i>♡</i>婚紗照版</b><span>不畫似顏繪，放你們的照片</span><em>打開範例 ↗</em></a>
+        <a href="/a/?photo" target="_blank" rel="noopener" data-cta="style_photo" data-cta-type="wedding"><b><i>♡</i>婚紗照版</b><span>不畫似顏繪，放你們的照片；A、B、C 都能做</span><em>打開範例 ↗</em></a>
       </div>
     </div>
   </section>"""
@@ -606,11 +606,11 @@ STEPS = """  <section style="padding-top:0">
 # ── 電子喜帖 ──
 web_qa = faqs("電子喜帖可以用多久？會被搜尋到嗎？", "可以修改幾次？", "製作要多久？可以趕急件嗎？", "怎麼付款？什麼時候開始製作？")
 web_body = hero("電子喜帖", "網頁電子喜帖：<br>手機一點就開，賓客線上回覆出席",
-                "把你們的似顏繪做成喜帖網頁：開場動畫、婚禮倒數、婚宴流程、Dress code、地圖、加入行事曆、出席回覆都在裡面。3 種風格同價 NT$3,800（另需雙人似顏繪 NT$1,800）。",
+                "把你們的似顏繪做成喜帖網頁：開場動畫、婚禮倒數、婚宴流程、Dress code、地圖、加入行事曆、出席回覆都在裡面。3 種風格同價 NT$3,800，搭配雙人似顏繪 NT$1,800；不畫似顏繪、改放婚紗照的婚紗照版，總價就是 NT$3,800。",
                 '<a class="pill" href="/?web=A#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#web">看 3 種風格</a>') + \
     "\n" + web_sec + "\n" + SAMPLES + "\n" + TRUST + "\n" + STEPS + "\n" + read_more_auto("/web-invitation/") + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote") + "\n" + BUNDLE
 web_ld = [{"@type": "Service", "name": "似顏繪網頁電子喜帖", "serviceType": "電子喜帖設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
-           "offers": [offer("網頁電子喜帖（3 種風格同價）", 3800, "交付起 3 個月上線與維護"), offer("延長上線（每月）", 600, "交付 3 個月後每延長 1 個月")]}, faq_ld(web_qa)]
+           "offers": [offer("網頁電子喜帖（3 種風格同價）", 3800, "交付起 3 個月上線與維護"), offer("網頁電子喜帖婚紗照版（不畫似顏繪）", 3800, "放新人的婚紗照，交付起 3 個月上線與維護"), offer("延長上線（每月）", 600, "交付 3 個月後每延長 1 個月")]}, faq_ld(web_qa)]
 built.append(page("/web-invitation/", "電子喜帖", "網頁電子喜帖客製｜似顏繪＋出席回覆、地圖、倒數 3 種風格 NT$3,800｜編織日和",
                   "似顏繪網頁電子喜帖：開場動畫、婚禮倒數、流程、Dress code、地圖、加入行事曆、出席回覆。書約手繪風、日系清新、雪景 3 種風格同價 NT$3,800，網址不公開、不被搜尋引擎收錄。",
                   "喜帖|電子喜帖|似顏繪網頁電子喜帖", web_body, web_ld))

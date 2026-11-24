@@ -87,9 +87,10 @@ p { text-wrap: pretty; }
 #open-btn:focus-visible { outline: 1px dashed var(--accent); outline-offset: 8px; }
 
 /* ===== 版面 ===== */
-.page { position: relative; max-width: 480px; margin: 0 auto; overflow: hidden; background: var(--paper); }
+.page { position: relative; max-width: 480px; margin: 0 auto; overflow: hidden; overflow: clip; background: var(--paper); }
 @media (min-width: 900px) { .page { margin: 48px auto; box-shadow: 0 30px 80px -40px rgba(60,50,40,.35); } }
 section { position: relative; padding: 72px 30px; }
+#gallery { --hyg-pad: 30px; }
 .sh { text-align: center; margin-bottom: 36px; position: relative; isolation: isolate; }
 .sh .no { display: block; font-size: 13px; color: var(--muted); letter-spacing: .5em; }
 .sh h2 { font-size: 22px; font-weight: 600; letter-spacing: .5em; margin: 8px 0 2px; padding-left: .5em; position: relative; }
@@ -278,6 +279,11 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
     <div class="story" id="story-list"></div>
   </section>
 
+  <section id="gallery" data-r>
+    <header class="sh"><span class="no cg fade">— ♡ —</span><h2 class="fade" style="--i:1" data-i18n="h_gallery">我們的照片</h2><span class="it fade" style="--i:1">All About Love</span></header>
+    <div class="fade" style="--i:2" id="gallery-box"></div>
+  </section>
+
   <section id="schedule" data-r>
     <header class="sh"><span class="no cg fade">— 03 —</span><h2 class="fade" style="--i:1" data-i18n="h_sched">婚宴流程</h2><span class="it fade" style="--i:1">Order of the Day</span></header>
     <div id="sched"></div>
@@ -340,6 +346,7 @@ footer { text-align: center; padding: 10px 24px 44px; font-size: 12px; color: va
 <div class="toast" id="toast"></div>
 
 <script src="../assets/invite-i18n.js"></script>
+<script src="../assets/invite-gallery.js"></script>
 <script>
 /* ===== 每接一案只要改這一段 ===== */
 const WEDDING = {
@@ -347,7 +354,9 @@ const WEDDING = {
   sample: true,             // 範例專用：切換語言時套用範例文字；正式交付給新人時刪掉這行
   groom: "阿哲", bride: "小晴",
   initials: ["哲", "晴"],                  // 印章上的字
-  couple: "../assets/couple-kimono.webp",
+  couple: "../assets/couple-kimono.webp",   // 新人全身似顏繪（去背）；婚紗照版放一張直式婚紗照
+  couplePhoto: false,       // 婚紗照版設 true：封面照片放進拱形相框，結尾不放小新人
+  photos: [],               // 婚紗照輪播，最多 20 張："photo-1.webp" 或 { src: "photo-2.webp", caption: "一句話" }；空的就不顯示這段
   start: "2027-03-20T11:30:00+08:00",
   end:   "2027-03-20T14:30:00+08:00",
   invite: "我們從大學社團認識\n一起走過十年的日子\n這一天　想請重要的你\n來見證我們的幸福",
@@ -388,7 +397,7 @@ const WEDDING = {
   address: "台北市○○區○○路 100 號",
   mapQuery: "台北市政府",
   mapUrl: "",              // 有 Google 地圖分享連結就貼這裡（優先於 mapQuery）
-  hide: [],                // 不需要的段落：story／dress／tips／parents／schedule
+  hide: [],                // 不需要的段落：story／gallery／dress／tips／parents／schedule
   transport: [
     { icon: "train", text: "捷運○○站 2 號出口，步行 5 分鐘" },
     { icon: "car",   text: "開車導航「○○婚宴會館」" },
@@ -413,6 +422,11 @@ const params = new URLSearchParams(location.search);
 const still = params.has("still"), embed = params.has("embed");
 const reduced = still || matchMedia("(prefers-reduced-motion: reduce)").matches;
 if (still) document.documentElement.classList.add("still");
+// ?photo：範例的婚紗照版（示意照片）
+if (WEDDING.sample && params.has("photo")) Object.assign(WEDDING, {
+  couple: "../assets/sample-photos/hero.webp", couplePhoto: true,
+  photos: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `../assets/sample-photos/photo-${n}.webp`),
+});
 let seed = 5;
 const R = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
 const pick = (a) => a[Math.floor(R() * a.length)];
@@ -561,6 +575,7 @@ $("rsvp-deadline").textContent = WEDDING.rsvpDeadline.replaceAll("-", " . ");
 $("rsvp-btn").href = WEDDING.rsvpUrl;
 HYI.renderContacts(WEDDING, LANG, $("contact"));
 
+try { HYG.render(WEDDING, LANG, $("gallery-box")); } catch (e) { $("gallery")?.remove(); }
 HYI.applyLayout(WEDDING);   // 內容填好後才拿掉不需要的段落
 
 /* ---------- 插畫 ---------- */
@@ -630,7 +645,7 @@ document.querySelectorAll(".sh").forEach((h, i) => {
 (() => {
   const svg = $("end-art");
   svg.innerHTML = wash(200, 150, 140, 90, "--w2", .7, .1) + wash(130, 120, 60, 50, "--w1", .4, .2) + wash(280, 180, 70, 44, "--w3", .4, .3) +
-    `<image class="couple" href="${WEDDING.couple}" x="158" y="44" width="84" height="164"/><g id="e-fl"></g>`;
+    `${WEDDING.couplePhoto ? "" : `<image class="couple" href="${WEDDING.couple}" x="158" y="44" width="84" height="164"/>`}<g id="e-fl"></g>`;
   const g = svg.querySelector("#e-fl");
   const s = stem(g, "M70 230 Q120 200 150 214", .4), t = stem(g, "M250 212 Q290 196 340 226", .5);
   grow(g, s, { step: 10, leaf: 18, bloomP: .4, size: 13, d0: .5, span: .6, buds: .4 });
@@ -716,7 +731,9 @@ window.setPreview = ({ img, photo, groom, bride, date, theme } = {}) => {
   if (date) { const s = new Date(date + "T11:30:00+08:00"); if (!isNaN(s)) { start = s; end = new Date(s.getTime() + 3 * 36e5); } }
   if (theme) setTheme(theme);
   renderNames(); renderCal(); tick(); $("gcal-btn").href = gcal();
-  if (img) {
+  if (img) heroImg(img, photo);
+};
+function heroImg(img, photo) {
     const im = $("couple-img"), box = $("h-couple");
     im.setAttribute("href", img);
     box.querySelector(".photo-frame")?.remove();
@@ -728,8 +745,8 @@ window.setPreview = ({ img, photo, groom, bride, date, theme } = {}) => {
       im.setAttribute("x", 110); im.setAttribute("y", 150); im.setAttribute("width", 180); im.setAttribute("height", 352);
       im.setAttribute("preserveAspectRatio", "xMidYMax meet"); im.removeAttribute("clip-path");
     }
-  }
-};
+}
+if (WEDDING.couplePhoto) heroImg(WEDDING.couple, true);
 
 if (still || embed) {
   $("intro").remove(); begin();

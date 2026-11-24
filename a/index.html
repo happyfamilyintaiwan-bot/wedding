@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* ===== 配色：糖果 pastel 四色（交付時設定 WEDDING.theme） ===== */
+/* ===== 配色：糖果 pastel 四色＋季節三色（交付時設定 WEDDING.theme） ===== */
 [data-theme="honey"], :root {
   --paper: #fffdf8; --sky: #fbf3e0; --ink: #2f2b28; --muted: #857b72; --accent: #d99a35; --soft: #fbeed2; --hill: #eef0dc; --card: #fffefb;
   --p: #f6c1b0; --p-hi: #fde7df; --p-ln: #c98a77;
@@ -58,6 +58,32 @@
   --w: #fff5ea; --w-hi: #ffffff; --w-ln: #c9b49b;
   --l: #f7cfdc; --l-hi: #fdebf1; --l-ln: #c98ea2;
   --g: #b6d4a4; --g-hi: #e3f0d6; --g-ln: #789b65; --e: #c6d6bb;
+}
+
+/* ===== 季節配色（2026-11-24 加）：春櫻、夏海、秋楓；冬天用 C 雪景 ===== */
+[data-theme="sakura"] {
+  --paper: #fffafb; --sky: #fdeef2; --ink: #3b3134; --muted: #8a7a7f; --accent: #e48aa5; --soft: #fde3ea; --hill: #e4efd8; --card: #fffefe;
+  --p: #f9c6d4; --p-hi: #fde9ef; --p-ln: #cc8aa0;
+  --y: #fde3c8; --y-hi: #fff4e8; --y-ln: #d4a679;
+  --w: #fff7f9; --w-hi: #ffffff; --w-ln: #cbb3ba;
+  --l: #e8d4f0; --l-hi: #f6eefa; --l-ln: #a98bb8;
+  --g: #bcd8b0; --g-hi: #e5f0df; --g-ln: #7d9c70; --e: #cddcc6;
+}
+[data-theme="sea"] {
+  --paper: #f7fbfd; --sky: #dff0f8; --ink: #2c3a44; --muted: #73858f; --accent: #3f97c2; --soft: #d6edf7; --hill: #f1e7cf; --card: #fcfeff;
+  --p: #ffd0c2; --p-hi: #ffece6; --p-ln: #d28f7c;
+  --y: #fbe6a6; --y-hi: #fff7dc; --y-ln: #c9a95b;
+  --w: #f6fafb; --w-hi: #ffffff; --w-ln: #b3c3c9;
+  --l: #a9d6ec; --l-hi: #e3f3fa; --l-ln: #5f9fbe;
+  --g: #a8d5c8; --g-hi: #def1eb; --g-ln: #5f9c8c; --e: #c3dcd6;
+}
+[data-theme="maple"] {
+  --paper: #fffaf4; --sky: #fbeadb; --ink: #3d2f28; --muted: #8a776b; --accent: #c8613a; --soft: #fadfcf; --hill: #ecdcbb; --card: #fffdf9;
+  --p: #f3a98f; --p-hi: #fde3d9; --p-ln: #c06d52;
+  --y: #f5c56f; --y-hi: #fdecc8; --y-ln: #c08f3c;
+  --w: #fbf3e8; --w-hi: #ffffff; --w-ln: #c3ac92;
+  --l: #e6b98e; --l-hi: #f8e8d8; --l-ln: #b07f55;
+  --g: #c9b77a; --g-hi: #ece4c6; --g-ln: #8f7d45; --e: #d5c8a2;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -490,7 +516,7 @@ const WEDDING = {
     { who: "groom", type: "email", value: "" },
     { who: "bride", type: "email", value: "" },
   ],
-  theme: "honey",
+  theme: "honey",           // honey／candy／mint／lavender；季節：sakura 春櫻／sea 夏海／maple 秋楓
   showThemePicker: true,   // 示範用；正式交付給新人時改成 false
 };
 const LANG = HYI.pick(WEDDING.lang), T = HYI.UI[LANG];
@@ -945,7 +971,7 @@ if (!reduced) {
 }
 
 /* ---------- 配色切換（示範用） ---------- */
-const THEMES = { honey: ["蜂蜜黃", "#f6c873"], candy: ["糖果粉", "#f7b8c8"], mint: ["薄荷綠", "#9fd3bb"], lavender: ["薰衣草", "#cdbdf0"] };
+const THEMES = { honey: ["蜂蜜黃", "#f6c873"], candy: ["糖果粉", "#f7b8c8"], mint: ["薄荷綠", "#9fd3bb"], lavender: ["薰衣草", "#cdbdf0"], sakura: ["春櫻", "#f9c6d4"], sea: ["夏海", "#a9d6ec"], maple: ["秋楓", "#f3a98f"] };
 function setTheme(k) {
   if (!THEMES[k]) return;
   document.documentElement.dataset.theme = k;
