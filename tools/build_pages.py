@@ -647,7 +647,7 @@ for P in POSTS:
                      {"@type": "ImageObject", "url": f"{SITE}/assets/blog/{ch['img']}", "width": 1080, "height": 1350, "caption": ch["alt"]}]},
           faq_ld(P["faq"])]
     built.append(page(url, strip(P["h1"]).split("：")[0], P["title"], P["desc"], f"喜帖|部落格|{P['ga']}", body, ld,
-                      og_image=f"/assets/blog/{cv['img']}", og_alt=cv["alt"], article=(P["published"], P["modified"])))
+                      og_image=f"/assets/blog/{cv['img']}", og_alt=cv["alt"], article=(P["published"], P["modified"]), extra_js=P.get("js", "")))
 
 by_cat = [(c, n, d, sorted((P for P in POSTS if P["cat"] == c), key=lambda x: x["modified"], reverse=True)) for c, n, d in CATS]
 by_cat = [x for x in by_cat if x[3]]
