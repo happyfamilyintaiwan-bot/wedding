@@ -337,10 +337,17 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .note-box { margin-top: 18px; font-size: 14.5px; color: var(--muted); }
 .draft { background: #fff3cd; border: 1px dashed #b8860b; padding: 10px 14px; border-radius: 10px; font-size: 14px; color: #6b4e00; }
 @media (max-width: 700px) { .law { grid-template-columns: 1fr; } .page-hero { padding-top: 32px; } }
+/* 手機選單（2026-11-26 部落格好讀改版）：右邊淡出提示還能滑；所在頁自動滑進畫面 */
+.nav a[aria-current="true"] { color: var(--wine); font-weight: 700; }
+@media (max-width: 860px) {
+  .pages-m { -webkit-mask-image: linear-gradient(to right, #000 82%, transparent); mask-image: linear-gradient(to right, #000 82%, transparent); }
+  .pages-m a[aria-current="true"] { color: var(--wine); border-color: var(--wine); font-weight: 700; }
+}
 /* 部落格文章 */
 .post { max-width: 760px; font-size: 17px; }
 .post h2 { font-family: var(--serif); color: var(--wine); font-size: clamp(22px, 3vw, 29px); margin: 44px 0 12px; line-height: 1.4; }
 .post h3 { font-family: var(--serif); color: var(--wine); font-size: 19px; margin: 26px 0 8px; }
+.post [id] { scroll-margin-top: 140px; }
 .post p { margin-bottom: 14px; }
 .post a { color: var(--wine); }
 .post ul, .post ol { padding-left: 1.3em; margin-bottom: 14px; }
@@ -420,20 +427,24 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .svc-end li::before { content: "✦"; position: absolute; left: 0; color: var(--rose-d); font-size: 12px; top: 3px; }
 .svc-end .price { font-family: var(--latin); color: var(--wine); font-size: 26px; margin-bottom: 12px; }
 .svc-end .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.svc-end .art { width: 100%; aspect-ratio: 1; border-radius: 14px; background: var(--blush); display: grid; place-items: center; }
+.svc-end .art svg { width: 70%; height: auto; }
 @media (max-width: 560px) {
   .svc-end { grid-template-columns: 1fr; padding: 16px; }
   .svc-end img { aspect-ratio: 4 / 3; object-position: center 70%; }
+  .svc-end .art { aspect-ratio: 16 / 9; } .svc-end .art svg { width: 40%; }
   .svc-end .acts .pill { flex: 1; }
   .post .tbl.stack table, .post .tbl.stack tbody, .post .tbl.stack tr, .post .tbl.stack td { display: block; min-width: 0; width: 100%; }
   .post .tbl.stack thead { display: none; }
   .post .tbl.stack tr { border: 1px solid var(--line); border-radius: 12px; margin-bottom: 10px; background: #fff; overflow: hidden; }
-  .post .tbl.stack td { border: 0; border-bottom: 1px dashed var(--line); display: grid; grid-template-columns: 7.5em 1fr; gap: 8px; }
+  .post .tbl.stack td { border: 0; border-bottom: 1px dashed var(--line); display: block; padding: 8px 12px; line-height: 1.6; }
   .post .tbl.stack td:last-child { border-bottom: 0; }
-  .post .tbl.stack td::before { content: attr(data-th); color: var(--muted); font-size: 13.5px; }
-  .post .tbl.stack td:first-child { background: var(--blush); color: var(--wine); font-weight: 700; grid-template-columns: 1fr; }
+  .post .tbl.stack td::before { content: attr(data-th); display: block; color: var(--muted); font-size: 12.5px; line-height: 1.4; margin-bottom: 1px; }
+  .post .tbl.stack td:first-child { background: var(--blush); color: var(--wine); font-weight: 700; }
   .post .tbl.stack td:first-child::before { display: none; }
 }
 .post-hero h1 { font-size: clamp(26px, 4.2vw, 42px); }
+@media (max-width: 560px) { .post-hero { padding: 20px 0 14px; } .post-hero h1 { font-size: 25px; margin: 8px 0 8px; } .post .meta { font-size: 13px; margin: 0; } .post-cover { margin-top: 4px; } }
 .post .lead-p { font-size: 17px; }
 .post .note-box { font-size: 14.5px; color: var(--muted); }
 .rel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 10px 0 18px; }
@@ -594,9 +605,9 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
 <header class="top">
   <div class="wrap">
     <a class="kh-brand" href="https://wedding.knittinghiyori.com/" data-google-vignette="false" data-cta="brand_hub" data-cta-type="wedding"><img src="/icons/logo-knitting-120.webp" width="40" height="40" alt="">編織日和<span class="site">・似顏繪喜帖</span></a>
-<!--HY-NAV--><nav class="nav" aria-label="網站選單"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/paper-invitation/">紙本喜帖</a><a href="/about/">關於我們</a><a href="/blog/">部落格</a><a class="pill" href="/#quote" data-cta="hero_quote" data-cta-type="wedding">估價 <span class="arr">→</span></a></nav><!--/HY-NAV-->
+<!--HY-NAV--><nav class="nav" aria-label="網站選單"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/paper-invitation/">紙本喜帖</a><a href="/about/">關於我們</a><a href="/blog/" aria-current="true">部落格</a><a class="pill" href="/#quote" data-cta="hero_quote" data-cta-type="wedding">估價 <span class="arr">→</span></a></nav><!--/HY-NAV-->
   </div>
-<!--HY-NAV-M--><nav class="pages-m" aria-label="網站選單（手機）"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/paper-invitation/">紙本喜帖</a><a href="/about/">關於我們</a><a href="/blog/">部落格</a></nav><!--/HY-NAV-M-->
+<!--HY-NAV-M--><nav class="pages-m" aria-label="網站選單（手機）"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/paper-invitation/">紙本喜帖</a><a href="/about/">關於我們</a><a href="/blog/" aria-current="true">部落格</a></nav><!--/HY-NAV-M-->
 </header>
 
 <main>
@@ -604,13 +615,13 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     <div class="wrap post" style="padding:0">
       <p class="crumb"><a href="/">似顏繪喜帖</a> › <a href="/blog/">部落格</a> › <a href="/blog/#registration">結婚登記與法規</a></p>
       <h1>台灣同性結婚登記全攻略：<br>流程、要帶什麼、書約法條與跨國伴侶規定</h1>
-      <p class="meta">結婚登記與法規｜Zoe & Alison｜發布 2026-02-04｜更新 2026-11-23</p>
+      <p class="meta">Zoe & Alison｜更新 <time datetime="2026-11-23">2026-11-23</time></p>
     </div>
   </section>
   <section style="padding-top:0">
     <article class="wrap post">
-      <figure class="post-cover"><img src="/assets/blog/same-sex-marriage-registration-taiwan.jpg" alt="台灣同性結婚登記全攻略：流程、要帶的證件、書約法條與跨國伴侶規定" width="1200" height="630" fetchpriority="high"></figure>
       <div class="sum3"><b>3 句話看懂</b><ol><li><span>在台灣，婚姻成立看的是<b>戶政事務所的結婚登記</b>，有沒有辦婚禮、宴客都不影響。</span></li><li><span>同性結婚的法律依據是<b>《司法院釋字第七四八號解釋施行法》</b>，書約上的法條要寫這部，不是《民法》婚姻章。</span></li><li><span>台灣人＋外國人、台灣人＋港澳居民都可以登記；兩位外國人要<b>雙方國家都承認同性婚姻</b>才可以。</span></li></ol></div>
+      <figure class="post-cover"><img src="/assets/blog/same-sex-marriage-registration-taiwan.jpg" alt="台灣同性結婚登記全攻略：流程、要帶的證件、書約法條與跨國伴侶規定" width="1200" height="630" fetchpriority="high"></figure>
       <ul class="toc" aria-label="文章目錄"><li><a href="#who">誰可以登記</a></li><li><a href="#documents">要帶什麼</a></li><li><a href="#certificate">書約法條</a></li><li><a href="#process">當天流程</a></li><li><a href="#abroad">國外結婚回台登記</a></li><li><a href="#us">寫給你</a></li><li><a href="#faq">常見問題</a></li></ul>
       <p class="lead-p">我們自己也是同婚伴侶，走過一次結婚登記。第一次走進戶政事務所，最怕的不是排隊，而是「文件到底對不對」。這篇把同性結婚登記的流程、要帶的東西、書約上的法條，還有跨國伴侶最常卡關的規定，照內政部戶政司的公告一次整理好。</p>
 
@@ -670,10 +681,10 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
 <h2 id="us">寫給正在準備登記的你</h2>
 <p>不論是同性還是異性婚姻，在台灣你都有權利完成結婚登記，也有權利選一份尊重你們關係的書約。結婚登記不只是蓋章，而是被承認的那一刻。我們自己走過，知道那份緊張，也知道那份踏實。</p>
 
-      <div class="svc-end"><img src="/assets/portfolio/couple-portrait-wedding-dress-cats-balloons.webp" alt="" loading="lazy"><div><span class="kicker">Our service</span><h3>把你們畫成似顏繪，<br>放進書約和喜帖</h3><ul><li>照你們最喜歡的婚紗照畫雙人全身彩色似顏繪</li><li>同一張圖延伸成結婚書約、電子喜帖、紙本喜帖</li><li>毛小孩、小朋友可以一起畫進來</li></ul><div class="price">NT$1,800 起</div><div class="acts"><a class="pill" href="/#quote" data-cta="post_service" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="/caricature/" data-cta="post_service" data-cta-type="wedding">看作品</a></div></div></div>
-      <h2 id="related">延伸閱讀</h2><div class="rel"><a href="/blog/foreigner-marriage-registration-taiwan/" data-cta="related_link" data-cta-type="wedding"><img src="/assets/blog/foreigner-marriage-registration-taiwan.jpg" alt="台灣人和外國人在台灣結婚：登記流程、單身證明驗證與要帶的文件" loading="lazy" width="1200" height="630"><div><i>結婚登記與法規</i><b>台灣人和外國人在台灣結婚：登記流程、單身證明驗證與要帶的文件</b></div></a><a href="/blog/wedding-songs/" data-cta="related_link" data-cta-type="wedding"><img src="/assets/blog/wedding-songs.jpg" alt="婚禮歌單 88 首：依迎賓、一進、二進、用餐、敬酒、送客分好的婚禮歌曲" loading="lazy" width="1200" height="630"><div><i>婚禮籌備</i><b>婚禮歌單：88 首婚禮歌曲，依迎賓、一進、二進、用餐、敬酒、送客分好了</b></div></a></div>
       <h2 id="faq">常見問題</h2>
       <div class="faq"><details><summary>兩個香港人可以在台灣同性結婚嗎？</summary><p>依現行實務目前不行。台灣處理港澳人士婚姻是類推適用《涉外民事法律適用法》，要看雙方原本適用的法律；香港、澳門都沒有承認同性婚姻。若其中一方是台灣人就可以登記。登記前請向戶政事務所確認最新規定。</p></details><details><summary>兩個外國人可以在台灣同性結婚嗎？</summary><p>雙方的國家或地區都承認同性婚姻，才可以在台灣辦結婚登記；只要其中一方的國家不承認，目前就沒辦法。</p></details><details><summary>台灣人和外國人可以同性結婚嗎？</summary><p>可以。外籍配偶的國家沒有同婚也可以登記；若是外交部公告的特定國家人士，要附駐外館處核發的面談結果通知函。</p></details><details><summary>同性結婚登記一定要戶口名簿嗎？</summary><p>要。在國內結婚的雙方都要帶戶口名簿正本，另外還有身分證、印章或簽名、結婚書約和 2 年內的證件照。</p></details><details><summary>同性結婚書約要引用哪一條法律？</summary><p>引用《司法院釋字第七四八號解釋施行法》第 2 條與第 4 條，不是《民法》婚姻章。書約要寫雙方姓名、出生日期、身分證字號（或護照、居留證號碼）、戶籍地址，以及 2 位以上證人簽名或蓋章。</p></details><details><summary>同性結婚登記一定要本人到場嗎？</summary><p>原則上雙方要親自到戶政事務所。有正當理由並經戶政事務所核准，才能書面委託他人辦理；也可以在結婚日前 3 個辦公日內先辦，並指定結婚登記日。</p></details></div>
+      <div class="svc-end"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 80"><circle cx="46" cy="44" r="26" fill="none" stroke="#5a2232" stroke-width="6"/><circle cx="74" cy="44" r="26" fill="none" stroke="#c07a8c" stroke-width="6"/><path d="M74 6l6 6-6 6-6-6z" fill="#fff" stroke="#c07a8c" stroke-width="2"/></svg></div><div><span class="kicker">Our service</span><h3>把你們畫成似顏繪，<br>放進書約和喜帖</h3><ul><li>照你們最喜歡的婚紗照畫雙人全身彩色似顏繪</li><li>同一張圖延伸成結婚書約、電子喜帖、紙本喜帖</li><li>毛小孩、小朋友可以一起畫進來</li></ul><div class="price">NT$1,800 起</div><div class="acts"><a class="pill" href="/#quote" data-cta="post_service" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="/caricature/" data-cta="post_service" data-cta-type="wedding">看作品</a></div></div></div>
+      <h2 id="related">延伸閱讀</h2><div class="rel"><a href="/blog/foreigner-marriage-registration-taiwan/" data-cta="related_link" data-cta-type="wedding"><img src="/assets/blog/foreigner-marriage-registration-taiwan.jpg" alt="台灣人和外國人在台灣結婚：登記流程、單身證明驗證與要帶的文件" loading="lazy" width="1200" height="630"><div><i>結婚登記與法規</i><b>台灣人和外國人在台灣結婚：登記流程、單身證明驗證與要帶的文件</b></div></a><a href="/blog/wedding-songs/" data-cta="related_link" data-cta-type="wedding"><img src="/assets/blog/wedding-songs.jpg" alt="婚禮歌單 88 首：依迎賓、一進、二進、用餐、敬酒、送客分好的婚禮歌曲" loading="lazy" width="1200" height="630"><div><i>婚禮籌備</i><b>婚禮歌單：88 首婚禮歌曲，依迎賓、一進、二進、用餐、敬酒、送客分好了</b></div></a></div>
       <h2 id="sources">資料來源</h2>
       <ul class="sources"><li><a href="https://www.ris.gov.tw/documents/html/2/3/1/401.html" rel="noopener" target="_blank">內政部戶政司：同性結婚登記（應備證件與注意事項）</a></li><li><a href="https://www.moi.gov.tw/News_Content.aspx?n=4&s=321066" rel="noopener" target="_blank">內政部新聞：兩岸同性伴侶在第三地結婚後可在臺辦理結婚登記（2024-09-19）</a></li><li><a href="https://ca.gov.taipei/News_Content.aspx?n=59F2E04A34FDA3E8&s=99D8A9A946E09128" rel="noopener" target="_blank">臺北市政府：常見問答－同性之結婚登記作業</a></li><li><a href="https://tapcpr.org/main-topics/transnational-same-sex-marriage/" rel="noopener" target="_blank">台灣伴侶權益推動聯盟：跨國同婚 Q&A</a></li></ul>
     </article>
@@ -724,6 +735,8 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   const lio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { const f = e.target; f.src = f.dataset.src; lio.unobserve(f); } }), { rootMargin: "300px" });
   document.querySelectorAll(".device iframe").forEach((f) => lio.observe(f));
   fit(); addEventListener("resize", fit);
+  const pm = document.querySelector(".pages-m"), cur = pm && pm.querySelector("[aria-current]");
+  if (cur && cur.offsetLeft + cur.offsetWidth > pm.clientWidth) pm.scrollLeft = cur.offsetLeft - 16;
 })();
 </script>
 <script>

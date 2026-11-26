@@ -71,11 +71,16 @@ def mid(service, hook):
             f'<div><i>{hook}</i><b>{s["name"]}</b><span>{s["line"]} →</span></div></a>')
 
 
-def end_card(service):
-    """文末服務卡片（build_pages.py 依每篇的 service 欄位自動放）"""
+RINGS = ('<div class="art" aria-hidden="true"><svg viewBox="0 0 120 80"><circle cx="46" cy="44" r="26" fill="none" stroke="#5a2232" stroke-width="6"/>'
+         '<circle cx="74" cy="44" r="26" fill="none" stroke="#c07a8c" stroke-width="6"/><path d="M74 6l6 6-6 6-6-6z" fill="#fff" stroke="#c07a8c" stroke-width="2"/></svg></div>')
+
+
+def end_card(service, art=None):
+    """文末服務卡片（build_pages.py 依每篇的 service 欄位自動放）。art="rings" 把插圖換成交扣戒指（同婚文章在有同性伴侶似顏繪前先用）"""
     s = SERVICES[service]
     pts = "".join(f"<li>{p}</li>" for p in s["points"])
-    return (f'<div class="svc-end"><img src="{s["img"]}" alt="" loading="lazy">'
+    pic = RINGS if art == "rings" else f'<img src="{s["img"]}" alt="" loading="lazy">'
+    return (f'<div class="svc-end">{pic}'
             f'<div><span class="kicker">Our service</span><h3>{s["title"]}</h3><ul>{pts}</ul><div class="price">{s["price"]}</div>'
             f'<div class="acts"><a class="pill" href="{s["quote"]}" data-cta="post_service" data-cta-type="wedding">{s.get("quote_label", "開始估價")} <span class="arr">→</span></a>'
             f'<a class="pill ghost" href="{s.get("more_url", s["url"])}" data-cta="post_service" data-cta-type="wedding">{s["more"]}</a></div></div></div>')

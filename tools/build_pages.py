@@ -34,7 +34,8 @@ zh = open(idx_path, encoding="utf-8").read()
 
 def nav(cur):
     here = ' aria-current="page"'
-    links = "".join(f'<a href="{u}"{here if u == cur else ""}>{t}</a>' for u, t in PAGES)
+    sect = ' aria-current="true"'  # 文章頁：選單標出所在的「部落格」
+    links = "".join(f'<a href="{u}"{here if u == cur else (sect if u == "/blog/" and cur.startswith("/blog/") else "")}>{t}</a>' for u, t in PAGES)
     langs = ""
     if cur == "/":
         langs = ('<span class="langs"><a href="/" hreflang="zh-Hant" aria-current="page" data-cta="lang_switch" data-cta-type="wedding">中文</a>'
@@ -95,6 +96,8 @@ ANIM = """<script>
   const lio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { const f = e.target; f.src = f.dataset.src; lio.unobserve(f); } }), { rootMargin: "300px" });
   document.querySelectorAll(".device iframe").forEach((f) => lio.observe(f));
   fit(); addEventListener("resize", fit);
+  const pm = document.querySelector(".pages-m"), cur = pm && pm.querySelector("[aria-current]");
+  if (cur && cur.offsetLeft + cur.offsetWidth > pm.clientWidth) pm.scrollLeft = cur.offsetLeft - 16;
 })();
 </script>"""
 
@@ -117,10 +120,17 @@ PAGE_CSS = """<style>
 .note-box { margin-top: 18px; font-size: 14.5px; color: var(--muted); }
 .draft { background: #fff3cd; border: 1px dashed #b8860b; padding: 10px 14px; border-radius: 10px; font-size: 14px; color: #6b4e00; }
 @media (max-width: 700px) { .law { grid-template-columns: 1fr; } .page-hero { padding-top: 32px; } }
+/* 手機選單（2026-11-26 部落格好讀改版）：右邊淡出提示還能滑；所在頁自動滑進畫面 */
+.nav a[aria-current="true"] { color: var(--wine); font-weight: 700; }
+@media (max-width: 860px) {
+  .pages-m { -webkit-mask-image: linear-gradient(to right, #000 82%, transparent); mask-image: linear-gradient(to right, #000 82%, transparent); }
+  .pages-m a[aria-current="true"] { color: var(--wine); border-color: var(--wine); font-weight: 700; }
+}
 /* 部落格文章 */
 .post { max-width: 760px; font-size: 17px; }
 .post h2 { font-family: var(--serif); color: var(--wine); font-size: clamp(22px, 3vw, 29px); margin: 44px 0 12px; line-height: 1.4; }
 .post h3 { font-family: var(--serif); color: var(--wine); font-size: 19px; margin: 26px 0 8px; }
+.post [id] { scroll-margin-top: 140px; }
 .post p { margin-bottom: 14px; }
 .post a { color: var(--wine); }
 .post ul, .post ol { padding-left: 1.3em; margin-bottom: 14px; }
@@ -200,20 +210,24 @@ PAGE_CSS = """<style>
 .svc-end li::before { content: "✦"; position: absolute; left: 0; color: var(--rose-d); font-size: 12px; top: 3px; }
 .svc-end .price { font-family: var(--latin); color: var(--wine); font-size: 26px; margin-bottom: 12px; }
 .svc-end .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.svc-end .art { width: 100%; aspect-ratio: 1; border-radius: 14px; background: var(--blush); display: grid; place-items: center; }
+.svc-end .art svg { width: 70%; height: auto; }
 @media (max-width: 560px) {
   .svc-end { grid-template-columns: 1fr; padding: 16px; }
   .svc-end img { aspect-ratio: 4 / 3; object-position: center 70%; }
+  .svc-end .art { aspect-ratio: 16 / 9; } .svc-end .art svg { width: 40%; }
   .svc-end .acts .pill { flex: 1; }
   .post .tbl.stack table, .post .tbl.stack tbody, .post .tbl.stack tr, .post .tbl.stack td { display: block; min-width: 0; width: 100%; }
   .post .tbl.stack thead { display: none; }
   .post .tbl.stack tr { border: 1px solid var(--line); border-radius: 12px; margin-bottom: 10px; background: #fff; overflow: hidden; }
-  .post .tbl.stack td { border: 0; border-bottom: 1px dashed var(--line); display: grid; grid-template-columns: 7.5em 1fr; gap: 8px; }
+  .post .tbl.stack td { border: 0; border-bottom: 1px dashed var(--line); display: block; padding: 8px 12px; line-height: 1.6; }
   .post .tbl.stack td:last-child { border-bottom: 0; }
-  .post .tbl.stack td::before { content: attr(data-th); color: var(--muted); font-size: 13.5px; }
-  .post .tbl.stack td:first-child { background: var(--blush); color: var(--wine); font-weight: 700; grid-template-columns: 1fr; }
+  .post .tbl.stack td::before { content: attr(data-th); display: block; color: var(--muted); font-size: 12.5px; line-height: 1.4; margin-bottom: 1px; }
+  .post .tbl.stack td:first-child { background: var(--blush); color: var(--wine); font-weight: 700; }
   .post .tbl.stack td:first-child::before { display: none; }
 }
 .post-hero h1 { font-size: clamp(26px, 4.2vw, 42px); }
+@media (max-width: 560px) { .post-hero { padding: 20px 0 14px; } .post-hero h1 { font-size: 25px; margin: 8px 0 8px; } .post .meta { font-size: 13px; margin: 0; } .post-cover { margin-top: 4px; } }
 .post .lead-p { font-size: 17px; }
 .post .note-box { font-size: 14.5px; color: var(--muted); }
 .rel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 10px 0 18px; }
@@ -612,7 +626,8 @@ for P in POSTS:
     check_post(P)
     url = post_url(P)
     cv, ch = P["cover"], P["cheat"]
-    meta = f'<p class="meta">{CAT_NAME[P["cat"]]}｜Zoe & Alison｜發布 {P["published"]}' + (f'｜更新 {P["modified"]}' if P["modified"] != P["published"] else "") + "</p>"
+    shown = f'更新 <time datetime="{P["modified"]}">{P["modified"]}</time>' if P["modified"] != P["published"] else f'發布 <time datetime="{P["published"]}">{P["published"]}</time>'
+    meta = f'<p class="meta">Zoe & Alison｜{shown}</p>'  # 分類已在麵包屑；發布日在 JSON-LD
     src = "".join(f'<li><a href="{u}" rel="noopener" target="_blank">{n}</a></li>' for n, u in P["sources"])
     cheat_fig = (f'<figure class="cheat"><img src="/assets/blog/{ch["img"]}" alt="{html.escape(ch["alt"])}" loading="lazy" width="1080" height="1350">'
                  f'<figcaption>{ch.get("caption", strip(ch["title"]).replace(chr(10), ""))}</figcaption>'
@@ -627,15 +642,15 @@ for P in POSTS:
   </section>
   <section style="padding-top:0">
     <article class="wrap post">
-      <figure class="post-cover"><img src="/assets/blog/{cv['img']}" alt="{html.escape(cv['alt'])}" width="1200" height="630" fetchpriority="high"></figure>
       {sum3}
+      <figure class="post-cover"><img src="/assets/blog/{cv['img']}" alt="{html.escape(cv['alt'])}" width="1200" height="630" fetchpriority="high"></figure>
       {toc(P)}
       <p class="lead-p">{P['lead']}</p>
 {P['body'].replace(CHEAT, cheat_fig)}
-      {end_card(P['service'])}
-      {related(P)}
       <h2 id="faq">常見問題</h2>
       {faq_html(P['faq'])}
+      {end_card(P['service'], P.get('service_art'))}
+      {related(P)}
       <h2 id="sources">資料來源</h2>
       <ul class="sources">{src}</ul>
     </article>
