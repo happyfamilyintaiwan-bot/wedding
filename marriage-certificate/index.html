@@ -229,6 +229,8 @@ form.q { display: grid; gap: 34px; }
 .opt input { accent-color: var(--rose-d); width: 18px; height: 18px; flex: none; }
 .opt .p { margin-left: auto; font-family: var(--latin); font-size: 17px; white-space: nowrap; }
 .opt.locked { cursor: default; }
+.opt[hidden], .note[hidden] { display: none; }
+.opt:has(input:disabled:not(:checked)) { opacity: .45; cursor: not-allowed; }
 .sub-opts { display: grid; gap: 14px; padding: 16px; border-radius: 14px; background: rgba(255, 255, 255, .55); }
 .sub-opts[hidden] { display: none; }
 .field { display: grid; gap: 6px; font-size: 14.5px; min-width: 0; }
@@ -369,6 +371,28 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .post-list a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; }
 .post-list b { font-family: var(--serif); color: var(--wine); font-size: 19px; display: block; margin-bottom: 4px; }
 .post-list span { color: var(--muted); font-size: 15px; }
+/* 電子喜帖：範例入口、安心說明、三步驟 */
+.samples { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.samples a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; transition: border-color .2s, transform .2s; }
+.samples a:hover { border-color: var(--wine); transform: translateY(-2px); }
+.samples b { display: block; font-family: var(--serif); color: var(--wine); font-size: 18px; }
+.samples b i { font-style: normal; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--blush); margin-right: 8px; font-size: 14px; }
+.samples span { display: block; color: var(--muted); font-size: 14.5px; margin-top: 4px; }
+.samples em { display: block; font-style: normal; color: var(--rose-d); font-size: 14px; font-weight: 700; margin-top: 8px; }
+.trust { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.trust > div { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; }
+.trust svg { width: 44px; height: 44px; }
+.trust b { display: block; font-family: var(--serif); color: var(--wine); font-size: 17.5px; margin-bottom: 2px; }
+.trust p { margin: 0; font-size: 15px; color: var(--ink); }
+.steps { list-style: none; padding: 0; margin: 22px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: st; }
+.steps li { position: relative; background: var(--cream); border: 1px solid var(--line); border-radius: 18px; padding: 22px 20px 20px; }
+.steps .no { position: absolute; top: -14px; left: 18px; font-family: var(--latin); font-size: 13px; letter-spacing: .14em; color: var(--wine); background: var(--blush); border: 1px solid var(--wine); border-radius: 999px; padding: 3px 12px; }
+.steps svg { display: block; width: 100%; max-width: 220px; height: auto; margin: 8px auto 12px; }
+.steps b { display: block; font-family: var(--serif); color: var(--wine); font-size: 19px; margin-bottom: 6px; }
+.steps p { margin: 0; font-size: 15px; }
+.steps small { display: block; margin-top: 8px; color: var(--muted); font-size: 13.5px; }
+@media (max-width: 860px) { .samples { grid-template-columns: repeat(2, minmax(0, 1fr)); } .steps { grid-template-columns: 1fr; gap: 26px; } .steps svg { max-width: 260px; } }
+@media (max-width: 560px) { .trust { grid-template-columns: 1fr; } .samples { gap: 10px; } .samples a { padding: 14px; } }
 @media (max-width: 560px) { .post ul.songs { grid-template-columns: 1fr; } .post { font-size: 16px; } }
 /* 文章元件（build_pages.py） */
 .post-cover { margin: 0 0 18px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 1200 / 630; background: var(--blush); }
