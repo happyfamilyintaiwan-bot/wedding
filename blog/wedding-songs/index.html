@@ -339,10 +339,17 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .note-box { margin-top: 18px; font-size: 14.5px; color: var(--muted); }
 .draft { background: #fff3cd; border: 1px dashed #b8860b; padding: 10px 14px; border-radius: 10px; font-size: 14px; color: #6b4e00; }
 @media (max-width: 700px) { .law { grid-template-columns: 1fr; } .page-hero { padding-top: 32px; } }
+/* 手機選單（2026-11-26 部落格好讀改版）：右邊淡出提示還能滑；所在頁自動滑進畫面 */
+.nav a[aria-current="true"] { color: var(--wine); font-weight: 700; }
+@media (max-width: 860px) {
+  .pages-m { -webkit-mask-image: linear-gradient(to right, #000 82%, transparent); mask-image: linear-gradient(to right, #000 82%, transparent); }
+  .pages-m a[aria-current="true"] { color: var(--wine); border-color: var(--wine); font-weight: 700; }
+}
 /* 部落格文章 */
 .post { max-width: 760px; font-size: 17px; }
 .post h2 { font-family: var(--serif); color: var(--wine); font-size: clamp(22px, 3vw, 29px); margin: 44px 0 12px; line-height: 1.4; }
 .post h3 { font-family: var(--serif); color: var(--wine); font-size: 19px; margin: 26px 0 8px; }
+.post [id] { scroll-margin-top: 140px; }
 .post p { margin-bottom: 14px; }
 .post a { color: var(--wine); }
 .post ul, .post ol { padding-left: 1.3em; margin-bottom: 14px; }
@@ -444,20 +451,24 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .svc-end li::before { content: "✦"; position: absolute; left: 0; color: var(--rose-d); font-size: 12px; top: 3px; }
 .svc-end .price { font-family: var(--latin); color: var(--wine); font-size: 26px; margin-bottom: 12px; }
 .svc-end .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.svc-end .art { width: 100%; aspect-ratio: 1; border-radius: 14px; background: var(--blush); display: grid; place-items: center; }
+.svc-end .art svg { width: 70%; height: auto; }
 @media (max-width: 560px) {
   .svc-end { grid-template-columns: 1fr; padding: 16px; }
   .svc-end img { aspect-ratio: 4 / 3; object-position: center 70%; }
+  .svc-end .art { aspect-ratio: 16 / 9; } .svc-end .art svg { width: 40%; }
   .svc-end .acts .pill { flex: 1; }
   .post .tbl.stack table, .post .tbl.stack tbody, .post .tbl.stack tr, .post .tbl.stack td { display: block; min-width: 0; width: 100%; }
   .post .tbl.stack thead { display: none; }
   .post .tbl.stack tr { border: 1px solid var(--line); border-radius: 12px; margin-bottom: 10px; background: #fff; overflow: hidden; }
-  .post .tbl.stack td { border: 0; border-bottom: 1px dashed var(--line); display: grid; grid-template-columns: 7.5em 1fr; gap: 8px; }
+  .post .tbl.stack td { border: 0; border-bottom: 1px dashed var(--line); display: block; padding: 8px 12px; line-height: 1.6; }
   .post .tbl.stack td:last-child { border-bottom: 0; }
-  .post .tbl.stack td::before { content: attr(data-th); color: var(--muted); font-size: 13.5px; }
-  .post .tbl.stack td:first-child { background: var(--blush); color: var(--wine); font-weight: 700; grid-template-columns: 1fr; }
+  .post .tbl.stack td::before { content: attr(data-th); display: block; color: var(--muted); font-size: 12.5px; line-height: 1.4; margin-bottom: 1px; }
+  .post .tbl.stack td:first-child { background: var(--blush); color: var(--wine); font-weight: 700; }
   .post .tbl.stack td:first-child::before { display: none; }
 }
 .post-hero h1 { font-size: clamp(26px, 4.2vw, 42px); }
+@media (max-width: 560px) { .post-hero { padding: 20px 0 14px; } .post-hero h1 { font-size: 25px; margin: 8px 0 8px; } .post .meta { font-size: 13px; margin: 0; } .post-cover { margin-top: 4px; } }
 .post .lead-p { font-size: 17px; }
 .post .note-box { font-size: 14.5px; color: var(--muted); }
 .rel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 10px 0 18px; }
@@ -618,9 +629,9 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
 <header class="top">
   <div class="wrap">
     <a class="kh-brand" href="https://wedding.knittinghiyori.com/" data-google-vignette="false" data-cta="brand_hub" data-cta-type="wedding"><img src="/icons/logo-knitting-120.webp" width="40" height="40" alt="">編織日和<span class="site">・似顏繪喜帖</span></a>
-<!--HY-NAV--><nav class="nav" aria-label="網站選單"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/paper-invitation/">紙本喜帖</a><a href="/about/">關於我們</a><a href="/blog/">部落格</a><a class="pill" href="/#quote" data-cta="hero_quote" data-cta-type="wedding">估價 <span class="arr">→</span></a></nav><!--/HY-NAV-->
+<!--HY-NAV--><nav class="nav" aria-label="網站選單"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/paper-invitation/">紙本喜帖</a><a href="/about/">關於我們</a><a href="/blog/" aria-current="true">部落格</a><a class="pill" href="/#quote" data-cta="hero_quote" data-cta-type="wedding">估價 <span class="arr">→</span></a></nav><!--/HY-NAV-->
   </div>
-<!--HY-NAV-M--><nav class="pages-m" aria-label="網站選單（手機）"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/paper-invitation/">紙本喜帖</a><a href="/about/">關於我們</a><a href="/blog/">部落格</a></nav><!--/HY-NAV-M-->
+<!--HY-NAV-M--><nav class="pages-m" aria-label="網站選單（手機）"><a href="/caricature/">似顏繪</a><a href="/marriage-certificate/">結婚書約</a><a href="/web-invitation/">電子喜帖</a><a href="/paper-invitation/">紙本喜帖</a><a href="/about/">關於我們</a><a href="/blog/" aria-current="true">部落格</a></nav><!--/HY-NAV-M-->
 </header>
 
 <main>
@@ -628,13 +639,13 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     <div class="wrap post" style="padding:0">
       <p class="crumb"><a href="/">似顏繪喜帖</a> › <a href="/blog/">部落格</a> › <a href="/blog/#planning">婚禮籌備</a></p>
       <h1>婚禮歌單：88 首婚禮歌曲，<br>依迎賓、一進、二進、用餐、敬酒、送客分好了</h1>
-      <p class="meta">婚禮籌備｜Zoe & Alison｜發布 2026-11-21｜更新 2026-11-23</p>
+      <p class="meta">Zoe & Alison｜更新 <time datetime="2026-11-23">2026-11-23</time></p>
     </div>
   </section>
   <section style="padding-top:0">
     <article class="wrap post">
-      <figure class="post-cover"><img src="/assets/blog/wedding-songs.jpg" alt="婚禮歌單 88 首：依迎賓、一進、二進、用餐、敬酒、送客分好的婚禮歌曲" width="1200" height="630" fetchpriority="high"></figure>
       <div class="sum3"><b>3 句話看懂</b><ol><li><span>婚禮歌單分成<b>迎賓、一進、二進、用餐、逐桌敬酒、送客</b>六個時刻，每首點歌名就能在 YouTube 試聽。</span></li><li><span>儀式歌（一進、二進、和家人進場、送客）各挑 1 首，大約 4～6 首；其他時段用一份長歌單循環播放。</span></li><li><span>一進我們最推 <b>Kina Grannis 版〈Can't Help Falling in Love〉</b>；同婚婚禮可以挑標「🌈 同婚也適合」、歌詞不分性別的歌。</span></li></ol></div>
+      <figure class="post-cover"><img src="/assets/blog/wedding-songs.jpg" alt="婚禮歌單 88 首：依迎賓、一進、二進、用餐、敬酒、送客分好的婚禮歌曲" width="1200" height="630" fetchpriority="high"></figure>
       <ul class="toc" aria-label="文章目錄"><li><a href="#scenes">怎麼分</a></li><li><a href="#how-many">要準備幾首</a></li><li><a href="#top">最推的歌</a></li><li><a href="#welcome">迎賓</a></li><li><a href="#first-entrance">一進</a></li><li><a href="#second-entrance">二進</a></li><li><a href="#dinner">用餐</a></li><li><a href="#toast">敬酒</a></li><li><a href="#farewell">送客</a></li><li><a href="#movies">電影婚禮場景</a></li><li><a href="#ost">影視原聲</a></li><li><a href="#same-sex">同婚也適合</a></li><li><a href="#invite">放進喜帖</a></li><li><a href="#faq">常見問題</a></li></ul>
       <p class="lead-p">這份婚禮歌單，一半是我們自己私心喜歡的歌，一半來自 Threads 上一篇「求感人婚禮歌單」的網友推薦，上百則留言裡，很多是新人分享自己婚禮真的用過的歌。我們把它們依婚禮流程分成六個時刻，每首都能直接點開聽，挑歌時省一點力氣。我們自己是同婚伴侶，也特別整理了歌詞不分性別、同婚婚禮也適合的歌。</p>
 
@@ -674,10 +685,10 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
 <p>挑好歌之後，可以把歌名寫進婚宴流程，例如「一進：〈Can't Help Falling in Love〉」，賓客聽到時就知道這首歌對你們的意義。我們的<a href="/web-invitation/">網頁電子喜帖</a>有婚宴流程區塊，<a href="/paper-invitation/">紙本喜帖</a>也可以設計一頁放流程和 Dress code。</p>
 <a class="svc-mid" href="/web-invitation/" data-cta="post_context" data-cta-type="wedding"><img src="/assets/og-invite-a.jpg" alt="" loading="lazy" width="84" height="84"><div><i>想把歌名寫進婚宴流程？</i><b>似顏繪網頁電子喜帖</b><span>婚宴流程、地圖、出席回覆都在裡面，NT$3,800 →</span></div></a>
 
-      <div class="svc-end"><img src="/assets/portfolio/couple-portrait-wedding-dress-cats-balloons.webp" alt="" loading="lazy"><div><span class="kicker">Our service</span><h3>把你們畫成似顏繪，<br>放進書約和喜帖</h3><ul><li>照你們最喜歡的婚紗照畫雙人全身彩色似顏繪</li><li>同一張圖延伸成結婚書約、電子喜帖、紙本喜帖</li><li>毛小孩、小朋友可以一起畫進來</li></ul><div class="price">NT$1,800 起</div><div class="acts"><a class="pill" href="/#quote" data-cta="post_service" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="/caricature/" data-cta="post_service" data-cta-type="wedding">看作品</a></div></div></div>
-      <h2 id="related">延伸閱讀</h2><div class="rel"><a href="/blog/same-sex-marriage-registration-taiwan/" data-cta="related_link" data-cta-type="wedding"><img src="/assets/blog/same-sex-marriage-registration-taiwan.jpg" alt="台灣同性結婚登記全攻略：流程、要帶的證件、書約法條與跨國伴侶規定" loading="lazy" width="1200" height="630"><div><i>結婚登記與法規</i><b>台灣同性結婚登記全攻略：流程、要帶什麼、書約法條與跨國伴侶規定</b></div></a><a href="/blog/foreigner-marriage-registration-taiwan/" data-cta="related_link" data-cta-type="wedding"><img src="/assets/blog/foreigner-marriage-registration-taiwan.jpg" alt="台灣人和外國人在台灣結婚：登記流程、單身證明驗證與要帶的文件" loading="lazy" width="1200" height="630"><div><i>結婚登記與法規</i><b>台灣人和外國人在台灣結婚：登記流程、單身證明驗證與要帶的文件</b></div></a></div>
       <h2 id="faq">常見問題</h2>
       <div class="faq"><details><summary>一進、二進是什麼意思？</summary><p>一進是新人在婚宴開場第一次進場，二進是新人換第二套禮服後再次進場。一進通常選最感人、最有意義的歌，二進可以輕快甜一點。</p></details><details><summary>婚禮歌單要準備幾首？</summary><p>儀式歌（一進、二進、和家人進場、送客）各挑 1 首，大約 4～6 首；迎賓、用餐、敬酒用背景歌單循環播放，長度抓整場婚宴的時間，常見 2～3 小時。</p></details><details><summary>婚禮一進歌推薦哪些？</summary><p>我們最推 Kina Grannis 版〈Can't Help Falling in Love〉（電影《瘋狂亞洲富豪》婚禮紅毯曲），網友推最多的還有〈A Thousand Years〉、Ed Sheeran〈Perfect〉、Shane Filan〈Beautiful in White〉、傻子與白痴〈第一支舞〉。</p></details><details><summary>哪些電影婚禮場景的歌適合用在婚禮？</summary><p>進場可以選《瘋狂亞洲富豪》的〈Can't Help Falling in Love〉、《暮光之城：破曉 上》的〈Turning Page〉；純音樂可以選《天外奇蹟》的〈Married Life〉；送客想熱鬧一點，可以選《婚禮終結者》的〈Shout〉、《伴娘我最大》的〈Hold On〉、《媽媽咪呀！》的〈I Do, I Do, I Do, I Do, I Do〉、《愛是您，愛是我》的〈All You Need Is Love〉。</p></details><details><summary>敬酒的時候適合放什麼歌？</summary><p>敬酒時長輩比較多，放大家都會哼的經典老歌最保險，例如蘇芮〈牽手〉、張宇〈給你們〉、趙詠華〈最浪漫的事〉、西城男孩〈Nothing's Gonna Change My Love for You〉。</p></details><details><summary>同婚婚禮適合放什麼歌？</summary><p>可以選歌詞不限定性別的歌，例如〈A Thousand Years〉、〈Can't Help Falling in Love〉、Adele〈Make You Feel My Love〉、Ellie Goulding〈How Long Will I Love You〉、〈Lucky〉、方大同〈Special Person〉。用之前建議再讀一次完整歌詞。</p></details></div>
+      <div class="svc-end"><img src="/assets/portfolio/couple-portrait-wedding-dress-cats-balloons.webp" alt="" loading="lazy"><div><span class="kicker">Our service</span><h3>把你們畫成似顏繪，<br>放進書約和喜帖</h3><ul><li>照你們最喜歡的婚紗照畫雙人全身彩色似顏繪</li><li>同一張圖延伸成結婚書約、電子喜帖、紙本喜帖</li><li>毛小孩、小朋友可以一起畫進來</li></ul><div class="price">NT$1,800 起</div><div class="acts"><a class="pill" href="/#quote" data-cta="post_service" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="/caricature/" data-cta="post_service" data-cta-type="wedding">看作品</a></div></div></div>
+      <h2 id="related">延伸閱讀</h2><div class="rel"><a href="/blog/same-sex-marriage-registration-taiwan/" data-cta="related_link" data-cta-type="wedding"><img src="/assets/blog/same-sex-marriage-registration-taiwan.jpg" alt="台灣同性結婚登記全攻略：流程、要帶的證件、書約法條與跨國伴侶規定" loading="lazy" width="1200" height="630"><div><i>結婚登記與法規</i><b>台灣同性結婚登記全攻略：流程、要帶什麼、書約法條與跨國伴侶規定</b></div></a><a href="/blog/foreigner-marriage-registration-taiwan/" data-cta="related_link" data-cta-type="wedding"><img src="/assets/blog/foreigner-marriage-registration-taiwan.jpg" alt="台灣人和外國人在台灣結婚：登記流程、單身證明驗證與要帶的文件" loading="lazy" width="1200" height="630"><div><i>結婚登記與法規</i><b>台灣人和外國人在台灣結婚：登記流程、單身證明驗證與要帶的文件</b></div></a></div>
       <h2 id="sources">資料來源</h2>
       <ul class="sources"><li><a href="https://www.threads.com/@mimi07040819/post/Df7CD7fo_LU" rel="noopener" target="_blank">Threads：求感人婚禮歌單的貼文與網友留言（2026-11-21 擷取）</a></li><li><a href="https://www.youtube.com/" rel="noopener" target="_blank">歌曲影片：各歌手官方 YouTube 頻道（2026-11-22 查核）</a></li></ul>
     </article>
@@ -728,6 +739,8 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   const lio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { const f = e.target; f.src = f.dataset.src; lio.unobserve(f); } }), { rootMargin: "300px" });
   document.querySelectorAll(".device iframe").forEach((f) => lio.observe(f));
   fit(); addEventListener("resize", fit);
+  const pm = document.querySelector(".pages-m"), cur = pm && pm.querySelector("[aria-current]");
+  if (cur && cur.offsetLeft + cur.offsetWidth > pm.clientWidth) pm.scrollLeft = cur.offsetLeft - 16;
 })();
 </script>
 <script>
