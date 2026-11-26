@@ -456,7 +456,7 @@ FILMS = [  # 電影／影集裡的婚禮場景
     ("影集《歡樂合唱團》（Glee）", "Marry You", "Bruno Mars", "婚禮上的合唱"),
     ("陸劇《當我飛奔向你》", "I Do（當我走向你）", "楊默依 Moi Yang", "蘇在在與張陸讓的結婚曲"),
 ]
-NEUTRAL = ["A Thousand Years", "Can't Help Falling in Love", "Make You Feel My Love", "How Long Will I Love You", "Lucky", "Special Person"]
+NEUTRAL = ["A Thousand Years", "Can't Help Falling in Love", "Make You Feel My Love", "How Long Will I Love You", "Lucky", "Special Person", "Stay with Me"]
 
 
 def _yt(v):
@@ -534,7 +534,7 @@ POSTS.append(dict(
     js=PICKER_JS,
     ga="婚禮歌單",
     published="2026-11-21",
-    modified="2026-11-24",
+    modified="2026-11-26",
     cover=dict(img="wedding-songs.jpg", alt=f"婚禮歌單 {SONG_COUNT} 首：依迎賓、一進、二進、用餐、敬酒、送客分好的婚禮歌曲",
                art="assets/couple-kimono.webp", kicker="Wedding playlist", title=f"婚禮歌單 {SONG_COUNT} 首", sub="迎賓、一進、二進、用餐、\n敬酒、送客都分好了"),
     summary=[
@@ -558,7 +558,7 @@ POSTS.append(dict(
         ("婚禮一進歌推薦哪些？", "我們最推 Kina Grannis 版〈Can't Help Falling in Love〉（電影《瘋狂亞洲富豪》婚禮紅毯曲），網友推最多的還有〈A Thousand Years〉、Ed Sheeran〈Perfect〉、Shane Filan〈Beautiful in White〉、傻子與白痴〈第一支舞〉。"),
         ("哪些電影婚禮場景的歌適合用在婚禮？", "進場可以選《瘋狂亞洲富豪》的〈Can't Help Falling in Love〉、《暮光之城：破曉 上》的〈Turning Page〉；純音樂可以選《天外奇蹟》的〈Married Life〉；送客想熱鬧一點，可以選《婚禮終結者》的〈Shout〉、《伴娘我最大》的〈Hold On〉、《媽媽咪呀！》的〈I Do, I Do, I Do, I Do, I Do〉、《愛是您，愛是我》的〈All You Need Is Love〉。"),
         ("敬酒的時候適合放什麼歌？", "敬酒時長輩比較多，放大家都會哼的經典老歌最保險，例如蘇芮〈牽手〉、張宇〈給你們〉、趙詠華〈最浪漫的事〉、西城男孩〈Nothing's Gonna Change My Love for You〉。"),
-        ("同婚婚禮適合放什麼歌？", "可以選歌詞不限定性別的歌，例如〈A Thousand Years〉、〈Can't Help Falling in Love〉、Adele〈Make You Feel My Love〉、Ellie Goulding〈How Long Will I Love You〉、〈Lucky〉、方大同〈Special Person〉。用之前建議再讀一次完整歌詞。"),
+        ("同婚婚禮適合放什麼歌？", "可以選歌詞不限定性別的歌，例如〈A Thousand Years〉、〈Can't Help Falling in Love〉、Adele〈Make You Feel My Love〉、Ellie Goulding〈How Long Will I Love You〉、〈Lucky〉、方大同〈Special Person〉、裘德〈Stay with Me〉。用之前建議再讀一次完整歌詞。"),
     ],
     sources=[
         ("Threads：求感人婚禮歌單的貼文與網友留言（2026-11-21 擷取）", "https://www.threads.com/@mimi07040819/post/Df7CD7fo_LU"),
