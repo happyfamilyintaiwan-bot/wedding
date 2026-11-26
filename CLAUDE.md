@@ -12,6 +12,9 @@
 - **成品喜帖網址**（Zoe 2026-11-22）：`<婚禮日期 YYMMDD>-<新人英文名>`，例 `270124-zoe-alison`。GA4 `WEDDING.ga.until` 填上線到期日 YYMMDD（例 `270228`），報表看到過期就去關掉。
 - **分享預覽**：每份成品喜帖的 `<head>` 都要改 og:title、og:description、og:image（完整網址），預覽圖用 `python3 tools/make_og.py --couple 去背似顏繪.png --names "名字 & 名字" --date "2027.03.20  SAT" --line2 "一句話" --style a|b|c --out og.jpg` 產生，放進喜帖資料夾一起上傳。
 
+- **婚紗照版**（Alison 2026-11-24 決定）：A、B、C 都可以做婚紗照版：`WEDDING.couplePhoto: true` 時封面照片放進拱形相框、結尾不放小新人；`WEDDING.photos` 放婚紗照輪播（最多 20 張，`assets/invite-gallery.js`）。範例網址加 `?photo`，示意照片用色塊剪影（`assets/sample-photos/`），不放真人照、不用圖庫。估價工具可選「不畫似顏繪：電子喜帖用婚紗照版」，總價 NT$3,800，只搭配電子喜帖（書約、紙本要似顏繪）；首頁 `/?photo` 帶入。cta_id `style_photo`。
+- **季節配色**（Alison 2026-11-24）：A 加 `sakura` 春櫻、`sea` 夏海、`maple` 秋楓（冬天用 C 雪景）。季節感先用配色做；同一種新風格有 3 位以上客人問，再做新版型。
+
 - **工作模式**（Zoe 2026-11-22，Alison 同樣適用）：見 `docs/WORKFLOW.md`。子對話把各自的頁面、文章系列、客戶做好；主對話是整體顧問。
 
 ## 部落格寫作規範（2026-11-23，部落格版型子對話；文章系列子對話照這個寫）
