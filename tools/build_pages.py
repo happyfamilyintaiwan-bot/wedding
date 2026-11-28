@@ -476,31 +476,6 @@ def toc(P):
 
 built = []
 
-# ── 結婚書約 ──
-cert_qa = faqs("結婚書約 4 種方案差在哪裡？", "同婚可以做嗎？", "結婚書約可以用在台灣以外的國家嗎？印好的書約怎麼寄？", "書約的小圖示可以換成我們的寵物嗎？", "製作要多久？可以趕急件嗎？")
-law_sec = """  <section style="padding-top:0">
-    <div class="wrap prose">
-      <span class="kicker">Two versions</span>
-      <h2>同婚版、一般版：書約上的法條文字不一樣</h2>
-      <p>結婚書約上會寫雙方「依照哪一條法律」結婚。同性伴侶和異性伴侶適用的法律不同，書約上的法條文字也不一樣。詢價時選好版本，我們會套用對應的文字。</p>
-      <div class="law">
-        <div><b>一般版</b>依《民法》第 982 條的結婚要件撰寫，適用異性伴侶。</div>
-        <div><b>同婚版</b>依《司法院釋字第 748 號解釋施行法》撰寫，適用同性伴侶。</div>
-      </div>
-      <p class="note-box">登記規定可能調整，登記前請先向戶政事務所確認最新的書約格式與應備文件。同性結婚登記要帶什麼、跨國伴侶能不能登記，整理在<a href="/blog/same-sex-marriage-registration-taiwan/">台灣同性結婚登記全攻略</a>。</p>
-    </div>
-  </section>"""
-cert_body = hero("結婚書約", "似顏繪結婚書約：<br>把你們畫進登記那天的書約",
-                 "先畫好你們兩人的全身彩色似顏繪（NT$1,800），再放進手繪邊框的結婚書約。書約有 4 種方案，NT$1,000 起；同婚、非同婚都有對應的法條版本。",
-                 '<a class="pill" href="/?sy=4#quote" data-cta="page_quote" data-cta-type="wedding">估價這個方案 <span class="arr">→</span></a><a class="pill ghost" href="#cert">看 4 種方案</a>') + \
-    "\n" + cert_sec + "\n" + law_sec + "\n" + flow_sec + "\n" + read_more_auto("/marriage-certificate/") + "\n" + faq_sec(cert_qa) + "\n" + cta_sec("開始估價結婚書約", "/?sy=4#quote") + "\n" + BUNDLE
-cert_ld = [{"@type": "Service", "name": "似顏繪結婚書約客製", "serviceType": "結婚書約設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
-            "offers": [offer("方案 1：書約設計", 1000, "設計圖面費，交付設計預覽，不含圖檔（另需雙人似顏繪 NT$1,800）"), offer("方案 2：書約設計＋PDF 電子檔", 1600, "可列印的 PDF"),
-                       offer("方案 3：書約設計＋印刷 3 張", 2380, "台灣印製，郵局掛號寄台灣地址"), offer("方案 4：設計＋印刷 3 張＋PDF", 2880, "組合價")]}, faq_ld(cert_qa)]
-built.append(page("/marriage-certificate/", "結婚書約", "似顏繪結婚書約客製｜同婚版・一般版 4 種方案 NT$1,000 起｜編織日和",
-                  "似顏繪結婚書約 4 種方案：設計 NT$1,000、加 PDF NT$1,600、印刷 3 張 NT$2,380、組合價 NT$2,880（另需雙人似顏繪 NT$1,800）。同婚版、一般版用對應的法條文字，8 款書約模板，郵局掛號寄台灣。",
-                  "喜帖|結婚書約|似顏繪結婚書約客製", cert_body, cert_ld))
-
 # ── 似顏繪 ──
 cari_qa = faqs("要準備什麼照片？", "可以修改幾次？", "製作要多久？可以趕急件嗎？", "你們會公開我們的作品嗎？", "似顏繪喜帖包含哪些東西？價格怎麼算？")
 cari_body = hero("似顏繪", "新人似顏繪：<br>照你們最喜歡的婚紗照畫",
@@ -614,6 +589,115 @@ web_ld = [{"@type": "Service", "name": "似顏繪網頁電子喜帖", "serviceTy
 built.append(page("/web-invitation/", "電子喜帖", "網頁電子喜帖客製｜似顏繪＋出席回覆、地圖、倒數 3 種風格 NT$3,800｜編織日和",
                   "似顏繪網頁電子喜帖：開場動畫、婚禮倒數、流程、Dress code、地圖、加入行事曆、出席回覆。書約手繪風、日系清新、雪景 3 種風格同價 NT$3,800，網址不公開、不被搜尋引擎收錄。",
                   "喜帖|電子喜帖|似顏繪網頁電子喜帖", web_body, web_ld))
+
+# ── 結婚書約（2026-11-28 Alison 版：戶政可以用嗎、安心清單、三步驟、跨國新人；樣式沿用電子喜帖頁） ──
+CERT_SRC = [
+    ("內政部戶政司：結婚登記（應備證件與注意事項）", "https://www.ris.gov.tw/documents/html/2/3/1/383.html"),
+    ("全國法規資料庫：民法（第 982 條）", "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=B0000001"),
+    ("全國法規資料庫：司法院釋字第七四八號解釋施行法（第 4 條）", "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=B0000008"),
+]
+cert_qa_new = [
+    ("自己設計的結婚書約，戶政事務所會收嗎？",
+     "官方規定的是書約上要寫的內容：雙方姓名、出生日期、身分證號（外國人寫護照號碼或居留證號）、戶籍地址，加上 2 位以上證人簽名或蓋章，登記時交正本。自己設計的書約收不收、紙張大小、要交幾份，官方沒有寫清楚，目前待確認；登記前請先打電話問你們要去的戶政事務所。"),
+    ("結婚書約要寫哪些資料？證人要幾位？",
+     "雙方的姓名、出生日期、身分證號（外國人寫護照號碼或居留證號）和戶籍地址（住在國外就寫國外地址）。證人要 2 位以上，在書約上簽名或蓋章。我們的書約每一格都照這些欄位留好位置。"),
+    ("外國人可以用這份書約登記嗎？",
+     '可以照同樣的欄位寫：身分證號那一格改寫護照號碼或居留證號，住在國外的人，戶籍地址寫國外的地址。外國人登記還要準備其他文件，整理在<a href="/blog/foreigner-marriage-registration-taiwan/">外國人在台灣結婚</a>。'),
+]
+cert_qa = cert_qa_new + faqs("結婚書約 4 種方案差在哪裡？", "同婚可以做嗎？", "結婚書約可以用在台灣以外的國家嗎？印好的書約怎麼寄？", "書約的小圖示可以換成我們的寵物嗎？", "製作要多久？可以趕急件嗎？")
+law_sec = """  <section style="padding-top:0">
+    <div class="wrap prose">
+      <span class="kicker">Two versions</span>
+      <h2>同婚版、一般版：書約上的法條文字不一樣</h2>
+      <p>結婚書約上會寫雙方「依照哪一條法律」結婚。同性伴侶和異性伴侶適用的法律不同，書約上的法條文字也不一樣。詢價時選好版本，我們會套用對應的文字。</p>
+      <div class="law">
+        <div><b>一般版</b>依《民法》第 982 條的結婚要件撰寫，適用異性伴侶。</div>
+        <div><b>同婚版</b>依《司法院釋字第 748 號解釋施行法》撰寫，適用同性伴侶。</div>
+      </div>
+      <p class="note-box">登記規定可能調整，登記前請先向戶政事務所確認最新的書約格式與應備文件。同性結婚登記要帶什麼、跨國伴侶能不能登記，整理在<a href="/blog/same-sex-marriage-registration-taiwan/">台灣同性結婚登記全攻略</a>。</p>
+    </div>
+  </section>"""
+# 戶政可以用嗎？（官方：戶政司、民法第 982 條、748 施行法第 4 條；官方沒寫的標待確認）
+REG_SEC = """  <section id="registration" style="padding-top:0">
+    <div class="wrap prose">
+      <span class="kicker">Can we register with it?</span>
+      <h2>戶政可以用嗎？書約上一定要有的資料</h2>
+      <p>拿去登記的書約，重點是內容寫對、簽名齊全。依內政部戶政司的說明和法律規定，書約上要有下面這些資料，我們的書約每一格都照這些欄位留好位置。</p>
+      <div class="law">
+        <div><b>雙方的基本資料</b>姓名、出生日期、身分證號。外國人寫護照號碼或居留證號。</div>
+        <div><b>雙方的戶籍地址</b>住在國外的人，寫國外的地址。</div>
+        <div><b>2 位以上證人</b>證人在書約上簽名或蓋章。</div>
+        <div><b>交正本</b>登記時交書約正本，請直接拿簽好的那一張去。</div>
+      </div>
+      <p class="note-box"><b>待確認：</b>自己設計的書約收不收、紙張大小、要交幾份，官方沒有寫清楚，各地戶政事務所的做法可能不同。<b>登記前請先打電話問你們要去的戶政事務所。</b></p>
+      <p class="note-box"><b>自己印 PDF 的建議：</b>用 A4、厚一點的紙彩色列印，比較不容易皺，簽名也不會透到背面；多印 1～2 張備用，寫錯可以重來。</p>
+      <p class="note-box">官方資料：""" + "、".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in CERT_SRC) + """。</p>
+    </div>
+  </section>"""
+CERT_TRUST_ITEMS = [
+    ('<rect x="9" y="6" width="30" height="36" rx="4" fill="#f5dfe0"/><path d="M16 16h16M16 23h16M16 30h9"/><path d="M28 32l3 3 6-7"/>',
+     "欄位照官方規定留好", "姓名、出生日期、身分證號、戶籍地址、2 位證人，一格都不少，拿到就能填。"),
+    ('<path d="M24 5l15 6v11c0 10-6.5 17-15 21C15.5 39 9 32 9 22V11z" fill="#f5dfe0"/><path d="M17 24l5 5 9-10"/>',
+     "同婚版、一般版都有", "書約上的法條文字照你們適用的法律寫，詢價時選好版本就好。"),
+    ('<rect x="7" y="10" width="34" height="31" rx="4" fill="#f5dfe0"/><path d="M7 19h34M16 6v8M32 6v8"/><path d="M17 30l5 5 9-10"/>',
+     "確認後才印", "先給你們看預覽，似顏繪和書約都確認沒問題，才交 PDF 或送印。"),
+    ('<rect x="6" y="14" width="36" height="24" rx="3" fill="#f5dfe0"/><path d="M6 17l18 12 18-12"/><circle cx="35" cy="33" r="4" fill="#fffaf7"/>',
+     "台灣印製，郵局掛號寄出", "印刷版在台灣印 3 張，寫錯一張也還有備用；用郵局掛號寄到你們的台灣地址，查得到寄件進度。"),
+]
+CERT_TRUST = """  <section style="padding-top:0">
+    <div class="wrap prose" style="max-width:none">
+      <span class="kicker">Peace of mind</span>
+      <h2>登記那天之前，你可能想知道的事</h2>
+      <div class="trust">
+""" + "\n".join(f"        <div>{ico(i)}<div><b>{t}</b><p>{d}</p></div></div>" for i, t, d in CERT_TRUST_ITEMS) + """
+      </div>
+    </div>
+  </section>"""
+CERT_STEP_ART = [STEP_ART[0], STEP_ART[1],
+    # 3. 印好的書約＋掛號信封
+    '<svg viewBox="0 0 220 130" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+    '<ellipse cx="110" cy="118" rx="88" ry="7" fill="#f5dfe0" stroke="none"/>'
+    '<rect x="44" y="8" width="76" height="104" rx="3" fill="#fffaf7"/><rect x="50" y="14" width="64" height="92" rx="2" stroke-dasharray="2 4"/>'
+    '<circle cx="72" cy="38" r="9" fill="#f5dfe0"/><circle cx="92" cy="38" r="9" fill="#e6a9b5"/>'
+    '<path d="M60 60h44M60 70h44M60 80h30"/><path d="M60 96h16M88 96h16"/>'
+    '<g transform="translate(124 54) rotate(6)"><rect width="66" height="44" rx="4" fill="#fffaf7"/><path d="M2 3l31 22L64 3"/><rect x="48" y="28" width="12" height="10" fill="#e6a9b5"/></g>'
+    '<path d="M170 30l6-6M180 40h8" stroke-dasharray="3 5"/></svg>',
+]
+CERT_STEP_TXT = [
+    ("詢價、選方案", "在估價工具選書約方案（1～4）、同婚版或一般版，價格馬上算好，按一下就寄出詢價信。", "看得到總價才寄，不用先私訊問價。"),
+    ("確認似顏繪和書約", "我們回信確認報價，付款後開始畫似顏繪、放進書約，給你們看預覽確認。", "似顏繪可以免費修改 2 次；書約最多換 3 個小圖示。"),
+    ("交件", "方案 2 交可列印的 PDF，自己印；方案 3、4 我們印好 3 張，用郵局掛號寄到台灣地址（方案 1 只交設計預覽，不含圖檔）。", "登記前先打電話問戶政事務所，最安心。"),
+]
+CERT_STEPS = """  <section style="padding-top:0">
+    <div class="wrap prose" style="max-width:none">
+      <span class="kicker">How to order</span>
+      <h2>簡單三步驟訂購</h2>
+      <ol class="steps">
+""" + "\n".join(f'        <li><span class="no">STEP {i + 1}</span>{art}<b>{t}</b><p>{d}</p><small>{n}</small></li>' for i, (art, (t, d, n)) in enumerate(zip(CERT_STEP_ART, CERT_STEP_TXT))) + """
+      </ol>
+    </div>
+  </section>"""
+CERT_ABROAD = """  <section id="abroad" style="padding-top:0">
+    <div class="wrap prose">
+      <span class="kicker">Couples from abroad</span>
+      <h2>跨國新人、住在國外的新人</h2>
+      <p>其中一方是外國人，或兩個人住在國外、要回台灣登記，也可以用這份書約。外國人登記要準備哪些文件，整理在<a href="/blog/foreigner-marriage-registration-taiwan/" data-cta="related_link" data-cta-type="wedding">外國人在台灣結婚</a>；想從國外回台灣一次辦好登記和婚禮，可以看<a href="/taiwan-wedding/" data-cta="related_link" data-cta-type="wedding">回台結婚全包專案</a>。</p>
+      <div class="law">
+        <div><b>英文頁：台灣書約 PDF US$59</b>用美金付款，交付可以列印的 PDF；和似顏繪雙語喜帖一起訂是 US$50。請到<a href="/en/" data-cta="related_link" data-cta-type="wedding">英文頁</a>估價。</div>
+        <div><b>中文頁：新台幣方案</b>印刷版只寄台灣地址；住在國外的話，選方案 2 的 PDF 自己印最方便。</div>
+      </div>
+    </div>
+  </section>"""
+cert_body = hero("結婚書約", "似顏繪結婚書約：<br>把你們畫進登記那天的書約",
+                 "先畫好你們兩人的全身彩色似顏繪（NT$1,800），再放進手繪邊框的結婚書約。書約有 4 種方案，NT$1,000 起；同婚、非同婚都有對應的法條版本，欄位照戶政規定留好。",
+                 '<a class="pill" href="/?sy=4#quote" data-cta="page_quote" data-cta-type="wedding">估價這個方案 <span class="arr">→</span></a><a class="pill ghost" href="#registration">戶政可以用嗎？</a>') + \
+    "\n" + cert_sec + "\n" + REG_SEC + "\n" + law_sec + "\n" + CERT_TRUST + "\n" + CERT_STEPS + "\n" + CERT_ABROAD + "\n" + read_more_auto("/marriage-certificate/") + "\n" + faq_sec(cert_qa) + "\n" + cta_sec("開始估價結婚書約", "/?sy=4#quote") + "\n" + BUNDLE
+cert_ld = [{"@type": "Service", "name": "似顏繪結婚書約客製", "serviceType": "結婚書約設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
+            "offers": [offer("方案 1：書約設計", 1000, "設計圖面費，交付設計預覽，不含圖檔（另需雙人似顏繪 NT$1,800）"), offer("方案 2：書約設計＋PDF 電子檔", 1600, "可列印的 PDF"),
+                       offer("方案 3：書約設計＋印刷 3 張", 2380, "台灣印製，郵局掛號寄台灣地址"), offer("方案 4：設計＋印刷 3 張＋PDF", 2880, "組合價")]}, faq_ld(cert_qa)]
+built.append(page("/marriage-certificate/", "結婚書約", "似顏繪結婚書約客製｜戶政登記可用・同婚版・一般版 4 種方案 NT$1,000 起｜編織日和",
+                  "似顏繪結婚書約 4 種方案：設計 NT$1,000、加 PDF NT$1,600、印刷 3 張 NT$2,380、組合價 NT$2,880（另需雙人似顏繪 NT$1,800）。欄位照戶政規定留好，同婚版、一般版用對應的法條文字，郵局掛號寄台灣。",
+                  "喜帖|結婚書約|似顏繪結婚書約客製", cert_body, cert_ld))
 
 # ── 紙本喜帖（2026-11-21 新增，價格與規格由 Alison 提供） ──
 ENV = ["橘", "紅", "酒紅", "奶茶", "咖啡", "深咖啡", "駝色", "米白", "淺卡其", "淺綠", "橄欖綠", "墨綠", "淺灰", "灰", "深藍", "乾燥玫瑰", "淺粉", "灰紫", "淺灰白", "白", "白（無字）"]
@@ -785,6 +869,7 @@ sm = open(sm_path, encoding="utf-8").read()
 sm = re.sub(r"  <!--HY-PAGES-->.*?<!--/HY-PAGES-->\n", "", sm, flags=re.S)
 LASTMOD = {post_url(P): P["modified"] for P in POSTS}
 LASTMOD["/blog/"] = max(LASTMOD.values(), default=TODAY)
+LASTMOD["/marriage-certificate/"] = "2026-11-28"  # 服務頁改內容就更新
 rows = "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{max(TODAY, LASTMOD.get(u, TODAY))}</lastmod></url>\n" for u, ok in built if ok)
 sm = sm.replace("</urlset>", f"  <!--HY-PAGES-->\n{rows}  <!--/HY-PAGES-->\n</urlset>")
 open(sm_path, "w", encoding="utf-8").write(sm)
