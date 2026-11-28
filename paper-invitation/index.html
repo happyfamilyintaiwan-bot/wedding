@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>似顏繪紙本喜帖客製｜兩頁設計 NT$2,500、每份 NT$105 起印｜編織日和</title>
-<meta name="description" content="似顏繪紙本喜帖：兩頁設計 NT$2,500，印刷每份 NT$105、30 份起印，含 148×105mm 300 磅雪銅喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。只寄台灣，建議 4～5 週前訂製。">
+<title>似顏繪紙本喜帖客製｜30 份 NT$5,150（設計 NT$2,000＋每份 NT$105）｜編織日和</title>
+<meta name="description" content="似顏繪紙本喜帖：30 份 NT$5,150（兩頁設計 NT$2,000＋印刷每份 NT$105，30 份起印），含 300 磅雪銅喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。免費修改 2 次，台灣印製只寄台灣，建議 3～5 週前訂製。">
 <link rel="canonical" href="https://wedding.knittinghiyori.com/paper-invitation/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="編織日和">
-<meta property="og:title" content="似顏繪紙本喜帖客製｜兩頁設計 NT$2,500、每份 NT$105 起印">
-<meta property="og:description" content="似顏繪紙本喜帖：兩頁設計 NT$2,500，印刷每份 NT$105、30 份起印，含 148×105mm 300 磅雪銅喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。只寄台灣，建議 4～5 週前訂製。">
+<meta property="og:title" content="似顏繪紙本喜帖客製｜30 份 NT$5,150（設計 NT$2,000＋每份 NT$105）">
+<meta property="og:description" content="似顏繪紙本喜帖：30 份 NT$5,150（兩頁設計 NT$2,000＋印刷每份 NT$105，30 份起印），含 300 磅雪銅喜帖、燙金 Save the Date 信封（21 色）與玫瑰蠟封貼紙。免費修改 2 次，台灣印製只寄台灣，建議 3～5 週前訂製。">
 <meta property="og:url" content="https://wedding.knittinghiyori.com/paper-invitation/">
 <meta property="og:image" content="https://wedding.knittinghiyori.com/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -371,6 +371,20 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .post-list a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; }
 .post-list b { font-family: var(--serif); color: var(--wine); font-size: 19px; display: block; margin-bottom: 4px; }
 .post-list span { color: var(--muted); font-size: 15px; }
+/* 紙本喜帖：價格小卡 */
+.pcard { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 22px 32px; align-items: center; background: var(--cream); border: 2px solid var(--wine); border-radius: 20px; padding: 24px 26px; box-shadow: 6px 6px 0 var(--rose); }
+.pcard-n { font-family: var(--serif); color: var(--wine); font-size: 22px; margin: 4px 0 2px; line-height: 1.3; }
+.pcard-n b { font-family: var(--latin); font-weight: 400; font-size: clamp(40px, 6vw, 56px); letter-spacing: -.01em; margin-left: 4px; }
+.pcard-eq { font-weight: 700; color: var(--ink); margin: 0 0 10px; }
+.pcard-more { padding-left: 1.1em; margin: 0 0 16px; font-size: 14.5px; color: var(--muted); }
+.pcard-more li { margin-bottom: 4px; }
+.pcard-kit-t { font-family: var(--serif); color: var(--wine); font-weight: 700; margin: 0 0 10px; }
+.kit3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.kit3 figure { margin: 0; }
+.kit3 img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); background: #fff; }
+.kit3 figcaption { font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 6px; }
+.kit3 figcaption b { display: block; font-family: var(--serif); color: var(--wine); font-size: 16px; }
+@media (max-width: 760px) { .pcard { grid-template-columns: 1fr; padding: 20px 18px; } .kit3 { gap: 8px; } .kit3 figcaption { font-size: 12px; } }
 /* 電子喜帖：範例入口、安心說明、三步驟 */
 .samples { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
 .samples a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; transition: border-color .2s, transform .2s; }
@@ -523,9 +537,9 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     {
      "@type": "Offer",
      "name": "紙本喜帖 兩頁設計",
-     "price": "2500",
+     "price": "2000",
      "priceCurrency": "TWD",
-     "description": "可沿用作品集設計或討論新設計",
+     "description": "可沿用作品集設計或討論新設計，免費修改 2 次",
      "availability": "https://schema.org/InStock"
     },
     {
@@ -533,7 +547,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "name": "紙本喜帖 印刷（每份）",
      "price": "105",
      "priceCurrency": "TWD",
-     "description": "同款式 30 份起印，含信封與信封貼紙，只寄台灣",
+     "description": "同款式 30 份起印（加印也是），含信封與信封貼紙，只寄台灣",
      "availability": "https://schema.org/InStock"
     }
    ]
@@ -546,7 +560,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "name": "紙本喜帖多少錢？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "兩頁設計費 NT$2,500，印刷每份 NT$105，同款式 30 份起印（30 份是 NT$3,150）。另外需要雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價。"
+      "text": "兩頁設計費 NT$2,000，印刷每份 NT$105，同款式 30 份起印，所以 30 份總共 NT$5,150（設計 NT$2,000＋印刷 NT$3,150）。另外需要雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價。"
      }
     },
     {
@@ -555,6 +569,30 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "acceptedAnswer": {
       "@type": "Answer",
       "text": "1 張喜帖（148×105mm，300 磅雪銅紙）、1 個信封（185×125mm，燙金 Save the Date，21 色可選）、1 枚古銅色玫瑰信封貼紙（直徑 3cm）。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "設計可以改幾次？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "設計可以免費修改 2 次。你們確認校稿（定稿）後就會送印，不能再改；超過免費次數或定稿後要修改，會酌收費用。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "會有色差嗎？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "會有一點。螢幕是發光顯示，紙張是用墨水印刷，印出來的顏色通常會比螢幕上稍微暗、稍微淡一點，每支手機和電腦螢幕看到的也不太一樣。信封顏色請以色卡為準。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "可以加印嗎？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "可以。加印一樣是同款式 30 份起印，每份 NT$105（30 份 NT$3,150）。份數不確定的話，建議第一次訂就把可能要的份數一起算進去。"
      }
     },
     {
@@ -570,7 +608,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "name": "要多久前訂？可以寄到國外嗎？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "建議在需要拿到喜帖的 4～5 週前訂製。紙本喜帖只寄台灣地址；海外新人可以選網頁電子喜帖。"
+      "text": "建議在需要拿到喜帖的 3～5 週前訂製。紙本喜帖只寄台灣地址；海外新人可以選網頁電子喜帖。"
      }
     },
     {
@@ -602,13 +640,61 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     <div class="wrap">
       <p class="crumb"><a href="/">似顏繪喜帖</a> › 紙本喜帖</p>
       <h1>似顏繪紙本喜帖：<br>把你們的似顏繪印成喜帖</h1>
-      <p class="lead">用你們的似顏繪設計兩頁喜帖，連同燙金信封和蠟封貼紙一起印好。兩頁設計 NT$2,500，印刷每份 NT$105（30 份起），只寄台灣。</p>
-      <div class="acts"><a class="pill" href="/?paper=1#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#portfolio">看作品</a></div>
+      <p class="lead">用你們的似顏繪設計兩頁喜帖，連同燙金信封和蠟封貼紙一起在台灣印好，寄到台灣地址。</p>
+      <div class="acts"><a class="pill ghost" href="#portfolio">看作品</a><a class="pill ghost" href="#faq">常見問題</a></div>
     </div>
   </section>
-  <section id="portfolio">
+  <section id="price" style="padding-top:0">
     <div class="wrap">
-      <div class="chapter"><span class="no">✦</span><div><span class="kicker">Portfolio</span><h2>紙本喜帖作品</h2><p>可以沿用作品集的設計，也可以討論新的設計；兩種都會收設計費，確保每一份都符合你們。點圖可以放大。</p></div></div>
+      <div class="pcard">
+        <div class="pcard-sum">
+          <span class="kicker">Price</span>
+          <p class="pcard-n">30 份 <b>NT$5,150</b></p>
+          <p class="pcard-eq">兩頁設計 NT$2,000＋印刷 NT$3,150（每份 NT$105）</p>
+          <ul class="pcard-more">
+            <li>每多 1 份 +NT$105：40 份 NT$6,200、50 份 NT$7,250</li>
+            <li>同款式 30 份起印，加印也是 30 份起</li>
+            <li>另需雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價</li>
+          </ul>
+          <a class="pill" href="/?paper=1#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a>
+        </div>
+        <div class="pcard-kit">
+          <p class="pcard-kit-t">一組包含這 3 樣</p>
+          <div class="kit3">
+            <figure data-src="/assets/paper/paper-invitation-welcome-pink-two-pages.webp"><img src="/assets/paper/paper-invitation-welcome-pink-two-pages.webp" alt="似顏繪紙本喜帖，正面似顏繪封面、背面邀請資訊" width="800" height="1066" loading="lazy"><figcaption><b>喜帖</b>148×105mm，300 磅雪銅紙，正反兩頁</figcaption></figure>
+            <figure data-src="/assets/paper/envelope-burgundy-photo.webp"><img src="/assets/paper/envelope-burgundy-photo.webp" alt="酒紅色信封，燙金 Save the Date 實拍" width="900" height="609" loading="lazy"><figcaption><b>燙金信封</b>185×125mm，燙金 Save the Date，21 色</figcaption></figure>
+            <figure data-src="/assets/paper/seal-sticker-rose.webp"><img src="/assets/paper/seal-sticker-rose.webp" alt="古銅色玫瑰蠟封信封貼紙" width="500" height="518" loading="lazy"><figcaption><b>蠟封貼紙</b>古銅色玫瑰，直徑 3cm，背面有雙面膠</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap prose" style="max-width:none">
+      <span class="kicker">Peace of mind</span>
+      <h2>下訂之前，你可能想知道的事</h2>
+      <div class="trust">
+        <div><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5l15 6v11c0 10-6.5 17-15 21C15.5 39 9 32 9 22V11z" fill="#f5dfe0"/><path d="M17 24l5 5 9-10"/></svg><div><b>台灣印製</b><p>喜帖、信封、貼紙都在台灣印製，印好直接寄到你們指定的台灣地址。</p></div></div>
+        <div><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="6" width="30" height="36" rx="4" fill="#f5dfe0"/><path d="M16 16h16M16 23h16M16 30h9"/><path d="M28 32l3 3 6-7"/></svg><div><b>校稿確認才印</b><p>設計可以免費修改 2 次，你們確認校稿後才送印。定稿後就不能再改；超過免費次數或定稿後要修改，會酌收費用。</p></div></div>
+        <div><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="24" r="12" fill="#f5dfe0"/><circle cx="30" cy="24" r="12"/><path d="M24 14v20"/></svg><div><b>先知道會有一點色差</b><p>螢幕發光、紙張印墨水，印出來的顏色通常比螢幕上稍微暗、稍微淡一點。信封顏色以色卡為準。</p></div></div>
+        <div><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16h24v18H6z" fill="#f5dfe0"/><path d="M30 22h7l5 6v6H30z"/><circle cx="13" cy="36" r="3.5" fill="#fffaf7"/><circle cx="35" cy="36" r="3.5" fill="#fffaf7"/></svg><div><b>只寄台灣地址</b><p>紙本喜帖只寄台灣；海外新人可以選網頁電子喜帖，用連結傳給賓客。</p></div></div>
+      </div>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap prose" style="max-width:none">
+      <span class="kicker">How to order</span>
+      <h2>簡單三步驟訂購</h2>
+      <ol class="steps">
+        <li><span class="no">STEP 1</span><svg viewBox="0 0 220 130" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="110" cy="118" rx="88" ry="7" fill="#f5dfe0" stroke="none"/><rect x="48" y="8" width="62" height="108" rx="10" fill="#fffaf7"/><path d="M70 16h18"/><rect x="57" y="28" width="44" height="10" rx="3" fill="#f5dfe0"/><path d="M58 48h10M74 48h26M58 58h10M74 58h20M58 68h10M74 68h24"/><path d="M58 82h42"/><path d="M80 92h20" stroke-width="3"/><rect x="57" y="100" width="44" height="10" rx="5" fill="#e6a9b5"/><g transform="translate(122 46) rotate(-8)"><rect width="66" height="44" rx="4" fill="#fffaf7"/><path d="M2 3l31 22L64 3"/><circle cx="33" cy="30" r="6" fill="#e6a9b5"/></g><path d="M114 40c6-8 14-10 22-8" stroke-dasharray="3 5"/></svg><b>估價、寄出詢價信</b><p>在估價工具勾選紙本喜帖、填份數，總價馬上算好，按一下寄出詢價信，附上婚紗照和想要的信封顏色。</p><small>建議在需要拿到喜帖的 3～5 週前詢價。</small></li>
+        <li><span class="no">STEP 2</span><svg viewBox="0 0 220 130" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="110" cy="118" rx="88" ry="7" fill="#f5dfe0" stroke="none"/><rect x="46" y="14" width="64" height="92" rx="4" fill="#fffaf7"/><path d="M60 64V40a18 18 0 0 1 36 0v24z" fill="#f5dfe0"/><path d="M60 78h36M66 88h24"/><rect x="118" y="14" width="64" height="92" rx="4" fill="#fffaf7"/><path d="M130 30h40M130 42h32M130 54h40M130 66h28M130 78h36"/><circle cx="172" cy="96" r="18" fill="#e6a9b5"/><path d="M164 96l6 6 11-13" stroke-width="2.4"/></svg><b>確認設計並付款</b><p>似顏繪、喜帖設計一起討論，確認樣式和最終報價後，我們提供帳戶，匯款後開始製作。</p><small>目前只能匯款，還沒有信用卡付款。</small></li>
+        <li><span class="no">STEP 3</span><svg viewBox="0 0 220 130" aria-hidden="true" fill="none" stroke="#5a2232" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="110" cy="118" rx="88" ry="7" fill="#f5dfe0" stroke="none"/><g transform="translate(40 26) rotate(-8)"><rect width="56" height="76" rx="3" fill="#fffaf7"/><path d="M12 48V30a16 16 0 0 1 32 0v18z" fill="#f5dfe0"/><path d="M12 60h32"/></g><rect x="104" y="42" width="84" height="58" rx="4" fill="#fffaf7"/><path d="M106 45l40 28 40-28"/><circle cx="146" cy="74" r="9" fill="#e6a9b5"/><path d="M118 92h20" stroke-width="2.4" stroke="#c97487"/><path d="M168 24l4 8 8 2-8 3-4 8-3-8-8-3 8-2z" fill="#f5dfe0"/></svg><b>校稿、印刷、寄送</b><p>設計可以免費修改 2 次，你們確認校稿後送印，台灣印製，寄到台灣地址。</p><small>定稿後不能再改；之後要修改會酌收費用。</small></li>
+      </ol>
+    </div>
+  </section>
+  <section id="portfolio" style="padding-top:0">
+    <div class="wrap">
+      <div class="chapter"><span class="no">✦</span><div><span class="kicker">Portfolio</span><h2>紙本喜帖作品</h2><p>可以沿用作品集的設計，也可以依你們的婚禮主題設計新的。正面是似顏繪封面，背面是邀請細節與婚宴流程（固定兩頁，不做單頁）。</p></div></div>
       <div class="folio-grid" id="folio">
         <figure class="rv" style="--i:0" data-src="/assets/paper/paper-invitation-welcome-pink-two-pages.webp"><img src="/assets/paper/paper-invitation-welcome-pink-two-pages.webp" alt="紙本喜帖作品：粉色花園，正面 Welcome 似顏繪、背面邀請資訊" width="800" height="1066" loading="lazy"><figcaption>兩頁設計・粉色花園</figcaption></figure>
         <figure class="rv" style="--i:1" data-src="/assets/paper/paper-invitation-garden-cats.webp"><img src="/assets/paper/paper-invitation-garden-cats.webp" alt="紙本喜帖作品：花拱門下的新人和兩隻貓" width="700" height="935" loading="lazy"><figcaption>花拱門＋兩隻貓</figcaption></figure>
@@ -620,30 +706,11 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
       </div>
     </div>
   </section>
-  <section style="padding-top:0">
-    <div class="wrap prose">
-      <span class="kicker">What you get</span>
-      <h2>價格與規格</h2>
-      <ul>
-        <li><b>固定正反兩頁，設計費 NT$2,500</b>：正面是似顏繪封面，背面是邀請細節與婚宴流程（不做單頁）。背景主題依你們的婚禮客製；複雜的設計另外報價。</li>
-        <li><b>信封顏色要先選定</b>：詢價時請從色卡選一個顏色，確定後才排印刷。</li>
-        <li><b>印刷每份 NT$105</b>：同款式 <b>30 份起印</b>（30 份 NT$3,150）。</li>
-        <li><b>一組包含</b>：1 張喜帖（148×105mm，300 磅雪銅紙）、1 個信封（185×125mm，燙金 Save the Date）、1 枚信封貼紙（古銅色玫瑰蠟封貼，直徑 3cm，背面有雙面膠）。</li>
-        <li><b>只寄台灣地址</b>；只提供給訂製似顏繪的新人加購。</li>
-        <li>建議在<b>需要拿到喜帖的 4～5 週前</b>訂製。</li>
-      </ul>
-      <div class="folio-grid" style="margin-top:22px">
-        <figure data-src="/assets/paper/card-size-save-the-date.webp"><img src="/assets/paper/card-size-save-the-date.webp" alt="信封尺寸 18.5×12.5cm，燙金 Save the Date" width="900" height="593" loading="lazy"><figcaption>信封 18.5×12.5cm</figcaption></figure>
-        <figure data-src="/assets/paper/envelope-burgundy-photo.webp"><img src="/assets/paper/envelope-burgundy-photo.webp" alt="酒紅色信封，燙金 Save the Date 實拍" width="900" height="609" loading="lazy"><figcaption>燙金 Save the Date 實拍</figcaption></figure>
-        <figure data-src="/assets/paper/seal-sticker-rose.webp"><img src="/assets/paper/seal-sticker-rose.webp" alt="古銅色玫瑰蠟封信封貼紙" width="500" height="518" loading="lazy"><figcaption>古銅色玫瑰信封貼</figcaption></figure>
-      </div>
-    </div>
-  </section>
   <section id="envelope" style="padding-top:0">
     <div class="wrap prose">
       <span class="kicker">Envelope colors</span>
       <h2>信封顏色：21 色</h2>
-      <p>下訂時備註信封編號就可以。顏色名稱只是方便溝通，實際以色卡為準。</p>
+      <p>詢價時從色卡選一個顏色，寫上編號就可以；確定顏色後才排印刷。顏色名稱只是方便溝通，實際以色卡為準。</p>
       <div class="folio-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
         <figure data-src="/assets/paper/envelope-colors-1-12.webp"><img src="/assets/paper/envelope-colors-1-12.webp" alt="信封色卡 1 到 12 號" width="900" height="1030" loading="lazy"><figcaption>1～12 號</figcaption></figure>
         <figure data-src="/assets/paper/envelope-colors-13-21.webp"><img src="/assets/paper/envelope-colors-13-21.webp" alt="信封色卡 13 到 21 號" width="900" height="797" loading="lazy"><figcaption>13～21 號</figcaption></figure>
@@ -652,24 +719,12 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     </div>
   </section>
   <section style="padding-top:0">
-    <div class="wrap">
-      <div class="chapter"><span class="no">✦</span><div><span class="kicker">How to order</span><h2>訂製步驟</h2><p>確認細節與報價後，我們會提供帳戶，請用匯款付款（目前還沒有信用卡付款）。</p></div></div>
-      <ol class="flow">
-        <li class="rv"><b>估價＋寄信</b><span>用估價工具勾選，寫好詢價信，附上婚紗照</span></li>
-        <li class="rv" style="--i:1"><b>討論設計</b><span>似顏繪、喜帖、結婚書約一起確認</span></li>
-        <li class="rv" style="--i:2"><b>確認樣式後下訂</b><span>收到報價與帳戶，匯款後開始製作</span></li>
-        <li class="rv" style="--i:3"><b>備註信封顏色</b><span>下訂喜帖時寫信封編號（1～21）</span></li>
-        <li class="rv" style="--i:4"><b>印刷寄送</b><span>台灣印製，寄到台灣地址</span></li>
-      </ol>
-    </div>
-  </section>
-  <section style="padding-top:0">
     <div class="wrap prose"><span class="kicker">Read more</span><h2>延伸閱讀</h2><ul><li><a href="/blog/wedding-songs/" data-cta="related_link" data-cta-type="wedding">婚禮歌單：88 首婚禮歌曲，依迎賓、一進、二進、用餐、敬酒、送客分好了</a></li></ul></div>
   </section>
   <section id="faq">
     <div class="wrap">
       <div class="chapter"><span class="no">✦</span><div><span class="kicker">FAQ</span><h2>常見問題</h2></div></div>
-      <div class="faq"><details><summary>紙本喜帖多少錢？</summary><p>兩頁設計費 NT$2,500，印刷每份 NT$105，同款式 30 份起印（30 份是 NT$3,150）。另外需要雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價。</p></details><details><summary>一組紙本喜帖包含什麼？</summary><p>1 張喜帖（148×105mm，300 磅雪銅紙）、1 個信封（185×125mm，燙金 Save the Date，21 色可選）、1 枚古銅色玫瑰信封貼紙（直徑 3cm）。</p></details><details><summary>可以只印喜帖、不訂似顏繪嗎？</summary><p>不行。印刷喜帖只提供給訂製似顏繪與喜帖設計的新人加購。可以沿用作品集的設計，也可以討論新設計，兩種都會收設計費。</p></details><details><summary>要多久前訂？可以寄到國外嗎？</summary><p>建議在需要拿到喜帖的 4～5 週前訂製。紙本喜帖只寄台灣地址；海外新人可以選網頁電子喜帖。</p></details><details><summary>怎麼付款？</summary><p>確認細節與報價後，我們會提供帳戶，請用匯款付款；目前還沒有信用卡付款。</p></details></div>
+      <div class="faq"><details><summary>紙本喜帖多少錢？</summary><p>兩頁設計費 NT$2,000，印刷每份 NT$105，同款式 30 份起印，所以 30 份總共 NT$5,150（設計 NT$2,000＋印刷 NT$3,150）。另外需要雙人全身彩色似顏繪 NT$1,800；複雜的設計另外報價。</p></details><details><summary>一組紙本喜帖包含什麼？</summary><p>1 張喜帖（148×105mm，300 磅雪銅紙）、1 個信封（185×125mm，燙金 Save the Date，21 色可選）、1 枚古銅色玫瑰信封貼紙（直徑 3cm）。</p></details><details><summary>設計可以改幾次？</summary><p>設計可以免費修改 2 次。你們確認校稿（定稿）後就會送印，不能再改；超過免費次數或定稿後要修改，會酌收費用。</p></details><details><summary>會有色差嗎？</summary><p>會有一點。螢幕是發光顯示，紙張是用墨水印刷，印出來的顏色通常會比螢幕上稍微暗、稍微淡一點，每支手機和電腦螢幕看到的也不太一樣。信封顏色請以色卡為準。</p></details><details><summary>可以加印嗎？</summary><p>可以。加印一樣是同款式 30 份起印，每份 NT$105（30 份 NT$3,150）。份數不確定的話，建議第一次訂就把可能要的份數一起算進去。</p></details><details><summary>可以只印喜帖、不訂似顏繪嗎？</summary><p>不行。印刷喜帖只提供給訂製似顏繪與喜帖設計的新人加購。可以沿用作品集的設計，也可以討論新設計，兩種都會收設計費。</p></details><details><summary>要多久前訂？可以寄到國外嗎？</summary><p>建議在需要拿到喜帖的 3～5 週前訂製。紙本喜帖只寄台灣地址；海外新人可以選網頁電子喜帖。</p></details><details><summary>怎麼付款？</summary><p>確認細節與報價後，我們會提供帳戶，請用匯款付款；目前還沒有信用卡付款。</p></details></div>
     </div>
   </section>
   <section style="padding-top:0">
@@ -680,7 +735,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   <section style="padding-top:0">
     <div class="wrap">
       <div class="bundle" style="grid-template-columns:1fr">
-        <div><span class="kicker">All in one</span><h3>想一次搞定？全套方案加送兩份贈品</h3><p>似顏繪＋結婚書約＋網頁電子喜帖＋紙本喜帖四樣都選，加送 Save the Date 分享圖和迎賓板列印檔（例：書約方案 4＋紙本喜帖 30 份，全套 NT$14,130）。同一張似顏繪延伸成整套設計，估價工具會幫你全部勾好，再依需要調整。</p></div>
+        <div><span class="kicker">All in one</span><h3>想一次搞定？全套方案加送兩份贈品</h3><p>似顏繪＋結婚書約＋網頁電子喜帖＋紙本喜帖四樣都選，加送 Save the Date 分享圖和迎賓板列印檔（例：書約方案 4＋紙本喜帖 30 份，全套 NT$13,630）。同一張似顏繪延伸成整套設計，估價工具會幫你全部勾好，再依需要調整。</p></div>
         <div><a class="pill" href="/?all=1#quote" data-cta="bundle_quote" data-cta-type="wedding">一次估價全套 <span class="arr">→</span></a></div>
       </div>
     </div>
