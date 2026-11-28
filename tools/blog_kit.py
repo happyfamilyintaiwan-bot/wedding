@@ -24,7 +24,7 @@ SERVICES = {
         url="/web-invitation/", quote="/?web=A#quote", img="/assets/og-invite-a.jpg",
         name="似顏繪網頁電子喜帖", line="婚宴流程、地圖、出席回覆都在裡面，NT$3,800",
         title="手機一點就開的<br>似顏繪電子喜帖",
-        points=["婚宴流程、Dress code、地圖、加入行事曆", "賓客線上回覆出席，不用一個個問", "3 種風格同價，另需雙人似顏繪 NT$1,800"],
+        points=["婚宴流程、Dress code、地圖、加入行事曆", "賓客線上回覆出席，不用一個個問", "3 種風格同價，搭配似顏繪 +NT$1,800，或選婚紗照版不畫"],
         price="NT$3,800", more="看 3 種風格"),
     "paper": dict(
         url="/paper-invitation/", quote="/?paper=1#quote", img="/assets/paper/paper-invitation-welcome-pink-two-pages.webp",

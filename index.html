@@ -234,6 +234,8 @@ form.q { display: grid; gap: 34px; }
 .opt input { accent-color: var(--rose-d); width: 18px; height: 18px; flex: none; }
 .opt .p { margin-left: auto; font-family: var(--latin); font-size: 17px; white-space: nowrap; }
 .opt.locked { cursor: default; }
+.opt[hidden], .note[hidden] { display: none; }
+.opt:has(input:disabled:not(:checked)) { opacity: .45; cursor: not-allowed; }
 .sub-opts { display: grid; gap: 14px; padding: 16px; border-radius: 14px; background: rgba(255, 255, 255, .55); }
 .sub-opts[hidden] { display: none; }
 .field { display: grid; gap: 6px; font-size: 14.5px; min-width: 0; }
@@ -406,6 +408,12 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     },
     {
      "@type": "Offer",
+     "name": "網頁電子喜帖婚紗照版（不畫似顏繪，放新人的婚紗照，含交付起 3 個月維護）",
+     "price": "3800",
+     "priceCurrency": "TWD"
+    },
+    {
+     "@type": "Offer",
      "name": "全套方案：似顏繪＋結婚書約方案 4＋網頁電子喜帖＋紙本喜帖 30 份（四樣都選，加送 Save the Date 分享圖與迎賓板列印檔）",
      "price": "13630",
      "priceCurrency": "TWD"
@@ -420,7 +428,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "name": "似顏繪喜帖包含哪些東西？價格怎麼算？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "基本是雙人全身彩色似顏繪 NT$1,800，必選。可以再加購結婚書約（NT$1,000 起，有 4 種方案）和網頁電子喜帖（NT$3,800，三種風格同價）。加畫寵物或小孩每位 +NT$800。"
+      "text": "基本是雙人全身彩色似顏繪 NT$1,800，可以再加購結婚書約（NT$1,000 起，有 4 種方案）和網頁電子喜帖（NT$3,800，三種風格同價）。加畫寵物或小孩每位 +NT$800。只想要電子喜帖、不畫似顏繪的話，可以選婚紗照版：喜帖放你們的婚紗照，總價 NT$3,800。"
      }
     },
     {
@@ -571,10 +579,10 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     <div class="wrap">
       <div class="chapter"><span class="no">01</span><div><span class="kicker">The Menu</span><h2 class="split" data-split>似顏繪喜帖價目表</h2><p>似顏繪是基本，書約和電子喜帖可以只選一個，也可以都加。價格都是新台幣。</p></div></div>
       <div class="menu">
-        <div class="row rv"><span class="n">i.</span><h3>雙人全身彩色似顏繪<small>必選</small></h3><span class="p"><sup>NT$</sup>1,800</span><p>照你們最喜歡的婚紗照畫，免費修改 2 次。</p></div>
+        <div class="row rv"><span class="n">i.</span><h3>雙人全身彩色似顏繪<small>必選（婚紗照版電子喜帖除外）</small></h3><span class="p"><sup>NT$</sup>1,800</span><p>照你們最喜歡的婚紗照畫，免費修改 2 次。</p></div>
         <div class="row rv"><span class="n">ii.</span><h3>加畫寵物或小孩</h3><span class="p"><sup>+NT$</sup>800</span><p>每位。毛小孩、小朋友一起入鏡。</p></div>
         <div class="row rv"><span class="n">iii.</span><h3>結婚書約<small>4 種方案</small></h3><span class="p"><sup>+NT$</sup>1,000<span style="font-size:.4em"> 起</span></span><p>NT$1,000 是設計圖面費；PDF 電子檔、印刷 3 張可以加選。</p></div>
-        <div class="row rv"><span class="n">iv.</span><h3>網頁電子喜帖<small>3 種風格同價</small></h3><span class="p"><sup>+NT$</sup>3,800</span><p>從交付當天起維護 3 個月，延長每月 +NT$600。</p></div>
+        <div class="row rv"><span class="n">iv.</span><h3>網頁電子喜帖<small>3 種風格同價</small></h3><span class="p"><sup>+NT$</sup>3,800</span><p>從交付當天起維護 3 個月，延長每月 +NT$600。不畫似顏繪、改放婚紗照的<b>婚紗照版</b>，總價就是 NT$3,800。</p></div>
         <div class="row rv"><span class="n">v.</span><h3>紙本喜帖<small>兩頁設計＋印刷，只寄台灣</small></h3><span class="p"><sup>+NT$</sup>2,000<span style="font-size:.4em"> 起</span></span><p>NT$2,000 是兩頁設計費；印刷每份 +NT$105（30 份起印，含信封與封口貼紙）。</p></div>
       </div>
       <div class="bundle rv" id="bundle">
@@ -697,8 +705,10 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
         <form class="q" id="q" onsubmit="return false">
           <fieldset>
             <legend><i>i.</i>似顏繪</legend>
-            <label class="opt locked"><input type="checkbox" checked disabled> 雙人全身彩色似顏繪<span class="p">1,800</span></label>
-            <div class="opt locked">加畫寵物或小孩（每位 +800）<span class="p"><span class="stepper"><button type="button" data-step="-1" aria-label="減少一位">−</button><output id="pets">0</output><button type="button" data-step="1" aria-label="增加一位">＋</button></span></span></div>
+            <label class="opt"><input type="radio" name="art" value="draw" checked> 雙人全身彩色似顏繪<span class="p">1,800</span></label>
+            <label class="opt"><input type="radio" name="art" value="photo"> 不畫似顏繪：電子喜帖用婚紗照版<span class="p">0</span></label>
+            <span class="note" id="photo-note" hidden>婚紗照版只搭配電子喜帖（已幫你選 A，可以換 B、C）；結婚書約和紙本喜帖要搭配似顏繪。</span>
+            <div class="opt locked" id="pets-row">加畫寵物或小孩（每位 +800）<span class="p"><span class="stepper"><button type="button" data-step="-1" aria-label="減少一位">−</button><output id="pets">0</output><button type="button" data-step="1" aria-label="增加一位">＋</button></span></span></div>
           </fieldset>
           <fieldset>
             <legend><i>ii.</i>結婚書約</legend>
@@ -760,7 +770,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     <div class="wrap">
       <div class="chapter"><span class="no">06</span><div><span class="kicker">FAQ</span><h2 class="split" data-split>常見問題</h2></div></div>
       <div class="faq">
-        <details><summary>似顏繪喜帖包含哪些東西？價格怎麼算？</summary><p>基本是雙人全身彩色似顏繪 NT$1,800，必選。可以再加購結婚書約（NT$1,000 起，有 4 種方案）和網頁電子喜帖（NT$3,800，三種風格同價）。加畫寵物或小孩每位 +NT$800。</p></details>
+        <details><summary>似顏繪喜帖包含哪些東西？價格怎麼算？</summary><p>基本是雙人全身彩色似顏繪 NT$1,800，可以再加購結婚書約（NT$1,000 起，有 4 種方案）和網頁電子喜帖（NT$3,800，三種風格同價）。加畫寵物或小孩每位 +NT$800。只想要電子喜帖、不畫似顏繪的話，可以選婚紗照版：喜帖放你們的婚紗照，總價 NT$3,800。</p></details>
         <details><summary>結婚書約 4 種方案差在哪裡？</summary><p>方案 1 是設計圖面費 NT$1,000，交付設計預覽，不含圖檔。方案 2 加可列印的 PDF 電子檔，共 NT$1,600。方案 3 加印刷 3 張，共 NT$2,380。方案 4 是設計＋印刷 3 張＋PDF 的組合價 NT$2,880（原價 NT$2,980）。</p></details>
         <details><summary>結婚書約可以用在台灣以外的國家嗎？印好的書約怎麼寄？</summary><p>目前結婚書約只提供台灣格式。印刷版只在台灣印製，用郵局掛號寄到你提供的台灣地址。</p></details>
         <details><summary>要準備什麼照片？</summary><p>似顏繪會照著照片畫，請選一張你們最喜歡的婚紗照，或每人 2～3 張清楚的正面照加 1 張合照，用 Email 寄給我們。</p></details>
@@ -802,7 +812,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   ];
   const SY = { "1": ["方案 1：書約設計（設計圖面，不含圖檔）", 1000], "2": ["方案 2：書約設計＋PDF 電子檔", 1600], "3": ["方案 3：書約設計＋印刷 3 張", 2380], "4": ["方案 4：書約設計＋印刷 3 張＋PDF（組合價）", 2880] };
   const WEB = { A: "A・書約手繪風", B: "B・日系清新", C: "C・雪景" };
-  const COLORS = { A: ["蜂蜜黃", "糖果粉", "薄荷綠", "薰衣草"], B: ["霧玫瑰", "鼠尾草", "霧藍", "奶茶"], C: ["雪白藍", "銀灰", "粉雪", "冬夜"] };
+  const COLORS = { A: ["蜂蜜黃", "糖果粉", "薄荷綠", "薰衣草", "春櫻", "夏海", "秋楓"], B: ["霧玫瑰", "鼠尾草", "霧藍", "奶茶"], C: ["雪白藍", "銀灰", "粉雪", "冬夜"] };
   const MAIL = "theperfectmatchfilters@gmail.com";
   const ENV = ["橘", "紅", "酒紅", "奶茶", "咖啡", "深咖啡", "駝色", "米白", "淺卡其", "淺綠", "橄欖綠", "墨綠", "淺灰", "灰", "深藍", "乾燥玫瑰", "淺粉", "灰紫", "淺灰白", "白", "白（無字）"];
   const PAPER_DESIGN = 2000, PAPER_EACH = 105, PAPER_MIN = 30;
@@ -822,10 +832,13 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     const sy = checked("sy"), web = checked("web"), ext = +checked("ext") || 0;
     const paper = checked("paper"), pq = Math.max(PAPER_MIN, Math.round(+v("pq") || PAPER_MIN));
     $("sy-more").hidden = !sy; $("web-more").hidden = !web; $("paper-more").hidden = !paper;
-    const items = [["雙人全身彩色似顏繪", 1800]];
-    if (pets) items.push([`加畫寵物或小孩 ×${pets}`, pets * 800]);
+    const photoOnly = checked("art") === "photo";
+    $("photo-note").hidden = !photoOnly; $("pets-row").hidden = photoOnly;
+    document.querySelectorAll("input[name=sy], input[name=paper]").forEach((r) => { r.disabled = photoOnly && !!r.value; });
+    const items = photoOnly ? [] : [["雙人全身彩色似顏繪", 1800]];
+    if (pets && !photoOnly) items.push([`加畫寵物或小孩 ×${pets}`, pets * 800]);
     if (sy) items.push([`結婚書約 ${SY[sy][0]}`, SY[sy][1]]);
-    if (web) items.push([`電子喜帖 ${WEB[web]}`, 3800]);
+    if (web) items.push([`電子喜帖 ${WEB[web]}${photoOnly ? "（婚紗照版）" : ""}`, 3800]);
     if (web && ext) items.push([`喜帖延長 ${ext} 個月`, ext * 600]);
     if (paper) items.push(["紙本喜帖 兩頁設計", PAPER_DESIGN], [`紙本喜帖 印刷 ${pq} 份`, pq * PAPER_EACH]);
     const days = v("need") ? Math.ceil((new Date(v("need")) - new Date()) / 864e5) : 99;
@@ -843,14 +856,14 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
       `稱呼：${v("who") || "（未填）"}`, `Email：${v("mail") || "（未填）"}`,
       `新人名字（印在喜帖上）：${v("n1") || "（未填）"}、${v("n2") || "（未填）"}`,
       `婚禮／登記日期：${date("wd")}`, `希望拿到成品：${date("need")}${rush ? "（急件）" : ""}`, "",
-      "── 想要的項目 ──", `✔ 雙人全身彩色似顏繪　${money(1800)}`];
-    if (pets) L.push(`✔ 加畫寵物或小孩 ×${pets}　${money(pets * 800)}`);
+      "── 想要的項目 ──", photoOnly ? "✘ 似顏繪：不需要（電子喜帖用婚紗照版）" : `✔ 雙人全身彩色似顏繪　${money(1800)}`];
+    if (pets && !photoOnly) L.push(`✔ 加畫寵物或小孩 ×${pets}　${money(pets * 800)}`);
     if (sy) {
       L.push(`✔ 結婚書約 ${SY[sy][0]}　${money(SY[sy][1])}`, `　・版本：${checked("law")}`, `　・模板：${$("tpl").value || "還沒決定"}`);
       if (v("icons")) L.push(`　・想換的小圖示：${v("icons")}`);
     } else L.push("✘ 結婚書約：不需要");
     if (web) {
-      L.push(`✔ 電子喜帖 ${WEB[web]}　${money(3800)}`, `　・配色：${checked("color")}`);
+      L.push(`✔ 電子喜帖 ${WEB[web]}${photoOnly ? "（婚紗照版）" : ""}　${money(3800)}`, `　・配色：${checked("color")}`);
       L.push(ext ? `　・使用期間：交付起 3 個月＋延長 ${ext} 個月　${money(ext * 600)}` : "　・使用期間：交付起 3 個月");
     } else L.push("✘ 電子喜帖：不需要");
     if (paper) L.push(`✔ 紙本喜帖 兩頁設計　${money(PAPER_DESIGN)}`, `✔ 紙本喜帖 印刷 ${pq} 份　${money(pq * PAPER_EACH)}`, `　・信封顏色：${$("env").value || "（請先選信封顏色）"}`);
@@ -869,6 +882,16 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     pets = Math.max(0, Math.min(6, pets + +b.dataset.step)); $("pets").textContent = pets; update();
   }));
   document.querySelectorAll("input[name=web]").forEach((r) => r.addEventListener("change", () => { if (r.value) colorPills(r.value); }));
+  // 婚紗照版：沒選電子喜帖就幫忙選 A，書約和紙本喜帖清掉
+  const pickPhoto = () => {
+    if (!checked("web")) { const a = document.querySelector("input[name=web][value=A]"); a.checked = true; colorPills("A"); }
+    document.querySelector("input[name=sy][value='']").checked = true;
+    document.querySelector("input[name=paper][value='']").checked = true;
+  };
+  document.querySelector("input[name=art][value=photo]").addEventListener("change", pickPhoto);
+  document.querySelectorAll("input[name=web]").forEach((r) => r.addEventListener("change", () => {
+    if (!r.value && checked("art") === "photo") document.querySelector("input[name=art][value=draw]").checked = true;
+  }));
   $("q").addEventListener("input", update);
   $("q").addEventListener("change", update);
   // 紙本喜帖：信封顏色一定要選，沒選不能複製或寄出
@@ -892,13 +915,14 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     const r = document.querySelector(`input[name=web][value="${a.dataset.pickWeb}"]`); if (r) { r.checked = true; colorPills(r.value); update(); }
   }));
   colorPills("A");
-  // 從分頁「估價」按鈕帶入方案（?sy=1–4、?web=A|B|C）
+  // 從分頁「估價」按鈕帶入方案（?sy=1–4、?web=A|B|C、?photo）
   try {
     const qs = new URLSearchParams(location.search);
     const all = qs.has("all");
     const s1 = document.querySelector(`input[name=sy][value="${all ? "4" : qs.get("sy")}"]`); if (s1) s1.checked = true;
     const w1 = document.querySelector(`input[name=web][value="${all ? "A" : qs.get("web")}"]`); if (w1) { w1.checked = true; colorPills(w1.value); }
     if (all || qs.has("paper")) document.querySelector('input[name=paper][value="1"]').checked = true;
+    if (!all && qs.has("photo")) { document.querySelector("input[name=art][value=photo]").checked = true; pickPhoto(); }   // ?photo：婚紗照版
   } catch (err) {}
   update();
   window.HY_TPL = TPL;
