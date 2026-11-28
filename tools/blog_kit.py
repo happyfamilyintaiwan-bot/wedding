@@ -34,10 +34,10 @@ SERVICES = {
         price="NT$2,500＋每份 NT$105", more="看作品"),
     "package": dict(
         url="/taiwan-wedding/", quote="/taiwan-wedding/#price", quote_label="看專案價格", img="/assets/couple-kimono.webp",
-        name="回台結婚全包專案", line="住國外、回台灣結婚的新人一次備齊，NT$22,000",
+        name="回台結婚全包專案", line="住國外、回台灣結婚的新人一次備齊，NT$9,800",
         title="住在國外，<br>回台灣結婚一次備齊",
         points=["似顏繪、結婚書約 PDF、中英雙語電子喜帖", "外國賓客專區、迎賓板與 Save the Date", "全程線上，不用收包裹"],
-        price="NT$22,000", more="看專案內容", more_url="/taiwan-wedding/#included"),
+        price="NT$9,800", more="看專案內容", more_url="/taiwan-wedding/#included"),
 }
 
 

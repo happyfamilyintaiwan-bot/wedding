@@ -386,6 +386,12 @@ BUNDLE = """  <section style="padding-top:0">
     </div>
   </section>"""
 
+PKG = """  <section style="padding-top:0">
+    <div class="wrap">
+      <p class="note" style="font-size:15.5px">住在國外、要回台灣結婚？似顏繪、書約 PDF、中英雙語電子喜帖一次備齊：<a href="/taiwan-wedding/" data-cta="package_entry" data-cta-type="wedding">看回台結婚全包專案 →</a></p>
+    </div>
+  </section>"""  # 似顏繪、書約、電子喜帖頁底部的跨國新人入口（紙本只寄台灣，不放）
+
 def read_more(*links):
     """服務頁底部連到相關文章（文章與服務頁互相導引）"""
     return """  <section style="padding-top:0">
@@ -493,7 +499,7 @@ law_sec = """  <section style="padding-top:0">
 cert_body = hero("結婚書約", "似顏繪結婚書約：<br>把你們畫進登記那天的書約",
                  "先畫好你們兩人的全身彩色似顏繪（NT$1,800），再放進手繪邊框的結婚書約。書約有 4 種方案，NT$1,000 起；同婚、非同婚都有對應的法條版本。",
                  '<a class="pill" href="/?sy=4#quote" data-cta="page_quote" data-cta-type="wedding">估價這個方案 <span class="arr">→</span></a><a class="pill ghost" href="#cert">看 4 種方案</a>') + \
-    "\n" + cert_sec + "\n" + law_sec + "\n" + flow_sec + "\n" + read_more_auto("/marriage-certificate/") + "\n" + faq_sec(cert_qa) + "\n" + cta_sec("開始估價結婚書約", "/?sy=4#quote") + "\n" + BUNDLE
+    "\n" + cert_sec + "\n" + law_sec + "\n" + flow_sec + "\n" + read_more_auto("/marriage-certificate/") + "\n" + faq_sec(cert_qa) + "\n" + cta_sec("開始估價結婚書約", "/?sy=4#quote") + "\n" + BUNDLE + "\n" + PKG
 cert_ld = [{"@type": "Service", "name": "似顏繪結婚書約客製", "serviceType": "結婚書約設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
             "offers": [offer("方案 1：書約設計", 1000, "設計圖面費，交付設計預覽，不含圖檔（另需雙人似顏繪 NT$1,800）"), offer("方案 2：書約設計＋PDF 電子檔", 1600, "可列印的 PDF"),
                        offer("方案 3：書約設計＋印刷 3 張", 2380, "台灣印製，郵局掛號寄台灣地址"), offer("方案 4：設計＋印刷 3 張＋PDF", 2880, "組合價")]}, faq_ld(cert_qa)]
@@ -506,7 +512,7 @@ cari_qa = faqs("要準備什麼照片？", "可以修改幾次？", "製作要�
 cari_body = hero("似顏繪", "新人似顏繪：<br>照你們最喜歡的婚紗照畫",
                  "雙人全身彩色似顏繪 NT$1,800，免費修改 2 次；毛小孩、小朋友每位加 NT$800 一起畫進來。這張圖之後可以放進結婚書約和電子喜帖，整套看起來是同一個風格。",
                  '<a class="pill" href="/#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#portfolio">看作品</a>') + \
-    "\n" + folio_sec + "\n" + duo_sec + "\n" + flow_sec + "\n" + read_more_auto("/caricature/") + "\n" + faq_sec(cari_qa) + "\n" + cta_sec("開始估價似顏繪", "/#quote") + "\n" + BUNDLE
+    "\n" + folio_sec + "\n" + duo_sec + "\n" + flow_sec + "\n" + read_more_auto("/caricature/") + "\n" + faq_sec(cari_qa) + "\n" + cta_sec("開始估價似顏繪", "/#quote") + "\n" + BUNDLE + "\n" + PKG
 cari_ld = [{"@type": "Service", "name": "新人似顏繪客製", "serviceType": "婚禮似顏繪", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
             "offers": [offer("雙人全身彩色似顏繪", 1800, "免費修改 2 次"), offer("加畫寵物或小孩（每位）", 800, "毛小孩、小朋友一起入鏡")]}, faq_ld(cari_qa)]
 built.append(page("/caricature/", "似顏繪", "新人似顏繪客製｜雙人全身彩色 NT$1,800、可加畫寵物｜編織日和",
@@ -608,7 +614,7 @@ web_qa = faqs("電子喜帖可以用多久？會被搜尋到嗎？", "可以修�
 web_body = hero("電子喜帖", "網頁電子喜帖：<br>手機一點就開，賓客線上回覆出席",
                 "把你們的似顏繪做成喜帖網頁：開場動畫、婚禮倒數、婚宴流程、Dress code、地圖、加入行事曆、出席回覆都在裡面。3 種風格同價 NT$3,800，搭配雙人似顏繪 NT$1,800；不畫似顏繪、改放婚紗照的婚紗照版，總價就是 NT$3,800。",
                 '<a class="pill" href="/?web=A#quote" data-cta="page_quote" data-cta-type="wedding">開始估價 <span class="arr">→</span></a><a class="pill ghost" href="#web">看 3 種風格</a>') + \
-    "\n" + web_sec + "\n" + SAMPLES + "\n" + TRUST + "\n" + STEPS + "\n" + read_more_auto("/web-invitation/") + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote") + "\n" + BUNDLE
+    "\n" + web_sec + "\n" + SAMPLES + "\n" + TRUST + "\n" + STEPS + "\n" + read_more_auto("/web-invitation/") + "\n" + faq_sec(web_qa) + "\n" + cta_sec("開始估價電子喜帖", "/?web=A#quote") + "\n" + BUNDLE + "\n" + PKG
 web_ld = [{"@type": "Service", "name": "似顏繪網頁電子喜帖", "serviceType": "電子喜帖設計", "areaServed": {"@type": "Country", "name": "Taiwan"}, "provider": PROVIDER,
            "offers": [offer("網頁電子喜帖（3 種風格同價）", 3800, "交付起 3 個月上線與維護"), offer("網頁電子喜帖婚紗照版（不畫似顏繪）", 3800, "放新人的婚紗照，交付起 3 個月上線與維護"), offer("延長上線（每月）", 600, "交付 3 個月後每延長 1 個月")]}, faq_ld(web_qa)]
 built.append(page("/web-invitation/", "電子喜帖", "網頁電子喜帖客製｜似顏繪＋出席回覆、地圖、倒數 3 種風格 NT$3,800｜編織日和",

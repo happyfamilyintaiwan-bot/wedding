@@ -11,7 +11,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIVE = "--live" in sys.argv
 BASE = "https://wedding.knittinghiyori.com"
 MAIL = "theperfectmatchfilters@gmail.com"
-PRICE_TWD, PRICE_USD = "22,000", "690"
+PRICE_TWD, PRICE_USD = "9,800", "299"  # Alison 2026-11-28：原 22,000／690，調到不高於單點加總
 PATHS = {"zh": "/taiwan-wedding/", "en": "/en/taiwan-wedding/"}
 
 zh_home = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
@@ -41,7 +41,20 @@ EXTRA = """
 .cmp td:nth-child(3), .cmp th:nth-child(3) { background: var(--blush); }
 .cmp-wrap { overflow-x: auto; }
 .hero h1 { letter-spacing: .04em; }
-@media (max-width: 760px) { .inc, .who, .pricebox { grid-template-columns: 1fr; } .cmp { font-size: 14.5px; min-width: 520px; } }
+.hero .quick { background: var(--cream); border: 1px solid var(--wine); border-radius: 18px; padding: 14px 18px; color: var(--ink, #3a2a2e); text-align: left; }
+.hero .quick b { font-family: var(--latin); font-size: 28px; color: var(--wine); font-weight: 400; display: block; line-height: 1.2; }
+.hero .quick span { font-size: 14px; color: var(--muted); }
+.inc li a { grid-column: 2; font-size: 14.5px; color: var(--rose-d); }
+@media (max-width: 760px) {
+  .inc, .who, .pricebox { grid-template-columns: 1fr; }
+  .cmp thead { display: none; }
+  .cmp, .cmp tbody, .cmp tr, .cmp td { display: block; }
+  .cmp tr { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; background: var(--cream); }
+  .cmp td { border: 0; padding: 4px 0; display: flex; justify-content: space-between; gap: 12px; background: none !important; }
+  .cmp td:first-child { font-family: var(--serif); color: var(--wine); font-size: 16px; }
+  .cmp td:not(:first-child)::before { content: attr(data-label); color: var(--muted); }
+  .cmp td:nth-child(3) { color: var(--wine); font-weight: 700; }
+}
 </style>"""
 
 EN_FONT = """
@@ -59,21 +72,22 @@ T = {
     h1="住在國外，<b>回台灣結婚</b>：<br>似顏繪、書約、雙語喜帖一次備齊",
     lead="人在國外，不方便收包裹、也沒時間一樣一樣找廠商。我們把婚禮需要的畫和喜帖都做成數位檔，全程用 Email 完成。兩位都是台灣人，或另一半是外國人，都適合。",
     cta1="詢問專案", cta2="看專案內容",
+    quick=f"或 US${PRICE_USD}・一次付清・全程 Email，約 4～5 週交件",
     who_k="For you", who_h="這個專案適合誰", who_p="",
     who=[("兩位都是台灣人，住在國外", "回台辦婚禮，親友分散在不同國家。一個連結，長輩和朋友都收得到。"), ("另一半是外國人", "喜帖中文、英文都有，外國親友看得懂；還有一區專門告訴他們怎麼到會場、紅包怎麼包。")],
-    inc_k="What’s included", inc_h="專案內容", inc_p="以下全部包含在專案價格裡。",
+    inc_k="What’s included", inc_h="專案內容", inc_p="以下全部包含在專案價格裡。", inc_more="看完整介紹",
     inc=[
-        ("雙人全身彩色似顏繪", "照你們喜歡的照片畫；可以加 1 隻寵物或 1 位小孩；可修改 4 次。"),
-        ("結婚書約設計＋PDF", "台灣戶政登記用的書約格式，交付可列印的 PDF，自己印或請家人印。"),
-        ("中英雙語電子喜帖", "同一個連結，中文、英文可以切換。三種風格任選，上線 6 個月。"),
+        ("雙人全身彩色似顏繪", "照你們喜歡的照片畫；可以加 1 隻寵物或 1 位小孩；可修改 4 次。", "/caricature/"),
+        ("結婚書約設計＋PDF", "台灣戶政登記用的書約格式，交付可列印的 PDF，自己印或請家人印。", "/marriage-certificate/"),
+        ("中英雙語電子喜帖", "同一個連結，中文、英文可以切換。三種風格任選，上線 6 個月。", "/web-invitation/"),
         ("外國賓客專區", "機場到會場怎麼走、住宿建議、台灣婚禮小禮儀（例如紅包），放在喜帖裡。"),
         ("雙語出席回覆表單", "我們提供做好的表單範本，你們用自己的 Google 帳號建立副本。賓客的回覆只在你們手上，我們看不到。"),
         ("迎賓板檔案＋Save the Date 圖", "用同一張似顏繪做成可列印的迎賓板，以及可以發在社群的 Save the Date 圖。"),
     ],
     addon="需要印刷嗎？書約或紙本喜帖可以另外加購，印好後用郵局掛號寄到你們在台灣的收件地址（另外報價）。",
     cmp_k="Compare", cmp_h="和單點有什麼不同", cmp_head=["項目", "單點", "回台結婚專案"],
-    cmp=[("電子喜帖語言", "單一語言", "中英雙語，可切換"), ("喜帖上線時間", "交付起 3 個月", "交付起 6 個月"), ("似顏繪修改", "2 次", "4 次"), ("加畫寵物或小孩", "每位 +NT$800", "含 1 位"),
-         ("出席回覆表單", "新人自己建立", "提供雙語範本"), ("外國賓客專區", "沒有", "有"), ("迎賓板與 Save the Date", "沒有", "有")],
+    cmp=[("結婚書約 PDF", "NT$1,600", "含"), ("電子喜帖語言", "單一語言", "中英雙語，可切換"), ("喜帖上線時間", "交付起 3 個月（延長每月 NT$600）", "交付起 6 個月"), ("似顏繪修改", "2 次", "4 次"), ("加畫寵物或小孩", "每位 +NT$800", "含 1 位"),
+         ("出席回覆表單", "新人自己建立", "提供雙語範本"), ("外國賓客專區", "沒有", "有"), ("迎賓板與 Save the Date", "四樣全選才送", "有")],
     price_k="One price", price_h="專案價格", price_alt=f"或 US${PRICE_USD}",
     price_li=["台幣：轉帳到台灣帳戶", "美金：用 Wise 付款", "一次付清後開始製作", "開始畫草稿前可以全額退款；開始畫之後不退款"],
     how_k="How it works", how_h="從詢問到交件", how_p="一般製作約 4～5 週，建議在婚禮前<b>至少 2 個月</b>詢問。",
@@ -88,7 +102,7 @@ T = {
         ("我們不在台灣，東西怎麼收？", "專案內容全部是數位檔，用 Email 交付，不用收包裹。如果加購印刷，會用郵局掛號寄到你們在台灣的收件地址。"),
         ("賓客的回覆資料會經過你們嗎？", "不會。出席回覆表單是你們用自己的 Google 帳號建立的，賓客的回覆只存在你們的帳號裡。"),
         ("喜帖可以用中文和英文以外的語言嗎？", "可以加日文或西班牙文，請在詢問時告訴我們。"),
-        ("結婚書約可以用在戶政登記嗎？", "書約是照台灣戶政登記用的結婚書約格式設計的。登記需要的證件和流程，請以戶政事務所的規定為準。"),
+        ("結婚書約可以用在戶政登記嗎？", "書約照台灣戶政登記用的格式設計，雙方與 2 位證人的欄位都有。自己設計的書約收不收、要交幾份，官方沒有統一寫明，請先打電話問要去登記的戶政事務所。另一半是外國人要準備哪些文件，整理在<a href=\"/blog/foreigner-marriage-registration-taiwan/\" data-cta=\"related_link\" data-cta-type=\"wedding\">外國人在台灣結婚</a>。"),
         ("製作要多久？", "一般約 4～5 週，建議在婚禮前至少 2 個月詢問。比 4 週短算急件，排得進來才接，急件費是總價的 30%。"),
         ("同婚可以做嗎？", "可以，結婚書約會用對應的法條版本。"),
     ],
@@ -107,9 +121,10 @@ T = {
     h1="Getting married in <b>Taiwan</b>?<br>Portrait, certificate and a bilingual invitation in one package",
     lead="You live abroad, so you can't receive parcels or chase vendors one by one. We make the illustrations and the invitation as digital files, all by email. For Taiwanese couples overseas and international couples alike.",
     cta1="Ask about the package", cta2="See what's included",
+    quick=f"or NT${PRICE_TWD} · one payment · all by email, about 4 to 5 weeks",
     who_k="For you", who_h="Who it's for", who_p="",
     who=[("Two Taiwanese partners living abroad", "A wedding back home, with family and friends in different countries. One link reaches everyone."), ("One partner is from another country", "The invitation is in Chinese and English, with a section that tells overseas guests how to get to the venue and how red envelopes work.")],
-    inc_k="What's included", inc_h="What's in the package", inc_p="Everything below is included in the package price.",
+    inc_k="What's included", inc_h="What's in the package", inc_p="Everything below is included in the package price.", inc_more="",
     inc=[
         ("Full-body color couple portrait", "Drawn from your favorite photo. One pet or child included. Up to 4 revisions."),
         ("Marriage certificate design (PDF)", "In the format used for household registration in Taiwan, delivered as a printable PDF."),
@@ -120,7 +135,7 @@ T = {
     ],
     addon="Need printing? Printed certificates or paper invitations can be added and sent by registered mail to your address in Taiwan (quoted separately).",
     cmp_k="Compare", cmp_h="Package vs. single items", cmp_head=["Item", "Single items", "Taiwan wedding package"],
-    cmp=[("Marriage certificate PDF", "+US$50", "Included"), ("Portrait revisions", "2", "4"), ("Pet or child", "+US$25 each", "1 included"),
+    cmp=[("Marriage certificate PDF", "+US$50", "Included"), ("Portrait revisions", "2 (+US$15 each extra)", "4"), ("Pet or child", "+US$25 each", "1 included"),
          ("RSVP form", "You set it up", "Bilingual template provided"), ("Guide for overseas guests", "No", "Yes"), ("Welcome sign and save-the-date", "No", "Yes")],
     price_k="One price", price_h="Package price", price_alt=f"or NT${PRICE_TWD}",
     price_li=["US dollars: pay by Wise", "Taiwan dollars: bank transfer to a Taiwan account", "We start after full payment", "Full refund before we start the first sketch; no refund once drawing has started"],
@@ -136,7 +151,7 @@ T = {
         ("We're not in Taiwan. How do we receive everything?", "Everything in the package is digital and delivered by email. If you add printing, we send it by registered mail to your address in Taiwan."),
         ("Do you see our guests' RSVP replies?", "No. You create the RSVP form in your own Google account, so replies are stored only in your account."),
         ("Can the invitation include other languages?", "Yes, Japanese or Spanish can be added. Tell us when you get in touch."),
-        ("Can we use the certificate for marriage registration in Taiwan?", "It is designed in the marriage certificate format used for household registration in Taiwan. For the documents and steps you need, please follow the rules of the Household Registration Office."),
+        ("Can we use the certificate for marriage registration in Taiwan?", "It follows the format used for household registration in Taiwan, with fields for both of you and 2 witnesses. Official rules don't say whether every office accepts a custom-designed certificate or how many copies to bring, so please call the Household Registration Office where you plan to register first."),
         ("How long does it take?", "Usually 4 to 5 weeks. Please contact us at least 2 months before your wedding. Less than 4 weeks is a rush order: an extra 30% of the total, and only if our schedule allows."),
         ("Do you work with same-sex couples?", "Yes. The certificate uses the matching legal wording."),
     ],
@@ -165,13 +180,14 @@ def build(lang):
          "areaServed": "Worldwide",
          "offers": [{"@type": "Offer", "name": t["og_title"], "price": PRICE_TWD.replace(",", ""), "priceCurrency": "TWD"},
                     {"@type": "Offer", "name": t["og_title"], "price": PRICE_USD, "priceCurrency": "USD"}]},
-        {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in t["faq"]]}]}
+        {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": strip(a)}} for q, a in t["faq"]]}]}
     cur = ' aria-current="page"'
     langs = "".join(f'<a href="{PATHS[c]}" hreflang="{"zh-Hant" if c == "zh" else c}"{cur if c == lang else ""} data-cta="lang_switch" data-cta-type="wedding">{n}</a>' for c, n in [("zh", "中文"), ("en", "EN")])
     cta = lambda label, cls="pill": f'<a class="{cls}" href="{mailto}" data-cta="package_email" data-cta-type="other">{label} <span class="arr">→</span></a>'
     who = "".join(f'<article class="rv" style="--i:{i}"><h3>{a}</h3><p>{b}</p></article>' for i, (a, b) in enumerate(t["who"]))
-    inc = "\n".join(f'        <li class="rv"><i>{i + 1:02d}</i><b>{a}</b><span>{b}</span></li>' for i, (a, b) in enumerate(t["inc"]))
-    cmp_rows = "".join(f"<tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>" for a, b, c in t["cmp"])
+    more = lambda x: f'<a href="{x[2]}" data-cta="package_single" data-cta-type="wedding">{t["inc_more"]} →</a>' if len(x) > 2 and t["inc_more"] else ""
+    inc = "\n".join(f'        <li class="rv"><i>{i + 1:02d}</i><b>{x[0]}</b><span>{x[1]}</span>{more(x)}</li>' for i, x in enumerate(t["inc"]))
+    cmp_rows = "".join(f'<tr><td>{a}</td><td data-label="{t["cmp_head"][1]}">{b}</td><td data-label="{t["cmp_head"][2]}">{c}</td></tr>' for a, b, c in t["cmp"])
     steps = "\n".join(f'        <li class="rv" style="--i:{i}"><b>{a}</b><span>{b}</span></li>' for i, (a, b) in enumerate(t["steps"]))
     faq = "\n".join(f"        <details><summary>{q}</summary><p>{a}</p></details>" for q, a in t["faq"])
     robots = "index, follow, max-image-preview:large" if LIVE else "noindex, nofollow"
@@ -239,6 +255,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{{cookie_doma
     <div class="hero-copy">
       <h1 class="rv" style="--i:3">{t['h1']}</h1>
       <div class="meta rv" style="--i:4">
+        <p class="quick"><b>{price_main}</b><span>{t['quick']}</span></p>
         <p>{t['lead']}</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">{cta(t['cta1'])}<a class="pill ghost" href="#included" data-cta="hero_price" data-cta-type="wedding">{t['cta2']}</a></div>
       </div>

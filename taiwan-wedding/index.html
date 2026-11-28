@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>回台結婚全包專案｜似顏繪、結婚書約、雙語電子喜帖｜編織日和</title>
-<meta name="description" content="住在國外、要回台灣結婚的新人專案：雙人似顏繪、結婚書約 PDF、中英雙語電子喜帖、外國賓客專區、迎賓板與 Save the Date，一次備齊 NT$22,000（US$690）。全程線上，不用收包裹。">
+<meta name="description" content="住在國外、要回台灣結婚的新人專案：雙人似顏繪、結婚書約 PDF、中英雙語電子喜帖、外國賓客專區、迎賓板與 Save the Date，一次備齊 NT$9,800（US$299）。全程線上，不用收包裹。">
 <link rel="canonical" href="https://wedding.knittinghiyori.com/taiwan-wedding/">
 <link rel="alternate" hreflang="zh-Hant" href="https://wedding.knittinghiyori.com/taiwan-wedding/">
 <link rel="alternate" hreflang="en" href="https://wedding.knittinghiyori.com/en/taiwan-wedding/">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="編織日和">
 <meta property="og:title" content="回台結婚全包專案｜似顏繪、書約、雙語電子喜帖">
-<meta property="og:description" content="住在國外、要回台灣結婚的新人專案：雙人似顏繪、結婚書約 PDF、中英雙語電子喜帖、外國賓客專區、迎賓板與 Save the Date，一次備齊 NT$22,000（US$690）。全程線上，不用收包裹。">
+<meta property="og:description" content="住在國外、要回台灣結婚的新人專案：雙人似顏繪、結婚書約 PDF、中英雙語電子喜帖、外國賓客專區、迎賓板與 Save the Date，一次備齊 NT$9,800（US$299）。全程線上，不用收包裹。">
 <meta property="og:url" content="https://wedding.knittinghiyori.com/taiwan-wedding/">
 <meta property="og:image" content="https://wedding.knittinghiyori.com/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -232,6 +232,8 @@ form.q { display: grid; gap: 34px; }
 .opt input { accent-color: var(--rose-d); width: 18px; height: 18px; flex: none; }
 .opt .p { margin-left: auto; font-family: var(--latin); font-size: 17px; white-space: nowrap; }
 .opt.locked { cursor: default; }
+.opt[hidden], .note[hidden] { display: none; }
+.opt:has(input:disabled:not(:checked)) { opacity: .45; cursor: not-allowed; }
 .sub-opts { display: grid; gap: 14px; padding: 16px; border-radius: 14px; background: rgba(255, 255, 255, .55); }
 .sub-opts[hidden] { display: none; }
 .field { display: grid; gap: 6px; font-size: 14.5px; min-width: 0; }
@@ -340,7 +342,20 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .cmp td:nth-child(3), .cmp th:nth-child(3) { background: var(--blush); }
 .cmp-wrap { overflow-x: auto; }
 .hero h1 { letter-spacing: .04em; }
-@media (max-width: 760px) { .inc, .who, .pricebox { grid-template-columns: 1fr; } .cmp { font-size: 14.5px; min-width: 520px; } }
+.hero .quick { background: var(--cream); border: 1px solid var(--wine); border-radius: 18px; padding: 14px 18px; color: var(--ink, #3a2a2e); text-align: left; }
+.hero .quick b { font-family: var(--latin); font-size: 28px; color: var(--wine); font-weight: 400; display: block; line-height: 1.2; }
+.hero .quick span { font-size: 14px; color: var(--muted); }
+.inc li a { grid-column: 2; font-size: 14.5px; color: var(--rose-d); }
+@media (max-width: 760px) {
+  .inc, .who, .pricebox { grid-template-columns: 1fr; }
+  .cmp thead { display: none; }
+  .cmp, .cmp tbody, .cmp tr, .cmp td { display: block; }
+  .cmp tr { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; background: var(--cream); }
+  .cmp td { border: 0; padding: 4px 0; display: flex; justify-content: space-between; gap: 12px; background: none !important; }
+  .cmp td:first-child { font-family: var(--serif); color: var(--wine); font-size: 16px; }
+  .cmp td:not(:first-child)::before { content: attr(data-label); color: var(--muted); }
+  .cmp td:nth-child(3) { color: var(--wine); font-weight: 700; }
+}
 </style>
 <!-- wedding 子網域：不放 Travelpayouts、不放 Google 廣告（core §1） -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQZHTYTRMQ"></script>
@@ -358,7 +373,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   {
    "@type": "Service",
    "name": "回台結婚全包專案｜似顏繪、書約、雙語電子喜帖",
-   "description": "住在國外、要回台灣結婚的新人專案：雙人似顏繪、結婚書約 PDF、中英雙語電子喜帖、外國賓客專區、迎賓板與 Save the Date，一次備齊 NT$22,000（US$690）。全程線上，不用收包裹。",
+   "description": "住在國外、要回台灣結婚的新人專案：雙人似顏繪、結婚書約 PDF、中英雙語電子喜帖、外國賓客專區、迎賓板與 Save the Date，一次備齊 NT$9,800（US$299）。全程線上，不用收包裹。",
    "url": "https://wedding.knittinghiyori.com/taiwan-wedding/",
    "provider": {
     "@type": "Organization",
@@ -371,13 +386,13 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     {
      "@type": "Offer",
      "name": "回台結婚全包專案｜似顏繪、書約、雙語電子喜帖",
-     "price": "22000",
+     "price": "9800",
      "priceCurrency": "TWD"
     },
     {
      "@type": "Offer",
      "name": "回台結婚全包專案｜似顏繪、書約、雙語電子喜帖",
-     "price": "690",
+     "price": "299",
      "priceCurrency": "USD"
     }
    ]
@@ -390,7 +405,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "name": "回台結婚專案包含什麼？多少錢？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "包含雙人似顏繪、結婚書約 PDF、中英雙語電子喜帖、外國賓客專區、雙語出席回覆表單範本、迎賓板檔案和 Save the Date 圖，專案價 NT$22,000（或 US$690）。"
+      "text": "包含雙人似顏繪、結婚書約 PDF、中英雙語電子喜帖、外國賓客專區、雙語出席回覆表單範本、迎賓板檔案和 Save the Date 圖，專案價 NT$9,800（或 US$299）。"
      }
     },
     {
@@ -438,7 +453,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "name": "結婚書約可以用在戶政登記嗎？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "書約是照台灣戶政登記用的結婚書約格式設計的。登記需要的證件和流程，請以戶政事務所的規定為準。"
+      "text": "書約照台灣戶政登記用的格式設計，雙方與 2 位證人的欄位都有。自己設計的書約收不收、要交幾份，官方沒有統一寫明，請先打電話問要去登記的戶政事務所。另一半是外國人要準備哪些文件，整理在外國人在台灣結婚。"
      }
     },
     {
@@ -485,6 +500,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     <div class="hero-copy">
       <h1 class="rv" style="--i:3">住在國外，<b>回台灣結婚</b>：<br>似顏繪、書約、雙語喜帖一次備齊</h1>
       <div class="meta rv" style="--i:4">
+        <p class="quick"><b>NT$9,800</b><span>或 US$299・一次付清・全程 Email，約 4～5 週交件</span></p>
         <p>人在國外，不方便收包裹、也沒時間一樣一樣找廠商。我們把婚禮需要的畫和喜帖都做成數位檔，全程用 Email 完成。兩位都是台灣人，或另一半是外國人，都適合。</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="pill" href="mailto:theperfectmatchfilters@gmail.com?subject=%E3%80%90%E5%9B%9E%E5%8F%B0%E7%B5%90%E5%A9%9A%E5%B0%88%E6%A1%88%E8%A9%A2%E5%95%8F%E3%80%91&body=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E8%A9%A2%E5%95%8F%E5%9B%9E%E5%8F%B0%E7%B5%90%E5%A9%9A%E5%B0%88%E6%A1%88%E3%80%82%0A%0A%E7%A8%B1%E5%91%BC%EF%BC%9A%0A%E7%9B%AE%E5%89%8D%E5%B1%85%E4%BD%8F%E7%9A%84%E5%9C%8B%E5%AE%B6%EF%BC%9A%0A%E5%A9%9A%E7%A6%AE%E6%97%A5%E6%9C%9F%EF%BC%9A%0A%E5%A9%9A%E7%A6%AE%E5%9F%8E%E5%B8%82%EF%BC%8F%E6%9C%83%E5%A0%B4%EF%BC%9A%0A%E5%96%9C%E5%B8%96%E8%AA%9E%E8%A8%80%EF%BC%88%E4%B8%AD%E8%8B%B1%EF%BC%8C%E6%88%96%E5%8A%A0%E5%85%B6%E4%BB%96%E8%AA%9E%E8%A8%80%EF%BC%89%EF%BC%9A%0A%E6%83%B3%E7%94%A8%E7%9A%84%E4%BB%98%E6%AC%BE%E6%96%B9%E5%BC%8F%EF%BC%88%E5%8F%B0%E5%B9%A3%E8%BD%89%E5%B8%B3%EF%BC%8FWise%20%E7%BE%8E%E9%87%91%EF%BC%89%EF%BC%9A%0A%E5%85%B6%E4%BB%96%E6%83%B3%E8%AA%AA%E7%9A%84%EF%BC%9A%0A" data-cta="package_email" data-cta-type="other">詢問專案 <span class="arr">→</span></a><a class="pill ghost" href="#included" data-cta="hero_price" data-cta-type="wedding">看專案內容</a></div>
       </div>
@@ -502,9 +518,9 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     <div class="wrap">
       <div class="chapter"><span class="no">02</span><div><span class="kicker">What’s included</span><h2 class="split" data-split>專案內容</h2><p>以下全部包含在專案價格裡。</p></div></div>
       <ul class="inc">
-        <li class="rv"><i>01</i><b>雙人全身彩色似顏繪</b><span>照你們喜歡的照片畫；可以加 1 隻寵物或 1 位小孩；可修改 4 次。</span></li>
-        <li class="rv"><i>02</i><b>結婚書約設計＋PDF</b><span>台灣戶政登記用的書約格式，交付可列印的 PDF，自己印或請家人印。</span></li>
-        <li class="rv"><i>03</i><b>中英雙語電子喜帖</b><span>同一個連結，中文、英文可以切換。三種風格任選，上線 6 個月。</span></li>
+        <li class="rv"><i>01</i><b>雙人全身彩色似顏繪</b><span>照你們喜歡的照片畫；可以加 1 隻寵物或 1 位小孩；可修改 4 次。</span><a href="/caricature/" data-cta="package_single" data-cta-type="wedding">看完整介紹 →</a></li>
+        <li class="rv"><i>02</i><b>結婚書約設計＋PDF</b><span>台灣戶政登記用的書約格式，交付可列印的 PDF，自己印或請家人印。</span><a href="/marriage-certificate/" data-cta="package_single" data-cta-type="wedding">看完整介紹 →</a></li>
+        <li class="rv"><i>03</i><b>中英雙語電子喜帖</b><span>同一個連結，中文、英文可以切換。三種風格任選，上線 6 個月。</span><a href="/web-invitation/" data-cta="package_single" data-cta-type="wedding">看完整介紹 →</a></li>
         <li class="rv"><i>04</i><b>外國賓客專區</b><span>機場到會場怎麼走、住宿建議、台灣婚禮小禮儀（例如紅包），放在喜帖裡。</span></li>
         <li class="rv"><i>05</i><b>雙語出席回覆表單</b><span>我們提供做好的表單範本，你們用自己的 Google 帳號建立副本。賓客的回覆只在你們手上，我們看不到。</span></li>
         <li class="rv"><i>06</i><b>迎賓板檔案＋Save the Date 圖</b><span>用同一張似顏繪做成可列印的迎賓板，以及可以發在社群的 Save the Date 圖。</span></li>
@@ -536,7 +552,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   <section id="price">
     <div class="wrap">
       <div class="pricebox rv">
-        <div><span class="kicker" style="color:var(--rose)">One price</span><p style="font-family:var(--serif);font-size:22px;margin:8px 0 10px">專案價格</p><p class="big">NT$22,000</p><p class="alt">或 US$690</p><a class="pill" href="mailto:theperfectmatchfilters@gmail.com?subject=%E3%80%90%E5%9B%9E%E5%8F%B0%E7%B5%90%E5%A9%9A%E5%B0%88%E6%A1%88%E8%A9%A2%E5%95%8F%E3%80%91&body=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E8%A9%A2%E5%95%8F%E5%9B%9E%E5%8F%B0%E7%B5%90%E5%A9%9A%E5%B0%88%E6%A1%88%E3%80%82%0A%0A%E7%A8%B1%E5%91%BC%EF%BC%9A%0A%E7%9B%AE%E5%89%8D%E5%B1%85%E4%BD%8F%E7%9A%84%E5%9C%8B%E5%AE%B6%EF%BC%9A%0A%E5%A9%9A%E7%A6%AE%E6%97%A5%E6%9C%9F%EF%BC%9A%0A%E5%A9%9A%E7%A6%AE%E5%9F%8E%E5%B8%82%EF%BC%8F%E6%9C%83%E5%A0%B4%EF%BC%9A%0A%E5%96%9C%E5%B8%96%E8%AA%9E%E8%A8%80%EF%BC%88%E4%B8%AD%E8%8B%B1%EF%BC%8C%E6%88%96%E5%8A%A0%E5%85%B6%E4%BB%96%E8%AA%9E%E8%A8%80%EF%BC%89%EF%BC%9A%0A%E6%83%B3%E7%94%A8%E7%9A%84%E4%BB%98%E6%AC%BE%E6%96%B9%E5%BC%8F%EF%BC%88%E5%8F%B0%E5%B9%A3%E8%BD%89%E5%B8%B3%EF%BC%8FWise%20%E7%BE%8E%E9%87%91%EF%BC%89%EF%BC%9A%0A%E5%85%B6%E4%BB%96%E6%83%B3%E8%AA%AA%E7%9A%84%EF%BC%9A%0A" data-cta="package_email" data-cta-type="other">詢問專案 <span class="arr">→</span></a></div>
+        <div><span class="kicker" style="color:var(--rose)">One price</span><p style="font-family:var(--serif);font-size:22px;margin:8px 0 10px">專案價格</p><p class="big">NT$9,800</p><p class="alt">或 US$299</p><a class="pill" href="mailto:theperfectmatchfilters@gmail.com?subject=%E3%80%90%E5%9B%9E%E5%8F%B0%E7%B5%90%E5%A9%9A%E5%B0%88%E6%A1%88%E8%A9%A2%E5%95%8F%E3%80%91&body=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E8%A9%A2%E5%95%8F%E5%9B%9E%E5%8F%B0%E7%B5%90%E5%A9%9A%E5%B0%88%E6%A1%88%E3%80%82%0A%0A%E7%A8%B1%E5%91%BC%EF%BC%9A%0A%E7%9B%AE%E5%89%8D%E5%B1%85%E4%BD%8F%E7%9A%84%E5%9C%8B%E5%AE%B6%EF%BC%9A%0A%E5%A9%9A%E7%A6%AE%E6%97%A5%E6%9C%9F%EF%BC%9A%0A%E5%A9%9A%E7%A6%AE%E5%9F%8E%E5%B8%82%EF%BC%8F%E6%9C%83%E5%A0%B4%EF%BC%9A%0A%E5%96%9C%E5%B8%96%E8%AA%9E%E8%A8%80%EF%BC%88%E4%B8%AD%E8%8B%B1%EF%BC%8C%E6%88%96%E5%8A%A0%E5%85%B6%E4%BB%96%E8%AA%9E%E8%A8%80%EF%BC%89%EF%BC%9A%0A%E6%83%B3%E7%94%A8%E7%9A%84%E4%BB%98%E6%AC%BE%E6%96%B9%E5%BC%8F%EF%BC%88%E5%8F%B0%E5%B9%A3%E8%BD%89%E5%B8%B3%EF%BC%8FWise%20%E7%BE%8E%E9%87%91%EF%BC%89%EF%BC%9A%0A%E5%85%B6%E4%BB%96%E6%83%B3%E8%AA%AA%E7%9A%84%EF%BC%9A%0A" data-cta="package_email" data-cta-type="other">詢問專案 <span class="arr">→</span></a></div>
         <ul><li>台幣：轉帳到台灣帳戶</li><li>美金：用 Wise 付款</li><li>一次付清後開始製作</li><li>開始畫草稿前可以全額退款；開始畫之後不退款</li></ul>
       </div>
     </div>
@@ -545,7 +561,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   <section style="padding-top:0">
     <div class="wrap">
       <div class="chapter"><span class="no">04</span><div><span class="kicker">Compare</span><h2 class="split" data-split>和單點有什麼不同</h2></div></div>
-      <div class="cmp-wrap"><table class="cmp"><thead><tr><th>項目</th><th>單點</th><th>回台結婚專案</th></tr></thead><tbody><tr><td>電子喜帖語言</td><td>單一語言</td><td>中英雙語，可切換</td></tr><tr><td>喜帖上線時間</td><td>交付起 3 個月</td><td>交付起 6 個月</td></tr><tr><td>似顏繪修改</td><td>2 次</td><td>4 次</td></tr><tr><td>加畫寵物或小孩</td><td>每位 +NT$800</td><td>含 1 位</td></tr><tr><td>出席回覆表單</td><td>新人自己建立</td><td>提供雙語範本</td></tr><tr><td>外國賓客專區</td><td>沒有</td><td>有</td></tr><tr><td>迎賓板與 Save the Date</td><td>沒有</td><td>有</td></tr></tbody></table></div>
+      <div class="cmp-wrap"><table class="cmp"><thead><tr><th>項目</th><th>單點</th><th>回台結婚專案</th></tr></thead><tbody><tr><td>結婚書約 PDF</td><td data-label="單點">NT$1,600</td><td data-label="回台結婚專案">含</td></tr><tr><td>電子喜帖語言</td><td data-label="單點">單一語言</td><td data-label="回台結婚專案">中英雙語，可切換</td></tr><tr><td>喜帖上線時間</td><td data-label="單點">交付起 3 個月（延長每月 NT$600）</td><td data-label="回台結婚專案">交付起 6 個月</td></tr><tr><td>似顏繪修改</td><td data-label="單點">2 次</td><td data-label="回台結婚專案">4 次</td></tr><tr><td>加畫寵物或小孩</td><td data-label="單點">每位 +NT$800</td><td data-label="回台結婚專案">含 1 位</td></tr><tr><td>出席回覆表單</td><td data-label="單點">新人自己建立</td><td data-label="回台結婚專案">提供雙語範本</td></tr><tr><td>外國賓客專區</td><td data-label="單點">沒有</td><td data-label="回台結婚專案">有</td></tr><tr><td>迎賓板與 Save the Date</td><td data-label="單點">四樣全選才送</td><td data-label="回台結婚專案">有</td></tr></tbody></table></div>
       <p class="note" style="margin-top:18px;font-size:15px">只需要其中一項？ <a href="/" data-cta="package_single" data-cta-type="wedding">看單點價目表</a></p>
     </div>
   </section>
@@ -571,13 +587,13 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     <div class="wrap">
       <div class="chapter"><span class="no">06</span><div><span class="kicker">FAQ</span><h2 class="split" data-split>常見問題</h2></div></div>
       <div class="faq">
-        <details><summary>回台結婚專案包含什麼？多少錢？</summary><p>包含雙人似顏繪、結婚書約 PDF、中英雙語電子喜帖、外國賓客專區、雙語出席回覆表單範本、迎賓板檔案和 Save the Date 圖，專案價 NT$22,000（或 US$690）。</p></details>
+        <details><summary>回台結婚專案包含什麼？多少錢？</summary><p>包含雙人似顏繪、結婚書約 PDF、中英雙語電子喜帖、外國賓客專區、雙語出席回覆表單範本、迎賓板檔案和 Save the Date 圖，專案價 NT$9,800（或 US$299）。</p></details>
         <details><summary>人在國外，要怎麼付款？</summary><p>可以用台幣轉帳到台灣的帳戶，或用 Wise 付美金。確認內容後我們會提供付款資訊，一次付清後開始製作。</p></details>
         <details><summary>可以退款嗎？</summary><p>開始畫草稿之前取消，可以全額退款；開始畫之後就不退款。</p></details>
         <details><summary>我們不在台灣，東西怎麼收？</summary><p>專案內容全部是數位檔，用 Email 交付，不用收包裹。如果加購印刷，會用郵局掛號寄到你們在台灣的收件地址。</p></details>
         <details><summary>賓客的回覆資料會經過你們嗎？</summary><p>不會。出席回覆表單是你們用自己的 Google 帳號建立的，賓客的回覆只存在你們的帳號裡。</p></details>
         <details><summary>喜帖可以用中文和英文以外的語言嗎？</summary><p>可以加日文或西班牙文，請在詢問時告訴我們。</p></details>
-        <details><summary>結婚書約可以用在戶政登記嗎？</summary><p>書約是照台灣戶政登記用的結婚書約格式設計的。登記需要的證件和流程，請以戶政事務所的規定為準。</p></details>
+        <details><summary>結婚書約可以用在戶政登記嗎？</summary><p>書約照台灣戶政登記用的格式設計，雙方與 2 位證人的欄位都有。自己設計的書約收不收、要交幾份，官方沒有統一寫明，請先打電話問要去登記的戶政事務所。另一半是外國人要準備哪些文件，整理在<a href="/blog/foreigner-marriage-registration-taiwan/" data-cta="related_link" data-cta-type="wedding">外國人在台灣結婚</a>。</p></details>
         <details><summary>製作要多久？</summary><p>一般約 4～5 週，建議在婚禮前至少 2 個月詢問。比 4 週短算急件，排得進來才接，急件費是總價的 30%。</p></details>
         <details><summary>同婚可以做嗎？</summary><p>可以，結婚書約會用對應的法條版本。</p></details>
       </div>

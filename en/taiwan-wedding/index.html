@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Getting Married in Taiwan: Illustrated Wedding Package | Portrait, Bilingual Invitation | Knitting Hiyori</title>
-<meta name="description" content="For couples living abroad who are getting married in Taiwan: a hand-drawn couple portrait, Taiwan marriage certificate design (PDF), a bilingual Chinese and English wedding invitation website, a guide for overseas guests, welcome sign and save-the-date. One package, US$690 (NT$22,000). Fully online.">
+<meta name="description" content="For couples living abroad who are getting married in Taiwan: a hand-drawn couple portrait, Taiwan marriage certificate design (PDF), a bilingual Chinese and English wedding invitation website, a guide for overseas guests, welcome sign and save-the-date. One package, US$299 (NT$9,800). Fully online.">
 <link rel="canonical" href="https://wedding.knittinghiyori.com/en/taiwan-wedding/">
 <link rel="alternate" hreflang="zh-Hant" href="https://wedding.knittinghiyori.com/taiwan-wedding/">
 <link rel="alternate" hreflang="en" href="https://wedding.knittinghiyori.com/en/taiwan-wedding/">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Knitting Hiyori">
 <meta property="og:title" content="Getting Married in Taiwan: Illustrated Wedding Package">
-<meta property="og:description" content="For couples living abroad who are getting married in Taiwan: a hand-drawn couple portrait, Taiwan marriage certificate design (PDF), a bilingual Chinese and English wedding invitation website, a guide for overseas guests, welcome sign and save-the-date. One package, US$690 (NT$22,000). Fully online.">
+<meta property="og:description" content="For couples living abroad who are getting married in Taiwan: a hand-drawn couple portrait, Taiwan marriage certificate design (PDF), a bilingual Chinese and English wedding invitation website, a guide for overseas guests, welcome sign and save-the-date. One package, US$299 (NT$9,800). Fully online.">
 <meta property="og:url" content="https://wedding.knittinghiyori.com/en/taiwan-wedding/">
 <meta property="og:image" content="https://wedding.knittinghiyori.com/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -232,6 +232,8 @@ form.q { display: grid; gap: 34px; }
 .opt input { accent-color: var(--rose-d); width: 18px; height: 18px; flex: none; }
 .opt .p { margin-left: auto; font-family: var(--latin); font-size: 17px; white-space: nowrap; }
 .opt.locked { cursor: default; }
+.opt[hidden], .note[hidden] { display: none; }
+.opt:has(input:disabled:not(:checked)) { opacity: .45; cursor: not-allowed; }
 .sub-opts { display: grid; gap: 14px; padding: 16px; border-radius: 14px; background: rgba(255, 255, 255, .55); }
 .sub-opts[hidden] { display: none; }
 .field { display: grid; gap: 6px; font-size: 14.5px; min-width: 0; }
@@ -340,7 +342,20 @@ dialog.folio-zoom button { position: absolute; top: 10px; right: 10px; width: 44
 .cmp td:nth-child(3), .cmp th:nth-child(3) { background: var(--blush); }
 .cmp-wrap { overflow-x: auto; }
 .hero h1 { letter-spacing: .04em; }
-@media (max-width: 760px) { .inc, .who, .pricebox { grid-template-columns: 1fr; } .cmp { font-size: 14.5px; min-width: 520px; } }
+.hero .quick { background: var(--cream); border: 1px solid var(--wine); border-radius: 18px; padding: 14px 18px; color: var(--ink, #3a2a2e); text-align: left; }
+.hero .quick b { font-family: var(--latin); font-size: 28px; color: var(--wine); font-weight: 400; display: block; line-height: 1.2; }
+.hero .quick span { font-size: 14px; color: var(--muted); }
+.inc li a { grid-column: 2; font-size: 14.5px; color: var(--rose-d); }
+@media (max-width: 760px) {
+  .inc, .who, .pricebox { grid-template-columns: 1fr; }
+  .cmp thead { display: none; }
+  .cmp, .cmp tbody, .cmp tr, .cmp td { display: block; }
+  .cmp tr { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; background: var(--cream); }
+  .cmp td { border: 0; padding: 4px 0; display: flex; justify-content: space-between; gap: 12px; background: none !important; }
+  .cmp td:first-child { font-family: var(--serif); color: var(--wine); font-size: 16px; }
+  .cmp td:not(:first-child)::before { content: attr(data-label); color: var(--muted); }
+  .cmp td:nth-child(3) { color: var(--wine); font-weight: 700; }
+}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <style>:root { --serif: "Bodoni Moda", serif; --sans: "Inter", system-ui, sans-serif; } .hero h1 { letter-spacing: .01em; }</style>
@@ -360,7 +375,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   {
    "@type": "Service",
    "name": "Getting Married in Taiwan: Illustrated Wedding Package",
-   "description": "For couples living abroad who are getting married in Taiwan: a hand-drawn couple portrait, Taiwan marriage certificate design (PDF), a bilingual Chinese and English wedding invitation website, a guide for overseas guests, welcome sign and save-the-date. One package, US$690 (NT$22,000). Fully online.",
+   "description": "For couples living abroad who are getting married in Taiwan: a hand-drawn couple portrait, Taiwan marriage certificate design (PDF), a bilingual Chinese and English wedding invitation website, a guide for overseas guests, welcome sign and save-the-date. One package, US$299 (NT$9,800). Fully online.",
    "url": "https://wedding.knittinghiyori.com/en/taiwan-wedding/",
    "provider": {
     "@type": "Organization",
@@ -373,13 +388,13 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     {
      "@type": "Offer",
      "name": "Getting Married in Taiwan: Illustrated Wedding Package",
-     "price": "22000",
+     "price": "9800",
      "priceCurrency": "TWD"
     },
     {
      "@type": "Offer",
      "name": "Getting Married in Taiwan: Illustrated Wedding Package",
-     "price": "690",
+     "price": "299",
      "priceCurrency": "USD"
     }
    ]
@@ -392,7 +407,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "name": "What is in the Taiwan wedding package, and how much is it?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "A couple portrait, a marriage certificate design (PDF), a bilingual Chinese and English invitation website, a guide for overseas guests, a bilingual RSVP form template, a welcome sign file and a save-the-date image. The package is US$690 (or NT$22,000)."
+      "text": "A couple portrait, a marriage certificate design (PDF), a bilingual Chinese and English invitation website, a guide for overseas guests, a bilingual RSVP form template, a welcome sign file and a save-the-date image. The package is US$299 (or NT$9,800)."
      }
     },
     {
@@ -440,7 +455,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
      "name": "Can we use the certificate for marriage registration in Taiwan?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "It is designed in the marriage certificate format used for household registration in Taiwan. For the documents and steps you need, please follow the rules of the Household Registration Office."
+      "text": "It follows the format used for household registration in Taiwan, with fields for both of you and 2 witnesses. Official rules don't say whether every office accepts a custom-designed certificate or how many copies to bring, so please call the Household Registration Office where you plan to register first."
      }
     },
     {
@@ -487,6 +502,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     <div class="hero-copy">
       <h1 class="rv" style="--i:3">Getting married in <b>Taiwan</b>?<br>Portrait, certificate and a bilingual invitation in one package</h1>
       <div class="meta rv" style="--i:4">
+        <p class="quick"><b>US$299</b><span>or NT$9,800 · one payment · all by email, about 4 to 5 weeks</span></p>
         <p>You live abroad, so you can't receive parcels or chase vendors one by one. We make the illustrations and the invitation as digital files, all by email. For Taiwanese couples overseas and international couples alike.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="pill" href="mailto:theperfectmatchfilters@gmail.com?subject=%5BTaiwan%20wedding%20package%5D&body=Hello%2C%20I%27d%20like%20to%20ask%20about%20the%20Taiwan%20wedding%20package.%0A%0AName%3A%0ACountry%20we%20live%20in%3A%0AWedding%20date%3A%0ACity%20/%20venue%20in%20Taiwan%3A%0AInvitation%20languages%20%28Chinese%20%2B%20English%2C%20or%20others%29%3A%0APreferred%20payment%20%28Wise%20USD%20/%20Taiwan%20bank%20transfer%29%3A%0AAnything%20else%3A%0A" data-cta="package_email" data-cta-type="other">Ask about the package <span class="arr">→</span></a><a class="pill ghost" href="#included" data-cta="hero_price" data-cta-type="wedding">See what's included</a></div>
       </div>
@@ -538,7 +554,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   <section id="price">
     <div class="wrap">
       <div class="pricebox rv">
-        <div><span class="kicker" style="color:var(--rose)">One price</span><p style="font-family:var(--serif);font-size:22px;margin:8px 0 10px">Package price</p><p class="big">US$690</p><p class="alt">or NT$22,000</p><a class="pill" href="mailto:theperfectmatchfilters@gmail.com?subject=%5BTaiwan%20wedding%20package%5D&body=Hello%2C%20I%27d%20like%20to%20ask%20about%20the%20Taiwan%20wedding%20package.%0A%0AName%3A%0ACountry%20we%20live%20in%3A%0AWedding%20date%3A%0ACity%20/%20venue%20in%20Taiwan%3A%0AInvitation%20languages%20%28Chinese%20%2B%20English%2C%20or%20others%29%3A%0APreferred%20payment%20%28Wise%20USD%20/%20Taiwan%20bank%20transfer%29%3A%0AAnything%20else%3A%0A" data-cta="package_email" data-cta-type="other">Ask about the package <span class="arr">→</span></a></div>
+        <div><span class="kicker" style="color:var(--rose)">One price</span><p style="font-family:var(--serif);font-size:22px;margin:8px 0 10px">Package price</p><p class="big">US$299</p><p class="alt">or NT$9,800</p><a class="pill" href="mailto:theperfectmatchfilters@gmail.com?subject=%5BTaiwan%20wedding%20package%5D&body=Hello%2C%20I%27d%20like%20to%20ask%20about%20the%20Taiwan%20wedding%20package.%0A%0AName%3A%0ACountry%20we%20live%20in%3A%0AWedding%20date%3A%0ACity%20/%20venue%20in%20Taiwan%3A%0AInvitation%20languages%20%28Chinese%20%2B%20English%2C%20or%20others%29%3A%0APreferred%20payment%20%28Wise%20USD%20/%20Taiwan%20bank%20transfer%29%3A%0AAnything%20else%3A%0A" data-cta="package_email" data-cta-type="other">Ask about the package <span class="arr">→</span></a></div>
         <ul><li>US dollars: pay by Wise</li><li>Taiwan dollars: bank transfer to a Taiwan account</li><li>We start after full payment</li><li>Full refund before we start the first sketch; no refund once drawing has started</li></ul>
       </div>
     </div>
@@ -547,7 +563,7 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
   <section style="padding-top:0">
     <div class="wrap">
       <div class="chapter"><span class="no">04</span><div><span class="kicker">Compare</span><h2 class="split" data-split>Package vs. single items</h2></div></div>
-      <div class="cmp-wrap"><table class="cmp"><thead><tr><th>Item</th><th>Single items</th><th>Taiwan wedding package</th></tr></thead><tbody><tr><td>Marriage certificate PDF</td><td>+US$50</td><td>Included</td></tr><tr><td>Portrait revisions</td><td>2</td><td>4</td></tr><tr><td>Pet or child</td><td>+US$25 each</td><td>1 included</td></tr><tr><td>RSVP form</td><td>You set it up</td><td>Bilingual template provided</td></tr><tr><td>Guide for overseas guests</td><td>No</td><td>Yes</td></tr><tr><td>Welcome sign and save-the-date</td><td>No</td><td>Yes</td></tr></tbody></table></div>
+      <div class="cmp-wrap"><table class="cmp"><thead><tr><th>Item</th><th>Single items</th><th>Taiwan wedding package</th></tr></thead><tbody><tr><td>Marriage certificate PDF</td><td data-label="Single items">+US$50</td><td data-label="Taiwan wedding package">Included</td></tr><tr><td>Portrait revisions</td><td data-label="Single items">2 (+US$15 each extra)</td><td data-label="Taiwan wedding package">4</td></tr><tr><td>Pet or child</td><td data-label="Single items">+US$25 each</td><td data-label="Taiwan wedding package">1 included</td></tr><tr><td>RSVP form</td><td data-label="Single items">You set it up</td><td data-label="Taiwan wedding package">Bilingual template provided</td></tr><tr><td>Guide for overseas guests</td><td data-label="Single items">No</td><td data-label="Taiwan wedding package">Yes</td></tr><tr><td>Welcome sign and save-the-date</td><td data-label="Single items">No</td><td data-label="Taiwan wedding package">Yes</td></tr></tbody></table></div>
       <p class="note" style="margin-top:18px;font-size:15px">Only need one item? <a href="/en/" data-cta="package_single" data-cta-type="wedding">See single-item prices</a></p>
     </div>
   </section>
@@ -573,13 +589,13 @@ gtag("config","G-ZQZHTYTRMQ",/[?]hy_debug=1/.test(location.search)?{cookie_domai
     <div class="wrap">
       <div class="chapter"><span class="no">06</span><div><span class="kicker">FAQ</span><h2 class="split" data-split>Questions</h2></div></div>
       <div class="faq">
-        <details><summary>What is in the Taiwan wedding package, and how much is it?</summary><p>A couple portrait, a marriage certificate design (PDF), a bilingual Chinese and English invitation website, a guide for overseas guests, a bilingual RSVP form template, a welcome sign file and a save-the-date image. The package is US$690 (or NT$22,000).</p></details>
+        <details><summary>What is in the Taiwan wedding package, and how much is it?</summary><p>A couple portrait, a marriage certificate design (PDF), a bilingual Chinese and English invitation website, a guide for overseas guests, a bilingual RSVP form template, a welcome sign file and a save-the-date image. The package is US$299 (or NT$9,800).</p></details>
         <details><summary>How do we pay from abroad?</summary><p>Pay in US dollars by Wise, or in Taiwan dollars by bank transfer to a Taiwan account. We send payment details after confirming your order, and start after full payment.</p></details>
         <details><summary>Can we get a refund?</summary><p>Yes, a full refund if you cancel before we start the first sketch. Once drawing has started, we can't offer a refund.</p></details>
         <details><summary>We're not in Taiwan. How do we receive everything?</summary><p>Everything in the package is digital and delivered by email. If you add printing, we send it by registered mail to your address in Taiwan.</p></details>
         <details><summary>Do you see our guests' RSVP replies?</summary><p>No. You create the RSVP form in your own Google account, so replies are stored only in your account.</p></details>
         <details><summary>Can the invitation include other languages?</summary><p>Yes, Japanese or Spanish can be added. Tell us when you get in touch.</p></details>
-        <details><summary>Can we use the certificate for marriage registration in Taiwan?</summary><p>It is designed in the marriage certificate format used for household registration in Taiwan. For the documents and steps you need, please follow the rules of the Household Registration Office.</p></details>
+        <details><summary>Can we use the certificate for marriage registration in Taiwan?</summary><p>It follows the format used for household registration in Taiwan, with fields for both of you and 2 witnesses. Official rules don't say whether every office accepts a custom-designed certificate or how many copies to bring, so please call the Household Registration Office where you plan to register first.</p></details>
         <details><summary>How long does it take?</summary><p>Usually 4 to 5 weeks. Please contact us at least 2 months before your wedding. Less than 4 weeks is a rush order: an extra 30% of the total, and only if our schedule allows.</p></details>
         <details><summary>Do you work with same-sex couples?</summary><p>Yes. The certificate uses the matching legal wording.</p></details>
       </div>
